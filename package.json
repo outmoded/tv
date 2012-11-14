@@ -2,9 +2,9 @@
     "name": "hapi-helmet",
     "description": "Interactive debug console",
     "version": "0.0.1",
-    "author": "Wyatt Preul <wpreul@gmail.com>",
+    "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
     "contributors":[
-        "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
+        "Wyatt Preul <wpreul@gmail.com>",
         "Van Nguyen <the.gol.effect@gmail.com>"
     ],
     "repository": "git://github.com/walmartlabs/helmet",
