@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var Websocket = require('ws');
 var libPath = process.env.TEST_COV ? '../lib-cov/' : '../lib/';
 var Helmet = require(libPath + 'helmet');
+var Os = require('os')
 
 describe('Helmet', function() {
 
@@ -45,6 +46,26 @@ describe('Helmet', function() {
             expect(helmet.settings.host).to.equal('localhost');
             expect(helmet.settings.websocketPort).to.equal(3002);
             done();
+        });
+
+        it('adds message to subscribers list when receiving message', function(done) {
+
+            var config = {host: 'localhost', websocketPort: 3010}
+            var helmet = new Helmet(config);
+
+            var ws = new Websocket("ws://" + config.host + ':' + config.websocketPort);
+            ws.readyState = Websocket.OPEN;
+            
+            ws.on('open', function() {
+
+                ws.send("test1");
+                setTimeout(function(){
+
+                        expect(helmet._subscribers["test1"]).to.exist;
+                        done()
+                    }, 
+                    1000);
+            });
         });
     });
 
@@ -118,5 +139,21 @@ describe('Helmet', function() {
             expect(html).to.contain('3006');
             done();
         });
+
+/*
+        it('includes the hostname and port of default config', function(done) {
+
+            var helmet = new Helmet();
+
+            var html = helmet.getMarkup();
+
+            // May not be accurate
+
+            expect(html).to.contain(Os.hostname());
+            expect(html).to.contain('3000');
+            done();
+        });*/
+
+
     });
 });
