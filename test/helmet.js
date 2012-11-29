@@ -48,6 +48,8 @@ describe('Helmet', function() {
             done();
         });
 
+        // Adds coverage. May need to add more to this later
+
         it('adds message to subscribers list when receiving message', function(done) {
 
             var config = {host: 'localhost', websocketPort: 3010}
