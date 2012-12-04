@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+			<title>Debug Console</title>
+			<meta http-equiv="Content-Language" content="en-us">
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	</head>
+	<body>
+	        <script>
+		        function htmlEscape(string) { 
+
+		        	return string.replace(/&/g,"&amp;").replace(/>/g,"&gt;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+		        }
+		        var ws = new WebSocket('ws://{{host}}:{{port}}');
+		        ws.onopen = function() {};
+		        ws.onmessage = function(message) { document.getElementById("stream").innerHTML += htmlEscape(message.data) + "<p />" };
+		        ws.onclose = function() {};
+	        </script>
+	        <input id="session" /><button id="subscribe" onclick="ws.send(document.getElementById('session').value);">Subscribe</button>
+	        <pre><div id="stream"></div></pre>
+	</body>
+</html>
