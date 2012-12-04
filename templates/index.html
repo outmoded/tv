@@ -1,22 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 	<head>
 			<title>Debug Console</title>
 			<meta http-equiv="Content-Language" content="en-us">
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+			<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 	</head>
 	<body>
-	        <script>
-		        function htmlEscape(string) { 
+			<script>
 
-		        	return string.replace(/&/g,"&amp;").replace(/>/g,"&gt;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
-		        }
-		        var ws = new WebSocket('ws://{{host}}:{{port}}');
-		        ws.onopen = function() {};
-		        ws.onmessage = function(message) { document.getElementById("stream").innerHTML += htmlEscape(message.data) + "<p />" };
-		        ws.onclose = function() {};
-	        </script>
-	        <input id="session" /><button id="subscribe" onclick="ws.send(document.getElementById('session').value);">Subscribe</button>
-	        <pre><div id="stream"></div></pre>
+				var tagList = [];
+
+				function htmlEscape(string) { 
+
+					return string.replace(/&/g,"&amp;").replace(/>/g,"&gt;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+				}
+
+
+				function addFilterTag(tag) {
+
+					if (tagList.indexOf(tag) == -1) {
+
+						tagList.push(tag);
+						$("#checkboxes").append("<input type='checkbox' name='tag' value='" + tag + "'>" + tag + "<br>");
+					}
+				}
+
+
+				function wsSend() {
+
+					$('#filterButton').show();
+					ws.send($('#session').val());
+				}
+
+
+				function filter() {
+
+					for (var i = 0, tagListLength = tagList.length; i < tagListLength; ++i) {
+
+						$('.' + tagList[i]).hide();
+					}
+
+					var checkedLength = $('input:checked').length;
+
+					for(var i = 0; i< checkedLength; ++i) {
+
+						var tag = $('input:checked')[i].value;
+						$('.' + tag).show();
+					}
+				}
+
+
+				var ws = new WebSocket('ws://{{host}}:{{port}}');
+
+				ws.onopen = function() {};
+
+
+				ws.onmessage = function(message) { 
+
+					var payload = JSON.parse(message.data);
+					var tag = payload.tags || ["noTag"];
+					var tagString = tag[0].toString();
+
+					addFilterTag(tagString);
+
+					for (var i = 1, iLength = tag.length; i < iLength; ++i) {
+						
+						addFilterTag(tag[i]);
+						tagString += " " + tag[i];
+					}
+
+					tagString = "'" + tagString + "'";
+
+					$("#streamList").append("<li class=" + tagString.toString() + ">" + htmlEscape(message.data) + "</li>");
+				};
+
+
+				ws.onclose = function() {};
+
+
+				$(document).ready(function() {
+
+					$('#filterButton').hide();
+				})
+				
+			</script>
+	       
+	        <input id="session" /><button id="subscribe" onclick="wsSend();">Subscribe</button>
+	        <pre>
+	        	<div class="row" id="stream">
+		        	<div class="span4">
+		        		<ul id=streamList></ul>
+		        	</div>
+		        	<div class="span4">
+		        		<form id="checkboxes"><input id="filterButton" type="button" value="Filter" onclick="filter();"><br></form>
+		        	</div>
+	        	</div>
+	        </pre>
 	</body>
 </html>
