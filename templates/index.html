@@ -1,92 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 	<head>
 			<title>Debug Console</title>
 			<meta http-equiv="Content-Language" content="en-us">
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 			<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+			<script src="../assets/js/index.js"></script>
 	</head>
 	<body>
-			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-	        <script>
-	        	var dataList = [];
-	        	var tagList = [];
+			<script>
 
-		        function htmlEscape(string) { 
+				var tagList = [];
 
-		        	return string.replace(/&/g,"&amp;").replace(/>/g,"&gt;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
-		        }
+				function htmlEscape(string) { 
 
-		        function addFilterTag(tag) {
+					return string.replace(/&/g,"&amp;").replace(/>/g,"&gt;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+				}
 
-		        	if (tagList.indexOf(tag) == -1) {
+				function addFilterTag(tag) {
 
-		        		tagList.push(tag)
-		        		$("#checkboxes").append("<input type='checkbox' name='tag' value='" + tag + "'>" + tag + "<br>");
-		        	}
-		        }
+					if (tagList.indexOf(tag) == -1) {
 
-		        function wsSend() {
+						tagList.push(tag);
+						$("#checkboxes").append("<input type='checkbox' name='tag' value='" + tag + "'>" + tag + "<br>");
+					}
+				}
 
-		        	$('#filterButton').show();
-		        	ws.send(document.getElementById('session').value);
-		        }
+				function wsSend() {
 
-		        function filter() {
+					$('#filterButton').show();
+					ws.send($('#session').val());
+				}
 
-		        	for (var i = 0, tagListLength = tagList.length; i < tagListLength; ++i) {
+				function filter() {
 
-		        		$('.' + tagList[i]).hide();
-		        	}
+					for (var i = 0, tagListLength = tagList.length; i < tagListLength; ++i) {
 
-		        	var checkedLength = $('input:checked').length;
-		  
-		        	for(var i = 0; i< checkedLength; ++i) {
+						$('.' + tagList[i]).hide();
+					}
 
-		        		var tag = $('input:checked')[i].value
-		        		$('.' + tag).show();
-		        	}
-		        }
+					var checkedLength = $('input:checked').length;
 
-		        var ws = new WebSocket('ws://{{host}}:{{port}}');
+					for(var i = 0; i< checkedLength; ++i) {
 
-		        ws.onopen = function() {};
+						var tag = $('input:checked')[i].value;
+						$('.' + tag).show();
+					}
+				}
 
-		        ws.onmessage = function(message) { 
+				var ws = new WebSocket('ws://{{host}}:{{port}}');
 
-		        	var dataString = message.data;
-		        	var data = JSON.parse(dataString);
-		        	var tag = data.tags || ["noTag"];
-		        	var tagString = tag[0].toString();
+				ws.onopen = function() {};
 
-		        	addFilterTag(tagString);
+				ws.onmessage = function(message) { 
 
-		        	for (var i = 1, iLength = tag.length; i < iLength; ++i) {
-		        		addFilterTag(tag[i])
-		        		tagString += " " + tag[i];
-		        	}
+					var payload = JSON.parse(message.data);
+					var tag = payload.tags || ["noTag"];
+					var tagString = tag[0].toString();
 
-		        	tagString = "'" + tagString + "'";
-		        
-		        	$("#streamList").append("<li class=" + tagString.toString() + ">" + htmlEscape(dataString) + "</li>");
-		        };
+					addFilterTag(tagString);
 
-		        ws.onclose = function() {};
+					for (var i = 1, iLength = tag.length; i < iLength; ++i) {
+						
+						addFilterTag(tag[i]);
+						tagString += " " + tag[i];
+					}
 
-		        $(document).ready(function() {
-		        	$('#filterButton').hide();
-		        })
+					tagString = "'" + tagString + "'";
 
+					$("#streamList").append("<li class=" + tagString.toString() + ">" + htmlEscape(dataString) + "</li>");
+				};
 
-	        </script>
+				ws.onclose = function() {};
+
+				$(document).ready(function() {
+
+					$('#filterButton').hide();
+				})
+
+			</script>
+	       
 	        <input id="session" /><button id="subscribe" onclick="wsSend();">Subscribe</button>
-	        <pre><div class="row" id="stream">
-	        	<div class="span4">
-	        		<ul id=streamList></ul>
+	        <pre>
+	        	<div class="row" id="stream">
+		        	<div class="span4">
+		        		<ul id=streamList></ul>
+		        	</div>
+		        	<div class="span4">
+		        		<form id="checkboxes"><input id="filterButton" type="button" value="Filter" onclick="filter();"><br></form>
+		        	</div>
 	        	</div>
-	        	<div class="span4">
-	        		<form id="checkboxes"><input id="filterButton" type="button" value="Filter" onclick="filter();"><br></form>
-	        	</div>
-	        </div></pre>
+	        </pre>
 	</body>
 </html>
