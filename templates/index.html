@@ -20,6 +20,7 @@
 					return string.replace(/&/g,"&amp;").replace(/>/g,"&gt;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
 				}
 
+
 				function addFilterTag(tag) {
 
 					if (tagList.indexOf(tag) == -1) {
@@ -29,11 +30,13 @@
 					}
 				}
 
+
 				function wsSend() {
 
 					$('#filterButton').show();
 					ws.send($('#session').val());
 				}
+
 
 				function filter() {
 
@@ -51,9 +54,11 @@
 					}
 				}
 
+
 				var ws = new WebSocket('ws://{{host}}:{{port}}');
 
 				ws.onopen = function() {};
+
 
 				ws.onmessage = function(message) { 
 
@@ -74,13 +79,15 @@
 					$("#streamList").append("<li class=" + tagString.toString() + ">" + htmlEscape(message.data) + "</li>");
 				};
 
+
 				ws.onclose = function() {};
+
 
 				$(document).ready(function() {
 
 					$('#filterButton').hide();
 				})
-
+				
 			</script>
 	       
 	        <input id="session" /><button id="subscribe" onclick="wsSend();">Subscribe</button>
