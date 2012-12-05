@@ -79,6 +79,7 @@
 					})
 				}
 
+
 				function filterSome() {
 
 					var checkedLength = $('input:checked').length;
@@ -89,8 +90,8 @@
 						var tag = $('input:checked')[i].value;
 						$('.' + tag).removeClass("filtered");
 					}
-
 				}
+
 
 				function filterAll() {
 
@@ -100,23 +101,26 @@
 					});
 				}
 
+
 				function checkBoxCount() {
 
 					var checkboxLength = $(':checkbox').length;
 					var checkedLength = $('input:checked').length;
 
 					if (checkboxLength === checkedLength) {
-						console.log("filteringall")
+					
 						filterAll();
-					} else if (checkedLength === 0) {
-						console.log("filteringall 0")
+					} 
+					else if (checkedLength === 0) {
+					
 						filterAll();
-					} else {
-						console.log("filteringsome")
+					} 
+					else {
+					
 						filterSome();
 					}
-
 				}
+
 
 				function filter() {
 
@@ -175,9 +179,6 @@
 
 
 				ws.onclose = function() {};
-
-				
-
 				
 
 				$(document).ready(function() {
@@ -192,7 +193,6 @@
 
 								$(this).hide();
 							}
-
 							else {
 
 								if (!$(this).hasClass('filtered')) {
