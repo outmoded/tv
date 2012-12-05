@@ -1,8 +1,19 @@
-var expect = require('chai').expect;
+// Load modules
+
+var Chai = require('chai');
 var Websocket = require('ws');
-var libPath = process.env.TEST_COV ? '../lib-cov/' : '../lib/';
-var Helmet = require(libPath + 'helmet');
-var Os = require('os')
+var Helmet = process.env.TEST_COV ? require('../lib-cov') : require('../lib');
+
+
+// Declare internals
+
+var internals = {};
+
+
+// Test shortcuts
+
+var expect = Chai.expect;
+
 
 describe('Helmet', function() {
 

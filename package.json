@@ -1,6 +1,6 @@
 {
     "name": "hapi-helmet",
-    "description": "Interactive debug console",
+    "description": "Interactive debug console for hapi",
     "version": "0.0.1",
     "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
     "contributors":[
@@ -10,7 +10,9 @@
     "repository": "git://github.com/walmartlabs/helmet",
     "main": "index",
     "keywords": [
-        "docs"
+        "debug",
+        "console",
+        "hapi"
     ],
     "engines": {
         "node": ">=0.8.0"
