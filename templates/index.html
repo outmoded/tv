@@ -262,17 +262,59 @@
 					newPayload.time = new Date(payload.timestamp);
 					newPayload.tags = payload.tags;
 					newPayload.data = payload.data;
+					var clearData = organizeData(newPayload.data)
 
 
 
 					$("." + requestId).append("<dd class=" + tagString.toString() + "><div class='row'>" + 
-						"<div class='span3'>" + JSON.stringify(newPayload.time) + "</div>" +
+						"<div class='span3'></div><div class='span3'>" + JSON.stringify(newPayload.time) + "</div>" +
 						"<div class='span2 tags'>" + JSON.stringify(newPayload.tags) + "</div>" +
-						"<div class='span3'>" + JSON.stringify(newPayload.data) + "</div>" +
+						"<div class='span3'>" + clearData + "</div>" +
 						"</div></dd>");
 
 					filter();
 				};
+
+				function organizeData(data) {
+
+					var dataString = ""
+
+					if (typeof data === "undefined") {
+
+						return dataString;
+					}
+
+					var dataLength = Object.keys(data).length;
+
+					if (dataLength === 1) {
+
+						for (var key in data) {
+
+							dataString += key + " : " + data[key];
+						}
+
+						return dataString + "<br>";
+					}
+					else {
+
+						var firstKey = true;
+
+						for (var key in data) {
+
+							if (firstKey) {
+
+								dataString += "<span class='firstPair'>" + key + " : " + data[key] + "</span><span class='pairEllipses'>...</span><br>";
+								firstKey = false;
+							}
+							else {
+
+								dataString += "<span class='otherPair' style='display: none'>" + key + " : " + data[key] + "</span><br>";
+							}
+						}
+
+						return dataString + "<br>";
+					}
+				}
 
 
 				ws.onclose = function() {};
@@ -280,11 +322,9 @@
 
 				$(document).ready(function() {
 
-					$('#filterButton').hide();
-				
-					$(document).on("click", "dt", function() {
+					$(document).on("click", "dt p", function(e) {
 
-						$(this).children("dd").each(function() {
+						$(this).parent().children("dd").each(function() {
 
 							if ($(this).css("display") === "block") {
 
@@ -302,6 +342,21 @@
 						checkSigns();
 					})
 
+					$(document).on("click", ".firstPair", function(){
+
+						if ($(this).siblings(".pairEllipses").html() === "...") {
+
+							$(this).parent().children(".otherPair").show();
+							$(this).siblings(".pairEllipses").html("")
+						}
+						else {
+
+							$(this).parent().children(".otherPair").hide();
+							$(this).siblings(".pairEllipses").html("...");
+						}
+					})
+
+
 					$(document).on("change", ":checkbox", function(){ 
 
 						filter();
@@ -315,6 +370,9 @@
 	       
 	        	<div class-"row" id="columnNames">
 	        		<div class="span3">
+	        			<p>Request ID</p>
+	        		</div>
+	        		<div class="span3">
 	        			<p>Time</p>
 	        		</div>
 	        		<div class="span2">
@@ -326,7 +384,7 @@
 	        		
 	        	</div>
 	        	<div class="row" id="stream">
-		        	<div class="span10">
+		        	<div class="span12">
 		        		<dl id=streamList></dl>
 		        	</div>
 		        	<div class="span4">
