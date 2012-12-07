@@ -143,6 +143,47 @@
 					filterRequestId();
 				}
 
+				// Checks expands/collapse signs
+
+				function checkSigns() {
+
+					$('dt').each(function() {
+
+						var dt = this;
+						var done = false;
+						var isVisible = false;
+						var ddList = $(dt).children("dd");
+						
+						for (var i = 0, ddListLength = ddList.length; i < ddListLength; ++i ) {
+
+							if ($(ddList[i]).css("display") === "block") {
+
+								isVisible = true;
+							
+								var currentSign = $(dt).find(".sign").html();
+
+								if (currentSign === " + ") {
+								
+									$(dt).find(".sign").html(" - ");
+									done = true;
+									break;
+								}
+							}
+						}
+
+						if (!done) {
+
+							if (!isVisible) {
+
+								if ($(dt).find(".sign").html() === " - ") {
+								
+									$(dt).find(".sign").html(" + ");
+								}
+							}
+						}
+					})
+				}
+
 
 				var ws = new WebSocket('ws://{{host}}:{{port}}');
 
@@ -168,11 +209,22 @@
 
 					if (requestIdList.indexOf(requestId) === -1) {
 
-						$("#streamList").append("<dt class=" + requestId + "><p class='requestId'>" + " + " + requestId + "</p></dt>");
+						$("#streamList").append("<dt class=" + requestId + "><p class='requestId'>" + "<span class='sign'> - </span>" + requestId + "</p></dt>");
 						requestIdList.push(requestId);
 					}
 
-					$("." + requestId).append("<dd class=" + tagString.toString() + "><p class='payload'>" + htmlEscape(message.data) + "</p1></dd>");
+					var newPayload = {}
+					newPayload.time = new Date(payload.timestamp);
+					newPayload.tags = payload.tags;
+					newPayload.data = payload.data;
+
+
+
+					$("." + requestId).append("<dd class=" + tagString.toString() + "><div class='row'>" + 
+						"<div class='span3'>" + JSON.stringify(newPayload.time) + "</div>" +
+						"<div class='span2'>" + JSON.stringify(newPayload.tags) + "</div>" +
+						"<div class='span3'>" + JSON.stringify(newPayload.data) + "</div>" +
+						"</div></dd>");
 
 					filter();
 				};
@@ -201,21 +253,41 @@
 								}
 							}
 						})
+
+						checkSigns();
 					})
+
+					$(document).on("change", ":checkbox", function(){ 
+
+						filter();
+					});
 				});
+				
 
 			</script>
 	       
 	        <input id="session" /><button id="subscribe" onclick="wsSend();">Subscribe</button>
-	        <pre>
+	       
+	        	<div class-"row" id="columnNames">
+	        		<div class="span3">
+	        			<p>Time</p>
+	        		</div>
+	        		<div class="span2">
+	        			<p>Tags<p>
+	        		</div>
+	        		<div class="span3">
+	        			<p>Data</p>
+	        		</div>
+	        		
+	        	</div>
 	        	<div class="row" id="stream">
-		        	<div class="span4">
+		        	<div class="span10">
 		        		<dl id=streamList></dl>
 		        	</div>
 		        	<div class="span4">
-		        		<form id="checkboxes"><input id="filterButton" type="button" value="Filter" onclick="filter();"><br></form>
+		        		<form id="checkboxes"></form>
 		        	</div>
 	        	</div>
-	        </pre>
+	       
 	</body>
 </html>
