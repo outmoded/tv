@@ -1,15 +1,14 @@
 var Hapi = require("hapi")
 
-var expect = require('chai').expect,
-Browser = require('zombie'),
-browser = new Browser();
+var expect = require('chai').expect;
+var jellyfish = require('jellyfish');
 
 
 var Hapi = require('hapi');
 
 var options = {
 
-	debug : {debugEndpoint : '/debug/console'}
+    debug : {debugEndpoint : '/debug/console'}
 }
 
 // Create a server with a host and port
@@ -35,37 +34,20 @@ server.start();
 /*
 browser.on("error", function(error) {
 
-	console.error(error);
+    console.error(error);
 })*/
 
 describe('Debug Console Page', function(){
 
-	describe('Page Loads', function() {
+    describe('Page Loads', function() {
 
-		it('should load the page with the right title', function(done) {
+        it('should load the page with the right title', function(done) {
 
-			browser.visit("http://localhost:8000/debug/console", function (done2) {
-            	
-            	var text = browser.text("title");
-            
-            	//expect(1).to.equal(1);
-            	assert.ok(browser.success);
-            	assert.equal(browser.text("title"), "Debug Cos
-            	nsole");
-            	expect(browser.text("title")).to.equal("Debugs Console");
-            	done2();
-            	
-            });
-            done()
+            var browser = jellyfish.createChrome();
+            browser.go("http://localhost:8000/debug/console")
+            .js("document.title", function(o) {
+                assert.equal(o.result, "jelly")
+            })
         });
-
-        it('should not show a filter button on load', function(done) {
-
-        	browser.visit("http://localhost:8000/debug/console", function() {
-
-        		
-        	})
-        	done();
-        })
     });
 });
