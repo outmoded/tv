@@ -19,7 +19,6 @@
 	<body>
 		<script>
 			var tagList = [];							// Complete Tag List
-			var filteredTagList = [];					// Tag List After Filtered
 			var requestIdList = [];
 
 			function htmlEscape(string) { 
@@ -39,7 +38,7 @@
 
 			function filterTagList() {
 
-				filteredTagList = {};
+				var filteredTagList = {};
 				$('dd').each(function() {
 					if ($(this).css('display') === 'none') {
 						return true;
