@@ -41,11 +41,12 @@
 
 				filteredTagList = {};
 				$('dd').each(function() {
-					if ($(this).css('display') !== 'block') {
+					if ($(this).css('display') === 'none') {
 						return true;
 					}
 
-					var tagArray = $(this).attr('class').split(' ');	
+					var tagArray = $(this).attr('class').split(' ');
+					console.log(tagArray);	
 					for (var i = 0, tagArrayLength = tagArray.length; i < tagArrayLength; ++i) {
 						filteredTagList[tagArray[i]] = true;		
 					}
@@ -187,6 +188,12 @@
 			var ws = new WebSocket('ws://{{host}}:{{port}}');
 			ws.onopen = function() {};
 
+			function wsSend() {
+
+				$('#filterButton').show();
+				ws.send($('#session').val());
+			}
+
 			ws.onmessage = function(message) { 
 
 				var payload = JSON.parse(message.data);
@@ -204,7 +211,7 @@
 				tagString = '"' + tagString + '"';
 
 				if (requestIdList.indexOf(requestId) === -1) {
-					$('#streamList').append('<dt class="' + requestId + '"><p class="requestId"><span class="sign"> - </span>' + requestId + '</p></dt>');
+					$("#streamList").append("<dt class=" + requestId + "><p class='requestId'>" + "<span class='sign'> - </span>" + requestId + "</p></dt>");
 					requestIdList.push(requestId);
 				}
 
@@ -214,11 +221,12 @@
 				newPayload.data = payload.data;
 				var clearData = organizeData(newPayload.data)
 
-				$('.' + requestId).append('<dd class="' + tagString.toString() + '"><div class="row">' + 
-					'<div class="span3"></div><div class="span3">' + JSON.stringify(newPayload.time) + '</div>' +
-					'<div class="span2 tags">' + JSON.stringify(newPayload.tags) + '</div>' +
-					'<div class="span3">' + clearData + '</div>' +
-					'</div></dd>');
+				$("." + requestId).append("<dd class=" + tagString.toString() + "><div class='row'>" + 
+					"<div class='span3'></div><div class='span3'>" + JSON.stringify(newPayload.time) + "</div>" +
+					"<div class='span2 tags'>" + JSON.stringify(newPayload.tags) + "</div>" +
+					"<div class='span3'>" + clearData + "</div>" +
+					"</div></dd>");
+
 
 				filter();
 			};
