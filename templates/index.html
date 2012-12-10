@@ -1,8 +1,5 @@
 ﻿<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<html lang="en">
 	<head>
 		<title>Debug Console</title>
 		<meta http-equiv="Content-Language" content="en-us">
@@ -27,14 +24,14 @@
 
 			function htmlEscape(string) { 
 
-				return string.replace(/&/g,"&amp;").replace(/>/g,"&gt;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+				return string.replace(/&/g,'&amp;').replace(/>/g,'&gt;').replace(/</g,'&lt;').replace(/'/g,'&quot;');
 			}
 
 			function addFilterTag(tag) {
 
 				if (tagList.indexOf(tag) === -1) {
 					tagList.push(tag);
-					$("#checkboxes").append("<span class='checkboxWrapper'><input type='checkbox' name='tag' class='" + tag + "' value='" + tag + "'>" + tag + "</span><br>");
+					$("#checkboxes").append('<span class="checkboxWrapper"><input type="checkbox" name="tag" class="' + tag + '" value="' + tag + '">' + tag + '</span><br>');
 				}
 			}
 
@@ -43,12 +40,12 @@
 			function filterTagList() {
 
 				filteredTagList = {};
-				$("dd").each(function() {
+				$('dd').each(function() {
 					if ($(this).css('display') !== 'block') {
 						return true;
 					}
 
-					var tagArray = $(this).attr("class").split(" ");	
+					var tagArray = $(this).attr('class').split(' ');	
 					for (var i = 0, tagArrayLength = tagArray.length; i < tagArrayLength; ++i) {
 						filteredTagList[tagArray[i]] = true;		
 					}
@@ -57,10 +54,10 @@
 				for (var i = 0, iLength = tagList.length; i < iLength; ++i) {
 					var tag = tagList[i];
 					if (filteredTagList[tag]) {
-						$('input:checkbox.' + tag).removeAttr("disabled");
+						$('input:checkbox.' + tag).removeAttr('disabled');
 					}
 					else {
-						$('input:checkbox.' + tag).attr("disabled", true);
+						$('input:checkbox.' + tag).attr('disabled', true);
 					}
 				}
 			}
@@ -71,16 +68,15 @@
 				ws.send($('#session').val());
 			}
 
-
 			function filterRequestId() {
 
-				$("dt").each(function() {
+				$('dt').each(function() {
 
 					var requestSelector = this;
-					var childrenList = $(requestSelector).children("dd").length;
+					var childrenList = $(requestSelector).children('dd').length;
 					var count = 0;
 
-					$(requestSelector).children("dd").each(function() {
+					$(requestSelector).children('dd').each(function() {
 
 						if ($(this).css('display') === 'block') {
 							$(requestSelector).show();
@@ -99,18 +95,19 @@
 			function filterSome() {
 
 				var checkedLength = $('input:checked').length;
-
+				var tag = '';
 				for(var i = 0; i< checkedLength; ++i) {
-					var tag = $('input:checked')[i].value;
-					$('.' + tag).removeClass("filtered");
+					tag += '.' + $('input:checked')[i].value;
 				}
+				
+				$(tag).removeClass('filtered');
 			}
 
 
 			function filterAll() {
 
-				$("dd").each(function() {
-					$(this).removeClass("filtered");
+				$('dd').each(function() {
+					$(this).removeClass('filtered');
 				});
 			}
 
@@ -134,13 +131,13 @@
 
 			function filter() {
 
-				$("dt").show();
-				$("dd").show();
+				$('dt').show();
+				$('dd').show();
 
-				$("dd").each(function() {
+				$('dd').each(function() {
 
-					if (!$(this).hasClass("filtered")) {
-						$(this).addClass("filtered");
+					if (!$(this).hasClass('filtered')) {
+						$(this).addClass('filtered');
 					}
 				});
 
@@ -161,16 +158,16 @@
 					var dt = this;
 					var done = false;
 					var isVisible = false;
-					var ddList = $(dt).children("dd");
+					var ddList = $(dt).children('dd');
 
 					for (var i = 0, ddListLength = ddList.length; i < ddListLength; ++i ) {
 
-						if ($(ddList[i]).css("display") === "block") {
+						if ($(ddList[i]).css('display') === 'block') {
 							isVisible = true;
-							var currentSign = $(dt).find(".sign").html();
+							var currentSign = $(dt).find('.sign').html();
 
-							if (currentSign === " + ") {
-								$(dt).find(".sign").html(" - ");
+							if (currentSign === ' + ') {
+								$(dt).find('.sign').html(' - ');
 								done = true;
 								break;
 							}
@@ -179,8 +176,8 @@
 
 					if (!done) {
 						if (!isVisible) {
-							if ($(dt).find(".sign").html() === " - ") {
-								$(dt).find(".sign").html(" + ");
+							if ($(dt).find('.sign').html() === ' - ') {
+								$(dt).find('.sign').html(' + ');
 							}
 						}
 					}
@@ -193,7 +190,7 @@
 			ws.onmessage = function(message) { 
 
 				var payload = JSON.parse(message.data);
-				var tag = payload.tags || ["noTag"];
+				var tag = payload.tags || ['noTag'];
 				var tagString = tag[0].toString();
 				var requestId = payload.request;
 
@@ -201,13 +198,13 @@
 
 				for (var i = 1, iLength = tag.length; i < iLength; ++i) {
 					addFilterTag(tag[i]);
-					tagString += " " + tag[i];
+					tagString += ' ' + tag[i];
 				}
 
-				tagString = "'" + tagString + "'";
+				tagString = '"' + tagString + '"';
 
 				if (requestIdList.indexOf(requestId) === -1) {
-					$("#streamList").append("<dt class=" + requestId + "><p class='requestId'>" + "<span class='sign'> - </span>" + requestId + "</p></dt>");
+					$('#streamList').append('<dt class="' + requestId + '"><p class="requestId"><span class="sign"> - </span>' + requestId + '</p></dt>');
 					requestIdList.push(requestId);
 				}
 
@@ -217,54 +214,54 @@
 				newPayload.data = payload.data;
 				var clearData = organizeData(newPayload.data)
 
-				$("." + requestId).append("<dd class=" + tagString.toString() + "><div class='row'>" + 
-					"<div class='span3'></div><div class='span3'>" + JSON.stringify(newPayload.time) + "</div>" +
-					"<div class='span2 tags'>" + JSON.stringify(newPayload.tags) + "</div>" +
-					"<div class='span3'>" + clearData + "</div>" +
-					"</div></dd>");
+				$('.' + requestId).append('<dd class="' + tagString.toString() + '"><div class="row">' + 
+					'<div class="span3"></div><div class="span3">' + JSON.stringify(newPayload.time) + '</div>' +
+					'<div class="span2 tags">' + JSON.stringify(newPayload.tags) + '</div>' +
+					'<div class="span3">' + clearData + '</div>' +
+					'</div></dd>');
 
 				filter();
 			};
 
 			function organizeData(data) {
 
-				var dataString = ""
-				if (typeof data === "undefined") {
+				var dataString = ''
+				if (typeof data === 'undefined') {
 					return dataString;
 				}
 
 				var dataLength = Object.keys(data).length;
 				if (dataLength === 1) {
 					for (var key in data) {
-						dataString += key + " : " + data[key];
+						dataString += key + ' : ' + data[key];
 					}
 
-					return dataString + "<br>";
+					return dataString + '<br>';
 				}
 
 				var firstKey = true;
 				for (var key in data) {
 					if (firstKey) {
-						dataString += "<span class='firstPair'>" + key + " : " + data[key] + "</span><span class='pairEllipses'>...</span><br>";
+						dataString += '<span class="firstPair">' + key + ' : ' + data[key] + '</span><span class="pairEllipses">...</span><br>';
 						firstKey = false;
 					}
 					else {
-						dataString += "<span class='otherPair' style='display: none'>" + key + " : " + data[key] + "</span><br>";
+						dataString += '<span class="otherPair" style="display: none">' + key + ' : ' + data[key] + '</span><br>';
 					}
 				}
 
-				return dataString + "<br>";
+				return dataString + '<br>';
 			}
 
 			ws.onclose = function() {};
 			
 			$(document).ready(function() {
 
-				$(document).on("click", "dt p", function(e) {
+				$(document).on('click', 'dt p', function(e) {
 
-					$(this).parent().children("dd").each(function() {
+					$(this).parent().children('dd').each(function() {
 
-						if ($(this).css("display") === "block") {
+						if ($(this).css('display') === 'block') {
 							$(this).hide();
 						}
 						else if (!$(this).hasClass('filtered')) {
@@ -275,19 +272,19 @@
 					checkSigns();
 				})
 
-				$(document).on("click", ".firstPair", function(){
+				$(document).on('click', '.firstPair', function(){
 
-					if ($(this).siblings(".pairEllipses").html() === "...") {
-						$(this).parent().children(".otherPair").show();
-						$(this).siblings(".pairEllipses").html("")
+					if ($(this).siblings('.pairEllipses').html() === '...') {
+						$(this).parent().children('.otherPair').show();
+						$(this).siblings('.pairEllipses').html('')
 					}
 					else {
-						$(this).parent().children(".otherPair").hide();
-						$(this).siblings(".pairEllipses").html("...");
+						$(this).parent().children('.otherPair').hide();
+						$(this).siblings('.pairEllipses').html('...');
 					}
 				})
 
-				$(document).on("change", ":checkbox", function(){ 
+				$(document).on('change', ':checkbox', function(){ 
 
 					filter();
 				});
