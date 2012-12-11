@@ -5,7 +5,8 @@
     "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
     "contributors":[
         "Wyatt Preul <wpreul@gmail.com>",
-        "Van Nguyen <the.gol.effect@gmail.com>"
+        "Van Nguyen <the.gol.effect@gmail.com>",
+        "Ben Nguyen <hungryhippo138@gmail.com"
     ],
     "repository": "git://github.com/walmartlabs/helmet",
     "main": "index",
