@@ -1,7 +1,7 @@
 {
     "name": "hapi-helmet",
-    "description": "Interactive debug console",
-    "version": "0.0.1",
+    "description": "Interactive debug console for hapi",
+    "version": "0.0.2",
     "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
     "contributors":[
         "Wyatt Preul <wpreul@gmail.com>",
@@ -10,19 +10,21 @@
     "repository": "git://github.com/walmartlabs/helmet",
     "main": "index",
     "keywords": [
-        "docs"
+        "debug",
+        "console",
+        "hapi"
     ],
     "engines": {
         "node": ">=0.8.0"
     },
     "dependencies": {
         "hoek": "0.0.x",
-        "ws": "0.4.x"
+        "ws": "0.4.x",
+        "handlebars": "1.0.x"
     },
     "devDependencies": {
         "mocha": "1.x.x",
-        "chai": "1.2.x",
-        "sinon": "1.3.4"
+        "chai": "1.2.x"
     },
     "scripts": {
         "test": "make test && make unit"
