@@ -210,7 +210,7 @@
 				tagString = '"' + tagString + '"';
 
 				if (requestIdList.indexOf(requestId) === -1) {
-					$("#streamList").append("<dt class=" + requestId + "><p class='requestId'>" + "<span class='sign'> - </span>" + requestId + "</p></dt>");
+					$("#streamList").append('<dt class=' + requestId + '><p class="requestId">' + '<span class="sign"> - </span>' + requestId + '</p></dt>');
 					requestIdList.push(requestId);
 				}
 
@@ -220,11 +220,11 @@
 				newPayload.data = payload.data;
 				var clearData = organizeData(newPayload.data)
 
-				$("." + requestId).append("<dd class=" + tagString.toString() + "><div class='row'>" + 
-					"<div class='span3'></div><div class='span3'>" + JSON.stringify(newPayload.time) + "</div>" +
-					"<div class='span2 tags'>" + JSON.stringify(newPayload.tags) + "</div>" +
-					"<div class='span3'>" + clearData + "</div>" +
-					"</div></dd>");
+				$("." + requestId).append('<dd class=' + tagString.toString() + '><div class="row">' + 
+					'<div class="span3"></div><div class="span3">' + JSON.stringify(newPayload.time) + '</div>' +
+					'<div class="span2 tags">' + JSON.stringify(newPayload.tags) + '</div>' +
+					'<div class="span3">' + clearData + '</div>' +
+					'</div></dd>');
 
 
 				filter();
