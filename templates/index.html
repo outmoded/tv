@@ -17,8 +17,28 @@
 
 		    .checkboxesWrapper {
 		    	position: fixed;
-		    	top: 100px;
+		    	top: 150px;
 		    	right: 1px;
+		    }
+
+		    #textPage {
+		    	margin: 10px 30px 0 30px;
+		    }
+
+		    #sessionWrapper {
+		    	margin: 30px 0 20px 0px;
+		    }
+
+		    #sessionWrapperRuler {
+		    	margin: 0 0 20px 0;
+		    }
+
+		    #columnNames {
+
+		    }
+
+		    .columnName {
+		    	font-weight: 100;
 		    }
 		</style>
 	</head>
@@ -303,30 +323,35 @@
 				});
 			});
 		</script>
-	       
-        <input id="session" />
-        <button id="subscribe" onclick="wsSend();">Subscribe</button>
-    	<div class="row" id="columnNames">
-    		<div class="span3">
-    			<p>Request ID</p>
-    		</div>
-    		<div class="span3">
-    			<p>Time</p>
-    		</div>
-    		<div class="span2">
-    			<p>Tags<p>
-    		</div>
-    		<div class="span3">
-    			<p>Data</p>
-    		</div>
-    	</div>
-    	<div class="row" id="stream">
-        	<div class="span12">
-        		<dl id=streamList></dl>
-        	</div>
-        	<div class="span2 checkboxesWrapper">
-        		<form id="checkboxes"></form>
-        	</div>   
-    	</div>    
+		<div id="textPage">
+			<h1 id="Helmet">Helmet : Interactive Debug Console</h1>
+		    <div id="sessionWrapper"> 
+		        <input id="session" />
+		        <button id="subscribe" onclick="wsSend();">Subscribe</button>
+		    </div>
+		    <hr id="sessionWrapperRuler">
+	    	<div class="row" id="columnNames">
+	    		<div class="span3">
+	    			<h2 class="columnName">Request ID</h2>
+	    		</div>
+	    		<div class="span3">
+	    			<h2 class="columnName">Time</h2>
+	    		</div>
+	    		<div class="span2">
+	    			<h2 class="columnName">Tags<h2>
+	    		</div>
+	    		<div class="span3">
+	    			<h2 class="columnName">Data</h2>
+	    		</div>
+	    	</div>
+	    	<div class="row" id="stream">
+	        	<div class="span12">
+	        		<dl id=streamList></dl>
+	        	</div>
+	        	<div class="span2 checkboxesWrapper">
+	        		<form id="checkboxes"></form>
+	        	</div>   
+	    	</div>    
+	    </div>
 	</body>
 </html>
