@@ -14,29 +14,20 @@
 		    .requestId {
 			    text-decoration: underline;
 		    }
-
 		    .checkboxesWrapper {
 		    	position: fixed;
 		    	top: 150px;
 		    	right: 1px;
 		    }
-
 		    #textPage {
 		    	margin: 10px 30px 0 30px;
 		    }
-
 		    #sessionWrapper {
 		    	margin: 30px 0 20px 0px;
 		    }
-
 		    #sessionWrapperRuler {
 		    	margin: 0 0 20px 0;
 		    }
-
-		    #columnNames {
-
-		    }
-
 		    .columnName {
 		    	font-weight: 100;
 		    }
@@ -47,7 +38,7 @@
 			var tagList = [];							// Complete Tag List
 			var requestIdList = [];
 			var colorsList = [
-								"Aqua",
+								"Brown",
 								"Blue",
 								"Red",
 								"Green",
@@ -84,7 +75,6 @@
 					}
 
 					var tagArray = $(this).attr('class').split(' ');
-					console.log(tagArray);	
 					for (var i = 0, tagArrayLength = tagArray.length; i < tagArrayLength; ++i) {
 						filteredTagList[tagArray[i]] = true;		
 					}
@@ -236,20 +226,23 @@
 
 				var payload = JSON.parse(message.data);
 				var tag = payload.tags || ['noTag'];
-				var tagString = tag[0].toString();
+				var tagClass = tag[0].toString();
 				var requestId = payload.request;
-
-				addFilterTag(tagString);
+				
+				addFilterTag(tagClass);
+				var tagString = '<span class="' + tag[0].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[0])] + '">' + tag[0].toString() + '</span>';
 
 				for (var i = 1, iLength = tag.length; i < iLength; ++i) {
 					addFilterTag(tag[i]);
-					tagString += ' ' + tag[i];
+					tagString = tagString + ', ' + '<span class="' + tag[i].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[i])] + '">' + tag[i].toString() + '</span>';
+					tagClass += ' ' + tag[i];
 				}
 
-				tagString = '"' + tagString + '"';
+				
+				tagClass = '"' + tagClass + '"';
 
 				if (requestIdList.indexOf(requestId) === -1) {
-					$("#streamList").append('<dt class=' + requestId + '><p class="requestId"><span class="sign"> - </span>' + requestId + '</p></dt>');
+					$("#streamList").prepend('<dt class=' + requestId + '><p class="requestId"><span class="sign"> - </span>' + requestId + '</p></dt>');
 					requestIdList.push(requestId);
 				}
 
@@ -259,7 +252,6 @@
 				newPayload.data = payload.data;
 				var clearData = organizeData(newPayload.data);
 				var tagsLength = newPayload.tags.length;
-				console.log(newPayload.tags)
 				var tagsClass = newPayload.tags;
 				var tagsClassString = "";
 				for (var i = 0, iLength = tagsClass.length; i < iLength; ++i) {
@@ -267,9 +259,9 @@
 				}
 				tagsClassString = "span2 tags" + tagsClassString;
 
-				$("." + requestId).append('<dd class=' + tagString.toString() + '><div class="row">' + 
+				$("." + requestId).append('<dd class=' + tagClass + '><div class="row">' + 
 					'<div class="span3"></div><div class="span3">' + JSON.stringify(newPayload.time) + '</div>' +
-					'<div class=' +tagsClassString + '>' + JSON.stringify(newPayload.tags) + '</div>' +
+					'<div class="span2 tags">' + tagString + '</div>' +
 					'<div class="span3">' + clearData + '</div>' +
 					'</div></dd>');
 
