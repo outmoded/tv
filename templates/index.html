@@ -214,17 +214,20 @@
 
 				var payload = JSON.parse(message.data);
 				var tag = payload.tags || ['noTag'];
-				var tagString = tag[0].toString();
+				var tagClass = tag[0].toString();
 				var requestId = payload.request;
+				var tagString = '<span class="' + tag[0].toString() + '">' + tag[0].toString() + '</span>';
 
-				addFilterTag(tagString);
+				addFilterTag(tagClass);
 
 				for (var i = 1, iLength = tag.length; i < iLength; ++i) {
 					addFilterTag(tag[i]);
-					tagString += ' ' + tag[i];
+					tagString = tagString + ', ' + '<span class="' + tag[i].toString() + '">' + tag[i].toString() + '</span>';
+					tagClass += ' ' + tag[i];
 				}
 
-				tagString = '"' + tagString + '"';
+				
+				tagClass = '"' + tagClass + '"';
 
 				if (requestIdList.indexOf(requestId) === -1) {
 					$("#streamList").prepend('<dt class=' + requestId + '><p class="requestId"><span class="sign"> - </span>' + requestId + '</p></dt>');
@@ -237,9 +240,9 @@
 				newPayload.data = payload.data;
 				var clearData = organizeData(newPayload.data)
 
-				$("." + requestId).append('<dd class=' + tagString.toString() + '><div class="row">' + 
+				$("." + requestId).append('<dd class=' + tagClass + '><div class="row">' + 
 					'<div class="span3"></div><div class="span3">' + JSON.stringify(newPayload.time) + '</div>' +
-					'<div class="span2 tags">' + JSON.stringify(newPayload.tags) + '</div>' +
+					'<div class="span2 tags">' + tagString + '</div>' +
 					'<div class="span3">' + clearData + '</div>' +
 					'</div></dd>');
 
