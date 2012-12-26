@@ -230,17 +230,15 @@
 				var requestId = payload.request;
 				
 				addFilterTag(tagClass);
-				var tagString = '<span class="' + tag[0].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[0])] + '">' + tag[0].toString() + '</span>';
 
+				var tagString = '<span class="' + tag[0].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[0])] + '">' + tag[0].toString() + '</span>';
 				for (var i = 1, iLength = tag.length; i < iLength; ++i) {
 					addFilterTag(tag[i]);
 					tagString = tagString + ', ' + '<span class="' + tag[i].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[i])] + '">' + tag[i].toString() + '</span>';
 					tagClass += ' ' + tag[i];
 				}
-
-				
+	
 				tagClass = '"' + tagClass + '"';
-
 				if (requestIdList.indexOf(requestId) === -1) {
 					$("#streamList").prepend('<dt class=' + requestId + '><p class="requestId"><span class="sign"> - </span>' + requestId + '</p></dt>');
 					requestIdList.push(requestId);
@@ -264,7 +262,6 @@
 					'<div class="span2 tags">' + tagString + '</div>' +
 					'<div class="span3">' + clearData + '</div>' +
 					'</div></dd>');
-
 
 				filter();
 			};
