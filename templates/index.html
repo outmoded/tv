@@ -37,6 +37,19 @@
 		<script>
 			var tagList = [];							// Complete Tag List
 			var requestIdList = [];
+			var colorsList = [
+								"Brown",
+								"Blue",
+								"Red",
+								"Green",
+								"Yellow",
+								"Orange",
+								"Purple",
+								"LightSlateGrey",
+								"DarkGoldenRod",
+								"Black",
+								"DeepPink"
+							];
 
 			function htmlEscape(string) { 
 
@@ -47,7 +60,7 @@
 
 				if (tagList.indexOf(tag) === -1) {
 					tagList.push(tag);
-					$("#checkboxes").append('<span class="checkboxWrapper"><input type="checkbox" name="tag" class="' + tag + '" value="' + tag + '">' + tag + '</span><br>');
+					$("#checkboxes").append('<span class="checkboxWrapper" style="color:' + colorsList[tagList.indexOf(tag)] + '"><input type="checkbox" name="tag" class="' + tag + '" value="' + tag + '">' + tag + '</span><br>');
 				}
 			}
 
@@ -62,7 +75,6 @@
 					}
 
 					var tagArray = $(this).attr('class').split(' ');
-					console.log(tagArray);	
 					for (var i = 0, tagArrayLength = tagArray.length; i < tagArrayLength; ++i) {
 						filteredTagList[tagArray[i]] = true;		
 					}
@@ -214,18 +226,19 @@
 
 				var payload = JSON.parse(message.data);
 				var tag = payload.tags || ['noTag'];
-				var tagString = tag[0].toString();
+				var tagClass = tag[0].toString();
 				var requestId = payload.request;
+				
+				addFilterTag(tagClass);
 
-				addFilterTag(tagString);
-
+				var tagString = '<span class="' + tag[0].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[0])] + '">' + tag[0].toString() + '</span>';
 				for (var i = 1, iLength = tag.length; i < iLength; ++i) {
 					addFilterTag(tag[i]);
-					tagString += ' ' + tag[i];
+					tagString = tagString + ', ' + '<span class="' + tag[i].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[i])] + '">' + tag[i].toString() + '</span>';
+					tagClass += ' ' + tag[i];
 				}
-
-				tagString = '"' + tagString + '"';
-
+	
+				tagClass = '"' + tagClass + '"';
 				if (requestIdList.indexOf(requestId) === -1) {
 					$("#streamList").prepend('<dt class=' + requestId + '><p class="requestId"><span class="sign"> - </span>' + requestId + '</p></dt>');
 					requestIdList.push(requestId);
@@ -235,14 +248,20 @@
 				newPayload.time = new Date(payload.timestamp);
 				newPayload.tags = payload.tags;
 				newPayload.data = payload.data;
-				var clearData = organizeData(newPayload.data)
+				var clearData = organizeData(newPayload.data);
+				var tagsLength = newPayload.tags.length;
+				var tagsClass = newPayload.tags;
+				var tagsClassString = "";
+				for (var i = 0, iLength = tagsClass.length; i < iLength; ++i) {
+					tagsClassString += " " + tagsClass[i];
+				}
+				tagsClassString = "span2 tags" + tagsClassString;
 
-				$("." + requestId).append('<dd class=' + tagString.toString() + '><div class="row">' + 
+				$("." + requestId).append('<dd class=' + tagClass + '><div class="row">' + 
 					'<div class="span3"></div><div class="span3">' + JSON.stringify(newPayload.time) + '</div>' +
-					'<div class="span2 tags">' + JSON.stringify(newPayload.tags) + '</div>' +
+					'<div class="span2 tags">' + tagString + '</div>' +
 					'<div class="span3">' + clearData + '</div>' +
 					'</div></dd>');
-
 
 				filter();
 			};
@@ -317,7 +336,7 @@
 		<div id="textPage">
 			<h1 id="Helmet">Helmet : Interactive Debug Console</h1>
 		    <div id="sessionWrapper"> 
-		        <input id="session" />
+		        <input id="session" value="*" />
 		        <button id="subscribe" onclick="wsSend();">Subscribe</button>
 		    </div>
 		    <hr id="sessionWrapperRuler">
