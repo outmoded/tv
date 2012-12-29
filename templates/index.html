@@ -80,7 +80,7 @@
 					}
 				})
 
-				for (var i = 0, iLength = tagList.length; i < iLength; ++i) {
+				for (var i = 0, il = tagList.length; i < il; ++i) {
 					var tag = tagList[i];
 					if (filteredTagList[tag]) {
 						$('input:checkbox.' + tag).removeAttr('disabled');
@@ -232,7 +232,7 @@
 				addFilterTag(tagClass);
 
 				var tagString = '<span class="' + tag[0].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[0])] + '">' + tag[0].toString() + '</span>';
-				for (var i = 1, iLength = tag.length; i < iLength; ++i) {
+				for (var i = 1, il = tag.length; i < il; ++i) {
 					addFilterTag(tag[i]);
 					tagString = tagString + ', ' + '<span class="' + tag[i].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[i])] + '">' + tag[i].toString() + '</span>';
 					tagClass += ' ' + tag[i];
@@ -252,7 +252,7 @@
 				var tagsLength = newPayload.tags.length;
 				var tagsClass = newPayload.tags;
 				var tagsClassString = "";
-				for (var i = 0, iLength = tagsClass.length; i < iLength; ++i) {
+				for (var i = 0, il = tagsClass.length; i < il; ++i) {
 					tagsClassString += " " + tagsClass[i];
 				}
 				tagsClassString = "span2 tags" + tagsClassString;
