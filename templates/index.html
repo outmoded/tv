@@ -275,7 +275,17 @@
 				var tagsClass = newPayload.tags;
 				var tagsClassString = "";
 				var newDate = new Date(newPayload.time);
-				newDate = newDate.toLocaleTimeString() + "." + newDate.getMilliseconds().toString();
+
+				var msec = newDate.getMilliseconds().toString();
+				if (msec.length < 3) {
+					if (msec.length === 2) {
+						msec = "0" + msec;
+					}
+					else if (msec.length === 1) {
+						msec = "00" + msec;
+					}
+				}
+				newDate = newDate.toLocaleTimeString() + "." + msec;
 				for (var i = 0, il = tagsClass.length; i < il; ++i) {
 					tagsClassString += " " + tagsClass[i];
 				}
