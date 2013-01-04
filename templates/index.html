@@ -225,9 +225,11 @@
 			ws.onmessage = function(message) { 
 
 				var payload = JSON.parse(message.data);
+				console.log(JSON.stringify(payload))
 				var tag = payload.tags || ['noTag'];
 				var tagClass = tag[0].toString();
 				var requestId = payload.request;
+				console.log(requestId)
 				
 				addFilterTag(tagClass);
 
@@ -239,26 +241,48 @@
 				}
 	
 				tagClass = '"' + tagClass + '"';
+
+				if (payload.data) {
+					var url = payload.data.url || null;
+				}
+				
+
+				if (url) {
+
+					var urlLength = url.length || null;
+					if (urlLength > 15) {
+						var urlFirstHalf = url.substring(0, 15);
+						var urlSecondHalf = url.substring(15, urlLength);
+						url = urlFirstHalf + '<span class="urlEllipses">...</span>' + '<span class="urlSecondHalf" style="display: none">' + urlSecondHalf + '</span>'
+					}
+				}
+				
 				if (requestIdList.indexOf(requestId) === -1) {
-					$("#streamList").prepend('<dt class=' + requestId + '><p class="requestId"><span class="sign"> - </span>' + requestId + '</p></dt>');
+					$("#streamList").prepend('<br><dt class=' + requestId + '><p class="requestId"><span class="sign"> - </span>' + payload.data.method + "  |  " + url +  '</p></dt>');
 					requestIdList.push(requestId);
 				}
+
 
 				var newPayload = {}
 				newPayload.time = new Date(payload.timestamp);
 				newPayload.tags = payload.tags;
-				newPayload.data = payload.data;
-				var clearData = organizeData(newPayload.data);
+				console.log(newPayload.tags)
+				var newData = payload.data;
+				//delete newData.method ;
+				//delete newData.url;
+				var clearData = organizeData(newData);
 				var tagsLength = newPayload.tags.length;
 				var tagsClass = newPayload.tags;
 				var tagsClassString = "";
+				var newDate = new Date(newPayload.time);
+				newDate = newDate.toLocaleTimeString() + "." + newDate.getMilliseconds().toString();
 				for (var i = 0, il = tagsClass.length; i < il; ++i) {
 					tagsClassString += " " + tagsClass[i];
 				}
 				tagsClassString = "span2 tags" + tagsClassString;
-
+				console.log(new Date(newPayload.time).getTime());
 				$("." + requestId).append('<dd class=' + tagClass + '><div class="row">' + 
-					'<div class="span3"></div><div class="span3">' + JSON.stringify(newPayload.time) + '</div>' +
+					'<div class="span3"></div><div class="span2">' + newDate + '</div>' +
 					'<div class="span2 tags">' + tagString + '</div>' +
 					'<div class="span3">' + clearData + '</div>' +
 					'</div></dd>');
@@ -285,24 +309,24 @@
 				var firstKey = true;
 				for (var key in data) {
 					if (firstKey) {
-						dataString += '<span class="firstPair">' + key + ' : ' + data[key] + '</span><span class="pairEllipses">...</span><br>';
+						dataString += '<span class="firstPair">' + key + ' : ' + data[key] + '</span><span class="pairEllipses">...<br></span>';
 						firstKey = false;
 					}
 					else {
-						dataString += '<span class="otherPair" style="display: none">' + key + ' : ' + data[key] + '</span><br>';
+						dataString += '<span class="otherPair" style="display: none">' + key + ' : ' + data[key] + '<br></span>';
 					}
 				}
 
-				return dataString + '<br>';
+				return dataString;
 			}
 
 			ws.onclose = function() {};
 			
 			$(document).ready(function() {
 
-				$(document).on('click', 'dt p', function(e) {
+				$(document).on('click', 'dt p .sign', function(e) {
 
-					$(this).parent().children('dd').each(function() {
+					$(this).parent().parent().children('dd').each(function() {
 
 						if ($(this).css('display') === 'block') {
 							$(this).hide();
@@ -331,6 +355,19 @@
 
 					filter();
 				});
+
+				$(document).on('click', '.urlEllipses', function() {
+
+					$(this).hide();
+					$(this).siblings('.urlSecondHalf').show();
+				});
+				$(document).on('click', '.urlSecondHalf', function() {
+
+					$(this).hide();
+					$(this).siblings('.urlEllipses').show();
+				});
+
+
 			});
 		</script>
 		<div id="textPage">
@@ -342,9 +379,9 @@
 		    <hr id="sessionWrapperRuler">
 	    	<div class="row" id="columnNames">
 	    		<div class="span3">
-	    			<h2 class="columnName">Request ID</h2>
+	    			<h2 class="columnName">Method | URL</h2>
 	    		</div>
-	    		<div class="span3">
+	    		<div class="span2">
 	    			<h2 class="columnName">Time</h2>
 	    		</div>
 	    		<div class="span2">
@@ -355,7 +392,7 @@
 	    		</div>
 	    	</div>
 	    	<div class="row" id="stream">
-	        	<div class="span12">
+	        	<div class="span11">
 	        		<dl id=streamList></dl>
 	        	</div>
 	        	<div class="span2 checkboxesWrapper">
