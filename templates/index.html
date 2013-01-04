@@ -262,8 +262,6 @@
 				newPayload.time = new Date(payload.timestamp);
 				newPayload.tags = payload.tags;
 				var newData = payload.data;
-				//delete newData.method ;
-				//delete newData.url;
 				var clearData = organizeData(newData);
 				var tagsLength = newPayload.tags.length;
 				var tagsClass = newPayload.tags;
@@ -313,6 +311,7 @@
 
 				var firstKey = true;
 				for (var key in data) {
+					if (key === "url" || key === "method") continue;
 					if (firstKey) {
 						dataString += '<span class="firstPair">' + key + ' : ' + data[key] + '</span><span class="pairEllipses">...</span><br>';
 						firstKey = false;
