@@ -254,7 +254,7 @@
 				}
 				
 				if (requestIdList.indexOf(requestId) === -1) {
-					$("#streamList").prepend('<br><dt class=' + requestId + '><p class="requestId"><span class="sign"> - </span>' + payload.data.method + "  |  " + url +  '</p></dt>');
+					$("#streamList").prepend('<br><dt class=' + requestId + '><p class="requestId"><span class="sign"> - </span>' + payload.data.method.toUpperCase() + "  |  " + url +  '</p></dt>');
 					requestIdList.push(requestId);
 				}
 
