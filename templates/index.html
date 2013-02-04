@@ -14,11 +14,22 @@
 		    .requestId {
 			    text-decoration: underline;
 		    }
-
 		    .checkboxesWrapper {
 		    	position: fixed;
-		    	top: 100px;
+		    	top: 150px;
 		    	right: 1px;
+		    }
+		    #textPage {
+		    	margin: 10px 30px 0 30px;
+		    }
+		    #sessionWrapper {
+		    	margin: 30px 0 20px 0px;
+		    }
+		    #sessionWrapperRuler {
+		    	margin: 0 0 20px 0;
+		    }
+		    .columnName {
+		    	font-weight: 100;
 		    }
 		</style>
 	</head>
@@ -26,6 +37,19 @@
 		<script>
 			var tagList = [];							// Complete Tag List
 			var requestIdList = [];
+			var colorsList = [
+								"Brown",
+								"Blue",
+								"Red",
+								"Green",
+								"Salmon",
+								"Orange",
+								"Purple",
+								"LightSlateGrey",
+								"DarkGoldenRod",
+								"Black",
+								"DeepPink"
+							];
 
 			function htmlEscape(string) { 
 
@@ -36,7 +60,7 @@
 
 				if (tagList.indexOf(tag) === -1) {
 					tagList.push(tag);
-					$("#checkboxes").append('<span class="checkboxWrapper"><input type="checkbox" name="tag" class="' + tag + '" value="' + tag + '">' + tag + '</span><br>');
+					$("#checkboxes").append('<span class="checkboxWrapper" style="color:' + colorsList[tagList.indexOf(tag)] + '"><input type="checkbox" name="tag" class="' + tag + '" value="' + tag + '">' + tag + '</span><br>');
 				}
 			}
 
@@ -51,13 +75,12 @@
 					}
 
 					var tagArray = $(this).attr('class').split(' ');
-					console.log(tagArray);	
 					for (var i = 0, tagArrayLength = tagArray.length; i < tagArrayLength; ++i) {
 						filteredTagList[tagArray[i]] = true;		
 					}
 				})
 
-				for (var i = 0, iLength = tagList.length; i < iLength; ++i) {
+				for (var i = 0, il = tagList.length; i < il; ++i) {
 					var tag = tagList[i];
 					if (filteredTagList[tag]) {
 						$('input:checkbox.' + tag).removeAttr('disabled');
@@ -203,35 +226,69 @@
 
 				var payload = JSON.parse(message.data);
 				var tag = payload.tags || ['noTag'];
-				var tagString = tag[0].toString();
+				var tagClass = tag[0].toString();
 				var requestId = payload.request;
+				
+				addFilterTag(tagClass);
 
-				addFilterTag(tagString);
-
-				for (var i = 1, iLength = tag.length; i < iLength; ++i) {
+				var tagString = '<span class="' + tag[0].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[0])] + '">' + tag[0].toString() + '</span>';
+				for (var i = 1, il = tag.length; i < il; ++i) {
 					addFilterTag(tag[i]);
-					tagString += ' ' + tag[i];
+					tagString = tagString + ', ' + '<span class="' + tag[i].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[i])] + '">' + tag[i].toString() + '</span>';
+					tagClass += ' ' + tag[i];
 				}
+	
+				tagClass = '"' + tagClass + '"';
 
-				tagString = '"' + tagString + '"';
-
+				if (payload.data) {
+					var url = payload.data.url || null;
+				}
+				
+				if (url) {
+					var urlLength = url.length || null;
+					if (urlLength > 15) {
+						var urlFirstHalf = url.substring(0, 15);
+						var urlSecondHalf = url.substring(15, urlLength);
+						url = urlFirstHalf + '<span class="urlEllipses">...</span>' + '<span class="urlSecondHalf" style="display: none">' + urlSecondHalf + '</span>'
+					}
+				}
+				
 				if (requestIdList.indexOf(requestId) === -1) {
-					$("#streamList").append('<dt class=' + requestId + '><p class="requestId"><span class="sign"> - </span>' + requestId + '</p></dt>');
+					$("#streamList").prepend('<br><dt class=' + requestId + '><p class="requestId"><span class="sign"> - </span>' + payload.data.method.toUpperCase() + "  |  " + url +  '</p></dt>');
 					requestIdList.push(requestId);
 				}
 
 				var newPayload = {}
 				newPayload.time = new Date(payload.timestamp);
 				newPayload.tags = payload.tags;
-				newPayload.data = payload.data;
-				var clearData = organizeData(newPayload.data)
+				var newData = payload.data;
+				var clearData = organizeData(newData);
+				var tagsLength = newPayload.tags.length;
+				var tagsClass = newPayload.tags;
+				var tagsClassString = "";
+				var newDate = new Date(newPayload.time);
 
-				$("." + requestId).append('<dd class=' + tagString.toString() + '><div class="row">' + 
-					'<div class="span3"></div><div class="span3">' + JSON.stringify(newPayload.time) + '</div>' +
-					'<div class="span2 tags">' + JSON.stringify(newPayload.tags) + '</div>' +
-					'<div class="span3">' + clearData + '</div>' +
+				var msec = newDate.getMilliseconds().toString();
+				if (msec.length < 3) {
+					if (msec.length === 2) {
+						msec = "0" + msec;
+					}
+					else if (msec.length === 1) {
+						msec = "00" + msec;
+					}
+				}
+
+				newDate = newDate.toLocaleTimeString() + "." + msec;
+				for (var i = 0, il = tagsClass.length; i < il; ++i) {
+					tagsClassString += " " + tagsClass[i];
+				}
+
+				tagsClassString = "span2 tags" + tagsClassString;
+				$("." + requestId).append('<dd class=' + tagClass + '><div class="row">' + 
+					'<div class="span1"></div><div class="span2">' + newDate + '</div>' +
+					'<div class="span2 tags">' + tagString + '</div>' +
+					'<div class="span5">' + clearData + '</div>' +
 					'</div></dd>');
-
 
 				filter();
 			};
@@ -254,25 +311,26 @@
 
 				var firstKey = true;
 				for (var key in data) {
+					if (key === "url" || key === "method") continue;
 					if (firstKey) {
 						dataString += '<span class="firstPair">' + key + ' : ' + data[key] + '</span><span class="pairEllipses">...</span><br>';
 						firstKey = false;
 					}
 					else {
-						dataString += '<span class="otherPair" style="display: none">' + key + ' : ' + data[key] + '</span><br>';
+						dataString += '<span class="otherPair" style="display: none">' + key + ' : ' + data[key] + '<br></span>';
 					}
 				}
 
-				return dataString + '<br>';
+				return dataString;
 			}
 
 			ws.onclose = function() {};
 			
 			$(document).ready(function() {
 
-				$(document).on('click', 'dt p', function(e) {
+				$(document).on('click', 'dt p .sign', function(e) {
 
-					$(this).parent().children('dd').each(function() {
+					$(this).parent().parent().children('dd').each(function() {
 
 						if ($(this).css('display') === 'block') {
 							$(this).hide();
@@ -301,32 +359,48 @@
 
 					filter();
 				});
+
+				$(document).on('click', '.urlEllipses', function() {
+
+					$(this).hide();
+					$(this).siblings('.urlSecondHalf').show();
+				});
+				$(document).on('click', '.urlSecondHalf', function() {
+
+					$(this).hide();
+					$(this).siblings('.urlEllipses').show();
+				});
 			});
 		</script>
-	       
-        <input id="session" />
-        <button id="subscribe" onclick="wsSend();">Subscribe</button>
-    	<div class="row" id="columnNames">
-    		<div class="span3">
-    			<p>Request ID</p>
-    		</div>
-    		<div class="span3">
-    			<p>Time</p>
-    		</div>
-    		<div class="span2">
-    			<p>Tags<p>
-    		</div>
-    		<div class="span3">
-    			<p>Data</p>
-    		</div>
-    	</div>
-    	<div class="row" id="stream">
-        	<div class="span12">
-        		<dl id=streamList></dl>
-        	</div>
-        	<div class="span2 checkboxesWrapper">
-        		<form id="checkboxes"></form>
-        	</div>   
-    	</div>    
+		<div id="textPage">
+			<h1 id="Helmet">Helmet : Interactive Debug Console</h1>
+		    <div id="sessionWrapper"> 
+		        <input id="session" value="*" />
+		        <button id="subscribe" onclick="wsSend();">Subscribe</button>
+		    </div>
+		    <hr id="sessionWrapperRuler">
+	    	<div class="row" id="columnNames">
+	    		<div class="span3">
+	    			<h2 class="columnName">Method | URL</h2>
+	    		</div>
+	    		<!--<div class="span2">
+	    			<<h2 class="columnName">Time</h2>
+	    		</div>-->
+	    		<div class="span2">
+	    			<h2 class="columnName">Tags<h2>
+	    		</div>
+	    		<div class="span5">
+	    			<h2 class="columnName">Data</h2>
+	    		</div>
+	    	</div>
+	    	<div class="row" id="stream">
+	        	<div class="span11">
+	        		<dl id=streamList></dl>
+	        	</div>
+	        	<div class="span2 checkboxesWrapper">
+	        		<form id="checkboxes"></form>
+	        	</div>   
+	    	</div>    
+	    </div>
 	</body>
 </html>
