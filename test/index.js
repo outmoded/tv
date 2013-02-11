@@ -2,7 +2,7 @@
 
 var Chai = require('chai');
 var Websocket = require('ws');
-var Helmet = process.env.TEST_COV ? require('../lib-cov') : require('../lib');
+var Tv = process.env.TEST_COV ? require('../lib-cov') : require('../lib');
 
 
 // Declare internals
@@ -15,7 +15,7 @@ var internals = {};
 var expect = Chai.expect;
 
 
-describe('Helmet', function() {
+describe('Tv', function() {
 
     describe('#constructor', function() {
 
@@ -23,7 +23,7 @@ describe('Helmet', function() {
 
             var fn = function() {
 
-                var helmet = Helmet();
+                var tv = Tv();
             };
 
             expect(fn).to.throw(Error);
@@ -34,35 +34,35 @@ describe('Helmet', function() {
 
             var fn = function() {
 
-                var helmet = new Helmet({websocketPort: 3001});
+                var tv = new Tv({websocketPort: 3001});
             };
 
             expect(fn).to.not.throw(Error);
             done();
         });
 
-        it('uses the helmet defaults when no config is passed in', function(done) {
+        it('uses the tv defaults when no config is passed in', function(done) {
 
-            var helmet = new Helmet();
+            var tv = new Tv();
 
-            expect(helmet.settings.host).to.equal('0.0.0.0');
-            expect(helmet.settings.websocketPort).to.equal(3000);
+            expect(tv.settings.host).to.equal('0.0.0.0');
+            expect(tv.settings.websocketPort).to.equal(3000);
             done();
         });
 
         it('uses the passed in config', function(done) {
 
-            var helmet = new Helmet({host: 'localhost', websocketPort: 3002});
+            var tv = new Tv({host: 'localhost', websocketPort: 3002});
 
-            expect(helmet.settings.host).to.equal('localhost');
-            expect(helmet.settings.websocketPort).to.equal(3002);
+            expect(tv.settings.host).to.equal('localhost');
+            expect(tv.settings.websocketPort).to.equal(3002);
             done();
         });
 
         it('adds message to subscribers list when receiving message', function(done) {
 
             var config = {host: 'localhost', websocketPort: 3010}
-            var helmet = new Helmet(config);
+            var tv = new Tv(config);
 
             var ws = new Websocket("ws://" + config.host + ':' + config.websocketPort);
             ws.readyState = Websocket.OPEN;
@@ -72,7 +72,7 @@ describe('Helmet', function() {
                 ws.send("test1");
                 setTimeout(function(){
 
-                    expect(helmet._subscribers["test1"]).to.exist;
+                    expect(tv._subscribers["test1"]).to.exist;
                     done();
                 },  1000);
             });
@@ -83,8 +83,8 @@ describe('Helmet', function() {
 
         it('sends the data to all subscribers when session is null', function(done) {
 
-            var helmet = new Helmet({websocketPort: 3003});
-            helmet._subscribers['*'] = [{
+            var tv = new Tv({websocketPort: 3003});
+            tv._subscribers['*'] = [{
                 readyState: Websocket.OPEN,
                 send: function(message) {
 
@@ -94,13 +94,13 @@ describe('Helmet', function() {
                 }
             }];
 
-            helmet.report(null, 'test');
+            tv.report(null, 'test');
         });
 
         it('only sends a message to the appropriate subscribers', function(done) {
 
-            var helmet = new Helmet({websocketPort: 3004});
-            helmet._subscribers['*'] = [{
+            var tv = new Tv({websocketPort: 3004});
+            tv._subscribers['*'] = [{
                 readyState: Websocket.OPEN,
                 send: function(message) {
 
@@ -108,7 +108,7 @@ describe('Helmet', function() {
                 }
             }];
 
-            helmet._subscribers['test'] = [{
+            tv._subscribers['test'] = [{
                 readyState: Websocket.OPEN,
                 send: function(message) {
 
@@ -118,13 +118,13 @@ describe('Helmet', function() {
                 }
             }];
 
-            helmet.report('test', 'test');
+            tv.report('test', 'test');
         });
 
         it('only sends a message when the websocket exists', function(done) {
 
-            var helmet = new Helmet({websocketPort: 3005});
-            helmet._subscribers['*'] = [{
+            var tv = new Tv({websocketPort: 3005});
+            tv._subscribers['*'] = [{
                 readyState: 'none',
                 send: function(message) {
 
@@ -132,7 +132,7 @@ describe('Helmet', function() {
                 }
             }];
 
-            helmet.report(null, 'test');
+            tv.report(null, 'test');
             done();
         });
     });
@@ -141,9 +141,9 @@ describe('Helmet', function() {
 
         it('includes the hostname and port in the source', function(done) {
 
-            var helmet = new Helmet({host: 'localhost', websocketPort: 3006});
+            var tv = new Tv({host: 'localhost', websocketPort: 3006});
 
-            var html = helmet.getMarkup();
+            var html = tv.getMarkup();
 
             expect(html).to.contain('localhost');
             expect(html).to.contain('3006');
