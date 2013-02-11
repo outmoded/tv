@@ -1,14 +1,14 @@
 {
-    "name": "hapi-helmet",
+    "name": "tv",
     "description": "Interactive debug console for hapi",
-    "version": "0.0.5",
+    "version": "0.0.1",
     "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
     "contributors":[
         "Wyatt Preul <wpreul@gmail.com>",
         "Van Nguyen <the.gol.effect@gmail.com>",
         "Ben Nguyen <benobviate@gmail.com>"
     ],
-    "repository": "git://github.com/walmartlabs/helmet",
+    "repository": "git://github.com/walmartlabs/tv",
     "main": "index",
     "keywords": [
         "debug",
@@ -33,7 +33,7 @@
     "licenses": [
         {
             "type": "BSD",
-            "url": "http://github.com/walmartlabs/helmet/raw/master/LICENSE"
+            "url": "http://github.com/walmartlabs/tv/raw/master/LICENSE"
         }
     ]
 }
