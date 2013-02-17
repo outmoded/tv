@@ -2,7 +2,7 @@
 
 var Chai = require('chai');
 var Websocket = require('ws');
-var Tv = process.env.TEST_COV ? require('../lib-cov') : require('../lib');
+var Tv = require('../lib');
 
 
 // Declare internals
