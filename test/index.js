@@ -1,8 +1,8 @@
 // Load modules
 
 var Chai = require('chai');
-var Websocket = require('ws');
-var Tv = require('../lib');
+var Hapi = require('hapi');
+var Ws = require('ws');
 
 
 // Declare internals
@@ -15,139 +15,70 @@ var internals = {};
 var expect = Chai.expect;
 
 
-describe('Tv', function() {
+describe('Tv', function () {
 
-    describe('#constructor', function() {
+    var server = null;
 
-        it('cannot be constructed without new', function(done) {
+    before(function (done) {
+        var options = {
+            permissions: {
+                ext: true
+            },
+            plugin: {
+                websocketPort: 3007
+            }
+        };
 
-            var fn = function() {
+        server = new Hapi.Server();
 
-                var tv = Tv();
-            };
+        server.route({
+            method: 'GET',
+            path: '/',
+            handler: function () {
 
-            expect(fn).to.throw(Error);
-            done();
+                return this.reply('1');
+            }
         });
 
-        it('can be constructed with new', function(done) {
+        server.plugin().require('../', options, function (err) {
 
-            var fn = function() {
-
-                var tv = new Tv({websocketPort: 3001});
-            };
-
-            expect(fn).to.not.throw(Error);
-            done();
-        });
-
-        it('uses the tv defaults when no config is passed in', function(done) {
-
-            var tv = new Tv();
-
-            expect(tv.settings.host).to.equal('0.0.0.0');
-            expect(tv.settings.websocketPort).to.equal(3000);
-            done();
-        });
-
-        it('uses the passed in config', function(done) {
-
-            var tv = new Tv({host: 'localhost', websocketPort: 3002});
-
-            expect(tv.settings.host).to.equal('localhost');
-            expect(tv.settings.websocketPort).to.equal(3002);
-            done();
-        });
-
-        it('adds message to subscribers list when receiving message', function(done) {
-
-            var config = {host: 'localhost', websocketPort: 3010}
-            var tv = new Tv(config);
-
-            var ws = new Websocket("ws://" + config.host + ':' + config.websocketPort);
-            ws.readyState = Websocket.OPEN;
-            
-            ws.on('open', function() {
-
-                ws.send("test1");
-                setTimeout(function(){
-
-                    expect(tv._subscribers["test1"]).to.exist;
-                    done();
-                },  1000);
-            });
-        });
-    });
-
-    describe('#report', function() {
-
-        it('sends the data to all subscribers when session is null', function(done) {
-
-            var tv = new Tv({websocketPort: 3003});
-            tv._subscribers['*'] = [{
-                readyState: Websocket.OPEN,
-                send: function(message) {
-
-                    expect(message).to.exist;
-                    expect(message).to.equal('"test"');
-                    done();
-                }
-            }];
-
-            tv.report(null, 'test');
-        });
-
-        it('only sends a message to the appropriate subscribers', function(done) {
-
-            var tv = new Tv({websocketPort: 3004});
-            tv._subscribers['*'] = [{
-                readyState: Websocket.OPEN,
-                send: function(message) {
-
-                    expect(message).to.not.exist;
-                }
-            }];
-
-            tv._subscribers['test'] = [{
-                readyState: Websocket.OPEN,
-                send: function(message) {
-
-                    expect(message).to.exist;
-                    expect(message).to.equal('"test"');
-                    done();
-                }
-            }];
-
-            tv.report('test', 'test');
-        });
-
-        it('only sends a message when the websocket exists', function(done) {
-
-            var tv = new Tv({websocketPort: 3005});
-            tv._subscribers['*'] = [{
-                readyState: 'none',
-                send: function(message) {
-
-                    expect(message).to.not.exist;
-                }
-            }];
-
-            tv.report(null, 'test');
+            expect(err).to.not.exist;
             done();
         });
     });
 
-    describe('#getMarkup', function() {
+    it('returns the console html', function (done) {
 
-        it('includes the hostname and port in the source', function(done) {
+        server.inject({ method: 'GET', url: '/debug/console' }, function (res) {
 
-            var tv = new Tv({host: 'localhost', websocketPort: 3006});
+            expect(res.result).to.contain('<!DOCTYPE html>');
+            done();
+        });
+    });
 
-            var html = tv.getMarkup();
+    it('reports a request event', function (done) {
 
-            expect(html).to.contain('localhost');
-            expect(html).to.contain('3006');
+        var ws = new Ws('ws://localhost:3007');
+
+        ws.on('open', function () {
+
+            ws.send('*');
+
+            setTimeout(function () {
+
+                server.inject({ method: 'GET', url: '/?debug=123' }, function (res) {
+
+                    expect(res.result).to.equal('1');
+                });
+            }, 100);
+        });
+
+        ws.once('message', function (data, flags) {
+
+            expect(JSON.parse(data).data.agent).to.equal('shot');
             done();
         });
     });
 });
+
+

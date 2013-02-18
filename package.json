@@ -24,7 +24,11 @@
     "ws": "0.4.x",
     "handlebars": "1.0.x"
   },
+  "peerDependencies": {
+    "hapi": "0.14.x"
+  },
   "devDependencies": {
+    "hapi": "0.14.x",
     "mocha": "1.x.x",
     "chai": "1.x.x",
     "blanket": "1.0.x",
