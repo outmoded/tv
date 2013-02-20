@@ -20,13 +20,9 @@ describe('Tv', function () {
     var server = null;
 
     before(function (done) {
+
         var options = {
-            permissions: {
-                ext: true
-            },
-            plugin: {
-                websocketPort: 3007
-            }
+            websocketPort: 3007
         };
 
         server = new Hapi.Server();
@@ -40,7 +36,7 @@ describe('Tv', function () {
             }
         });
 
-        server.plugin().require('../', options, function (err) {
+        server.plugin().allow({ ext: true }).require('../', options, function (err) {
 
             expect(err).to.not.exist;
             done();
