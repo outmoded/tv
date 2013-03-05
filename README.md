@@ -1,5 +1,5 @@
 <a href="https://github.com/walmartlabs/blammo"><img src="https://raw.github.com/walmartlabs/blammo/master/images/from.png" align="right" /></a>
-![tv Logo](https://raw.github.com/walmartlabs/tv/master/images/tv.png)
+![tv Logo](https://raw.github.com/spumko/tv/master/images/tv.png)
 
 Interactive debug console for [**hapi**](https://github.com/walmartlabs/hapi)
 
