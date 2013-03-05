@@ -8,7 +8,7 @@
     "Van Nguyen <the.gol.effect@gmail.com>",
     "Ben Nguyen <benobviate@gmail.com>"
   ],
-  "repository": "git://github.com/walmartlabs/tv",
+  "repository": "git://github.com/spumko/tv",
   "main": "index",
   "keywords": [
     "debug",
@@ -42,7 +42,7 @@
   "licenses": [
    {
       "type": "BSD",
-      "url": "http://github.com/walmartlabs/tv/raw/master/LICENSE"
+      "url": "http://github.com/spumko/tv/raw/master/LICENSE"
     }
   ]
 }
