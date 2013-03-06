@@ -1,9 +1,9 @@
-<a href="https://github.com/walmartlabs/blammo"><img src="https://raw.github.com/walmartlabs/blammo/master/images/from.png" align="right" /></a>
+<a href="https://github.com/spumko"><img src="https://raw.github.com/spumko/spumko/master/images/from.png" align="right" /></a>
 ![tv Logo](https://raw.github.com/spumko/tv/master/images/tv.png)
 
-Interactive debug console for [**hapi**](https://github.com/walmartlabs/hapi)
+Interactive debug console for [**hapi**](https://github.com/spumko/hapi)
 
-[![Build Status](https://secure.travis-ci.org/walmartlabs/tv.png)](http://travis-ci.org/walmartlabs/tv)
+[![Build Status](https://secure.travis-ci.org/spumko/tv.png)](http://travis-ci.org/spumko/tv)
 
 The debug console is a simple web page in which developers can subscribe to a debug id (or * for all), and then include that
 debug id as an extra query parameter with each request. The server will use WebSocket to stream the subscribed request logs to
