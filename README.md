@@ -15,7 +15,7 @@ var Hapi = require('hapi');
 var server = new Hapi.Server();
 var options = {
   webSocketPort: 3000,
-  debugEndpoing: '/debug/console',
+  debugEndpoint: '/debug/console',
   queryKey: 'debug'
 };
 
