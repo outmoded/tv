@@ -1,7 +1,7 @@
 {
   "name": "tv",
   "description": "Interactive debug console plugin for hapi",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
   "contributors":[
     "Wyatt Preul <wpreul@gmail.com>",
@@ -20,24 +20,20 @@
     "node": "0.8.x"
   },
   "dependencies": {
-    "hoek": "0.6.x",
+    "hoek": "0.7.x",
     "ws": "0.4.x",
     "handlebars": "1.0.x"
   },
   "peerDependencies": {
-    "hapi": "0.15.x"
+    "hapi": "0.16.x"
   },
   "devDependencies": {
-    "hapi": "0.15.x",
-    "mocha": "1.x.x",
-    "chai": "1.x.x",
-    "blanket": "1.0.x",
-    "travis-cov": "0.2.x"
+    "hapi": "0.16.x",
+    "lab": "0.0.x",
+    "complexity-report": "0.x.x"
   },
   "scripts": {
-    "test": "make test && make test-cov",
-    "blanket": { "pattern": "//^((?!\/node_modules\/)(?!\/test\/).)*$/ig", "onlyCwd": true, "data-cover-flags": { "branchTracking": true } },
-    "travis-cov": { "threshold": 100 }
+    "test": "make test-cov"
   },
   "licenses": [
    {
