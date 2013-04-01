@@ -8,4 +8,3 @@ complexity:
 	@./node_modules/.bin/cr -o complexity.md -f markdown lib
 
 .PHONY: test test-cov test-cov-html complexity
-
