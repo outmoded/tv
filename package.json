@@ -17,7 +17,7 @@
     "plugin"
   ],
   "engines": {
-    "node": "0.8.x"
+    "node": "0.10.x"
   },
   "dependencies": {
     "hoek": "0.7.x",
@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "hapi": "0.16.x",
-    "lab": "0.0.x",
+    "lab": "0.1.x",
     "complexity-report": "0.x.x"
   },
   "scripts": {

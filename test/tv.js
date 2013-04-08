@@ -38,7 +38,7 @@ describe('Tv', function () {
 
             var fn = function () {
 
-                var tv = new Tv({ websocketPort: 3001 });
+                var tv = new Tv({ port: 0 });
             };
 
             expect(fn).to.not.throw(Error);
@@ -50,35 +50,38 @@ describe('Tv', function () {
             var tv = new Tv();
 
             expect(tv.settings.host).to.equal('0.0.0.0');
-            expect(tv.settings.websocketPort).to.equal(3000);
+            expect(tv.settings.port).to.equal(3000);
             done();
         });
 
         it('uses the passed in config', function (done) {
 
-            var tv = new Tv({ host: 'localhost', websocketPort: 3002 });
+            var tv = new Tv({ host: 'localhost', port: 3002 });
 
             expect(tv.settings.host).to.equal('localhost');
-            expect(tv.settings.websocketPort).to.equal(3002);
+            expect(tv.settings.port).to.equal(3002);
             done();
         });
 
         it('adds message to subscribers list when receiving message', function (done) {
 
-            var config = { host: 'localhost', websocketPort: 3010 }
+            var config = { host: 'localhost', port: 0 };
             var tv = new Tv(config);
 
-            var ws = new Ws("ws://" + config.host + ':' + config.websocketPort);
-            ws.readyState = Ws.OPEN;
+            tv.start(function () {
 
-            ws.on('open', function () {
+                var ws = new Ws("ws://" + tv.settings.host + ':' + tv.settings.port);
+                ws.readyState = Ws.OPEN;
 
-                ws.send("test1");
-                setTimeout(function () {
+                ws.on('open', function () {
 
-                    expect(tv._subscribers["test1"]).to.exist;
-                    done();
-                }, 100);
+                    ws.send("test1");
+                    setTimeout(function () {
+
+                        expect(tv._subscribers["test1"]).to.exist;
+                        done();
+                    }, 100);
+                });
             });
         });
     });
@@ -87,7 +90,7 @@ describe('Tv', function () {
 
         it('sends the data to all subscribers when session is null', function (done) {
 
-            var tv = new Tv({ websocketPort: 3003 });
+            var tv = new Tv({ port: 0 });
             tv._subscribers['*'] = [{
                 readyState: Ws.OPEN,
                 send: function (message) {
@@ -103,7 +106,7 @@ describe('Tv', function () {
 
         it('only sends a message to the appropriate subscribers', function (done) {
 
-            var tv = new Tv({ websocketPort: 3004 });
+            var tv = new Tv({ port: 0 });
             tv._subscribers['*'] = [{
                 readyState: Ws.OPEN,
                 send: function (message) {
@@ -127,7 +130,7 @@ describe('Tv', function () {
 
         it('only sends a message when the websocket exists', function (done) {
 
-            var tv = new Tv({ websocketPort: 3005 });
+            var tv = new Tv({ port: 0 });
             tv._subscribers['*'] = [{
                 readyState: 'none',
                 send: function (message) {
@@ -145,13 +148,15 @@ describe('Tv', function () {
 
         it('includes the hostname and port in the source', function (done) {
 
-            var tv = new Tv({ host: 'localhost', websocketPort: 3006 });
+            var tv = new Tv({ host: 'localhost', port: 0 });
+            tv.start(function () {
 
-            var html = tv.getMarkup();
+                var html = tv.getMarkup();
 
-            expect(html).to.contain('localhost');
-            expect(html).to.contain('3006');
-            done();
+                expect(html).to.contain('localhost');
+                expect(html).to.contain(tv.settings.port);
+                done();
+            });
         });
     });
 });
