@@ -1,10 +1,10 @@
 (function (window, $) {
 
-    $.tv = $.tv || {};
+    $.tv = $.tv || {};                          // Add tv plugin namespace
 
 
-    var tagList = [];							// Complete Tag List
-    var requestIdList = [];
+    var tagList = [];                           // Complete Tag List
+    var requestList = [];
     var colorsList = [
         "Brown",
         "Blue",
@@ -19,317 +19,255 @@
         "DeepPink"
     ];
 
-    function addFilterTag(tag) {
+    function tagsContain (tags, tagName) {
 
-        if (tagList.indexOf(tag) === -1) {
-            tagList.push(tag);
-            $("#checkboxes").append('<span class="checkboxWrapper" style="color:' + colorsList[tagList.indexOf(tag)] + '"><input type="checkbox" name="tag" class="' + tag + '" value="' + tag + '">' + tag + '</span><br>');
-        }
-    }
+        for (var i = 0, il = tags.length; i < il; ++i) {
 
-    // Finds which tags are still shown, and removes unnecessary ones
-
-    function filterTagList() {
-
-        var filteredTagList = {};
-        $('dd').each(function() {
-            if ($(this).css('display') === 'none') {
+            if (tags[i].name === tagName) {
                 return true;
             }
-
-            var tagArray = $(this).attr('class').split(' ');
-            for (var i = 0, tagArrayLength = tagArray.length; i < tagArrayLength; ++i) {
-                filteredTagList[tagArray[i]] = true;
-            }
-        });
-
-        for (var i = 0, il = tagList.length; i < il; ++i) {
-            var tag = tagList[i];
-            if (filteredTagList[tag]) {
-                $('input:checkbox.' + tag).removeAttr('disabled');
-            }
-            else {
-                $('input:checkbox.' + tag).attr('disabled', true);
-            }
         }
+
+        return false;
     }
 
-    function filterRequestId() {
 
-        $('dt').each(function() {
+    function filterRequests (request) {
 
-            var requestSelector = this;
-            var childrenList = $(requestSelector).children('dd').length;
-            var count = 0;
+        var checked = $('#tagList :checked');
+        for (var i = 0, il = checked.length; i < il; ++i) {
 
-            $(requestSelector).children('dd').each(function() {
+            var id = $(checked[i]).attr('id');
+            if (tagsContain(request.tags, id)) {
 
-                if ($(this).css('display') === 'block') {
-                    $(requestSelector).show();
+                request.show = true;
+                return;
+            }
+        }
+
+        request.show = false;
+    }
+
+
+    function clone (obj, seen) {
+
+        if (typeof obj !== 'object' ||
+            obj === null) {
+
+            return obj;
+        }
+
+        seen = seen || { orig: [], copy: [] };
+
+        var lookup = seen.orig.indexOf(obj);
+        if (lookup !== -1) {
+            return seen.copy[lookup];
+        }
+
+        var newObj = (obj instanceof Array) ? [] : {};
+
+        seen.orig.push(obj);
+        seen.copy.push(newObj);
+
+        for (var i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                if (obj[i] instanceof Date) {
+                    newObj[i] = new Date(obj[i].getTime());
+                }
+                else if (obj[i] instanceof RegExp) {
+                    var flags = '' + (obj[i].global ? 'g' : '') + (obj[i].ignoreCase ? 'i' : '') + (obj[i].multiline ? 'm' : '');
+                    newObj[i] = new RegExp(obj[i].source, flags);
                 }
                 else {
-                    ++count;
+                    newObj[i] = clone(obj[i], seen);
+                }
+            }
+        }
+
+        return newObj;
+    }
+
+    function merge (target, source) {
+
+        if (!source) {
+            return target;
+        }
+
+        if (source instanceof Array) {
+            source.forEach(function (item) {
+
+                if (!tagsContain(target, item.name)) {
+                    target.push(item);
                 }
             });
 
-            if (childrenList === count) {
-                $(requestSelector).hide();
-            }
-        });
-    }
-
-    function filterSome() {
-
-        var checkedLength = $('input:checked').length;
-        var tag = '';
-        for(var i = 0; i< checkedLength; ++i) {
-            tag += '.' + $('input:checked')[i].value;
+            return target;
         }
 
-        $(tag).removeClass('filtered');
-    }
+        Object.keys(source).forEach(function (key) {
 
+            var value = source[key];
+            if (value &&
+                typeof value === 'object') {
 
-    function filterAll() {
+                if (!target[key] ||
+                    typeof target[key] !== 'object') {
 
-        $('dd').each(function() {
-            $(this).removeClass('filtered');
-        });
-    }
-
-
-    function checkBoxCount() {
-
-        var checkboxLength = $(':checkbox').length;
-        var checkedLength = $('input:checked').length;
-
-        if (checkboxLength === checkedLength) {
-            filterAll();
-        }
-        else if (checkedLength === 0) {
-            filterAll();
-        }
-        else {
-            filterSome();
-        }
-    }
-
-
-    function filter() {
-
-        $('dt').show();
-        $('dd').show();
-
-        $('dd').each(function() {
-
-            if (!$(this).hasClass('filtered')) {
-                $(this).addClass('filtered');
-            }
-        });
-
-        checkBoxCount();
-
-        $('.filtered').hide();
-
-        filterRequestId();
-        filterTagList();
-    }
-
-    // Checks expands/collapse signs
-
-    function checkSigns() {
-
-        $('dt').each(function() {
-
-            var dt = this;
-            var done = false;
-            var isVisible = false;
-            var ddList = $(dt).children('dd');
-
-            for (var i = 0, ddListLength = ddList.length; i < ddListLength; ++i ) {
-
-                if ($(ddList[i]).css('display') === 'block') {
-                    isVisible = true;
-                    var currentSign = $(dt).find('.sign').html();
-
-                    if (currentSign === ' + ') {
-                        $(dt).find('.sign').html(' - ');
-                        done = true;
-                        break;
-                    }
+                    target[key] = clone(value);
+                }
+                else {
+                    merge(target[key], source[key]);
                 }
             }
-
-            if (!done) {
-                if (!isVisible) {
-                    if ($(dt).find('.sign').html() === ' - ') {
-                        $(dt).find('.sign').html(' + ');
-                    }
+            else {
+                if (value !== null && value !== undefined) {            // Explicit to preserve empty strings
+                    target[key] = value;
+                }
+                else {                    // Defaults to true
+                    target[key] = value;
                 }
             }
         });
+
+        return target;
     }
 
-    function attachEvents(ws) {
 
-        ws.onclose = function() {};
-        ws.onmessage = function(message) {
+    function addTag (newTag) {
+
+        var exists = false;
+        var color;
+
+        tagList.forEach(function (tag) {
+
+            if (tag.name === newTag) {
+                tag.count++;
+                exists = true;
+                color = tag.color;
+            }
+        });
+
+        if (!exists) {
+            color = colorsList[tagList.length];
+            tagList.push({
+                name: newTag,
+                color: color,
+                count: 1
+            });
+        }
+
+        return color;
+    }
+
+
+    function addRequest (requestData) {
+
+        var exists = false;
+        requestList = requestList.map(function (request) {
+
+            if (request.requestId === requestData.requestId) {
+
+                requestData = merge(requestData, request);
+                exists = true;
+
+                return requestData;
+            }
+
+            return request;
+        });
+
+        if (!exists) {
+            requestList.push(requestData);
+        }
+
+        return requestData;
+    }
+
+
+    function dataReplacer (key, value) {
+
+        return key !== 'url' && key !== 'method' && key !== 'id' ? value: undefined;
+    }
+
+
+    function attachEvents (ws) {
+
+        ws.onclose = function () {};
+        ws.onmessage = function (message) {
 
             var payload = JSON.parse(message.data);
-            var tag = payload.tags || ['noTag'];
-            var tagClass = tag[0].toString();
             var requestId = payload.request;
+            var path = payload.data ? payload.data.url : null;
+            var truncatedPath = path && path.length > 15 ? path.substring(0, 15) + '...' : path;
 
-            addFilterTag(tagClass);
+            var requestData = {
+                requestId: requestId,
+                method: payload.data && payload.data.method && payload.data.method.toUpperCase(),
+                path: path,
+                truncatedPath: truncatedPath,
+                data: payload.data,
+                timestamp: new Date(payload.timestamp).toLocaleTimeString(),
+                tags: []
+            };
 
-            var tagString = '<span class="' + tag[0].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[0])] + '">' + tag[0].toString() + '</span>';
-            for (var i = 1, il = tag.length; i < il; ++i) {
-                addFilterTag(tag[i]);
-                tagString = tagString + ', ' + '<span class="' + tag[i].toString() + '" style="color:' + colorsList[tagList.indexOf(tag[i])] + '">' + tag[i].toString() + '</span>';
-                tagClass += ' ' + tag[i];
+            if (payload.tags) {
+                payload.tags.forEach(function (tag) {
+                    var color = addTag(tag);
+                    requestData.tags.push({
+                        name: tag,
+                        color: color
+                    });
+                });
             }
 
-            tagClass = '"' + tagClass + '"';
+            $('#tagList').html($.tv.templates.tags({ tags: tagList }));
 
-            if (payload.data) {
-                var url = payload.data.url || null;
+            requestData = addRequest(requestData);
+            requestList.forEach(filterRequests);
+
+            if ($('#' + requestData.requestId).length) {
+                $('#' + requestData.requestId).replaceWith($.tv.templates.row(requestData));
             }
-
-            if (url) {
-                var urlLength = url.length || null;
-                if (urlLength > 15) {
-                    var urlFirstHalf = url.substring(0, 15);
-                    var urlSecondHalf = url.substring(15, urlLength);
-                    url = urlFirstHalf + '<span class="urlEllipses">...</span>' + '<span class="urlSecondHalf" style="display: none">' + urlSecondHalf + '</span>';
-                }
+            else {
+                $('tbody').prepend($.tv.templates.row(requestData));
             }
-
-            if (requestIdList.indexOf(requestId) === -1) {
-                $("#streamList").prepend('<br><dt class=' + requestId + '><p class="requestId"><span class="sign"> - </span>' + payload.data.method.toUpperCase() + "  |  " + url +  '</p></dt>');
-                requestIdList.push(requestId);
-            }
-
-            var newPayload = {}
-            newPayload.time = new Date(payload.timestamp);
-            newPayload.tags = payload.tags;
-            var newData = payload.data;
-            var clearData = organizeData(newData);
-            var tagsLength = newPayload.tags.length;
-            var tagsClass = newPayload.tags;
-            var tagsClassString = "";
-            var newDate = new Date(newPayload.time);
-
-            var msec = newDate.getMilliseconds().toString();
-            if (msec.length < 3) {
-                if (msec.length === 2) {
-                    msec = "0" + msec;
-                }
-                else if (msec.length === 1) {
-                    msec = "00" + msec;
-                }
-            }
-
-            newDate = newDate.toLocaleTimeString() + "." + msec;
-            for (var i = 0, il = tagsClass.length; i < il; ++i) {
-                tagsClassString += " " + tagsClass[i];
-            }
-
-            tagsClassString = "span2 tags" + tagsClassString;
-            $("." + requestId).append('<dd class=' + tagClass + '><div class="row">' +
-                '<div class="span1"></div><div class="span2">' + newDate + '</div>' +
-                '<div class="span2 tags">' + tagString + '</div>' +
-                '<div class="span5">' + clearData + '</div>' +
-                '</div></dd>');
-
-            filter();
         };
 
-        $('#subscribe').click(function () {
+        $('#subscribe').click(function (e) {
 
             $('#filterButton').show();
             ws.send($('#session').val());
+            e.preventDefault();
         });
 
 
-        $('dt p .sign').click(function(e) {
+        $('#tagList').on('change', ':checkbox', function() {
 
-            $(this).parent().parent().children('dd').each(function() {
+            requestList.forEach(filterRequests);
+            $('tbody').html('');
+            requestList.forEach(function (requestData) {
 
-                if ($(this).css('display') === 'block') {
-                    $(this).hide();
-                }
-                else if (!$(this).hasClass('filtered')) {
-                    $(this).show();
-                }
+                $('tbody').prepend($.tv.templates.row(requestData));
             });
-
-            checkSigns();
-        });
-
-        $('.firstPair').click(function(){
-
-            if ($(this).siblings('.pairEllipses').html() === '...') {
-                $(this).parent().children('.otherPair').show();
-                $(this).siblings('.pairEllipses').html('');
-            }
-            else {
-                $(this).parent().children('.otherPair').hide();
-                $(this).siblings('.pairEllipses').html('...');
-            }
-        });
-
-        $(window).on('change', ':checkbox', function(){
-
-            filter();
-        });
-
-        $(window).on('click', '.urlEllipses', function() {
-
-            $(this).hide();
-            $(this).siblings('.urlSecondHalf').show();
-        });
-        $(window).on('click', '.urlSecondHalf', function() {
-
-            $(this).hide();
-            $(this).siblings('.urlEllipses').show();
         });
     }
 
-    function organizeData(data) {
+    function compileTemplates () {
 
-        var dataString = '';
-        if (typeof data === 'undefined') {
-            return dataString;
-        }
-
-        var dataLength = Object.keys(data).length;
-        if (dataLength === 1) {
-            for (var key in data) {
-                dataString += key + ' : ' + data[key];
-            }
-
-            return dataString + '<br>';
-        }
-
-        var firstKey = true;
-        for (var key in data) {
-            if (key === "url" || key === "method") continue;
-            if (firstKey) {
-                dataString += '<span class="firstPair">' + key + ' : ' + data[key] + '</span><span class="pairEllipses">...</span><br>';
-                firstKey = false;
-            }
-            else {
-                dataString += '<span class="otherPair" style="display: none">' + key + ' : ' + data[key] + '<br></span>';
-            }
-        }
-
-        return dataString;
+        $.tv.templates = $.tv.templates || {};
+        $.tv.templates.row = Handlebars.compile($('#row-template').html());
+        $.tv.templates.tags = Handlebars.compile($('#tags-template').html());
     }
+
 
     $.tv.register = function (options) {
 
-        var ws = new WebSocket('ws://' + options.host + ':' + options.port);
-        attachEvents(ws);
-    };
+        attachEvents(new WebSocket('ws://' + options.host + ':' + options.port));
+        compileTemplates();
 
+        Handlebars.registerHelper('stringifyData', function (data) {
+
+            return JSON.stringify(data, dataReplacer, 1);
+        });
+    };
 })(window, jQuery);

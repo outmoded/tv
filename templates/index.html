@@ -11,40 +11,42 @@
         <div id="textPage">
             <h1 id="heading">Interactive Debug Console</h1>
             <div id="sessionWrapper">
-                <input id="session" value="*" />
-                <button id="subscribe">Subscribe</button>
+                <form class="form-inline">
+                    <input type="text" id="session" value="*" class="input-medium" />
+                    <button id="subscribe" class="btn">Subscribe</button>
+                </form>
+                <form class="form-inline" id="tagList">
+                </form>
             </div>
             <hr id="sessionWrapperRuler">
-            <div class="row" id="columnNames">
-                <div class="span3">
-                    <h2 class="columnName">Method | URL</h2>
-                </div>
-                <!--<div class="span2">
-                    <<h2 class="columnName">Time</h2>
-                </div>-->
-                <div class="span2">
-                    <h2 class="columnName">Tags<h2>
-                </div>
-                <div class="span5">
-                    <h2 class="columnName">Data</h2>
-                </div>
-            </div>
-            <div class="row" id="stream">
-                <div class="span11">
-                    <dl id=streamList></dl>
-                </div>
-                <div class="span2 checkboxesWrapper">
-                    <form id="checkboxes"></form>
-                </div>
-            </div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Method</th>
+                    <th>Path</th>
+                    <th>Tags</th>
+                    <th>Data</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
         </div>
+        <div id="templates"></div>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ endpoint }}/js/handlebars.js"></script>
         <script type="text/javascript" src="{{ endpoint }}/js/ui.js"></script>
         <script type="text/javascript">
             $(function() {
-                $.tv.register({
-                    host: '{{ host }}',
-                    port: {{ port }}
+                $('#templates').load('{{ endpoint }}/templates/index.html', function () {
+                    $.tv.register({
+                        host: '{{ host }}',
+                        port: {{ port }}
+                    });
                 });
             });
         </script>

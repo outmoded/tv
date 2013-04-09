@@ -20,7 +20,7 @@ server.route({
 });
 
 
-server.plugin.allow({ ext: true }).require('../../../', null, function (err) {
+server.plugin.allow({ ext: true }).require('../', null, function (err) {
 
     if (err) {
         console.log(err);

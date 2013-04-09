@@ -40,7 +40,7 @@ describe('Tv', function () {
             }
         });
 
-        server.plugin.allow({ ext: true }).require('../../../', options, function (err) {
+        server.plugin.allow({ ext: true }).require('../', options, function (err) {
 
             expect(err).to.not.exist;
             done();
