@@ -40,7 +40,7 @@ describe('Tv', function () {
             }
         });
 
-        server.plugin.allow({ ext: true }).require('../', options, function (err) {
+        server.plugin.allow({ ext: true, views: true }).require('../', options, function (err) {
 
             expect(err).to.not.exist;
             done();
@@ -52,7 +52,7 @@ describe('Tv', function () {
         server.inject({ method: 'GET', url: '/debug/console' }, function (res) {
 
             expect(res.statusCode).to.equal(200);
-            expect(res.result).to.contain('<!DOCTYPE html>');
+            expect(res.result).to.contain('Debug Console');
             done();
         });
     });

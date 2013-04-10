@@ -143,20 +143,4 @@ describe('Tv', function () {
             done();
         });
     });
-
-    describe('#getMarkup', function () {
-
-        it('includes the hostname and port in the source', function (done) {
-
-            var tv = new Tv({ host: 'localhost', port: 0 });
-            tv.start(function () {
-
-                var html = tv.getMarkup();
-
-                expect(html).to.contain('localhost');
-                expect(html).to.contain(tv.settings.port);
-                done();
-            });
-        });
-    });
 });
