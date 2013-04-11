@@ -1,6 +1,7 @@
 // Load modules
 
 var Lab = require('lab');
+var Http = require('http');
 var Ws = require('ws');
 var Tv = require('../lib/tv');
 
@@ -82,6 +83,35 @@ describe('Tv', function () {
                         done();
                     }, 100);
                 });
+            });
+        });
+
+        it('responds with not implemented when making a non-ws request', function (done) {
+
+            var config = { host: 'localhost', port: 0 };
+            var tv = new Tv(config);
+
+            tv.start(function () {
+
+                var options = {
+                    hostname: tv.settings.host,
+                    port: tv.settings.port,
+                    path: '/',
+                    method: 'GET'
+                };
+
+                var req = Http.request(options, function (res) {
+
+                    expect(res.statusCode).to.equal(501);
+                    done();
+                });
+
+                req.once('error', function (err) {
+
+                    done();
+                });
+
+                req.end();
             });
         });
     });
