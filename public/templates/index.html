@@ -11,7 +11,11 @@
                 {{/each}}
             </ul>
         </td>
-        <td class='data'>{{ stringifyData this.data }}</td>
+        <td class='data'>
+            <pre class="prettyprint"><code class="language-json">
+{{ prettyPrintData this.data }}</code>
+            </pre>
+        </td>
     </tr>
     {{/if}}
 </script>

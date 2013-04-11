@@ -224,12 +224,13 @@
 
             requestData = addRequest(requestData);
             requestList.forEach(filterRequests);
+            var html = $.tv.templates.row(requestData);
 
             if ($('#' + requestData.requestId).length) {
-                $('#' + requestData.requestId).replaceWith($.tv.templates.row(requestData));
+                $('#' + requestData.requestId).replaceWith(html);
             }
             else {
-                $('tbody').prepend($.tv.templates.row(requestData));
+                $('tbody').prepend(html);
             }
         };
 
@@ -265,9 +266,11 @@
         attachEvents(new WebSocket('ws://' + options.host + ':' + options.port));
         compileTemplates();
 
-        Handlebars.registerHelper('stringifyData', function (data) {
+        Handlebars.registerHelper('prettyPrintData', function (data) {
 
-            return JSON.stringify(data, dataReplacer, 1);
+            var string = JSON.stringify(data, dataReplacer, 1);
+
+            return new Handlebars.SafeString(window.prettyPrintOne(string, 'json'));
         });
     };
 })(window, jQuery);
