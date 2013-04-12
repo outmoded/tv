@@ -17,19 +17,19 @@
     "plugin"
   ],
   "engines": {
-    "node": "0.8.x"
+    "node": "0.10.x"
   },
   "dependencies": {
     "hoek": "0.7.x",
-    "ws": "0.4.x",
-    "handlebars": "1.0.x"
+    "ws": "0.4.x"
   },
   "peerDependencies": {
-    "hapi": "0.16.x"
+    "hapi": "1.0.x"
   },
   "devDependencies": {
-    "hapi": "0.16.x",
-    "lab": "0.0.x",
+    "hapi": "1.0.x",
+    "handlebars": "1.0.x",
+    "lab": "0.1.x",
     "complexity-report": "0.x.x"
   },
   "scripts": {

@@ -1,0 +1,30 @@
+<script type="text/x-handlebars-template" id="row-template">
+    {{#if this.show}}
+    <tr id='{{ this.requestId }}'>
+        <td>{{ this.timestamp }}</td>
+        <td>{{ this.method }}</td>
+        <td><a href='{{ this.path }}'>{{ this.truncatedPath }}</a></td>
+        <td class='tags'>
+            <ul>
+                {{#each this.tags}}
+                <li style="color: {{ this.color }}">{{ this.name }}</li>
+                {{/each}}
+            </ul>
+        </td>
+        <td class='data'>
+            <pre class="prettyprint"><code class="language-json">
+{{ prettyPrintData this.data }}</code>
+            </pre>
+        </td>
+    </tr>
+    {{/if}}
+</script>
+
+<script type="text/x-handlebars-template" id="tags-template">
+    {{#each this.tags}}
+    <label class="checkbox">
+        <input type="checkbox" id="{{ this.name }}" checked />
+        <span style="color: {{ this.color }}">{{ this.name }}</span>
+    </label>
+    {{/each}}
+</script>
