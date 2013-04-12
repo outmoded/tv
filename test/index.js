@@ -26,10 +26,10 @@ describe('Tv', function () {
     before(function (done) {
 
         var options = {
-            websocketPort: 3007
+            port: 0
         };
 
-        server = new Hapi.Server();
+        server = new Hapi.Server(0);
 
         server.route({
             method: 'GET',
@@ -40,7 +40,7 @@ describe('Tv', function () {
             }
         });
 
-        server.plugin.allow({ ext: true }).require('../', options, function (err) {
+        server.plugin.allow({ ext: true, views: true }).require('../', options, function (err) {
 
             expect(err).to.not.exist;
             done();
@@ -51,14 +51,15 @@ describe('Tv', function () {
 
         server.inject({ method: 'GET', url: '/debug/console' }, function (res) {
 
-            expect(res.result).to.contain('<!DOCTYPE html>');
+            expect(res.statusCode).to.equal(200);
+            expect(res.result).to.contain('Debug Console');
             done();
         });
     });
 
     it('reports a request event', function (done) {
 
-        var ws = new Ws('ws://localhost:3007');
+        var ws = new Ws(server.plugins.tv.uri);
 
         ws.on('open', function () {
 
