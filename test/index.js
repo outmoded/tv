@@ -36,11 +36,11 @@ describe('Tv', function () {
             path: '/',
             handler: function () {
 
-                return this.reply('1');
+                this.reply('1');
             }
         });
 
-        server.plugin.allow({ ext: true, views: true }).require('../', options, function (err) {
+        server.pack.allow({ ext: true, views: true }).require('../', options, function (err) {
 
             expect(err).to.not.exist;
             done();
@@ -49,7 +49,7 @@ describe('Tv', function () {
 
     it('returns the console html', function (done) {
 
-        server.inject({ method: 'GET', url: '/debug/console' }, function (res) {
+        server.inject('/debug/console', function (res) {
 
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain('Debug Console');
@@ -67,7 +67,7 @@ describe('Tv', function () {
 
             setTimeout(function () {
 
-                server.inject({ method: 'GET', url: '/?debug=123' }, function (res) {
+                server.inject('/?debug=123', function (res) {
 
                     expect(res.result).to.equal('1');
                 });
