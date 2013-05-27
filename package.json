@@ -1,7 +1,7 @@
 {
   "name": "tv",
   "description": "Interactive debug console plugin for hapi",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
   "contributors":[
     "Wyatt Preul <wpreul@gmail.com>",
