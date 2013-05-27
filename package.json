@@ -1,7 +1,7 @@
 {
   "name": "tv",
   "description": "Interactive debug console plugin for hapi",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
   "contributors":[
     "Wyatt Preul <wpreul@gmail.com>",
@@ -21,15 +21,15 @@
   },
   "dependencies": {
     "hoek": "0.8.x",
-    "ws": "0.4.x"
+    "ws": "0.4.x",
+    "handlebars": "1.0.x"
   },
   "peerDependencies": {
     "hapi": "1.x.x"
   },
   "devDependencies": {
     "hapi": "1.x.x",
-    "handlebars": "1.0.x",
-    "lab": "0.1.x",
+    "lab": "0.x.x",
     "complexity-report": "0.x.x"
   },
   "scripts": {
