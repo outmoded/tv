@@ -20,7 +20,7 @@ server.route({
 });
 
 
-server.plugin.allow({ ext: true }).require('../', null, function (err) {
+server.pack.allow({ ext: true }).require('../', null, function (err) {
 
     if (err) {
         console.log(err);
@@ -29,7 +29,7 @@ server.plugin.allow({ ext: true }).require('../', null, function (err) {
 
     server.start(function () {
 
-        console.log('Server started at: ' + server.settings.uri);
-        console.log('Debug console started at: ' + server.settings.uri + server.plugins.tv.endpoint);
+        console.log('Server started at: ' + server.info.uri);
+        console.log('Debug console started at: ' + server.info.uri + server.plugins.tv.endpoint);
     });
 });
