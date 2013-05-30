@@ -19,7 +19,7 @@ var options = {
   queryKey: 'debug'
 };
 
-server.plugin.require('./tv', options, function (err) {
+server.pack.require('./tv', options, function (err) {
   
   if (!err) {
     server.start();
