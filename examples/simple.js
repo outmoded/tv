@@ -20,7 +20,7 @@ server.route({
 });
 
 
-server.pack.allow({ ext: true }).require('../', null, function (err) {
+server.pack.allow({ ext: true }).require('../', { host: 'localhost' }, function (err) {
 
     if (err) {
         console.log(err);
