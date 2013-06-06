@@ -4,25 +4,32 @@
         <title>Debug Console</title>
         <meta http-equiv="Content-Language" content="en-us">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"> -->
         <link href="{{ endpoint }}/css/prettify.css" rel="stylesheet">
         <link href="{{ endpoint }}/css/overrides.css" rel="stylesheet">
+        <link href="{{ endpoint }}/css/style.css" rel="stylesheet">
     </head>
     <body>
         <div id="textPage">
             <h1 id="heading">Interactive Debug Console</h1>
             <div id="sessionWrapper">
                 <form class="form-inline">
-                    <input type="text" id="session" value="*" class="input-medium" />
-                    <button id="subscribe" class="btn">Subscribe</button>
+                    <input type="text" id="session" value="*" class="subscribe-input" />
+                    <button id="subscribe" class="subscribe-btn">Subscribe</button>
                 </form>
                 <form class="form-inline" id="tagList">
                 </form>
             </div>
-            <hr id="sessionWrapperRuler">
 
             <table class="table table-striped">
-                <thead>
+                <colgroup>
+                    <col class="col-narrow">
+                    <col class="col-narrow">
+                    <col class="col-narrow">
+                    <col class="col-narrow">
+                    <col class="col-wide">
+                </colgroup>
+                <thead class="table-header">
                 <tr>
                     <th>Timestamp</th>
                     <th>Method</th>
@@ -31,7 +38,7 @@
                     <th>Data</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-body">
 
                 </tbody>
             </table>

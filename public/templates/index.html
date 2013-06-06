@@ -7,7 +7,7 @@
         <td class='tags'>
             <ul>
                 {{#each this.tags}}
-                <li style="color: {{ this.color }}">{{ this.name }}</li>
+                <li class="{{ this.color }}">{{ this.name }}</li>
                 {{/each}}
             </ul>
         </td>
@@ -24,7 +24,7 @@
     {{#each this.tags}}
     <label class="checkbox">
         <input type="checkbox" id="{{ this.name }}" checked />
-        <span style="color: {{ this.color }}">{{ this.name }}</span>
+        <label for="{{ this.id }}" class="{{ this.color }}">{{ this.name }}</label>
     </label>
     {{/each}}
 </script>

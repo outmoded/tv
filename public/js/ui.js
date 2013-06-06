@@ -6,17 +6,17 @@
     var tagList = [];                           // Complete Tag List
     var requestList = [];
     var colorsList = [
-        "Brown",
-        "Blue",
-        "Red",
-        "Green",
-        "Salmon",
-        "Orange",
-        "Purple",
-        "LightSlateGrey",
-        "DarkGoldenRod",
-        "Black",
-        "DeepPink"
+        "brown",
+        "blue",
+        "red",
+        "green",
+        "salmon",
+        "orange",
+        "purple",
+        "lightslategrey",
+        "darkgoldenrod",
+        "black",
+        "deeppink"
     ];
 
     function tagsContain (tags, tagName) {
