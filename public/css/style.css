@@ -187,10 +187,6 @@ a:hover {
   font-weight: bold;
 }
 
-.col-narrow {
-  width: 140px;
-}
-
 .prettyprint {
   white-space: pre-wrap;
   margin: 0;
@@ -199,6 +195,10 @@ a:hover {
   border-top-color: #ccc;
   border-radius: 2px;
   background: #fff;
+}
+
+.timestamp {
+  white-space: nowrap;
 }
 
 .tags ul {
