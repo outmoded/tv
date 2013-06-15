@@ -268,7 +268,7 @@
 
         Handlebars.registerHelper('prettyPrintData', function (data) {
 
-            var string = JSON.stringify(data, dataReplacer, 1);
+            var string = JSON.stringify(data, dataReplacer, 2);
 
             return new Handlebars.SafeString(window.prettyPrintOne(string, 'json'));
         });
