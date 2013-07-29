@@ -532,6 +532,7 @@ a:hover {
   border: 1px solid #333;
   border: 1px solid rgba(0,0,0,0.5);
   border-radius: 5px;
+  background-color: #666;
   background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
   background-image: -moz-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
   background-image: -ms-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
@@ -567,6 +568,26 @@ a:hover {
 
 .checkbox .salmon {
   background-color: #F27061;
+}
+
+.checkbox .purple {
+  background-color: #9C26FF;
+}
+
+.checkbox .lightslategrey {
+  background-color: #798999;
+}
+
+.checkbox .darkgoldenrod {
+  background-color: #B05131;
+}
+
+.checkbox .black {
+  background-color: #333;
+}
+
+.checkbox .deeppink {
+  background-color: #B0488E;
 }
 
 .table {
@@ -640,7 +661,9 @@ a:hover {
   display: inline-block;
   margin: 4px 0 0;
   padding: 2px 5px;
+  border: 1px solid #666;
   border-radius: 5px;
+  background-color: #666;
   background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
   background-image: -moz-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
   background-image: -ms-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
@@ -686,4 +709,29 @@ a:hover {
 .tags .salmon {
   border: 1px solid #F27061;
   background-color: #F27061;
+}
+
+.tags .purple {
+  border: 1px solid #9C26FF;
+  background-color: #9C26FF;
+}
+
+.tags .lightslategrey {
+  border: 1px solid #798999;
+  background-color: #798999;
+}
+
+.tags .darkgoldenrod {
+  border: 1px solid #B05131;
+  background-color: #B05131;
+}
+
+.tags .black {
+  border: 1px solid #333;
+  background-color: #333;
+}
+
+.tags .deeppink {
+  border: 1px solid #B0488E;
+  background-color: #B0488E;
 }
