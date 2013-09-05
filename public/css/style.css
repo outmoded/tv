@@ -639,6 +639,25 @@ a:hover {
   font-weight: bold;
 }
 
+.table tbody tr.even {
+  background-color: #f5f5f5 !important;
+}
+
+.table tbody tr.odd {
+  background-color: #ededed !important;
+}
+
+.hidden {
+  display: none;
+}
+
+#sessionWrapper .help-inline {
+  color: #fff;
+  font-size: 14px;
+  padding-left: 10px;
+  font-weight: bold;
+}
+
 .prettyprint {
   white-space: pre-wrap;
   margin: 0;

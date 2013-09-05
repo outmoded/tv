@@ -2,16 +2,18 @@
     {{#if this.show}}
     <tr id='{{ this.requestId }}'>
         <td class="timestamp">{{ this.timestamp }}</td>
-        <td>{{ this.method }}</td>
-        <td class='tags'>
+        <td class="method">{{ this.method }}</td>
+        <td class="tags">
             <ul>
                 {{#each this.tags}}
                 <li class="{{ this.color }}">{{ this.name }}</li>
                 {{/each}}
             </ul>
         </td>
-        <td><a href='{{ this.path }}'>{{ this.truncatedPath }}</a></td>
-        <td class='data'>
+        <td class="path">
+            <a href='{{ this.path }}'>{{ this.truncatedPath }}</a>
+        </td>
+        <td class="data">
             <pre class="prettyprint"><code class="language-json">
 {{ prettyPrintData this.data }}</code>
             </pre>
