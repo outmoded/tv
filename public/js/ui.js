@@ -390,7 +390,7 @@
         return ( el.hasClass('odd') ? 'odd' : 'even' );
     };
 
-    Grouping.prototype.isAGroup = function (pathName, lastPathName) {
+    Grouping.prototype.isAGroup2 = function (pathName, lastPathName) {
 
         // This is the primary function that defines what makes a "group", change this as needed
         if (!pathName || !lastPathName) {
@@ -398,6 +398,16 @@
         }
         
         return pathName.indexOf(lastPathName) >= 0 || lastPathName.indexOf(pathName) >= 0;
+    };
+    
+    Grouping.prototype.isAGroup = function (pathName, lastPathName) {
+
+        // This is the primary function that defines what makes a "group", change this as needed
+        if (!pathName || !lastPathName) {
+            return false;
+        }
+        
+        return pathName.split('/')[1] == lastPathName.split('/')[1];
     };
 
     // End Grouping Stuff
