@@ -281,10 +281,10 @@
     Grouping.prototype.toggle = function () {
 
         if (this._enabled) {
-            this.on();
+            this.off();
         }
         else {
-            this.off();
+            this.on();
         }
     };
 
