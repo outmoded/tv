@@ -293,6 +293,10 @@
             });
         });
 
+        $("#group-responses").on('change', ':checkbox', function() {
+            $.tv.grouping.toggle();
+        });
+
         $table.on('click', '.data ul', function(e) {
             $(this).toggleClass('expanded');
             e.stopPropagation();

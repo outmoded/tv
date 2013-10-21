@@ -461,6 +461,15 @@ a:hover {
   margin-top: 20px;
 }
 
+#group-responses {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
 .subscribe-label {
   margin-right: 10px;
   color: #fff;
@@ -612,6 +621,10 @@ a:hover {
   width: 50%;
 }
 
+.table-striped td {
+  border-bottom: 1px solid #e6e6e6;
+}
+
 .table-striped tr:nth-child(even) td {
   background-color: #FCFAFA;
 }
@@ -633,16 +646,20 @@ a:hover {
 }
 
 .table td {
-  padding: 0 16px;
-  border-bottom: 1px solid #e6e6e6;
+  padding: 6px 16px;
 }
 
-.table tbody tr.even {
-  background-color: #f5f5f5 !important;
+.table .even {
+  background: #f5f5f5;
 }
 
-.table tbody tr.odd {
-  background-color: #ededed !important;
+.table .odd {
+  background: #fff;
+}
+
+.odd + .even td,
+.even + .odd td {
+  border-top: 1px solid #e6e6e6;
 }
 
 .active-subscriber {
@@ -763,8 +780,8 @@ a:hover {
 .data .expanded:before {
   top: 6px;
 
-  border-left: 5px solid transparent;
-  border-top: 8px solid #666;
+  border-left: 4px solid transparent;
+  border-top: 6px solid #666;
 }
 
 .data .expanded > li {
@@ -795,12 +812,13 @@ a:hover {
 }
 
 .tags ul {
+  margin: 0;
   padding: 0;
 }
 
 .tags li {
   display: inline-block;
-  margin: 4px 0 0;
+  margin: 2px 0;
   padding: 1px 4px 2px;
   border: 1px solid #666;
   border-radius: 3px;
