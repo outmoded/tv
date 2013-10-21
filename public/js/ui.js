@@ -189,8 +189,39 @@
         return key !== 'url' && key !== 'method' && key !== 'id' ? value: undefined;
     }
 
+    function formatDate(date) {
+
+        var d = new Date(date);
+
+        var result = d.toLocaleTimeString() + ' ' + d.getMilliseconds() + 'ms';
+        return result;
+    }
+
+    function formatJSON(obj) {
+
+        var list = $('<ul>'),
+            container = $('<div>');
+
+        for (var prop in obj) {
+            var item = $('<li>');
+            item.append('<span class="json-key">' + prop + '</span>: ');
+
+            if (obj[prop] === Object(obj[prop])) {
+                item.append( formatJSON(obj[prop]) );
+            } else if (typeof obj[prop] == 'string' || obj[prop] instanceof String) {
+                item.append('<span class="json-value">"'+obj[prop]+'"</span>');
+            } else {
+                item.append('<span class="json-value">'+obj[prop]+'</span>');
+            }
+            list.append(item);
+        }
+        container.append(list);
+        return container.html();
+    }
 
     function attachEvents (ws) {
+
+        var $table = $('.table');
 
         ws.onclose = function () {};
         ws.onmessage = function (message) {
@@ -206,7 +237,7 @@
                 path: path,
                 truncatedPath: truncatedPath,
                 data: payload.data,
-                timestamp: new Date(payload.timestamp).toLocaleTimeString(),
+                timestamp: formatDate(payload.timestamp),
                 tags: []
             };
 
@@ -225,7 +256,7 @@
             requestData = addRequest(requestData);
             requestList.forEach(filterRequests);
             var html = $.tv.templates.row(requestData);
-            
+
             $.tv.grouping.group($(html), function (err, className) {
 
                 if (className) {
@@ -233,7 +264,7 @@
                     el.addClass(className);
                     html = $('<div>').append(el.clone()).html();
                 }
-                
+
                 if ($('#' + requestData.requestId).length) {
                     $('#' + requestData.requestId).replaceWith(html);
                 }
@@ -247,7 +278,7 @@
 
             $('#filterButton').show();
             ws.send($('#session').val());
-            $('#active-subscriber').removeClass('hidden');
+            $('#active-subscriber').addClass('active');
             e.preventDefault();
         });
 
@@ -260,6 +291,15 @@
 
                 $('tbody').prepend($.tv.templates.row(requestData));
             });
+        });
+
+        $("#group-responses").on('change', ':checkbox', function() {
+            $.tv.grouping.toggle();
+        });
+
+        $table.on('click', '.data ul', function(e) {
+            $(this).toggleClass('expanded');
+            e.stopPropagation();
         });
     }
 
@@ -277,31 +317,31 @@
         this._groupQueue = [];
         this._isLocked = false;
     };
-    
+
     Grouping.prototype.toggle = function () {
 
         if (this._enabled) {
-            this.on();
-        }
-        else {
             this.off();
         }
+        else {
+            this.on();
+        }
     };
-    
+
     Grouping.prototype.on = function () {
 
         this._enabled = true;
         $('table').removeClass('table-striped');
         this.groupAll();
     };
-    
+
     Grouping.prototype.off = function () {
 
         this._enabled = false;
         $('tbody tr').removeClass('even odd');
         $('table').addClass('table-striped');
     };
-    
+
     Grouping.prototype.groupAll = function () {
 
         var self = this;
@@ -325,7 +365,7 @@
         this.dequeue();
         this._isLocked = false;
     };
-    
+
     Grouping.prototype.dequeue = function () {
 
         while (this._groupQueue.length > 0) {
@@ -333,7 +373,7 @@
             this.group(selection[0], selection[1]);
         }
     };
-    
+
     Grouping.prototype.group = function (el, callback) {
 
         if (this._enabled) {
@@ -348,11 +388,11 @@
             return callback && callback(null, false);
         }
     };
-    
+
     Grouping.prototype._group = function (el, lastRow, callback) {
 
         var currentPath = this.getPathFromEl(el);
-        
+
         if (this.isAGroup(currentPath, lastRow.path)) {
             return callback(null, lastRow.className);
         }
@@ -365,13 +405,13 @@
             }
         }
     };
-    
+
     Grouping.prototype.getLastRow = function () {
 
         var elLast = $('tbody tr').first();
         return this.elToRow(elLast);
     };
-    
+
     Grouping.prototype.elToRow = function (el) {
 
         var result = {
@@ -380,12 +420,12 @@
         };
         return result;
     };
-    
+
     Grouping.prototype.getPathFromEl = function (el) {
 
         return el.children('td.path').children('a').attr('href');
     };
-    
+
     Grouping.prototype.getClassFromEl = function (el) {
         return ( el.hasClass('odd') ? 'odd' : 'even' );
     };
@@ -396,17 +436,17 @@
         if (!pathName || !lastPathName) {
             return false;
         }
-        
+
         return pathName.indexOf(lastPathName) >= 0 || lastPathName.indexOf(pathName) >= 0;
     };
-    
+
     Grouping.prototype.isAGroup = function (pathName, lastPathName) {
 
         // This is the primary function that defines what makes a "group", change this as needed
         if (!pathName || !lastPathName) {
             return false;
         }
-        
+
         return pathName.split('/')[1] == lastPathName.split('/')[1];
     };
 
@@ -419,11 +459,12 @@
         attachEvents(new WebSocket('ws://' + options.host + ':' + options.port));
         compileTemplates();
 
-        Handlebars.registerHelper('prettyPrintData', function (data) {
+        Handlebars.registerHelper('printData', function (data) {
 
-            var string = JSON.stringify(data, dataReplacer, 2);
+            var string = JSON.stringify(data, dataReplacer, 2),
+                result = formatJSON(JSON.parse(string));
 
-            return new Handlebars.SafeString(window.prettyPrintOne(string, 'json'));
+            return new Handlebars.SafeString(result);
         });
     };
 })(window, jQuery);

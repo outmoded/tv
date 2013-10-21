@@ -10,30 +10,41 @@
     </head>
     <body>
         <div id="textPage">
-            <h1 id="heading">Interactive Debug Console</h1>
             <div id="sessionWrapper" class="clearfix">
+                <h1 id="heading">Interactive Debug Console</h1>
                 <form class="subscribe-form">
                     <label class="subscribe-label">Debug ID:</label>
                     <input type="text" id="session" value="*" class="subscribe-input" />
                     <button id="subscribe" class="subscribe-btn">Subscribe</button>
-                    <span id="active-subscriber" class="help-inline hidden">
-                        &#x26a0;&nbsp;Active
+                    <span id="active-subscriber" class="active-subscriber">
+                        <span class="visuallyhidden">Active</span>
                     </span>
                 </form>
                 <form id="tagList">
                 </form>
+                 <label id="group-responses"><input type="checkbox"> Group Rows by Response</label>
             </div>
 
             <table class="table table-striped">
+                <colgroup>
+                    <col class="col-med">
+                    <col class="col-mini">
+                    <col class="col-med">
+                    <col class="col-large">
+                    <col>
+                </colgroup>
+
+
                 <thead class="table-header">
-                <tr>
-                    <th>Timestamp</th>
-                    <th>Method</th>
-                    <th>Tags</th>
-                    <th>Path</th>
-                    <th>Data</th>
-                </tr>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Method</th>
+                        <th>Path</th>
+                        <th>Data</th>
+                        <th>Tags</th>
+                    </tr>
                 </thead>
+
                 <tbody class="table-body">
 
                 </tbody>
