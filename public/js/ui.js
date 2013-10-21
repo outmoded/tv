@@ -189,8 +189,39 @@
         return key !== 'url' && key !== 'method' && key !== 'id' ? value: undefined;
     }
 
+    function formatDate(date) {
+
+        var d = new Date(date);
+
+        var result = d.toLocaleTimeString() + ' ' + d.getMilliseconds() + 'ms';
+        return result;
+    }
+
+    function formatJSON(obj) {
+
+        var list = $('<ul>'),
+            container = $('<div>');
+
+        for (var prop in obj) {
+            var item = $('<li>');
+            item.append('<span class="json-key">' + prop + '</span>: ');
+
+            if (obj[prop] === Object(obj[prop])) {
+                item.append( formatJSON(obj[prop]) );
+            } else if (typeof obj[prop] == 'string' || obj[prop] instanceof String) {
+                item.append('<span class="json-value">"'+obj[prop]+'"</span>');
+            } else {
+                item.append('<span class="json-value">'+obj[prop]+'</span>');
+            }
+            list.append(item);
+        }
+        container.append(list);
+        return container.html();
+    }
 
     function attachEvents (ws) {
+
+        var $table = $('.table');
 
         ws.onclose = function () {};
         ws.onmessage = function (message) {
@@ -206,7 +237,7 @@
                 path: path,
                 truncatedPath: truncatedPath,
                 data: payload.data,
-                timestamp: new Date(payload.timestamp).toLocaleTimeString(),
+                timestamp: formatDate(payload.timestamp),
                 tags: []
             };
 
@@ -260,6 +291,11 @@
 
                 $('tbody').prepend($.tv.templates.row(requestData));
             });
+        });
+
+        $table.on('click', '.data ul', function(e) {
+            $(this).toggleClass('expanded');
+            e.stopPropagation();
         });
     }
 
@@ -419,11 +455,12 @@
         attachEvents(new WebSocket('ws://' + options.host + ':' + options.port));
         compileTemplates();
 
-        Handlebars.registerHelper('prettyPrintData', function (data) {
+        Handlebars.registerHelper('printData', function (data) {
 
-            var string = JSON.stringify(data, dataReplacer, 2);
+            var string = JSON.stringify(data, dataReplacer, 2),
+                result = formatJSON(JSON.parse(string));
 
-            return new Handlebars.SafeString(window.prettyPrintOne(string, 'json'));
+            return new Handlebars.SafeString(result);
         });
     };
 })(window, jQuery);
