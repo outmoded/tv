@@ -58,7 +58,7 @@ describe('Tv', function () {
             var port = res.result.match(/var port = (\d+)/)[1];
             var ws = new Ws('ws://' + host + ':' + port);
 
-            ws.on('open', function () {
+            ws.once('open', function () {
 
                 ws.send('*');
 

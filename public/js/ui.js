@@ -260,7 +260,6 @@
         $.tv.templates.tags = Handlebars.compile($('#tags-template').html());
     }
 
-
     $.tv.register = function (options) {
 
         attachEvents(new WebSocket('ws://' + options.host + ':' + options.port));
