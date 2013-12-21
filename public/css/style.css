@@ -405,6 +405,17 @@ table {
     clear: both;
 }
 
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
 /* ==========================================================================
    TV Styles
    ========================================================================== */
@@ -424,26 +435,16 @@ a:hover {
 }
 
 #heading {
-  margin: 0;
-  padding: 10px;
-  border-bottom: 1px solid #000;
-  background-color: #333;
-  background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.1), transparent);
-  background-image: -moz-linear-gradient(top, rgba(255,255,255,0.1), transparent);
-  background-image: -ms-linear-gradient(top, rgba(255,255,255,0.1), transparent);
-  background-image: -o-linear-gradient(top, rgba(255,255,255,0.1), transparent);
-  background-image: linear-gradient(top, rgba(255,255,255,0.1), transparent);
-  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.1), 0 1px 1px rgba(0,0,0,0.2);
+  margin: 0 0 20px;
   color: #fff;
   font-size: 20px;
   text-align: center;
-  text-shadow: 0 -1px 0 rgba(0,0,0,0.6);
   -webkit-font-smoothing: antialiased;
 }
 
 #sessionWrapper {
-  padding: 20px 20px 0; 
-  background-color: #2D5881;
+  padding: 10px 20px 0;
+  background-color: #3C5266;
   background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.05),rgba(255,255,255,0));
   background-image: -moz-linear-gradient(top, rgba(255,255,255,0.05),rgba(255,255,255,0));
   background-image: -ms-linear-gradient(top, rgba(255,255,255,0.05),rgba(255,255,255,0));
@@ -458,6 +459,15 @@ a:hover {
 
 #tagList .checkbox label {
   margin-top: 20px;
+}
+
+#group-responses {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
 }
 
 .subscribe-label {
@@ -528,22 +538,21 @@ a:hover {
 
 .checkbox span {
   position: relative;
-  padding: 2px 5px;
-  border: 1px solid #333;
-  border: 1px solid rgba(0,0,0,0.5);
-  border-radius: 5px;
+  padding: 1px 4px 2px;
+  border: 1px solid #2E3F4E;
+  border-radius: 3px;
   background-color: #666;
-  background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
-  background-image: -moz-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
-  background-image: -ms-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
-  background-image: -o-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
-  background-image: linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+  background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+  background-image: -moz-linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+  background-image: -ms-linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+  background-image: -o-linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+  background-image: linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
   color: #fff;
   cursor: pointer;
   font-weight: bold;
-  text-transform: uppercase;
-  text-shadow: 0 -1px 0 rgba(0,0,0,0);
+  text-transform: lowercase;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.1);
 }
 
 .checkbox .brown {
@@ -592,61 +601,210 @@ a:hover {
 
 .table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0;
-  background-color: #eee;
-  background-image: -webkit-linear-gradient(top, #fff 40px, #f5f5f5 200px);
-  background-image: -moz-linear-gradient(top, #fff 40px, #f5f5f5 200px);
-  background-image: -ms-linear-gradient(top, #fff 40px, #f5f5f5 200px);
-  background-image: -o-linear-gradient(top, #fff 40px, #f5f5f5 200px);
-  background-image: linear-gradient(top, #fff 40px, #f5f5f5 200px);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  color: #333;
+  background-color: #fff;
+  color: #444;
   font-size: 14px;
 }
 
+.col-mini {
+  width: 90px;
+}
+
+.col-med {
+  width: 160px;
+}
+
+.col-large {
+  width: 50%;
+}
+
+.table-striped td {
+  border-bottom: 1px solid #e6e6e6;
+}
+
 .table-striped tr:nth-child(even) td {
-  background-color: #ededed;
+  background-color: #FCFAFA;
 }
 
 .table-header {
-  background-color: rgb(135, 180, 224);
-  background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255,0));
-  background-image: -moz-linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255,0));
-  background-image: -ms-linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255,0));
-  background-image: -o-linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255,0));
-  background-image: linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255,0));
+  background-color: #D3E0EC;
   border-top: 1px solid transparent;
-  border-bottom: 1px solid rgb(95, 144, 192);
+  border-bottom: 1px solid #BACCDB;
 }
 
 .table-header th {
-  padding: 10px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
-  color: #2D5881;
+  padding: 10px 16px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  color: #5E7285;
   font-size: 12px;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.4);
-  text-transform: uppercase;
+  text-align: left;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+  text-transform: lowercase;
 }
 
 .table td {
-  padding: 10px 16px;
-  border-bottom: 1px solid #ddd;
+  padding: 6px 16px;
 }
 
-.table td:nth-child(2) {
-  font-size: 13px;
+.table .even {
+  background: #f5f5f5;
+}
+
+.table .odd {
+  background: #fff;
+}
+
+.odd + .even td,
+.even + .odd td {
+  border-top: 1px solid #e6e6e6;
+}
+
+.active-subscriber {
+  position: relative;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 15px;
+  border-radius: 50%;
+  background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.3), rgba(255,255,255,0.2));
+  background-image: -moz-linear-gradient(top, rgba(0,0,0,0.3), rgba(255,255,255,0.2));
+  background-image: -ms-linear-gradient(top, rgba(0,0,0,0.3), rgba(255,255,255,0.2));
+  background-image: -o-linear-gradient(top, rgba(0,0,0,0.3), rgba(255,255,255,0.2));
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(255,255,255,0.2));
+}
+
+.active-subscriber:after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #77FF8D;
+  background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.3), rgba(255,255,255,0.4));
+  background-image: -moz-linear-gradient(top, rgba(0,0,0,0.3), rgba(255,255,255,0.4));
+  background-image: -ms-linear-gradient(top, rgba(0,0,0,0.3), rgba(255,255,255,0.4));
+  background-image: -o-linear-gradient(top, rgba(0,0,0,0.3), rgba(255,255,255,0.4));
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(255,255,255,0.4));
+  opacity: 0;
+  -webkit-transition: 0.3s ease opacity;
+  -moz-transition: 0.3s ease opacity;
+  -ms-transition: 0.3s ease opacity;
+  -o-transition: 0.3s ease opacity;
+  transition: 0.3s ease opacity;
+}
+
+.active-subscriber.active:after {
+  opacity: 1;
+}
+
+#sessionWrapper .help-inline {
+  color: #fff;
+  font-size: 14px;
+  padding-left: 10px;
   font-weight: bold;
 }
 
 .prettyprint {
   white-space: pre-wrap;
   margin: 0;
-  padding: 0 12px;
-  border: 1px solid #ddd;
-  border-top-color: #ccc;
-  border-radius: 2px;
-  background: #fff;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.method {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.table .data {
+  padding: 10px 0;
+}
+
+.data ul {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  height: 16px;
+  margin: 0;
+  padding: 0 10px 0 16px;
+
+  color: #93a1a1;
+  cursor: pointer;
+  font-family: monospace, serif;
+  list-style: none;
+  white-space: nowrap;
+}
+
+.data ul:before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 0;
+
+  display: block;
+  border: 4px solid transparent;
+  border-left: 6px solid #666;
+}
+
+.data li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  display: inline;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.data li:before {
+  content: ', ';
+}
+
+.data li:first-child:before {
+  content: '';
+}
+
+.data .expanded {
+  overflow: visible;
+  height: auto;
+
+  white-space: pre-wrap;
+}
+
+.data .expanded:before {
+  top: 6px;
+
+  border-left: 4px solid transparent;
+  border-top: 6px solid #666;
+}
+
+.data .expanded > li {
+  display: block;
+  width: 100%;
+
+  white-space: pre-wrap;
+}
+
+.data .expanded > li:before {
+  display: none;
+}
+
+.data .expanded > li > ul {
+  display: block;
+}
+
+.json-key, .json-string {
+  color: #D14;
+}
+
+.json-value {
+  color: #195f91;
 }
 
 .timestamp {
@@ -654,31 +812,27 @@ a:hover {
 }
 
 .tags ul {
+  margin: 0;
   padding: 0;
 }
 
 .tags li {
   display: inline-block;
-  margin: 4px 0 0;
-  padding: 2px 5px;
+  margin: 2px 0;
+  padding: 1px 4px 2px;
   border: 1px solid #666;
-  border-radius: 5px;
+  border-radius: 3px;
   background-color: #666;
-  background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
-  background-image: -moz-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
-  background-image: -ms-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
-  background-image: -o-linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
-  background-image: linear-gradient(top, rgba(255,255,255,0.2), rgba(255,255,255,0));
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+  background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+  background-image: -moz-linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+  background-image: -ms-linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+  background-image: -o-linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+  background-image: linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
   color: #fff;
   font-size: 12px;
   font-weight: bold;
-  text-transform: uppercase;
-  text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
-}
-
-.tags li:first-child {
-  margin: 0;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.1);
 }
 
 .tags .brown {

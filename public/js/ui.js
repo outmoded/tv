@@ -29,7 +29,7 @@
         }
 
         return false;
-    }
+    };
 
 
     function filterRequests (request) {
@@ -46,7 +46,7 @@
         }
 
         request.show = false;
-    }
+    };
 
 
     function clone (obj, seen) {
@@ -85,7 +85,7 @@
         }
 
         return newObj;
-    }
+    };
 
     function merge (target, source) {
 
@@ -189,8 +189,39 @@
         return key !== 'url' && key !== 'method' && key !== 'id' ? value: undefined;
     }
 
+    function formatDate(date) {
+
+        var d = new Date(date);
+
+        var result = d.toLocaleTimeString() + ' ' + d.getMilliseconds() + 'ms';
+        return result;
+    }
+
+    function formatJSON(obj) {
+
+        var list = $('<ul>'),
+            container = $('<div>');
+
+        for (var prop in obj) {
+            var item = $('<li>');
+            item.append('<span class="json-key">' + prop + '</span>: ');
+
+            if (obj[prop] === Object(obj[prop])) {
+                item.append( formatJSON(obj[prop]) );
+            } else if (typeof obj[prop] == 'string' || obj[prop] instanceof String) {
+                item.append('<span class="json-value">"'+obj[prop]+'"</span>');
+            } else {
+                item.append('<span class="json-value">'+obj[prop]+'</span>');
+            }
+            list.append(item);
+        }
+        container.append(list);
+        return container.html();
+    }
 
     function attachEvents (ws) {
+
+        var $table = $('.table');
 
         ws.onclose = function () {};
         ws.onmessage = function (message) {
@@ -206,7 +237,7 @@
                 path: path,
                 truncatedPath: truncatedPath,
                 data: payload.data,
-                timestamp: new Date(payload.timestamp).toLocaleTimeString(),
+                timestamp: formatDate(payload.timestamp),
                 tags: []
             };
 
@@ -226,18 +257,28 @@
             requestList.forEach(filterRequests);
             var html = $.tv.templates.row(requestData);
 
-            if ($('#' + requestData.requestId).length) {
-                $('#' + requestData.requestId).replaceWith(html);
-            }
-            else {
-                $('tbody').prepend(html);
-            }
+            $.tv.grouping.group($(html), function (err, className) {
+
+                if (className) {
+                    var el = $(html)
+                    el.addClass(className);
+                    html = $('<div>').append(el.clone()).html();
+                }
+
+                if ($('#' + requestData.requestId).length) {
+                    $('#' + requestData.requestId).replaceWith(html);
+                }
+                else {
+                    $('tbody').prepend(html);
+                }
+            });
         };
 
         $('#subscribe').click(function (e) {
 
             $('#filterButton').show();
             ws.send($('#session').val());
+            $('#active-subscriber').addClass('active');
             $('#session').val('');
             e.preventDefault();
         });
@@ -252,6 +293,15 @@
                 $('tbody').prepend($.tv.templates.row(requestData));
             });
         });
+
+        $("#group-responses").on('change', ':checkbox', function() {
+            $.tv.grouping.toggle();
+        });
+
+        $table.on('click', '.data ul', function(e) {
+            $(this).toggleClass('expanded');
+            e.stopPropagation();
+        });
     }
 
     function compileTemplates () {
@@ -259,18 +309,162 @@
         $.tv.templates = $.tv.templates || {};
         $.tv.templates.row = Handlebars.compile($('#row-template').html());
         $.tv.templates.tags = Handlebars.compile($('#tags-template').html());
-    }
+    };
+
+    // Grouping Stuff
+    var Grouping = function () {
+
+        this._enabled = false;
+        this._groupQueue = [];
+        this._isLocked = false;
+    };
+
+    Grouping.prototype.toggle = function () {
+
+        if (this._enabled) {
+            this.off();
+        }
+        else {
+            this.on();
+        }
+    };
+
+    Grouping.prototype.on = function () {
+
+        this._enabled = true;
+        $('table').removeClass('table-striped');
+        this.groupAll();
+    };
+
+    Grouping.prototype.off = function () {
+
+        this._enabled = false;
+        $('tbody tr').removeClass('even odd');
+        $('table').addClass('table-striped');
+    };
+
+    Grouping.prototype.groupAll = function () {
+
+        var self = this;
+        this._isLocked = true;
+        $('tbody tr').each(function(index, d){
+
+            var el = $(d);
+            var prev = el.prev();
+            if (prev.length == 0) {
+                el.addClass('even');
+            }
+            else {
+                self._group(el, self.elToRow($(prev[0])), function(err, className){
+
+                    if (className) {
+                        el.addClass(className);
+                    }
+                });
+            }
+        });
+        this.dequeue();
+        this._isLocked = false;
+    };
+
+    Grouping.prototype.dequeue = function () {
+
+        while (this._groupQueue.length > 0) {
+            var selection = this._groupQueue.shift();
+            this.group(selection[0], selection[1]);
+        }
+    };
+
+    Grouping.prototype.group = function (el, callback) {
+
+        if (this._enabled) {
+            if (this._isLocked) {
+                this._groupQueue.push([el, callback]);
+            }
+            else {
+                this._group(el, this.getLastRow(), callback);
+            }
+        }
+        else {
+            return callback && callback(null, false);
+        }
+    };
+
+    Grouping.prototype._group = function (el, lastRow, callback) {
+
+        var currentPath = this.getPathFromEl(el);
+
+        if (this.isAGroup(currentPath, lastRow.path)) {
+            return callback(null, lastRow.className);
+        }
+        else {
+            if (lastRow.className == 'even') {
+                return callback(null, 'odd');
+            }
+            else {
+                return callback(null, 'even');
+            }
+        }
+    };
+
+    Grouping.prototype.getLastRow = function () {
+
+        var elLast = $('tbody tr').first();
+        return this.elToRow(elLast);
+    };
+
+    Grouping.prototype.elToRow = function (el) {
+
+        var result = {
+            path: this.getPathFromEl(el),
+            className: this.getClassFromEl(el)
+        };
+        return result;
+    };
+
+    Grouping.prototype.getPathFromEl = function (el) {
+
+        return el.children('td.path').children('a').attr('href');
+    };
+
+    Grouping.prototype.getClassFromEl = function (el) {
+        return ( el.hasClass('odd') ? 'odd' : 'even' );
+    };
+
+    Grouping.prototype.isAGroup2 = function (pathName, lastPathName) {
+
+        // This is the primary function that defines what makes a "group", change this as needed
+        if (!pathName || !lastPathName) {
+            return false;
+        }
+
+        return pathName.indexOf(lastPathName) >= 0 || lastPathName.indexOf(pathName) >= 0;
+    };
+
+    Grouping.prototype.isAGroup = function (pathName, lastPathName) {
+
+        // This is the primary function that defines what makes a "group", change this as needed
+        if (!pathName || !lastPathName) {
+            return false;
+        }
+
+        return pathName.split('/')[1] == lastPathName.split('/')[1];
+    };
+
+    // End Grouping Stuff
 
     $.tv.register = function (options) {
 
+        $.tv.grouping = new Grouping();
         attachEvents(new WebSocket('ws://' + options.host + ':' + options.port));
         compileTemplates();
 
-        Handlebars.registerHelper('prettyPrintData', function (data) {
+        Handlebars.registerHelper('printData', function (data) {
 
-            var string = JSON.stringify(data, dataReplacer, 2);
+            var string = JSON.stringify(data, dataReplacer, 2),
+                result = formatJSON(JSON.parse(string));
 
-            return new Handlebars.SafeString(window.prettyPrintOne(string, 'json'));
+            return new Handlebars.SafeString(result);
         });
     };
 })(window, jQuery);
