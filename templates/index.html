@@ -1,12 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
     <head>
         <title>Debug Console</title>
         <meta http-equiv="Content-Language" content="en-us">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="{{ endpoint }}/css/prettify.css" rel="stylesheet">
-        <link href="{{ endpoint }}/css/overrides.css" rel="stylesheet">
         <link href="{{ endpoint }}/css/style.css" rel="stylesheet">
+        <script language="javascript">
+            var host = '{{ host }}';
+            var port = {{ port }};
+        </script>
     </head>
     <body>
         <div id="textPage">
@@ -60,8 +63,8 @@
             $(function() {
                 $('#templates').load('{{ endpoint }}/templates/index.html', function () {
                     $.tv.register({
-                        host: '{{ host }}',
-                        port: {{ port }}
+                        host: host,
+                        port: port
                     });
                 });
             });

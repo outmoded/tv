@@ -20,7 +20,7 @@ server.route({
 });
 
 
-server.pack.allow({ ext: true }).require('../', { host: 'localhost' }, function (err) {
+server.pack.require('../', function (err) {
 
     if (err) {
         console.log(err);
@@ -30,6 +30,5 @@ server.pack.allow({ ext: true }).require('../', { host: 'localhost' }, function 
     server.start(function () {
 
         console.log('Server started at: ' + server.info.uri);
-        console.log('Debug console started at: ' + server.info.uri + server.plugins.tv.endpoint);
     });
 });

@@ -279,6 +279,7 @@
             $('#filterButton').show();
             ws.send($('#session').val());
             $('#active-subscriber').addClass('active');
+            $('#session').val('');
             e.preventDefault();
         });
 
@@ -451,7 +452,6 @@
     };
 
     // End Grouping Stuff
-
 
     $.tv.register = function (options) {
 

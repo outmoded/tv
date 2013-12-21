@@ -47,37 +47,35 @@ describe('Tv', function () {
         });
     });
 
-    it('returns the console html', function (done) {
+    it('reports a request event', function (done) {
 
         server.inject('/debug/console', function (res) {
 
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain('Debug Console');
-            done();
-        });
-    });
 
-    it('reports a request event', function (done) {
+            var host = res.result.match(/var host = '([^']+)'/)[1];
+            var port = res.result.match(/var port = (\d+)/)[1];
+            var ws = new Ws('ws://' + host + ':' + port);
 
-        var ws = new Ws(server.plugins.tv.uri);
+            ws.once('open', function () {
 
-        ws.on('open', function () {
+                ws.send('*');
 
-            ws.send('*');
+                setTimeout(function () {
 
-            setTimeout(function () {
+                    server.inject('/?debug=123', function (res) {
 
-                server.inject('/?debug=123', function (res) {
+                        expect(res.result).to.equal('1');
+                    });
+                }, 100);
+            });
 
-                    expect(res.result).to.equal('1');
-                });
-            }, 100);
-        });
+            ws.once('message', function (data, flags) {
 
-        ws.once('message', function (data, flags) {
-
-            expect(JSON.parse(data).data.agent).to.equal('shot');
-            done();
+                expect(JSON.parse(data).data.agent).to.equal('shot');
+                done();
+            });
         });
     });
 });

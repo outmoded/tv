@@ -1,12 +1,13 @@
 {
   "name": "tv",
   "description": "Interactive debug console plugin for hapi",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
   "contributors":[
     "Wyatt Preul <wpreul@gmail.com>",
     "Van Nguyen <the.gol.effect@gmail.com>",
-    "Ben Nguyen <benobviate@gmail.com>"
+    "Ben Nguyen <benobviate@gmail.com>",
+    "Alex Lande"
   ],
   "repository": "git://github.com/spumko/tv",
   "main": "index",
@@ -20,7 +21,7 @@
     "node": "0.10.x"
   },
   "dependencies": {
-    "hoek": "0.9.x",
+    "hoek": "1.x.x",
     "ws": "0.4.x",
     "handlebars": "1.0.x"
   },
@@ -29,8 +30,7 @@
   },
   "devDependencies": {
     "hapi": "1.x.x",
-    "lab": "0.x.x",
-    "complexity-report": "0.x.x"
+    "lab": "1.x.x"
   },
   "scripts": {
     "test": "make test-cov"
