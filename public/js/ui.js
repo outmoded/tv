@@ -238,6 +238,7 @@
 
             $('#filterButton').show();
             ws.send($('#session').val());
+            $('#session').val('');
             e.preventDefault();
         });
 
