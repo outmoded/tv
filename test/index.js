@@ -34,13 +34,13 @@ describe('Tv', function () {
         server.route({
             method: 'GET',
             path: '/',
-            handler: function () {
+            handler: function (request, reply) {
 
-                this.reply('1');
+                reply('1');
             }
         });
 
-        server.pack.allow({ ext: true, views: true }).require('../', options, function (err) {
+        server.pack.require('../', options, function (err) {
 
             expect(err).to.not.exist;
             done();
