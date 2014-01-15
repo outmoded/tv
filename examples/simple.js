@@ -13,9 +13,9 @@ var server = new Hapi.Server(8080);
 server.route({
     method: 'GET',
     path: '/',
-    handler: function () {
+    handler: function (request, reply) {
 
-        return this.reply('1');
+        return reply('1');
     }
 });
 
