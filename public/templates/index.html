@@ -1,6 +1,6 @@
 <script type="text/x-handlebars-template" id="row-template">
     {{#if this.show}}
-    <tr id='{{ this.requestId }}'>
+    <tr data-request-id='{{ this.requestId }}'>
         <td class="timestamp">{{ this.timestamp }}</td>
         <td class="method">{{ this.method }}</td>
         <td class="path"><a href='{{ this.path }}'>{{ this.truncatedPath }}</a></td>

@@ -621,14 +621,6 @@ a:hover {
   width: 50%;
 }
 
-.table-striped td {
-  border-bottom: 1px solid #e6e6e6;
-}
-
-.table-striped tr:nth-child(even) td {
-  background-color: #FCFAFA;
-}
-
 .table-header {
   background-color: #D3E0EC;
   border-top: 1px solid transparent;
@@ -645,8 +637,25 @@ a:hover {
   text-transform: lowercase;
 }
 
+.table tr:first-child td {
+  border-top: 0;
+}
+
+.table tr:last-child td {
+  border-bottom: 1px solid #e6e6e6;
+}
+
 .table td {
   padding: 6px 16px;
+  border-top: 1px solid transparent;
+}
+
+.table-striped td {
+  border-top-color: #e6e6e6;
+}
+
+.table-striped tr:nth-child(even) td {
+  background-color: #FCFAFA;
 }
 
 .table .even {

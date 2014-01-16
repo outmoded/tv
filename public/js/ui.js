@@ -29,7 +29,7 @@
         }
 
         return false;
-    };
+    }
 
 
     function filterRequests (request) {
@@ -46,7 +46,7 @@
         }
 
         request.show = false;
-    };
+    }
 
 
     function clone (obj, seen) {
@@ -85,9 +85,9 @@
         }
 
         return newObj;
-    };
+    }
 
-    function merge (target, source) {
+    function merge (target, source, keyList) {
 
         if (!source) {
             return target;
@@ -106,7 +106,15 @@
 
         Object.keys(source).forEach(function (key) {
 
+
+            if (keyList) {
+                if ($.inArray(key, keyList) === -1) {
+                    return false;
+                }
+            }
+
             var value = source[key];
+
             if (value &&
                 typeof value === 'object') {
 
@@ -159,15 +167,15 @@
         return color;
     }
 
-
     function addRequest (requestData) {
 
+        var mergeKeys = ["method", "path", "truncatedPath"];
         var exists = false;
         requestList = requestList.map(function (request) {
 
             if (request.requestId === requestData.requestId) {
 
-                requestData = merge(requestData, request);
+                requestData = merge(requestData, request, mergeKeys);
                 exists = true;
 
                 return requestData;
@@ -254,23 +262,19 @@
             $('#tagList').html($.tv.templates.tags({ tags: tagList }));
 
             requestData = addRequest(requestData);
+
             requestList.forEach(filterRequests);
             var html = $.tv.templates.row(requestData);
 
             $.tv.grouping.group($(html), function (err, className) {
 
                 if (className) {
-                    var el = $(html)
+                    var el = $(html);
                     el.addClass(className);
                     html = $('<div>').append(el.clone()).html();
                 }
 
-                if ($('#' + requestData.requestId).length) {
-                    $('#' + requestData.requestId).replaceWith(html);
-                }
-                else {
-                    $('tbody').prepend(html);
-                }
+                $('tbody').prepend(html);
             });
         };
 
@@ -309,7 +313,7 @@
         $.tv.templates = $.tv.templates || {};
         $.tv.templates.row = Handlebars.compile($('#row-template').html());
         $.tv.templates.tags = Handlebars.compile($('#tags-template').html());
-    };
+    }
 
     // Grouping Stuff
     var Grouping = function () {
@@ -351,7 +355,7 @@
 
             var el = $(d);
             var prev = el.prev();
-            if (prev.length == 0) {
+            if (prev.length === 0) {
                 el.addClass('even');
             }
             else {
@@ -392,9 +396,9 @@
 
     Grouping.prototype._group = function (el, lastRow, callback) {
 
-        var currentPath = this.getPathFromEl(el);
+        var currentRequestId = this.getRequestIdFromEl(el);
 
-        if (this.isAGroup(currentPath, lastRow.path)) {
+        if (this.isAGroup(currentRequestId, lastRow.requestId)) {
             return callback(null, lastRow.className);
         }
         else {
@@ -416,7 +420,7 @@
     Grouping.prototype.elToRow = function (el) {
 
         var result = {
-            path: this.getPathFromEl(el),
+            requestId: this.getRequestIdFromEl(el),
             className: this.getClassFromEl(el)
         };
         return result;
@@ -427,7 +431,13 @@
         return el.children('td.path').children('a').attr('href');
     };
 
+    Grouping.prototype.getRequestIdFromEl = function (el) {
+
+        return el.data("request-id");
+    };
+
     Grouping.prototype.getClassFromEl = function (el) {
+
         return ( el.hasClass('odd') ? 'odd' : 'even' );
     };
 
@@ -441,14 +451,14 @@
         return pathName.indexOf(lastPathName) >= 0 || lastPathName.indexOf(pathName) >= 0;
     };
 
-    Grouping.prototype.isAGroup = function (pathName, lastPathName) {
+    Grouping.prototype.isAGroup = function (requestId, lastRequestId) {
 
         // This is the primary function that defines what makes a "group", change this as needed
-        if (!pathName || !lastPathName) {
+        if (!requestId || !lastRequestId) {
             return false;
         }
 
-        return pathName.split('/')[1] == lastPathName.split('/')[1];
+        return requestId === lastRequestId;
     };
 
     // End Grouping Stuff
@@ -460,6 +470,7 @@
         compileTemplates();
 
         Handlebars.registerHelper('printData', function (data) {
+            if (!data) return false;
 
             var string = JSON.stringify(data, dataReplacer, 2),
                 result = formatJSON(JSON.parse(string));
