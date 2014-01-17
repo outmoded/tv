@@ -1,4 +1,4 @@
-(function (window, $) {
+(function (window, $, _) {
 
     $.tv = $.tv || {};                          // Add tv plugin namespace
 
@@ -106,7 +106,6 @@
 
         Object.keys(source).forEach(function (key) {
 
-
             if (keyList) {
                 if ($.inArray(key, keyList) === -1) {
                     return false;
@@ -170,23 +169,19 @@
     function addRequest (requestData) {
 
         var mergeKeys = ["method", "path", "truncatedPath"];
-        var exists = false;
         requestList = requestList.map(function (request) {
 
             if (request.requestId === requestData.requestId) {
 
                 requestData = merge(requestData, request, mergeKeys);
-                exists = true;
 
-                return requestData;
+                return request;
             }
 
             return request;
         });
 
-        if (!exists) {
-            requestList.push(requestData);
-        }
+        requestList.push(requestData);
 
         return requestData;
     }
@@ -245,6 +240,7 @@
                 path: path,
                 truncatedPath: truncatedPath,
                 data: payload.data,
+                rawTimestamp: payload.timestamp,
                 timestamp: formatDate(payload.timestamp),
                 tags: []
             };
@@ -264,6 +260,7 @@
             requestData = addRequest(requestData);
 
             requestList.forEach(filterRequests);
+
             var html = $.tv.templates.row(requestData);
 
             $.tv.grouping.group($(html), function (err, className) {
@@ -275,6 +272,10 @@
                 }
 
                 $('tbody').prepend(html);
+
+                if ($.tv.grouping._enabled) {
+                    $.tv.grouping.on();
+                }
             });
         };
 
@@ -283,7 +284,6 @@
             $('#filterButton').show();
             ws.send($('#session').val());
             $('#active-subscriber').addClass('active');
-            $('#session').val('');
             e.preventDefault();
         });
 
@@ -335,6 +335,7 @@
 
     Grouping.prototype.on = function () {
 
+        this.sortByGroup();
         this._enabled = true;
         $('table').removeClass('table-striped');
         this.groupAll();
@@ -342,6 +343,7 @@
 
     Grouping.prototype.off = function () {
 
+        this.sortByTimestamp();
         this._enabled = false;
         $('tbody tr').removeClass('even odd');
         $('table').addClass('table-striped');
@@ -461,6 +463,29 @@
         return requestId === lastRequestId;
     };
 
+    Grouping.prototype.sortByGroup = function () {
+
+        $('tbody').html('');
+
+        _.chain(requestList)
+            .groupBy("requestId")
+            .sortBy("rawTimestamp")
+            .flatten()
+            .value()
+            .forEach(function (requestData) {
+                $('tbody').prepend($.tv.templates.row(requestData));
+            });
+    };
+
+    Grouping.prototype.sortByTimestamp = function () {
+
+        $('tbody').html('');
+
+        requestList.forEach(function (requestData) {
+            $('tbody').prepend($.tv.templates.row(requestData));
+        });
+    };
+
     // End Grouping Stuff
 
     $.tv.register = function (options) {
@@ -478,4 +503,4 @@
             return new Handlebars.SafeString(result);
         });
     };
-})(window, jQuery);
+})(window, jQuery, _);
