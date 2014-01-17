@@ -1,4 +1,4 @@
-(function (window, $) {
+(function (window, $, _) {
 
     $.tv = $.tv || {};                          // Add tv plugin namespace
 
@@ -29,7 +29,7 @@
         }
 
         return false;
-    };
+    }
 
 
     function filterRequests (request) {
@@ -46,7 +46,7 @@
         }
 
         request.show = false;
-    };
+    }
 
 
     function clone (obj, seen) {
@@ -85,9 +85,9 @@
         }
 
         return newObj;
-    };
+    }
 
-    function merge (target, source) {
+    function merge (target, source, keyList) {
 
         if (!source) {
             return target;
@@ -106,7 +106,14 @@
 
         Object.keys(source).forEach(function (key) {
 
+            if (keyList) {
+                if ($.inArray(key, keyList) === -1) {
+                    return false;
+                }
+            }
+
             var value = source[key];
+
             if (value &&
                 typeof value === 'object') {
 
@@ -159,26 +166,22 @@
         return color;
     }
 
-
     function addRequest (requestData) {
 
-        var exists = false;
+        var mergeKeys = ["method", "path", "truncatedPath"];
         requestList = requestList.map(function (request) {
 
             if (request.requestId === requestData.requestId) {
 
-                requestData = merge(requestData, request);
-                exists = true;
+                requestData = merge(requestData, request, mergeKeys);
 
-                return requestData;
+                return request;
             }
 
             return request;
         });
 
-        if (!exists) {
-            requestList.push(requestData);
-        }
+        requestList.push(requestData);
 
         return requestData;
     }
@@ -237,6 +240,7 @@
                 path: path,
                 truncatedPath: truncatedPath,
                 data: payload.data,
+                rawTimestamp: payload.timestamp,
                 timestamp: formatDate(payload.timestamp),
                 tags: []
             };
@@ -254,22 +258,23 @@
             $('#tagList').html($.tv.templates.tags({ tags: tagList }));
 
             requestData = addRequest(requestData);
+
             requestList.forEach(filterRequests);
+
             var html = $.tv.templates.row(requestData);
 
             $.tv.grouping.group($(html), function (err, className) {
 
                 if (className) {
-                    var el = $(html)
+                    var el = $(html);
                     el.addClass(className);
                     html = $('<div>').append(el.clone()).html();
                 }
 
-                if ($('#' + requestData.requestId).length) {
-                    $('#' + requestData.requestId).replaceWith(html);
-                }
-                else {
-                    $('tbody').prepend(html);
+                $('tbody').prepend(html);
+
+                if ($.tv.grouping._enabled) {
+                    $.tv.grouping.on();
                 }
             });
         };
@@ -279,7 +284,6 @@
             $('#filterButton').show();
             ws.send($('#session').val());
             $('#active-subscriber').addClass('active');
-            $('#session').val('');
             e.preventDefault();
         });
 
@@ -309,7 +313,7 @@
         $.tv.templates = $.tv.templates || {};
         $.tv.templates.row = Handlebars.compile($('#row-template').html());
         $.tv.templates.tags = Handlebars.compile($('#tags-template').html());
-    };
+    }
 
     // Grouping Stuff
     var Grouping = function () {
@@ -331,6 +335,7 @@
 
     Grouping.prototype.on = function () {
 
+        this.sortByGroup();
         this._enabled = true;
         $('table').removeClass('table-striped');
         this.groupAll();
@@ -338,6 +343,7 @@
 
     Grouping.prototype.off = function () {
 
+        this.sortByTimestamp();
         this._enabled = false;
         $('tbody tr').removeClass('even odd');
         $('table').addClass('table-striped');
@@ -351,7 +357,7 @@
 
             var el = $(d);
             var prev = el.prev();
-            if (prev.length == 0) {
+            if (prev.length === 0) {
                 el.addClass('even');
             }
             else {
@@ -392,9 +398,9 @@
 
     Grouping.prototype._group = function (el, lastRow, callback) {
 
-        var currentPath = this.getPathFromEl(el);
+        var currentRequestId = this.getRequestIdFromEl(el);
 
-        if (this.isAGroup(currentPath, lastRow.path)) {
+        if (this.isAGroup(currentRequestId, lastRow.requestId)) {
             return callback(null, lastRow.className);
         }
         else {
@@ -416,7 +422,7 @@
     Grouping.prototype.elToRow = function (el) {
 
         var result = {
-            path: this.getPathFromEl(el),
+            requestId: this.getRequestIdFromEl(el),
             className: this.getClassFromEl(el)
         };
         return result;
@@ -427,28 +433,47 @@
         return el.children('td.path').children('a').attr('href');
     };
 
+    Grouping.prototype.getRequestIdFromEl = function (el) {
+
+        return el.data("request-id");
+    };
+
     Grouping.prototype.getClassFromEl = function (el) {
+
         return ( el.hasClass('odd') ? 'odd' : 'even' );
     };
 
-    Grouping.prototype.isAGroup2 = function (pathName, lastPathName) {
+    Grouping.prototype.isAGroup = function (requestId, lastRequestId) {
 
         // This is the primary function that defines what makes a "group", change this as needed
-        if (!pathName || !lastPathName) {
+        if (!requestId || !lastRequestId) {
             return false;
         }
 
-        return pathName.indexOf(lastPathName) >= 0 || lastPathName.indexOf(pathName) >= 0;
+        return requestId === lastRequestId;
     };
 
-    Grouping.prototype.isAGroup = function (pathName, lastPathName) {
+    Grouping.prototype.sortByGroup = function () {
 
-        // This is the primary function that defines what makes a "group", change this as needed
-        if (!pathName || !lastPathName) {
-            return false;
-        }
+        $('tbody').html('');
 
-        return pathName.split('/')[1] == lastPathName.split('/')[1];
+        _.chain(requestList)
+            .groupBy("requestId")
+            .sortBy("rawTimestamp")
+            .flatten()
+            .value()
+            .forEach(function (requestData) {
+                $('tbody').prepend($.tv.templates.row(requestData));
+            });
+    };
+
+    Grouping.prototype.sortByTimestamp = function () {
+
+        $('tbody').html('');
+
+        requestList.forEach(function (requestData) {
+            $('tbody').prepend($.tv.templates.row(requestData));
+        });
     };
 
     // End Grouping Stuff
@@ -460,6 +485,7 @@
         compileTemplates();
 
         Handlebars.registerHelper('printData', function (data) {
+            if (!data) return false;
 
             var string = JSON.stringify(data, dataReplacer, 2),
                 result = formatJSON(JSON.parse(string));
@@ -467,4 +493,4 @@
             return new Handlebars.SafeString(result);
         });
     };
-})(window, jQuery);
+})(window, jQuery, _);
