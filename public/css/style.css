@@ -731,6 +731,59 @@ a:hover {
   font-weight: bold;
 }
 
+.path a {
+  position: relative;
+
+  padding: 10px 10px 10px 0;
+}
+
+.path a:after {
+  content: attr(href);
+  color: transparent;
+  font-size: 0;
+}
+
+.path a:hover:after {
+  position: absolute;
+  top: -1px;
+  left: -10px;
+  z-index: 200;
+
+  display: inline;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-width: 1px 1px 1px 0;
+
+  background: #fff;
+  box-shadow: 2px 0 1px -1px rgba(0,0,0,0.05);
+  color: #1a75cf;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.table-striped tr:nth-child(even) .path a:hover:after {
+  background: #fcfafa;
+}
+
+.table .odd .path a:hover:after {
+  border-width: 1px 1px 1px 0;
+
+  background: #fff;
+}
+
+.table .even .path a:hover:after {
+  border-width: 1px 1px 1px 0;
+
+  background: #f5f5f5;
+}
+
+.table tr:first-child .path a:hover:after {
+  top: 0;
+  padding-top: 9px;
+
+  border-top-color: transparent;
+}
+
 .table .data {
   padding: 10px 0;
 }
