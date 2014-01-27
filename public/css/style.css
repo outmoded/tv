@@ -609,16 +609,24 @@ a:hover {
   font-size: 14px;
 }
 
-.col-mini {
-  width: 90px;
-}
-
-.col-med {
+.col-timestamp {
   width: 160px;
 }
 
-.col-large {
+.col-method {
+  width: 90px;
+}
+
+.col-path {
+  width: 160px;
+}
+
+.col-data {
   width: 50%;
+}
+
+.col-tags {
+
 }
 
 .table-header {

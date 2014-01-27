@@ -18,6 +18,13 @@
         "black",
         "deeppink"
     ];
+    var columnList = [
+        "timestamp",
+        "method",
+        "path",
+        "data",
+        "tags"
+    ];
 
     function tagsContain (tags, tagName) {
 
@@ -313,6 +320,15 @@
         $.tv.templates = $.tv.templates || {};
         $.tv.templates.row = Handlebars.compile($('#row-template').html());
         $.tv.templates.tags = Handlebars.compile($('#tags-template').html());
+
+        $.tv.templates.col = {};
+
+        // Individual column partials
+        $.tv.templates.col.timestamp = Handlebars.compile($('#col-timestamp-template').html());
+        $.tv.templates.col.method = Handlebars.compile($('#col-method-template').html());
+        $.tv.templates.col.path = Handlebars.compile($('#col-path-template').html());
+        $.tv.templates.col.data = Handlebars.compile($('#col-data-template').html());
+        $.tv.templates.col.tags = Handlebars.compile($('#col-tags-template').html());
     }
 
     // Grouping Stuff
@@ -491,6 +507,17 @@
                 result = formatJSON(JSON.parse(string));
 
             return new Handlebars.SafeString(result);
+        });
+
+        Handlebars.registerHelper('columnList', function () {
+            var self = this,
+                colList = [];
+
+            _.forEach(columnList, function (col) {
+                colList.push($.tv.templates.col[col](self));
+            });
+
+            return new Handlebars.SafeString(colList.join(''));
         });
     };
 })(window, jQuery, _);
