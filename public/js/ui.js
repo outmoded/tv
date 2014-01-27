@@ -2,7 +2,6 @@
 
     $.tv = $.tv || {};                          // Add tv plugin namespace
 
-
     var tagList = [];                           // Complete Tag List
     var requestList = [];
     var colorsList = [
@@ -18,7 +17,7 @@
         "black",
         "deeppink"
     ];
-    var columnList = [
+    var columnList = JSON.parse(localStorage.getItem("colOrder")) || [
         "timestamp",
         "method",
         "path",
@@ -313,24 +312,23 @@
         $table.on('click', '.data ul', function(e) {
             $(this).toggleClass('expanded');
             e.stopPropagation();
-        });
+        }).on('dragstart th', function(e) {
+            $dragEl = $(e.target);
 
-        $('th').on('dragstart', function(e) {
-            $dragEl = $(this);
             e.originalEvent.dataTransfer.effectAllowed = 'move';
-        }).on('dragover', function(e) {
+        }).on('dragover th', function(e) {
             e.preventDefault();
-        }).on('drop', function(e) {
-            var $this = $(this);
+        }).on('drop th', function(e) {
+            var $dropEl = $(e.target);
 
             e.stopPropagation();
 
-            if ($dragEl.is($this)) { return false; }
+            if (!$dropEl.is('th') || $dropEl.is($dragEl)) { return; }
 
-            if ($this.prevAll().filter($dragEl).length) {
-                $dragEl.insertAfter($this);
+            if ($dropEl.prevAll().filter($dragEl).length) {
+                $dragEl.insertAfter($dropEl);
             } else {
-                $dragEl.insertBefore($this);
+                $dragEl.insertBefore($dropEl);
             }
 
             orderCols();
@@ -342,10 +340,18 @@
         $.tv.templates = $.tv.templates || {};
         $.tv.templates.row = Handlebars.compile($('#row-template').html());
         $.tv.templates.tags = Handlebars.compile($('#tags-template').html());
+        $.tv.templates.thead = Handlebars.compile($('#thead-template').html());
 
+        // Column heading partials
+        $.tv.templates.colHeading = $.tv.templates.colHeading || {};
+        $.tv.templates.colHeading.timestamp = Handlebars.compile($('#colheading-timestamp-template').html());
+        $.tv.templates.colHeading.method = Handlebars.compile($('#colheading-method-template').html());
+        $.tv.templates.colHeading.path = Handlebars.compile($('#colheading-path-template').html());
+        $.tv.templates.colHeading.data = Handlebars.compile($('#colheading-data-template').html());
+        $.tv.templates.colHeading.tags = Handlebars.compile($('#colheading-tags-template').html());
+
+        // Column partials
         $.tv.templates.col = $.tv.templates.col || {};
-
-        // Individual column partials
         $.tv.templates.col.timestamp = Handlebars.compile($('#col-timestamp-template').html());
         $.tv.templates.col.method = Handlebars.compile($('#col-method-template').html());
         $.tv.templates.col.path = Handlebars.compile($('#col-path-template').html());
@@ -362,10 +368,16 @@
 
         columnList = reorderedColumnList;
 
+        localStorage.setItem("colOrder", JSON.stringify(columnList));
+
         render();
     }
 
     function render () {
+        $('thead')
+            .html('')
+            .append($.tv.templates.thead());
+
         $('tbody').html('');
 
         requestList.forEach(function (requestData) {
@@ -551,6 +563,17 @@
             return new Handlebars.SafeString(result);
         });
 
+        Handlebars.registerHelper('columnHeadings', function () {
+            var self = this,
+                colHeadings = [];
+
+            _.forEach(columnList, function (col) {
+                colHeadings.push($.tv.templates.colHeading[col](self));
+            });
+
+            return new Handlebars.SafeString(colHeadings.join(''));
+        });
+
         Handlebars.registerHelper('columnList', function () {
             var self = this,
                 colList = [];
@@ -561,5 +584,7 @@
 
             return new Handlebars.SafeString(colList.join(''));
         });
+
+        render();
     };
 })(window, jQuery, _);

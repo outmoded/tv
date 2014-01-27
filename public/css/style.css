@@ -609,7 +609,7 @@ a:hover {
   font-size: 14px;
 }
 
-/*.col-timestamp {
+.col-timestamp {
   width: 160px;
 }
 
@@ -628,7 +628,7 @@ a:hover {
 .col-tags {
 
 }
-*/
+
 .table-header {
   background-color: #D3E0EC;
   border-top: 1px solid transparent;
