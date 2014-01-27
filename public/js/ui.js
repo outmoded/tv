@@ -26,6 +26,8 @@
         "tags"
     ];
 
+    var $dragEl = null;
+
     function tagsContain (tags, tagName) {
 
         for (var i = 0, il = tags.length; i < il; ++i) {
@@ -294,7 +296,6 @@
             e.preventDefault();
         });
 
-
         $('#tagList').on('change', ':checkbox', function() {
 
             requestList.forEach(filterRequests);
@@ -313,6 +314,27 @@
             $(this).toggleClass('expanded');
             e.stopPropagation();
         });
+
+        $('th').on('dragstart', function(e) {
+            $dragEl = $(this);
+            e.originalEvent.dataTransfer.effectAllowed = 'move';
+        }).on('dragover', function(e) {
+            e.preventDefault();
+        }).on('drop', function(e) {
+            var $this = $(this);
+
+            e.stopPropagation();
+
+            if ($dragEl.is($this)) { return false; }
+
+            if ($this.prevAll().filter($dragEl).length) {
+                $dragEl.insertAfter($this);
+            } else {
+                $dragEl.insertBefore($this);
+            }
+
+            orderCols();
+        });
     }
 
     function compileTemplates () {
@@ -321,7 +343,7 @@
         $.tv.templates.row = Handlebars.compile($('#row-template').html());
         $.tv.templates.tags = Handlebars.compile($('#tags-template').html());
 
-        $.tv.templates.col = {};
+        $.tv.templates.col = $.tv.templates.col || {};
 
         // Individual column partials
         $.tv.templates.col.timestamp = Handlebars.compile($('#col-timestamp-template').html());
@@ -329,6 +351,26 @@
         $.tv.templates.col.path = Handlebars.compile($('#col-path-template').html());
         $.tv.templates.col.data = Handlebars.compile($('#col-data-template').html());
         $.tv.templates.col.tags = Handlebars.compile($('#col-tags-template').html());
+    }
+
+    function orderCols () {
+        var reorderedColumnList = [];
+
+        $("th").each(function () {
+            reorderedColumnList.push($(this).text().toLowerCase());
+        });
+
+        columnList = reorderedColumnList;
+
+        render();
+    }
+
+    function render () {
+        $('tbody').html('');
+
+        requestList.forEach(function (requestData) {
+            $('tbody').prepend($.tv.templates.row(requestData));
+        });
     }
 
     // Grouping Stuff

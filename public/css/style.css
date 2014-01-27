@@ -609,7 +609,7 @@ a:hover {
   font-size: 14px;
 }
 
-.col-timestamp {
+/*.col-timestamp {
   width: 160px;
 }
 
@@ -628,7 +628,7 @@ a:hover {
 .col-tags {
 
 }
-
+*/
 .table-header {
   background-color: #D3E0EC;
   border-top: 1px solid transparent;
@@ -639,6 +639,7 @@ a:hover {
   padding: 10px 16px;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
   color: #5E7285;
+  cursor: move;
   font-size: 12px;
   text-align: left;
   text-shadow: 0 1px 0 rgba(255,255,255,0.2);
@@ -803,7 +804,7 @@ a:hover {
 
   height: 16px;
   margin: 0;
-  padding: 0 10px 0 16px;
+  padding: 0 10px 0 32px;
 
   color: #93a1a1;
   cursor: pointer;
@@ -816,7 +817,7 @@ a:hover {
   content: '';
   position: absolute;
   top: 5px;
-  left: 0;
+  left: 16px;
 
   display: block;
   border: 4px solid transparent;
