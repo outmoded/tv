@@ -317,7 +317,15 @@
 
             e.originalEvent.dataTransfer.effectAllowed = 'move';
         }).on('dragover th', function(e) {
+            var $dragEl = $(e.target);
+
             e.preventDefault();
+
+            $dragEl.addClass("is-droppable");
+        }).on('dragleave th', function(e) {
+            var $dragEl = $(e.target);
+
+            $dragEl.removeClass("is-droppable");
         }).on('drop th', function(e) {
             var $dropEl = $(e.target);
 
@@ -332,6 +340,8 @@
             }
 
             orderCols();
+        }).on('dragend', function(e) {
+            $('th').removeClass('is-droppable');
         });
     }
 

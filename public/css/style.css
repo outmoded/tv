@@ -642,8 +642,8 @@ a:hover {
   cursor: move;
   font-size: 12px;
   text-align: left;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.2);
   text-transform: lowercase;
+  transition: 0.15s ease-out background-color, color;
 }
 
 .table tr:first-child td {
@@ -959,4 +959,12 @@ a:hover {
 .tags .deeppink {
   border: 1px solid #B0488E;
   background-color: #B0488E;
+}
+
+/* Drag and Drop */
+
+th.is-droppable {
+  background: #AFC9E0;
+  box-shadow: inset 0 1px 3px 1px rgba(0,0,0,0.1);
+  color: transparent;
 }
