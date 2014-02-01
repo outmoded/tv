@@ -377,14 +377,10 @@
         $.tv.templates.row = Handlebars.compile($('#row-template').html());
         $.tv.templates.tags = Handlebars.compile($('#tags-template').html());
         $.tv.templates.thead = Handlebars.compile($('#thead-template').html());
+        $.tv.templates.colgroup = Handlebars.compile($('#colgroup-template').html());
 
-        // Column heading partials
-        $.tv.templates.colHeading = $.tv.templates.colHeading || {};
-        $.tv.templates.colHeading.timestamp = Handlebars.compile($('#colheading-timestamp-template').html());
-        $.tv.templates.colHeading.method = Handlebars.compile($('#colheading-method-template').html());
-        $.tv.templates.colHeading.path = Handlebars.compile($('#colheading-path-template').html());
-        $.tv.templates.colHeading.data = Handlebars.compile($('#colheading-data-template').html());
-        $.tv.templates.colHeading.tags = Handlebars.compile($('#colheading-tags-template').html());
+        $.tv.templates.colEl = Handlebars.compile($('#col-element-template').html());
+        $.tv.templates.colHeadingTpl = Handlebars.compile($('#colheading-template').html());
 
         // Column partials
         $.tv.templates.col = $.tv.templates.col || {};
@@ -410,6 +406,10 @@
     }
 
     function render () {
+        $('colgroup')
+            .html('')
+            .append($.tv.templates.colgroup());
+
         $('thead')
             .html('')
             .append($.tv.templates.thead());
@@ -604,10 +604,21 @@
                 colHeadings = [];
 
             _.forEach(columnList, function (col) {
-                colHeadings.push($.tv.templates.colHeading[col](self));
+                colHeadings.push($.tv.templates.colHeadingTpl(col));
             });
 
             return new Handlebars.SafeString(colHeadings.join(''));
+        });
+
+        Handlebars.registerHelper('columnElements', function () {
+            var self = this,
+                cols = [];
+
+            _.forEach(columnList, function (col) {
+                cols.push($.tv.templates.colEl(col));
+            });
+
+            return new Handlebars.SafeString(cols.join(''));
         });
 
         Handlebars.registerHelper('columnList', function () {

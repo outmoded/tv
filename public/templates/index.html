@@ -8,37 +8,25 @@
 </script>
 
 <script type="text/x-handlebars-template" id="colgroup-template">
-    <colgroup>{{cols}}</colgroup>
+    {{columnElements}}
+</script>
+
+<script type="text/x-handlebars-template" id="col-element-template">
+    <col class="col-{{this}}">
 </script>
 
 <script type="text/x-handlebars-template" id="thead-template">
     <tr>{{columnHeadings}}</tr>
 </script>
 
+<script type="text/x-handlebars-template" id="colheading-template">
+    <th draggable="true">{{this}}</th>
+</script>
+
 <script type="text/x-handlebars-template" id="row-template">
     {{#if this.show}}
         <tr data-request-id='{{ this.requestId }}'>{{columnList}}</tr>
     {{/if}}
-</script>
-
-<script type="text/x-handlebars-template" id="colheading-timestamp-template">
-    <th draggable="true" class="col-timestamp">Timestamp</th>
-</script>
-
-<script type="text/x-handlebars-template" id="colheading-method-template">
-    <th draggable="true" class="col-method">Method</th>
-</script>
-
-<script type="text/x-handlebars-template" id="colheading-path-template">
-    <th draggable="true" class="col-path">Path</th>
-</script>
-
-<script type="text/x-handlebars-template" id="colheading-data-template">
-    <th draggable="true" class="col-data">Data</th>
-</script>
-
-<script type="text/x-handlebars-template" id="colheading-tags-template">
-    <th draggable="true" class="col-tags">Tags</th>
 </script>
 
 <script type="text/x-handlebars-template" id="col-timestamp-template">
