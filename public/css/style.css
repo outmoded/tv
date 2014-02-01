@@ -637,6 +637,8 @@ a:hover {
 
 .table-header th {
   padding: 10px 16px;
+  border: 1px solid #BACCDB;
+  border-width: 0 1px;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
   color: #5E7285;
   cursor: move;

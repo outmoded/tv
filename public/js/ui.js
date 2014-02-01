@@ -1,4 +1,4 @@
-(function (window, $, _) {
+(function (window, $, _, interact) {
 
     $.tv = $.tv || {};                          // Add tv plugin namespace
 
@@ -26,6 +26,7 @@
     ];
 
     var $dragEl = null;
+    var $resizeCol = null;
 
     function tagsContain (tags, tagName) {
 
@@ -343,6 +344,31 @@
         }).on('dragend', function(e) {
             $('th').removeClass('is-droppable');
         });
+
+        interact("th").resizeable({
+            onstart: function(e) {
+                startColResize($(e.target));
+            },
+            onmove: function(e) {
+                adjustColWidth(e.dx);
+            },
+            onend: saveColWidth()
+        });
+    }
+
+    function startColResize ($sourceEl) {
+        var index = $("th").index($sourceEl);
+        $resizeCol = $("col").eq(index);
+
+        $resizeCol.width($sourceEl.outerWidth());
+    }
+
+    function adjustColWidth (widthChange) {
+        $resizeCol.width($resizeCol.width() + widthChange);
+    }
+
+    function saveColWidth () {
+        $resizeCol = null;
     }
 
     function compileTemplates () {
@@ -597,4 +623,4 @@
 
         render();
     };
-})(window, jQuery, _);
+})(window, jQuery, _, interact);
