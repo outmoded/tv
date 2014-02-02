@@ -641,11 +641,19 @@ a:hover {
   border-width: 0 1px;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
   color: #5E7285;
-  cursor: move;
   font-size: 12px;
   text-align: left;
   text-transform: lowercase;
   transition: 0.15s ease-out background-color, color;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.table td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .table tr:first-child td {
@@ -742,26 +750,29 @@ a:hover {
   font-weight: bold;
 }
 
+.path {
+  color: #1a75cf;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.path:hover {
+  overflow: visible;
+}
+
 .path a {
   position: relative;
 
   padding: 10px 10px 10px 0;
+
+  font-size: 14px;
 }
 
-.path a:after {
-  content: attr(href);
-  color: transparent;
-  font-size: 0;
-}
-
-.path a:hover:after {
-  position: absolute;
-  top: -1px;
-  left: -10px;
+.path a:hover {
   z-index: 200;
 
-  display: inline;
-  padding: 10px;
   border: 1px solid #e6e6e6;
   border-width: 1px 1px 1px 0;
 
@@ -776,19 +787,19 @@ a:hover {
   background: #fcfafa;
 }
 
-.table .odd .path a:hover:after {
+.table .odd .path a:hover {
   border-width: 1px 1px 1px 0;
 
   background: #fff;
 }
 
-.table .even .path a:hover:after {
+.table .even .path a:hover {
   border-width: 1px 1px 1px 0;
 
   background: #f5f5f5;
 }
 
-.table tr:first-child .path a:hover:after {
+.table tr:first-child .path a:hover {
   top: 0;
   padding-top: 9px;
 
@@ -797,6 +808,7 @@ a:hover {
 
 .table .data {
   padding: 10px 0;
+  white-space: normal;
 }
 
 .data ul {
@@ -882,6 +894,10 @@ a:hover {
 
 .timestamp {
   white-space: nowrap;
+}
+
+.tags {
+  white-space: normal;
 }
 
 .tags ul {

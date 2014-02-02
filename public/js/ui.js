@@ -177,7 +177,7 @@
 
     function addRequest (requestData) {
 
-        var mergeKeys = ["method", "path", "truncatedPath"];
+        var mergeKeys = ["method", "path"];
         requestList = requestList.map(function (request) {
 
             if (request.requestId === requestData.requestId) {
@@ -241,13 +241,11 @@
             var payload = JSON.parse(message.data);
             var requestId = payload.request;
             var path = payload.data ? payload.data.url : null;
-            var truncatedPath = path && path.length > 15 ? path.substring(0, 15) + '...' : path;
 
             var requestData = {
                 requestId: requestId,
                 method: payload.data && payload.data.method && payload.data.method.toUpperCase(),
                 path: path,
-                truncatedPath: truncatedPath,
                 data: payload.data,
                 rawTimestamp: payload.timestamp,
                 timestamp: formatDate(payload.timestamp),
@@ -345,7 +343,7 @@
             $('th').removeClass('is-droppable');
         });
 
-        interact("th").resizeable({
+        interact("th").draggable(true).resizeable({
             onstart: function(e) {
                 startColResize($(e.target));
             },
