@@ -12,7 +12,7 @@
 </script>
 
 <script type="text/x-handlebars-template" id="col-element-template">
-    <col class="col-{{this}}">
+    <col data-name="{{name}}" class="col-{{name}}" {{#if width}}style="width: {{width}}px"{{/if}}>
 </script>
 
 <script type="text/x-handlebars-template" id="thead-template">
@@ -20,7 +20,7 @@
 </script>
 
 <script type="text/x-handlebars-template" id="colheading-template">
-    <th draggable="true">{{this}}</th>
+    <th draggable="true">{{name}}</th>
 </script>
 
 <script type="text/x-handlebars-template" id="row-template">

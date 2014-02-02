@@ -17,12 +17,12 @@
         "black",
         "deeppink"
     ];
-    var columnList = JSON.parse(localStorage.getItem("colOrder")) || [
-        "timestamp",
-        "method",
-        "path",
-        "data",
-        "tags"
+    var columnList = JSON.parse(localStorage.getItem("columnList")) || [
+        { "name": "timestamp" },
+        { "name": "method" },
+        { "name": "path" },
+        { "name": "data" },
+        { "name": "tags" }
     ];
 
     var $dragEl = null;
@@ -352,7 +352,9 @@
             onmove: function(e) {
                 adjustColWidth(e.dx);
             },
-            onend: saveColWidth()
+            onend: function (e) {
+                saveColWidth();
+            }
         });
     }
 
@@ -368,6 +370,14 @@
     }
 
     function saveColWidth () {
+        _.forEach(columnList, function (col) {
+            if (col.name === $resizeCol.data('name')) {
+                col.width = $resizeCol.width();
+            }
+        });
+
+        saveCols();
+
         $resizeCol = null;
     }
 
@@ -395,14 +405,20 @@
         var reorderedColumnList = [];
 
         $("th").each(function () {
-            reorderedColumnList.push($(this).text().toLowerCase());
+            var col = _.where(columnList, { name: $(this).html() });
+
+            reorderedColumnList.push(col[0]);
         });
 
         columnList = reorderedColumnList;
 
-        localStorage.setItem("colOrder", JSON.stringify(columnList));
+        saveCols();
 
         render();
+    }
+
+    function saveCols () {
+        localStorage.setItem("columnList", JSON.stringify(columnList));
     }
 
     function render () {
@@ -626,7 +642,7 @@
                 colList = [];
 
             _.forEach(columnList, function (col) {
-                colList.push($.tv.templates.col[col](self));
+                colList.push($.tv.templates.col[col.name](self));
             });
 
             return new Handlebars.SafeString(colList.join(''));
