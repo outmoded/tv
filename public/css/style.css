@@ -453,6 +453,19 @@ a:hover {
   text-align: center;
 }
 
+.btn-link {
+  background: transparent;
+  border: 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+#sessionWrapper .btn-link {
+  margin-left: 20px;
+}
+
 #tagList {
   margin: 20px 0;
 }

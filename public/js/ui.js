@@ -17,13 +17,15 @@
         "black",
         "deeppink"
     ];
-    var columnList = JSON.parse(localStorage.getItem("columnList")) || [
+    var defaultColumnList = [
         { "name": "timestamp" },
         { "name": "method" },
         { "name": "path" },
         { "name": "data" },
         { "name": "tags" }
     ];
+
+    var columnList = JSON.parse(localStorage.getItem("columnList")) || _.clone(defaultColumnList, true);
 
     var $dragEl = null;
     var $resizeCol = null;
@@ -308,6 +310,12 @@
             $.tv.grouping.toggle();
         });
 
+        $('#reset-columns').on('click', function(e) {
+            e.preventDefault();
+
+            resetCols();
+        });
+
         $table.on('click', '.data ul', function(e) {
             $(this).toggleClass('expanded');
             e.stopPropagation();
@@ -425,6 +433,14 @@
 
     function saveCols () {
         localStorage.setItem("columnList", JSON.stringify(columnList));
+    }
+
+    function resetCols () {
+        localStorage.setItem("columnList", null);
+
+        columnList = defaultColumnList;
+
+        render();
     }
 
     function render () {
