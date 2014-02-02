@@ -314,6 +314,8 @@
         }).on('dragstart th', function(e) {
             $dragEl = $(e.target);
 
+            // Firefox requires setData for drag and drop behavior.
+            e.originalEvent.dataTransfer.setData('text/plain', '');
             e.originalEvent.dataTransfer.effectAllowed = 'move';
         }).on('dragover th', function(e) {
             var $dragEl = $(e.target);
@@ -343,7 +345,13 @@
             $('th').removeClass('is-droppable');
         });
 
-        interact("th").draggable(true).resizeable({
+        $('thead').on('mouseenter', function() {
+            $('.cursor-styles').html('html { cursor: move; }');
+        }).on('mouseleave', function() {
+            $('.cursor-styles').html('');
+        });
+
+        interact("th").resizeable({
             onstart: function(e) {
                 startColResize($(e.target));
             },
