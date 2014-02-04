@@ -10,6 +10,7 @@
             var host = '{{ host }}';
             var port = {{ port }};
         </script>
+        <style class="cursor-styles"></style>
     </head>
     <body>
         <div id="textPage">
@@ -25,26 +26,26 @@
                 </form>
                 <form id="tagList">
                 </form>
-                 <label id="group-responses"><input type="checkbox"> Group Rows by Request</label>
+                <label id="group-responses"><input type="checkbox"> Group Rows by Request</label>
+                <button type="button" class="btn-link" id="reset-columns">Reset Columns</button>
             </div>
 
             <table class="table table-striped">
                 <colgroup>
-                    <col class="col-med">
-                    <col class="col-mini">
-                    <col class="col-med">
-                    <col class="col-large">
+                    <col>
+                    <col>
+                    <col>
+                    <col>
                     <col>
                 </colgroup>
 
-
                 <thead class="table-header">
                     <tr>
-                        <th>Timestamp</th>
-                        <th>Method</th>
-                        <th>Path</th>
-                        <th>Data</th>
-                        <th>Tags</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
 
@@ -59,6 +60,7 @@
         <script type="text/javascript" src="{{ endpoint }}/js/lodash.js"></script>
         <script type="text/javascript" src="{{ endpoint }}/js/handlebars.js"></script>
         <script type="text/javascript" src="{{ endpoint }}/js/prettify.js"></script>
+        <script type="text/javascript" src="{{ endpoint }}/js/interact.js"></script>
         <script type="text/javascript" src="{{ endpoint }}/js/ui.js"></script>
         <script type="text/javascript">
             $(function() {

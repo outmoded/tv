@@ -1,21 +1,3 @@
-<script type="text/x-handlebars-template" id="row-template">
-    {{#if this.show}}
-    <tr data-request-id='{{ this.requestId }}'>
-        <td class="timestamp">{{ this.timestamp }}</td>
-        <td class="method">{{ this.method }}</td>
-        <td class="path"><a href='{{ this.path }}'>{{ this.truncatedPath }}</a></td>
-        <td class="data">{{ printData this.data }}</code></td>
-        <td class="tags">
-            <ul>
-                {{#each this.tags}}
-                <li class="{{ this.color }}">{{ this.name }}</li>
-                {{/each}}
-            </ul>
-        </td>
-    </tr>
-    {{/if}}
-</script>
-
 <script type="text/x-handlebars-template" id="tags-template">
     {{#each this.tags}}
     <label class="checkbox">
@@ -23,4 +5,52 @@
         <span class="{{ this.color }}">{{ this.name }}</span>
     </label>
     {{/each}}
+</script>
+
+<script type="text/x-handlebars-template" id="colgroup-template">
+    {{columnElements}}
+</script>
+
+<script type="text/x-handlebars-template" id="col-element-template">
+    <col data-name="{{name}}" class="col-{{name}}" {{#if width}}style="width: {{width}}px"{{/if}}>
+</script>
+
+<script type="text/x-handlebars-template" id="thead-template">
+    <tr>{{columnHeadings}}</tr>
+</script>
+
+<script type="text/x-handlebars-template" id="colheading-template">
+    <th draggable="true">{{name}}</th>
+</script>
+
+<script type="text/x-handlebars-template" id="row-template">
+    {{#if this.show}}
+        <tr data-request-id='{{ this.requestId }}'>{{columnList}}</tr>
+    {{/if}}
+</script>
+
+<script type="text/x-handlebars-template" id="col-timestamp-template">
+    <td class="timestamp">{{ this.timestamp }}</td>
+</script>
+
+<script type="text/x-handlebars-template" id="col-method-template">
+    <td class="method">{{ this.method }}</td>
+</script>
+
+<script type="text/x-handlebars-template" id="col-path-template">
+    <td class="path"><a href='{{ this.path }}'>{{ this.path }}</a></td>
+</script>
+
+<script type="text/x-handlebars-template" id="col-data-template">
+    <td class="data">{{ printData this.data }}</code></td>
+</script>
+
+<script type="text/x-handlebars-template" id="col-tags-template">
+    <td class="tags">
+        <ul>
+            {{#each this.tags}}
+            <li class="{{ this.color }}">{{ this.name }}</li>
+            {{/each}}
+        </ul>
+    </td>
 </script>
