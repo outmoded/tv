@@ -3,6 +3,7 @@
 var Lab = require('lab');
 var Hapi = require('hapi');
 var Ws = require('ws');
+var Tv = require('../');
 
 
 // Declare internals
@@ -34,7 +35,7 @@ describe('Tv', function () {
             }
         });
 
-        server.pack.require('../', { port: 0 }, function (err) {
+        server.pack.register({ plugin: Tv, options: { port: 0 } }, function (err) {
 
             expect(err).to.not.exist;
 
@@ -82,7 +83,7 @@ describe('Tv', function () {
             }
         });
 
-        server.pack.require('../', { port: 0, host: 'localhost' }, function (err) {
+        server.pack.register({ plugin: Tv, options: { port: 0, host: 'localhost' }}, function (err) {
 
             expect(err).to.not.exist;
 
@@ -137,7 +138,7 @@ describe('Tv', function () {
             }
         });
 
-        server.pack.require('../', { host: '127.0.0.1', port: 0 }, function (err) {
+        server.pack.register({plugin: Tv, options: { host: '127.0.0.1', port: 0 } }, function (err) {
 
             expect(err).to.not.exist;
             done();
