@@ -11,6 +11,7 @@ the web page in real-time. To enable the debug console in a **hapi** application
 
 ```javascript
 var Hapi = require('hapi');
+var Tv = require('tv');
 
 var server = new Hapi.Server();
 var options = {
@@ -18,7 +19,7 @@ var options = {
   queryKey: 'debug'
 };
 
-server.pack.require('./tv', options, function (err) {
+server.pack.register({ plugin: Tv, options: options }, function (err) {
   
   if (!err) {
     server.start();
