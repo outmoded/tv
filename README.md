@@ -5,6 +5,8 @@ Interactive debug console plugin for [**hapi**](https://github.com/spumko/hapi)
 
 [![Build Status](https://secure.travis-ci.org/spumko/tv.png)](http://travis-ci.org/spumko/tv)
 
+Lead Maintainer: [Wyatt Preul](https://github.com/wpreul)
+
 The debug console is a simple web page in which developers can subscribe to a debug id (or * for all), and then include that
 debug id as an extra query parameter with each request. The server will use WebSocket to stream the subscribed request logs to
 the web page in real-time. To enable the debug console in a **hapi** application, install **tv** and require it using either the _'composer'_ configuration or with the _'plugin'_ interface.  Below is an example of incuding **tv** using the _'pack'_ interface:
