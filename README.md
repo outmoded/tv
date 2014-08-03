@@ -1,9 +1,8 @@
-<a href="https://github.com/spumko"><img src="https://raw.github.com/spumko/spumko/master/images/from.png" align="right" /></a>
 ![tv Logo](https://raw.github.com/spumko/tv/master/images/tv.png)
 
-Interactive debug console plugin for [**hapi**](https://github.com/spumko/hapi)
+Interactive debug console plugin for [**hapi**](https://github.com/hapijs/hapi)
 
-[![Build Status](https://secure.travis-ci.org/spumko/tv.png)](http://travis-ci.org/spumko/tv)
+[![Build Status](https://secure.travis-ci.org/hapijs/tv.png)](http://travis-ci.org/hapijs/tv)
 
 Lead Maintainer: [Wyatt Preul](https://github.com/wpreul)
 
