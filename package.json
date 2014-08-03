@@ -9,7 +9,7 @@
     "Ben Nguyen <benobviate@gmail.com>",
     "Alex Lande <alexlande@gmail.com>"
   ],
-  "repository": "git://github.com/spumko/tv",
+  "repository": "git://github.com/hapijs/tv",
   "main": "index",
   "keywords": [
     "debug",
@@ -38,7 +38,7 @@
   "licenses": [
    {
       "type": "BSD",
-      "url": "http://github.com/spumko/tv/raw/master/LICENSE"
+      "url": "http://github.com/hapijs/tv/raw/master/LICENSE"
     }
   ]
 }
