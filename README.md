@@ -4,7 +4,7 @@ Interactive debug console plugin for [**hapi**](https://github.com/hapijs/hapi)
 
 [![Build Status](https://secure.travis-ci.org/hapijs/tv.png)](http://travis-ci.org/hapijs/tv)
 
-Lead Maintainer: [Colin Ihrig](https://github.com/cjihrig)
+Lead Maintainer: [Wyatt Preul](https://github.com/wpreul)
 
 The debug console is a simple web page in which developers can subscribe to a debug id (or * for all), and then include that
 debug id as an extra query parameter with each request. The server will use WebSocket to stream the subscribed request logs to
