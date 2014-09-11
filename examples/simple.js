@@ -1,7 +1,7 @@
 // Load modules
 
 var Hapi = require('hapi');
-
+var Tv = require('../');
 
 // Declare internals
 
@@ -20,7 +20,7 @@ server.route({
 });
 
 
-server.pack.require('../', function (err) {
+server.pack.register(Tv, function (err) {
 
     if (err) {
         console.log(err);
