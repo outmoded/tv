@@ -1,9 +1,9 @@
 {
   "name": "tv",
   "description": "Interactive debug console plugin for hapi",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "author": "Eran Hammer <eran@hammer.io> (http://hueniverse.com)",
-  "contributors":[
+  "contributors": [
     "Wyatt Preul <wpreul@gmail.com>",
     "Van Nguyen <the.gol.effect@gmail.com>",
     "Ben Nguyen <benobviate@gmail.com>",
@@ -37,7 +37,7 @@
     "test": "make test-cov"
   },
   "licenses": [
-   {
+    {
       "type": "BSD",
       "url": "http://github.com/hapijs/tv/raw/master/LICENSE"
     }
