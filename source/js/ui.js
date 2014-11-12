@@ -1,5 +1,6 @@
 var interact = require('interact');
 var _ = require('lodash');
+var Handlebars = require("hbsfy/runtime");
 
 (function (window, $, _, interact) {
 
@@ -401,21 +402,21 @@ var _ = require('lodash');
     function compileTemplates () {
 
         $.tv.templates = $.tv.templates || {};
-        $.tv.templates.row = Handlebars.compile($('#row-template').html());
-        $.tv.templates.tags = Handlebars.compile($('#tags-template').html());
-        $.tv.templates.thead = Handlebars.compile($('#thead-template').html());
-        $.tv.templates.colgroup = Handlebars.compile($('#colgroup-template').html());
+        $.tv.templates.row = require('../templates/row.hbs');
+        $.tv.templates.tags = require('../templates/tags.hbs');
+        $.tv.templates.thead = require('../templates/thead.hbs');
+        $.tv.templates.colgroup = require('../templates/colgroup.hbs');
 
-        $.tv.templates.colEl = Handlebars.compile($('#col-element-template').html());
-        $.tv.templates.colHeadingTpl = Handlebars.compile($('#colheading-template').html());
+        $.tv.templates.colEl = require('../templates/col-element.hbs');
+        $.tv.templates.colHeadingTpl = require('../templates/colheading.hbs');
 
         // Column partials
         $.tv.templates.col = $.tv.templates.col || {};
-        $.tv.templates.col.timestamp = Handlebars.compile($('#col-timestamp-template').html());
-        $.tv.templates.col.method = Handlebars.compile($('#col-method-template').html());
-        $.tv.templates.col.path = Handlebars.compile($('#col-path-template').html());
-        $.tv.templates.col.data = Handlebars.compile($('#col-data-template').html());
-        $.tv.templates.col.tags = Handlebars.compile($('#col-tags-template').html());
+        $.tv.templates.col.timestamp = require('../templates/col-timestamp.hbs');
+        $.tv.templates.col.method = require('../templates/col-method.hbs');
+        $.tv.templates.col.path = require('../templates/col-path.hbs');
+        $.tv.templates.col.data = require('../templates/col-data.hbs');
+        $.tv.templates.col.tags = require('../templates/col-tags.hbs');
     }
 
     function orderCols () {
