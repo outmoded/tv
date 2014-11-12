@@ -21,27 +21,33 @@
     "node": ">=0.10.30"
   },
   "dependencies": {
-    "handlebars": "1.3.x",
+    "backbone": "^1.1.2",
+    "handlebars": "^1.3.0",
     "hoek": "2.x.x",
-    "thorax": "^2.2.1",
+    "lodash": "^2.4.1",
+    "interact": "taye/interact.js",
+    "prettify": "^0.1.7",
     "ws": "0.4.x"
   },
   "peerDependencies": {
     "hapi": ">=2.x.x"
   },
   "devDependencies": {
-    "gulp": "^3.8.10",
-    "gulp-concat": "^2.4.1",
-    "gulp-declare": "^0.3.0",
-    "gulp-handlebars": "^3.0.1",
-    "gulp-sass": "^1.1.0",
-    "gulp-sourcemaps": "^1.2.8",
-    "gulp-wrap": "^0.5.0",
+    "browserify": "^6.3.2",
     "hapi": "6.x.x",
-    "lab": "4.x.x"
+    "hbsfy": "^2.2.0",
+    "lab": "4.x.x",
+    "node-sass": "^1.2.2",
+    "watchify": "^2.1.1"
   },
   "scripts": {
-    "test": "make test-cov"
+    "test": "make test-cov",
+    "watch-js": "watchify -t hbsfy source/js/ui.js -o public/js/app.js -d",
+    "watch-styles": "node-sass source/styles/style.scss public/css/style.css --watch",
+    "watch": "npm run watch-js & npm run watch-styles",
+    "build-js": "browserify -t hbsfy source/js/ui.js > public/js/app.js -d",
+    "build-styles": "node-sass source/styles/style.scss public/css/style.css",
+    "build": "npm run build-js && npm run build-styles"
   },
   "licenses": [
     {

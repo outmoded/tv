@@ -1,3 +1,6 @@
+var interact = require('interact');
+var _ = require('lodash');
+
 (function (window, $, _, interact) {
 
     $.tv = $.tv || {};                          // Add tv plugin namespace
