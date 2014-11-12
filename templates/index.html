@@ -57,18 +57,12 @@
         </div>
         <div id="templates"></div>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script type="text/javascript" src="{{ endpoint }}/js/lodash.js"></script>
-        <script type="text/javascript" src="{{ endpoint }}/js/handlebars.js"></script>
-        <script type="text/javascript" src="{{ endpoint }}/js/prettify.js"></script>
-        <script type="text/javascript" src="{{ endpoint }}/js/interact.js"></script>
-        <script type="text/javascript" src="{{ endpoint }}/js/ui.js"></script>
+        <script type="text/javascript" src="{{ endpoint }}/js/app.js"></script>
         <script type="text/javascript">
             $(function() {
-                $('#templates').load('{{ endpoint }}/templates/index.html', function () {
-                    $.tv.register({
-                        host: host,
-                        port: port
-                    });
+                $.tv.register({
+                    host: host,
+                    port: port
                 });
             });
         </script>
