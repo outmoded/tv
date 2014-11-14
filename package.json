@@ -50,7 +50,10 @@
     "watch": "npm run build && npm run watch-js & npm run watch-styles",
     "build-js": "browserify -t hbsfy -t reactify source/js/app.js > public/js/app.js -d",
     "build-styles": "node-sass source/styles/style.scss public/css/style.css",
-    "build": "npm run build-js && npm run build-styles"
+    "build": "npm run build-js && npm run build-styles",
+    "boot": "node examples/simple.js",
+    "start": "npm run build && npm run boot",
+    "start-dev": "npm run watch & npm run boot"
   },
   "licenses": [
     {
