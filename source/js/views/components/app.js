@@ -1,13 +1,13 @@
 var React = require('react');
 
 var App = React.createClass({
-  
+
   componentDidMount: function() {},
 
   componentDidUnmount: function() {},
 
   render: function() {
-    return ();
+    return;
   }
 
 });
