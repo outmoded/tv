@@ -24,9 +24,11 @@
     "backbone": "^1.1.2",
     "handlebars": "^1.3.0",
     "hoek": "2.x.x",
-    "lodash": "^2.4.1",
     "interact": "taye/interact.js",
+    "jquery": "^2.1.1",
+    "lodash": "^2.4.1",
     "prettify": "^0.1.7",
+    "react": "^0.12.0",
     "ws": "0.4.x"
   },
   "peerDependencies": {
@@ -38,14 +40,15 @@
     "hbsfy": "^2.2.0",
     "lab": "4.x.x",
     "node-sass": "^1.2.2",
+    "reactify": "^0.16.0",
     "watchify": "^2.1.1"
   },
   "scripts": {
     "test": "make test-cov",
-    "watch-js": "watchify -t hbsfy source/js/ui.js -o public/js/app.js -d",
+    "watch-js": "watchify -t hbsfy -t reactify source/js/app.js -o public/js/app.js -d",
     "watch-styles": "node-sass source/styles/style.scss public/css/style.css --watch",
     "watch": "npm run watch-js & npm run watch-styles",
-    "build-js": "browserify -t hbsfy source/js/ui.js > public/js/app.js -d",
+    "build-js": "browserify -t hbsfy -t reactify source/js/app.js > public/js/app.js -d",
     "build-styles": "node-sass source/styles/style.scss public/css/style.css",
     "build": "npm run build-js && npm run build-styles"
   },
