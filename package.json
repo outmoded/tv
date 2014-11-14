@@ -45,10 +45,10 @@
   },
   "scripts": {
     "test": "make test-cov",
-    "watch-js": "watchify -t hbsfy -t reactify source/js/app.js -o public/js/app.js -d",
+    "watch-js": "watchify -t hbsfy -t reactify -e source/js/app.js source/js/**/*.js -o public/js/app.js -d -v",
     "watch-styles": "node-sass source/styles/style.scss public/css/style.css -w source/styles -r",
     "watch": "npm run build && npm run watch-js & npm run watch-styles",
-    "build-js": "browserify -t hbsfy -t reactify source/js/app.js > public/js/app.js -d",
+    "build-js": "browserify -t hbsfy -t reactify -e source/js/app.js source/js/**/*.js > public/js/app.js -d",
     "build-styles": "node-sass source/styles/style.scss public/css/style.css",
     "build": "npm run build-js && npm run build-styles",
     "boot": "node examples/simple.js",
