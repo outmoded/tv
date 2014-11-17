@@ -1,0 +1,30 @@
+// Palette
+
+$black:       black;
+$dark_grey:   darkgrey;
+$grey:        grey;
+$light_grey:  lightgrey;
+$white:       white;
+
+$orange:      orange;
+$red:         red;
+
+// Components
+// Notes: Only palette color references below.
+// All other scss files should only reference 
+// the component color variables below (not css colors 
+// directly or the color variables above)
+
+$warning:             $orange;
+$critical:            $red;
+
+$table_header_bg:     $dark_grey;
+$table_header:        $white;
+$table_row_bg:        $white;
+$table_row_alt_bg:    $light_grey;
+$table_row:           $black;
+$table_row_secondary: $dark_grey;
+$table_row_hr:        $light_grey;
+$table_row_hr_alt:    $grey;
+
+$expander:            $dark_grey;
