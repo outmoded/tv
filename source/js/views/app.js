@@ -1,23 +1,68 @@
-var Backbone = require('backbone');
-var React = require('react');
-var AppComponent = require('./components/app');
+// var Backbone = require('backbone');
+// var React = require('react');
+// var AppComponent = require('./components/app');
 
-var AppView = Backbone.View.extend({
+// var TableComponent = React.createClass({
+//   getInitialState: function() { requests: [] }
+
+//   render: function() {
+//     var createRequest = function(request) {
+//       return (
+//         <tr>
+//           <td>{request.path}</td>
+//           <td>{request.method}</td>
+//           <td>{request.statusCode}</td>
+//           <td>{request.data}</td>
+//           <td>{request.timestamp}</td>
+//         </tr>
+//       );
+//     };
+    
+//     return (
+//       <table>
+//         <thead>
+//           <th>Path</th>
+//           <th>Method</th>
+//           <th>Status</th>
+//           <th>Data</th>
+//           <th>Timestamp</th>
+//         </thead>
+//         <tbody>
+//           {this.props.requests.map(createRequest)}
+//         </tbody>
+//       </table>
+//     );
+//   }
+
+// });
+
+
+
+
+
+// var AppView = Backbone.View.extend({
   
-  el: 'body',
+//   el: 'body',
 
-  initialize: function(options) {
-    var data = {
-      hostExample: host,
-      portExample: port
-    };
+//   initialize: function(options) {
+//     this.ws = ws;
 
-    // this.appComponent = React.renderComponent(
-    //   AppComponent(data),
-    //   this.el
-    // );
-  }
+//     var data = {
+//       hostExample: host,
+//       portExample: port
+//     };
+//   },
 
-});
+//   addRequest: function(request) {
+    
+//     this.tableComponent = React.renderComponent(
+//       TableComponent(message),
+//       this.el
+//     );
 
-module.exports = AppView;
+//     return this;
+//   }
+
+// });
+
+// module.exports = AppView;
