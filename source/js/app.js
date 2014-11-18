@@ -20,7 +20,7 @@ var FeedComponent = React.createClass({
       return (
         <tr>
           <td>{request.path}</td>
-          <td>{request.method}</td>
+          <td className="method">{request.method}</td>
           <td>{request.statusCode}</td>
           <td>{JSON.stringify(request.data)}</td>
           <td>{request.timestamp}</td>
@@ -29,7 +29,7 @@ var FeedComponent = React.createClass({
     };
 
     return (
-      <table>
+      <table className="table table-striped">
         <thead>
           <th>Path</th>
           <th>Method</th>
@@ -62,5 +62,5 @@ var AppComponent = React.createClass({
 
 var appComponent = React.render(
   AppComponent(),
-  $('body').get(0)
+  $('.main').get(0)
 );

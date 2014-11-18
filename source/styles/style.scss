@@ -1,8 +1,10 @@
+@import "colors";
+
 // Vendor libraries
+@import "bootstrap-overrides";
 @import "./vendor/bootstrap";
 
 // Base styles
-@import "colors";
 @import "elements";
 
 // Component Styles

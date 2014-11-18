@@ -1,3 +1,20 @@
-h1 {
-  color: $warning;
+.table {
+
+  thead {
+    background-color: $table-header-bg;
+    color: $table-header;
+    tr > th {
+      font-weight: normal;
+      border: none;
+    }
+  }
+
+  tbody > tr > td {
+    border: none;
+  }
+
+  tbody > tr > td.method {
+    text-transform: uppercase;
+  }
+
 }
