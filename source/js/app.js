@@ -60,7 +60,7 @@ var AppComponent = React.createClass({
 
 });
 
-var appComponent = React.render(
-  AppComponent(),
+React.render(
+  <AppComponent />,
   $('.main').get(0)
 );

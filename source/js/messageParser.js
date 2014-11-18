@@ -27,7 +27,7 @@ MessageParser.prototype._isForExistingRequest = function(message) {
   return _.any( this.requests, function(request) { 
     return request.id === message.request;
   });
-}
+};
 
 MessageParser.prototype._isFirstMessageForNewRequest = function(message) {
   var hasReceivedTag = message.tags.indexOf('received') !== -1;
@@ -37,10 +37,9 @@ MessageParser.prototype._isFirstMessageForNewRequest = function(message) {
 
 MessageParser.prototype._addRequest = function(message) {
   var request = {
-    id: message.request,
+    id: message.data.id,
     path: message.data.url,
     method: message.data.method,
-    status: null,
     timestamp: message.timestamp
   }
   console.log('adding request', request);
