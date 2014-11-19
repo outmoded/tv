@@ -18,9 +18,16 @@ MessageParser.prototype.addMessage = function(message) {
   } 
   else if(this._isForExistingRequest(message)) { 
     this._addServerLog(message);
+    if(this._isResponse(message)) {
+      this._updateRequestWithResponse(message);
+    }
   } else {
     // disregard message
   }
+};
+
+MessageParser.prototype._isResponse = function(message) {
+  return message.tags.indexOf('response') !== -1;
 };
 
 MessageParser.prototype._isForExistingRequest = function(message) {
@@ -46,14 +53,24 @@ MessageParser.prototype._addRequest = function(message) {
   this.requests.push(request);
 };
 
+MessageParser.prototype._updateRequestWithResponse = function(message) {
+  var requestId = message.request;
+  var request = _.findWhere(this.requests, {id: requestId});
+  
+  request.statusCode = message.data.statusCode;
+  request.data = message.data;
+};
+
 MessageParser.prototype._addServerLog = function(message) {
   var serverLog = {
+    requestId: message.request,
     tags: message.tags,
     data: message.data,
     timestamp: message.timestamp
   }
+
   console.log('adding server log', serverLog);
-  this.serverLogs.push(message);
+  this.serverLogs.push(serverLog);
 };
 
 MessageParser.create = function() {

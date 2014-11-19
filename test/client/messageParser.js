@@ -1,5 +1,6 @@
 // Load modules
 
+var _ = require('lodash');
 var Hapi = require('hapi');
 var Lab = require('lab');
 var Ws = require('ws');
@@ -34,6 +35,8 @@ describe('MessageParser', function() {
         delete this.messageData;
         delete this.secondMessageData;
         delete this.messageParser;
+        delete this.request;
+        delete this.responseMessage;
 
         done();
     });
@@ -138,6 +141,40 @@ describe('MessageParser', function() {
                     done();
                 });
 
+            });
+
+            context('with a response message for a request', function() {
+
+                beforeEach(function(done) {
+                    this.responseMessage = {
+                        data: {
+                            statusCode: 201,
+                            error: 'error message'
+                        },
+                        request: '123abc',
+                        tags: ['hapi', 'response'],
+                        timestamp: new Date().valueOf()
+                    };
+                    var message = { data: JSON.stringify(this.responseMessage) }
+
+                    this.messageParser.addMessage(message);
+
+                    this.request = _.findWhere(this.messageParser.requests, {id: this.responseMessage.request});
+
+                    done();
+                });
+
+                it('updates the request object with the status code', function(done) {
+                    expect(this.request.statusCode).to.equal(this.responseMessage.data.statusCode);
+
+                    done();
+                });
+
+                it('updates the request object with the error message', function(done) {
+                    expect(this.request.data).to.equal(this.responseMessage.data.error);
+
+                    done();
+                });
             });
         
         });
