@@ -1,15 +1,19 @@
 var React = require('react');
 
-var App = React.createClass({
+var FeedComponent = require('./feed');
 
-  componentDidMount: function() {},
+var AppComponent = React.createClass({
 
-  componentDidUnmount: function() {},
+  getInitialState: function() { return { requests: [] }; },
 
   render: function() {
-    return;
+    return (
+      <div>
+        <FeedComponent requests={this.state.requests}/>
+      </div>
+    );
   }
 
 });
 
-module.exports = App;
+module.exports = AppComponent;

@@ -39,14 +39,15 @@
     "lab": "4.x.x",
     "node-sass": "^1.2.2",
     "reactify": "^0.16.0",
+    "sinon": "^1.12.1",
     "watchify": "^2.1.1"
   },
   "scripts": {
     "test": "make test-cov",
-    "watch-js": "watchify -t reactify -e source/js/app.js source/js/**/*.js -o public/js/app.js -d -v",
+    "watch-js": "watchify -t reactify -e source/js/start.js source/js/**/*.js -o public/js/main.js -d -v",
     "watch-styles": "node-sass source/styles/style.scss public/css/style.css -w source/styles -r",
     "watch": "npm run build && npm run watch-js & npm run watch-styles",
-    "build-js": "browserify -t reactify -e source/js/app.js source/js/**/*.js > public/js/app.js -d",
+    "build-js": "browserify -t reactify -e source/js/start.js source/js/**/*.js > public/js/main.js -d",
     "build-styles": "node-sass source/styles/style.scss public/css/style.css",
     "build": "npm run build-js && npm run build-styles",
     "boot": "node examples/simple.js",
