@@ -36,7 +36,12 @@ describe('app', function() {
             this.messageParser = MessageParser.create();
             this.messageParserAddMessageSpy = sinon.stub(this.messageParser, 'addMessage', function() {});
             this.rootComponent = { render: spy(), setState: spy() };
-            this.reactRenderSpy = sinon.stub(React, 'render');
+            this.setStateSpy = spy();
+            this.reactRenderSpy = sinon.stub(React, 'render', function() {
+                return {
+                    setState: this.setStateSpy
+                }
+            }.bind(this));
 
             app.start(mockWebSocketManager, this.messageParser, this.rootComponent);
 
@@ -51,6 +56,7 @@ describe('app', function() {
             delete this.mockWebSocket;
             delete this.messageParserAddMessageSpy;
             delete this.reactRenderSpy;
+            delete this.setStateSpy;
             delete this.rootComponent;
             delete global.$;
 
@@ -83,8 +89,8 @@ describe('app', function() {
 
                 this.mockWebSocket.onmessage(message);
 
-                expect(this.rootComponent.setState.callCount).to.equal(1);
-                expect(this.rootComponent.setState.args[0][0]).to.have.property('requests', parsedRequests);
+                expect(this.setStateSpy.callCount).to.equal(1);
+                expect(this.setStateSpy.args[0][0]).to.have.property('requests', parsedRequests);
 
                 done();
             });
