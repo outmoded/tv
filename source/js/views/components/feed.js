@@ -42,7 +42,7 @@ var FeedComponent = React.createClass({
       return (
         <tr className={"server-log hidden " + stripe}>
           <td colSpan="3">{serverLog.tags.join(', ')}</td>
-          <td>data</td>
+          <td>{serverLog.data}</td>
           <td>{serverLog.timestamp}</td>
         </tr>
       );
