@@ -1,11 +1,14 @@
 // Palette
 
+// greys
 $black:       black;
 $dark-grey:   #333333;
 $grey:        grey;
 $light-grey:  #f8f8f8;
 $white:       white;
 
+// other colors
+$light-blue:  #d9eafd;
 $orange:      #f4a726;
 $red:         #f37b65;
 
@@ -29,5 +32,6 @@ $table-row-secondary: $dark-grey;
 $table-row-hr:        $light-grey;
 $table-row-hr-alt:    $grey;
 $table-cell-spinner:  $dark-grey;
+$table-row-hover:     $light-blue;
 
 $expander:            $dark-grey;

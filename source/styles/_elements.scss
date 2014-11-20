@@ -1,3 +1,10 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 .table {
 
   thead {
@@ -10,9 +17,12 @@
   }
 
   tbody > tr {
+    border: solid transparent 2px;
+
     & > td {
       border: none;
     }
+
 
     &.light {
       background-color: $table-row-bg;
@@ -20,6 +30,14 @@
 
     &.dark {
       background-color: $table-row-alt-bg;
+    }
+
+    &.request {
+      cursor: pointer;
+
+      &:hover, &.active > td {
+        background-color: $table-row-hover;
+      }
     }
   }
 
