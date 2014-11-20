@@ -1,57 +1,34 @@
 var React = require('react');
 require('bootstrap/js/collapse');
-
-var LogFeedComponent = React.createClass({
-
-  render: function() {
-    var createLog = function(log) {
-      return (
-        <tr>
-          <td colSpan="3">{log.tags.join(', ')}</td>
-          <td>data</td>
-          <td>{log.timestamp}</td>
-        </tr>
-      );
-    };
-
-    return (
-      <table className="table">
-        <tbody>
-          {this.props.logs.map(createLog)}
-        </tbody>
-      </table>
-    );
-  }
-
-})
+var _ = require('lodash');
 
 var FeedComponent = React.createClass({
 
-  render: function() {
-    // var createRequest = function(request, index) {
-    //   return (
-    //     <tr className="request {stripe}" data-request-id="{request.id}">
-    //       <tr className="request">
-    //         <td>{request.path}</td>
-    //         <td className="method">{request.method}</td>
-    //         <td>{statusCodeContent}</td>
-    //         <td>{JSON.stringify(request.data)}</td>
-    //         <td>{request.timestamp}</td>
-    //       </tr>
-    //       <tr className="request-details" data-request-id="{request.id}">
-    //         <LogFeedComponent logs={this.props.serverLogs.filter(isLogForRequest)} />
-    //       </tr>
-    //       </table>
-    //     </tr>
-    //   );
-    // }.bind(this);
+  toggle: function(e) {
+    var $requestRow = $(e.currentTarget);
 
-    var requestRow = function(request, index) {
-      var stripe = index % 2 === 0 ? 'even' : 'odd';
+    var $current = $requestRow.next();
+    var serverLogRows = [];
+    do {
+      serverLogRows.push($current);
+      $current = $current.next();
+    } while($current.hasClass('server-log'))
+
+    var hide = !serverLogRows[0].hasClass('hidden');
+
+    if(hide) {
+      _.each(serverLogRows, function($row){ $row.addClass('hidden'); });
+    } else {
+      _.each(serverLogRows, function($row){ $row.removeClass('hidden'); });
+    }
+  },
+
+  render: function() {
+    var requestRow = function(request, stripe) {
       var statusCodeContent = request.statusCode ? request.statusCode : <div className="spinner"></div>;
 
       return (
-        <tr className="request" data-toggle="collapse" data-parent="#requests" href={'#request-details-' + request.id}>
+        <tr className={"request " + stripe} onClick={this.toggle}>
           <td>{request.path}</td>
           <td className="method">{request.method}</td>
           <td>{statusCodeContent}</td>
@@ -61,26 +38,18 @@ var FeedComponent = React.createClass({
       );
     }.bind(this);
 
-    var requestDetails = function(request) {
-      var isLogForRequest = function(log) {
-        return log.requestId === request.id
-      };
-
+    var serverLogRow = function(serverLog, stripe) {
       return (
-        <tr id={'request-details-' + request.id} className="request-details panel-collapse collapse" data-request-id="{request.id}">
-          <td colSpan="5">
-            <LogFeedComponent logs={this.props.serverLogs.filter(isLogForRequest)} />
-          </td>
+        <tr className={"server-log hidden " + stripe}>
+          <td colSpan="3">{serverLog.tags.join(', ')}</td>
+          <td>data</td>
+          <td>{serverLog.timestamp}</td>
         </tr>
       );
     }.bind(this);
 
-    var requestMarkup = function(request) {
-      return [requestRow(request), requestDetails(request)];
-    };
-    
     return (
-      <table className="table table-striped" id="requests">
+      <table className="table">
         <thead>
           <th>Path</th>
           <th>Method</th>
@@ -89,7 +58,18 @@ var FeedComponent = React.createClass({
           <th>Timestamp</th>
         </thead>
         <tbody>
-          {this.props.requests.map(requestMarkup)}
+          {
+            this.props.requests.map(function(request, index) {
+              var stripe = index % 2 === 0 ? 'dark' : 'light';
+
+              var requestRowMarkup = requestRow(request, stripe);
+              var serverLogRowsMarkup = request.serverLogs.map(function(serverLog) {
+                return serverLogRow(serverLog, stripe);
+              });
+
+              return _.flatten([requestRowMarkup, serverLogRowsMarkup], true);
+            })
+          }
         </tbody>
       </table>
     );

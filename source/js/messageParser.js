@@ -2,7 +2,6 @@ var _ = require('lodash');
 
 var MessageParser = function() {
   this.requests = [];
-  this.serverLogs = [];
 };
 
 // There is a possibility that the websocket will initialize in the 
@@ -31,15 +30,14 @@ MessageParser.prototype._isResponse = function(message) {
 };
 
 MessageParser.prototype._isForExistingRequest = function(message) {
-  return _.any( this.requests, function(request) { 
-    return request.id === message.request;
-  });
+  return this._findRequest(message);
 };
 
 MessageParser.prototype._isFirstMessageForNewRequest = function(message) {
+  var found = this._findRequest(message);
   var hasReceivedTag = message.tags.indexOf('received') !== -1;
 
-  return !this._isForExistingRequest(message) && hasReceivedTag;
+  return !found && hasReceivedTag;
 };
 
 MessageParser.prototype._addRequest = function(message) {
@@ -47,30 +45,38 @@ MessageParser.prototype._addRequest = function(message) {
     id: message.data.id,
     path: message.data.url,
     method: message.data.method,
-    timestamp: message.timestamp
+    timestamp: message.timestamp,
+    serverLogs: []
   }
   console.log('adding request', request);
   this.requests.push(request);
 };
 
 MessageParser.prototype._updateRequestWithResponse = function(message) {
-  var requestId = message.request;
-  var request = _.findWhere(this.requests, {id: requestId});
-  
-  request.statusCode = message.data.statusCode;
-  request.data = message.data;
+  var request = this._findRequest(message);
+
+  request.statusCode = '--'; // message.data.statusCode;
+  request.data = '--'; // message.data;
+};
+
+MessageParser.prototype._findRequest = function(message) {
+  var requestId = message.request || message.data.id;
+
+  return _.find(this.requests, function(request) {
+      return request.id === requestId;
+  });
 };
 
 MessageParser.prototype._addServerLog = function(message) {
   var serverLog = {
-    requestId: message.request,
     tags: message.tags,
     data: message.data,
     timestamp: message.timestamp
   }
 
+  console.log('request', this._findRequest(message));
   console.log('adding server log', serverLog);
-  this.serverLogs.push(serverLog);
+  this._findRequest(message).serverLogs.push(serverLog);
 };
 
 MessageParser.create = function() {

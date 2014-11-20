@@ -9,8 +9,18 @@
     }
   }
 
-  tbody > tr > td {
-    border: none;
+  tbody > tr {
+    & > td {
+      border: none;
+    }
+
+    &.light {
+      background-color: $table-row-bg;
+    }
+
+    &.dark {
+      background-color: $table-row-alt-bg;
+    }
   }
 
   tbody > tr > td.method {
