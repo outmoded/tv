@@ -28,6 +28,7 @@
     "interact": "taye/interact.js",
     "json-markup": "^0.1.6",
     "lodash": "^2.4.1",
+    "moment": "^2.8.4",
     "prettify": "^0.1.7",
     "react": "^0.12.0",
     "ws": "0.4.x"

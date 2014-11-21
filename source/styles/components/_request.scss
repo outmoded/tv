@@ -1,3 +1,15 @@
+th {
+  &.path {
+    width: 250px;
+  }
+  &.method, &.status {
+    width: 75px;
+  }
+  &.timestamp {
+    width: 180px;
+  }
+}
+
 .request {
     &.error {
         .status, .data {

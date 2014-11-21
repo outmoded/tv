@@ -2,9 +2,18 @@ var React = require('react');
 require('bootstrap/js/collapse');
 var _ = require('lodash');
 var jsonMarkup = require('json-markup');
-
+var moment = require('moment');
 
 var FeedComponent = React.createClass({
+
+    _formatTimestamp: function(timestamp) {
+        var momentTimestamp = moment(timestamp);
+
+        return {
+            date: momentTimestamp.format('MM-DD-YYYY'),
+            time: momentTimestamp.format('HH:mm:ss:SSS')
+        };
+    },
 
     componentDidMount: function() {
         $(window).on('resize', this._adjustSizeOfJson);
@@ -28,7 +37,7 @@ var FeedComponent = React.createClass({
     },
 
     _adjustSizeOfJson: function() {
-        $('.json-markup').width($(window).width() - 550);
+        $('.json-markup').width($(window).width() - 600);
     },
 
     _toggleServerLogData: function(e) {
@@ -78,13 +87,18 @@ var FeedComponent = React.createClass({
             rowClasses.push('warning');
         }
 
+        var formattedTimestamp = this._formatTimestamp(request.timestamp);
+
         return (
             <tr className={rowClasses.join(' ')} onClick={this._toggle}>
             <td>{request.path}</td>
             <td className="method">{request.method}</td>
             <td className="status">{statusCodeContent}</td>
             <td className="data">{JSON.stringify(request.data)}</td>
-            <td>{request.timestamp}</td>
+            <td>
+              <span className="time">{formattedTimestamp.time} </span>
+              <span className="date">{formattedTimestamp.date}</span>
+            </td>
             </tr>
         );
     },
@@ -98,11 +112,16 @@ var FeedComponent = React.createClass({
     },
 
     _serverLogRow: function(serverLog, stripe) {
+        var formattedTimestamp = this._formatTimestamp(serverLog.timestamp);
+
         return (
             <tr className={"server-log hidden " + stripe}>
             <td colSpan="3">{serverLog.tags.join(', ')}</td>
             <td className="data" dangerouslySetInnerHTML={{__html: jsonMarkup(serverLog.data)}} onClick={this._toggleServerLogData}/>
-            <td>{serverLog.timestamp}</td>
+            <td>
+              <span className="time">{formattedTimestamp.time} </span>
+              <span className="date">{formattedTimestamp.date}</span>
+            </td>
             </tr>
         );
     }
