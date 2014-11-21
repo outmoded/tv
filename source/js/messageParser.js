@@ -39,7 +39,19 @@ MessageParser.prototype.addMessage = function(raw_message) {
 };
 
 MessageParser.prototype._isResponse = function(message) {
-  return message.tags.indexOf('response') !== -1;
+  var isResponse =
+      this._hasTags(message, 'response') ||
+      this._hasTags(message, ['error', 'internal']);
+
+  return isResponse;
+};
+
+MessageParser.prototype._hasTags = function(message, tags) {
+    if(!(tags instanceof Array)){
+        tags = [tags];
+    }
+
+    return _.intersection(message.tags, tags).length === tags.length;
 };
 
 MessageParser.prototype._isForExistingRequest = function(message) {
@@ -96,7 +108,11 @@ MessageParser.prototype._refreshResponseTimeout = function(message) {
   var request = this._findRequest(message);
 
   clearTimeout(request.timeout);
-  request.responseTimeout = false;
+
+  if(request.responseTimeout) {
+      request.data = undefined;
+      request.responseTimeout = false;
+  }
 
   if(!this._isResponse(message)) {
     request.timeout = setTimeout(function(){

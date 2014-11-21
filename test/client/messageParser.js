@@ -47,6 +47,14 @@ var RESPONSE = {
     tags: ['hapi', 'response'],
 };
 
+var ERROR = {
+    data: {
+        statusCode: 500,
+        error: 'error message'
+    },
+    tags: ['hapi', 'internal', 'error'],
+};
+
 var createMessage = function(message, id) {
     id = id || '123abc';
     message.request = id;
@@ -158,33 +166,38 @@ describe('MessageParser', function() {
 
             });
 
-            context('with a response message for a request', function() {
+            var testResponseMessageUpdates = function(responseMessage) {
+                context('with a response message for a request', function() {
 
-                beforeEach(function(done) {
-                    var message = createMessage(RESPONSE);
-                    this.messageData = JSON.parse(message.data);
+                    beforeEach(function(done) {
+                        var message = createMessage(responseMessage);
+                        this.messageData = JSON.parse(message.data);
 
-                    this.messageParser.addMessage(message);
+                        this.messageParser.addMessage(message);
 
-                    this.request = _.findWhere(this.messageParser.requests, {id: this.messageData.request});
+                        this.request = _.findWhere(this.messageParser.requests, {id: this.messageData.request});
 
-                    done();
+                        done();
+                    });
+
+                    it('updates the request object with the status code', function(done) {
+                        // expect(this.request.statusCode).to.equal(this.messageData.data.statusCode);
+                        expect(this.request.statusCode).to.equal('--');
+
+                        done();
+                    });
+
+                    it('updates the request object with the error message', function(done) {
+                        // expect(this.request.data).to.equal(this.messageData.data.error);
+                        expect(this.request.data).to.equal('--');
+
+                        done();
+                    });
                 });
+            };
 
-                it('updates the request object with the status code', function(done) {
-                    // expect(this.request.statusCode).to.equal(this.messageData.data.statusCode);
-                    expect(this.request.statusCode).to.equal('--');
-
-                    done();
-                });
-
-                it('updates the request object with the error message', function(done) {
-                    // expect(this.request.data).to.equal(this.messageData.data.error);
-                    expect(this.request.data).to.equal('--');
-
-                    done();
-                });
-            });
+            testResponseMessageUpdates(RESPONSE);
+            testResponseMessageUpdates(ERROR);
 
         });
 
@@ -209,12 +222,9 @@ describe('MessageParser', function() {
 
         describe('when a response doesn\'t come in within a set timeout', function() {
             beforeEach( function(done) {
-                this.messageParser = MessageParser.create({responseTimeout: 1})
+                this.messageParser = MessageParser.create({responseTimeout: 5})
 
-                var message = createMessage(RECEIVED);
-                var messageData = JSON.parse(message.data);
-
-                messageParser.addMessage(message);
+                messageParser.addMessage(createMessage(RECEIVED));
                 this.request = messageParser.requests[0];
 
                 done();
@@ -225,17 +235,17 @@ describe('MessageParser', function() {
                     expect(this.request.data).to.equal(MessageParser.RESPONSE_TIMEOUT_ERROR_MESSAGE);
 
                     done();
-                }.bind(this), 2);
+                }.bind(this), 10);
             });
 
             it('marks the request as having a response timeout', function(done) {
-                expect(this.request.responseTimeout).to.be.false;
+                expect(this.request.responseTimeout).to.not.be.true;
 
                 setTimeout( function() {
                     expect(this.request.responseTimeout).to.be.true;
 
                     done();
-                }.bind(this), 2);
+                }.bind(this), 10);
             });
 
             it('calls the onResponseTimeout callback', function(done) {
@@ -245,7 +255,7 @@ describe('MessageParser', function() {
                     expect(this.messageParser.onResponseTimeout.called).to.be.true;
 
                     done();
-                }.bind(this), 2);
+                }.bind(this), 100);
             });
         });
 
@@ -268,6 +278,34 @@ describe('MessageParser', function() {
                 }, 4);
             });
         });
+
+        var clearResponseTimeoutTest = function(responseMessage) {
+            describe('when a response for a request comes in after the response timeout has occured', function() {
+                it('clears the response error timeout', function(done) {
+                    var messageParser = MessageParser.create({responseTimeout: 1})
+
+                    messageParser.addMessage(createMessage(RECEIVED));
+
+                    var request = messageParser.requests[0];
+
+                    setTimeout( function() {
+                        expect(request.responseTimeout).to.be.true;
+
+                        messageParser.addMessage(createMessage(responseMessage));
+                    }, 3);
+
+                    setTimeout( function() {
+                        expect(request.responseTimeout).to.be.false;
+
+                        done();
+                    }, 6);
+
+                });
+            });
+        };
+
+        clearResponseTimeoutTest(RESPONSE);
+        clearResponseTimeoutTest(ERROR);
 
     });
 
