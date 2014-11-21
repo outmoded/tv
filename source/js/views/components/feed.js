@@ -69,7 +69,7 @@ var FeedComponent = React.createClass({
   },
 
   _requestRow: function(request, stripe) {
-    var statusCodeContent = request.statusCode ? request.statusCode : <div className="spinner"></div>;
+    var statusCodeContent = request.statusCode !== undefined ? request.statusCode : <div className="spinner"></div>;
 
     return (
       <tr className={"request " + stripe} onClick={this._toggle}>

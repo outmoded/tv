@@ -1,25 +1,38 @@
 var _ = require('lodash');
 
-var MessageParser = function() {
+var MessageParser = function(opts) {
+  opts = opts || {};
+
   this.requests = [];
+  this.responseTimeout = opts.responseTimeout || 2000;
 };
+
+MessageParser.create = function(opts) {
+  return new MessageParser(opts);
+};
+
+MessageParser.RESPONSE_TIMEOUT_ERROR_MESSAGE =
+  'Response Timeout: Never received the response log entry from the server.';
 
 // There is a possibility that the websocket will initialize in the 
 // middle of a request, returning a set of server logs that are 
 // incomplete to represent a full request. In such cases, we'll 
 // disregard these messages.
-MessageParser.prototype.addMessage = function(message) {
-  message = JSON.parse(message.data);
+MessageParser.prototype.addMessage = function(raw_message) {
+  var message = JSON.parse(raw_message.data);
+  console.log('message', message);
 
   if (this._isFirstMessageForNewRequest(message)) {
     this._addRequest(message);
     this._addServerLog(message);
-  } 
+    this._refreshResponseTimeout(message);
+  }
   else if(this._isForExistingRequest(message)) { 
     this._addServerLog(message);
     if(this._isResponse(message)) {
       this._updateRequestWithResponse(message);
     }
+    this._refreshResponseTimeout(message);
   } else {
     // disregard message
   }
@@ -42,7 +55,7 @@ MessageParser.prototype._isFirstMessageForNewRequest = function(message) {
 
 MessageParser.prototype._addRequest = function(message) {
   var request = {
-    id: message.data.id,
+    id: message.request,
     path: message.data.url,
     method: message.data.method,
     timestamp: message.timestamp,
@@ -60,7 +73,7 @@ MessageParser.prototype._updateRequestWithResponse = function(message) {
 };
 
 MessageParser.prototype._findRequest = function(message) {
-  var requestId = message.request || message.data.id;
+  var requestId = message.request;
 
   return _.find(this.requests, function(request) {
       return request.id === requestId;
@@ -76,11 +89,20 @@ MessageParser.prototype._addServerLog = function(message) {
 
   console.log('request', this._findRequest(message));
   console.log('adding server log', serverLog);
+
   this._findRequest(message).serverLogs.push(serverLog);
 };
 
-MessageParser.create = function() {
-  return new MessageParser();
+MessageParser.prototype._refreshResponseTimeout = function(message) {
+  var request = this._findRequest(message);
+  clearTimeout(request.timeout);
+
+  if(!this._isResponse(message)) {
+    request.timeout = setTimeout(function(){
+      request.data = MessageParser.RESPONSE_TIMEOUT_ERROR_MESSAGE;
+      request.statusCode = null;
+    }, this.responseTimeout);
+  }
 };
 
 module.exports = MessageParser;
