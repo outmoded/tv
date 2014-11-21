@@ -14,6 +14,18 @@ html {
       font-weight: normal;
       border: none;
     }
+
+    th {
+      &.path {
+        width: 250px;
+      }
+      &.method, &.status {
+        width: 75px;
+      }
+      &.timestamp {
+        width: 100px;
+      }
+    }
   }
 
   tbody > tr {
@@ -22,7 +34,6 @@ html {
     & > td {
       border: none;
     }
-
 
     &.light {
       background-color: $table-row-bg;

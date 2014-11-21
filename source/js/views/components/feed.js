@@ -1,26 +1,38 @@
 var React = require('react');
 require('bootstrap/js/collapse');
 var _ = require('lodash');
+var jsonMarkup = require('json-markup');
+
 
 var FeedComponent = React.createClass({
+
+  componentDidMount: function() {
+    $(window).on('resize', this._adjustSizeOfJson);
+  },
 
   render: function() {
     return (
       <table className="table">
         <thead>
-          <th>Path</th>
-          <th>Method</th>
-          <th>Status</th>
-          <th>Data</th>
-          <th>Timestamp</th>
+          <th className="path">Path</th>
+          <th className="method">Method</th>
+          <th className="status">Status</th>
+          <th className="data">Data</th>
+          <th className="timestamp">Timestamp</th>
         </thead>
         <tbody>
-          {
-            this.props.requests.map(this._requestGroup)
-          }
+          { this.props.requests.map(this._requestGroup) }
         </tbody>
       </table>
     );
+  },
+
+  _adjustSizeOfJson: function() {
+    $('.json-markup').width($(window).width() - 550);
+  },
+
+  _toggleServerLogData: function(e) {
+    $(e.currentTarget).find('.json-markup').toggleClass('expanded');
   },
 
   _toggle: function(e) {
@@ -31,7 +43,7 @@ var FeedComponent = React.createClass({
     do {
       serverLogRows.push($current);
       $current = $current.next();
-    } while($current.hasClass('server-log'))
+    } while ($current.hasClass('server-log'))
 
     var hide = !serverLogRows[0].hasClass('hidden');
 
@@ -41,6 +53,7 @@ var FeedComponent = React.createClass({
     } else {
       $requestRow.addClass('active');
       _.each(serverLogRows, function($row) { $row.removeClass('hidden'); });
+      this._adjustSizeOfJson();
     }
   },
 
@@ -73,7 +86,7 @@ var FeedComponent = React.createClass({
     return (
       <tr className={"server-log hidden " + stripe}>
         <td colSpan="3">{serverLog.tags.join(', ')}</td>
-        <td>{serverLog.data}</td>
+        <td className="data" dangerouslySetInnerHTML={{__html: jsonMarkup(serverLog.data)}} onClick={this._toggleServerLogData}/>
         <td>{serverLog.timestamp}</td>
       </tr>
     );
