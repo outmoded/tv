@@ -25,7 +25,7 @@ var expect = Lab.expect;
 var spy = sinon.spy;
 
 describe('app', function() {
-  
+
     describe('#start', function() {
 
         beforeEach(function(done){
@@ -69,8 +69,20 @@ describe('app', function() {
             done();
         });
 
+        describe('when a response timeout occurs', function() {
+
+            it('resets the state of the root component', function(done) {
+                this.messageParser.onResponseTimeout();
+
+                expect(this.setStateSpy.args[0][0].requests).to.equal(this.messageParser.requests);
+
+                done();
+            });
+
+        });
+
         describe('when a message is received', function(){
-            
+
             it('adds the message to the message parser', function(done) {
                 var message = 'fake message';
 

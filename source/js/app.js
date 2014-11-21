@@ -7,6 +7,10 @@ var app = {
             $('.main').get(0)
         );
 
+        messageParser.onResponseTimeout = function() {
+            rootComponent.setState(messageParser);
+        };
+
         webSocketManager.onMessage(function(message) {
             messageParser.addMessage(message);
             rootComponent.setState(messageParser);

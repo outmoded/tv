@@ -87,7 +87,6 @@ MessageParser.prototype._addServerLog = function(message) {
     timestamp: message.timestamp
   }
 
-  console.log('request', this._findRequest(message));
   console.log('adding server log', serverLog);
 
   this._findRequest(message).serverLogs.push(serverLog);
@@ -95,13 +94,18 @@ MessageParser.prototype._addServerLog = function(message) {
 
 MessageParser.prototype._refreshResponseTimeout = function(message) {
   var request = this._findRequest(message);
+
   clearTimeout(request.timeout);
+  request.responseTimeout = false;
 
   if(!this._isResponse(message)) {
     request.timeout = setTimeout(function(){
       request.data = MessageParser.RESPONSE_TIMEOUT_ERROR_MESSAGE;
       request.statusCode = null;
-    }, this.responseTimeout);
+      request.responseTimeout = true;
+
+      this.onResponseTimeout && this.onResponseTimeout();
+    }.bind(this), this.responseTimeout);
   }
 };
 

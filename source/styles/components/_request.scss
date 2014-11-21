@@ -1,0 +1,13 @@
+.request {
+    &.error {
+        .status, .data {
+            color: $error;
+        }
+    }
+
+    &.warning {
+        .status, .data {
+            color: $warning;
+        }
+    }
+}
