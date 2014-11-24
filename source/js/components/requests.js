@@ -1,7 +1,7 @@
 var React = require('react');
 var moment = require('moment');
 var ServerLogs = require('./serverLogs');
-var Common = require('../common');
+var DateTimeFormatter = require('../utils/dateTimeFormatter');
 
 var Requests = React.createClass({
 
@@ -28,7 +28,8 @@ var Requests = React.createClass({
             rowClasses.push('active');
         }
 
-        var formattedTimestamp = Common.formatTimestamp(request.timestamp);
+        var date = DateTimeFormatter.shortDate(request.timestamp);
+        var time = DateTimeFormatter.longTime(request.timestamp);
 
         return (
             <div>
@@ -38,8 +39,8 @@ var Requests = React.createClass({
                     <div className="col-xs-1 status">{statusCodeContent}</div>
                     <div className="col-xs-5 data">{JSON.stringify(request.data)}</div>
                     <div className="col-xs-2 timestamp">
-                        <span className="time">{formattedTimestamp.time}</span>
-                        <span className="date">{formattedTimestamp.date}</span>
+                        <span className="time">{time}</span>
+                        <span className="date">{date}</span>
                     </div>
                 </div>
                 <ServerLogs serverLogs={request.serverLogs} stripe={stripe} hidden={!request.active} />

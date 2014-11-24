@@ -1,6 +1,6 @@
 var React = require('react');
 var jsonMarkup = require('json-markup');
-var Common = require('../common');
+var DateTimeFormatter = require('../utils/dateTimeFormatter');
 
 var ServerLogs = React.createClass({
 
@@ -19,15 +19,16 @@ var ServerLogs = React.createClass({
     },
 
     _serverLogRow: function(serverLog) {
-        var formattedTimestamp = Common.formatTimestamp(serverLog.timestamp);
+        var date = DateTimeFormatter.shortDate(serverLog.timestamp);
+        var time = DateTimeFormatter.longTime(serverLog.timestamp);
 
         return (
             <div className="server-log row">
                 <div className="col-xs-5 tags">{serverLog.tags.join(', ')}</div>
                 <div className="col-xs-5 data" dangerouslySetInnerHTML={{__html: jsonMarkup(serverLog.data)}} onClick={this._toggleServerLogData}></div>
                 <div className="col-xs-2 timestamp">
-                    <span className="time">{formattedTimestamp.time}</span>
-                    <span className="date">{formattedTimestamp.date}</span>
+                    <span className="time">{time}</span>
+                    <span className="date">{date}</span>
                 </div>
             </div>
         );
