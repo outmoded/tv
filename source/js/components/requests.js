@@ -9,14 +9,15 @@ var Requests = React.createClass({
         return (
             <div>
                 {this.props.requests.map(this._requestRow)}
-            </div>);
+            </div>
+        );
     },
 
     _requestRow: function(request, index) {
         var stripe = index % 2 === 0 ? 'dark' : 'light';
+        var statusCodeContent = request.statusCode !== undefined ? request.statusCode : <div className="spinner"></div>;
 
         rowClasses = ['request', stripe, 'row'];
-        var statusCodeContent = request.statusCode !== undefined ? request.statusCode : <div className="spinner"></div>;
 
         if(this._requestHasErrors(request)) {
             rowClasses.push('error');
@@ -28,9 +29,6 @@ var Requests = React.createClass({
             rowClasses.push('active');
         }
 
-        var date = DateTimeFormatter.shortDate(request.timestamp);
-        var time = DateTimeFormatter.longTime(request.timestamp);
-
         return (
             <div>
                 <div className={rowClasses.join(' ')} onClick={this._toggle.bind(this, index)}>
@@ -39,8 +37,8 @@ var Requests = React.createClass({
                     <div className="col-xs-1 status">{statusCodeContent}</div>
                     <div className="col-xs-5 data">{JSON.stringify(request.data)}</div>
                     <div className="col-xs-2 timestamp">
-                        <span className="time">{time}</span>
-                        <span className="date">{date}</span>
+                    <span className="time">{DateTimeFormatter.longTime(request.timestamp)}</span>
+                    <span className="date">{DateTimeFormatter.shortDate(request.timestamp)}</span>
                     </div>
                 </div>
                 <ServerLogs serverLogs={request.serverLogs} stripe={stripe} hidden={!request.active} />
