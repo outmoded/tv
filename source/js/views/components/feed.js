@@ -15,29 +15,21 @@ var FeedComponent = React.createClass({
         };
     },
 
-    componentDidMount: function() {
-        $(window).on('resize', this._adjustSizeOfJson);
-    },
-
     render: function() {
         return (
-            <table className="table">
-            <thead>
-            <th className="path">Path</th>
-            <th className="method">Method</th>
-            <th className="status">Status</th>
-            <th className="data">Data</th>
-            <th className="timestamp">Timestamp</th>
-            </thead>
-            <tbody>
-            { this.props.requests.map(this._requestGroup) }
-            </tbody>
-            </table>
+            <div className="feed container-fluid">
+                <div className="header row">
+                    <div className="col-xs-3 path">Path</div>
+                    <div className="col-xs-1 method">Method</div>
+                    <div className="col-xs-1 status">Status</div>
+                    <div className="col-xs-5 data">Data</div>
+                    <div className="col-xs-2 timestamp">Timestamp</div>
+                </div>
+                <div className="body">
+                  { this.props.requests.map(this._requestGroup) }
+                </div>
+            </div>
         );
-    },
-
-    _adjustSizeOfJson: function() {
-        $('.json-markup').width($(window).width() - 600);
     },
 
     _toggleServerLogData: function(e) {
@@ -62,7 +54,6 @@ var FeedComponent = React.createClass({
             } else {
                 $requestRow.addClass('active');
                 _.each(serverLogRows, function($row) { $row.removeClass('hidden'); });
-                this._adjustSizeOfJson();
             }
     },
 
@@ -78,7 +69,7 @@ var FeedComponent = React.createClass({
     },
 
     _requestRow: function(request, stripe) {
-        rowClasses = ['request', stripe];
+        rowClasses = ['request', stripe, 'row'];
         var statusCodeContent = request.statusCode !== undefined ? request.statusCode : <div className="spinner"></div>;
 
         if(this._requestHasErrors(request)) {
@@ -90,16 +81,16 @@ var FeedComponent = React.createClass({
         var formattedTimestamp = this._formatTimestamp(request.timestamp);
 
         return (
-            <tr className={rowClasses.join(' ')} onClick={this._toggle}>
-            <td>{request.path}</td>
-            <td className="method">{request.method}</td>
-            <td className="status">{statusCodeContent}</td>
-            <td className="data">{JSON.stringify(request.data)}</td>
-            <td>
-              <span className="time">{formattedTimestamp.time} </span>
-              <span className="date">{formattedTimestamp.date}</span>
-            </td>
-            </tr>
+            <div className={rowClasses.join(' ')} onClick={this._toggle}>
+                <div className="col-xs-3 path">{request.path}</div>
+                <div className="col-xs-1 method">{request.method}</div>
+                <div className="col-xs-1 status">{statusCodeContent}</div>
+                <div className="col-xs-5 data">{JSON.stringify(request.data)}</div>
+                <div className="col-xs-2 timestamp">
+                    <span className="time">{formattedTimestamp.time}</span>
+                    <span className="date">{formattedTimestamp.date}</span>
+                </div>
+            </div>
         );
     },
 
@@ -113,16 +104,19 @@ var FeedComponent = React.createClass({
 
     _serverLogRow: function(serverLog, stripe) {
         var formattedTimestamp = this._formatTimestamp(serverLog.timestamp);
+        var serverLogClasses = ['server-log', 'hidden', 'row', stripe].join(' ');
 
         return (
-            <tr className={"server-log hidden " + stripe}>
-            <td colSpan="3">{serverLog.tags.join(', ')}</td>
-            <td className="data" dangerouslySetInnerHTML={{__html: jsonMarkup(serverLog.data)}} onClick={this._toggleServerLogData}/>
-            <td>
-              <span className="time">{formattedTimestamp.time} </span>
-              <span className="date">{formattedTimestamp.date}</span>
-            </td>
-            </tr>
+            <div className={serverLogClasses}>
+                <div className="col-xs-3 tags">{serverLog.tags.join(', ')}</div>
+                <div className="col-xs-1"></div>
+                <div className="col-xs-1"></div>
+                <div className="col-xs-5 data" dangerouslySetInnerHTML={{__html: jsonMarkup(serverLog.data)}} onClick={this._toggleServerLogData}></div>
+                <div className="col-xs-2 timestamp">
+                    <span className="time">{formattedTimestamp.time}</span>
+                    <span className="date">{formattedTimestamp.date}</span>
+                </div>
+            </div>
         );
     }
 
