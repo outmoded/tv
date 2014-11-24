@@ -13,6 +13,7 @@ internals.defaults = {
 internals.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 internals.numbers = '0123456789';
 
+internals.localStorageKey = 'clientId';
 
 
 
@@ -24,6 +25,12 @@ exports = module.exports = internals.ClientId = function(options) {
 
 internals.ClientId.create = function(options) {
     return internals.ClientId(options);
+};
+
+internals.ClientId.install = function() {
+    if ( !localStorage.getItem(internals.localStorageKey)) {
+        localStorage.setItem(internals.localStorageKey, internals.ClientId.create());
+    }
 };
 
 internals.ClientId.defaults = internals.defaults;
