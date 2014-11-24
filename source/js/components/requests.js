@@ -57,7 +57,7 @@ var Requests = React.createClass({
     _toggle: function(requestIndex) {
         var request = this.props.requests[requestIndex];
         request.active = !!!request.active;
-        this.setState(this.requests);
+        this.setState(this.props.requests);
     },
 
 });
