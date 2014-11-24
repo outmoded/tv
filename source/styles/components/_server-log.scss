@@ -1,78 +1,85 @@
-tr.server-log > td.data {
-  cursor: pointer;
+.server-log {
+    .data {
+        cursor: pointer;
 
-  ul {
-    position: relative;
-    overflow: hidden;
-    text-overflow: ellipsis;
+        ul {
+            position: relative;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
-    height: 16px;
-    margin: 0;
-    padding: 0 10px 0 32px;
+            height: 16px;
+            margin: 0;
+            padding: 0 10px 0 32px;
 
-    cursor: pointer;
-    font-family: monospace, serif;
-    list-style: none;
-    white-space: nowrap;
-  }
+            cursor: pointer;
+            font-family: monospace, serif;
+            list-style: none;
+            white-space: nowrap;
+        }
 
-  ul:before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 16px;
+        ul:before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 16px;
 
-    display: block;
-    border: 4px solid transparent;
-    border-left: 6px solid #666;
-  }
+            display: block;
+            border: 4px solid transparent;
+            border-left: 6px solid #666;
+        }
 
-  li {
-    overflow: hidden;
-    text-overflow: ellipsis;
+        li {
+            overflow: hidden;
+            text-overflow: ellipsis;
 
-    display: inline;
-    vertical-align: top;
-    white-space: nowrap;
-  }
+            display: inline;
+            vertical-align: top;
+            white-space: nowrap;
+        }
 
-  li:before {
-    content: ', ';
-  }
+        li:before {
+            content: ', ';
+        }
 
-  li:first-child:before {
-    content: '';
-  }
-
+        li:first-child:before {
+            content: '';
+        }
+    }
 }
 
 .json-markup {
-  line-height: 17px;
-  font-size: 13px;
-  font-family: monospace;
+    line-height: 17px;
+    font-size: 13px;
+    font-family: monospace;
+    width: auto !important;
 
-  &.expanded {
-    white-space: pre-wrap;
-  }
+    &.expanded {
+        white-space: pre-wrap;
+    }
 
-  &:not(.expanded) {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+    &:not(.expanded) {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
+
 .json-markup-key {
-  font-weight: bold;
+    font-weight: bold;
 }
+
 .json-markup-bool {
-  color: $json-markup-boolean;
+    color: $json-markup-boolean;
 }
+
 .json-markup-string {
-  color: $json-markup-string;
+    color: $json-markup-string;
 }
+
 .json-markup-null {
-  color: $json-markup-null;
+    color: $json-markup-null;
 }
+
 .json-markup-number {
-  color: $json-markup-number;
+    color: $json-markup-number;
 }

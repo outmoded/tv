@@ -1,25 +1,52 @@
-th {
-  &.path {
-    width: 250px;
-  }
-  &.method, &.status {
-    width: 75px;
-  }
-  &.timestamp {
-    width: 180px;
-  }
-}
+.feed {
+    .header > div, .request > div, .server-log > div {
+        padding: 5px 0px 5px 10px;
+        @extend .truncate;
+    }
 
-.request {
-    &.error {
-        .status, .data {
-            color: $error;
+    .header {
+        div {
+            background-color: $table-header-bg;
+            color: $table-header;
         }
     }
 
-    &.warning {
-        .status, .data {
-            color: $warning;
+    .body {
+        .date {
+            color: $table-row-secondary;
+            padding-left: 5px;
+        }
+
+        .request {
+            cursor: pointer;
+
+            &.light > div {
+                background-color: $table-row-bg;
+            }
+
+            &.dark  > div {
+                background-color: $table-row-alt-bg;
+            }
+
+            &:hover > div, &.active > div {
+                background-color: $table-row-hover;
+            }
+
+            .method {
+                text-transform: uppercase;
+            }
+
+            .error {
+                .status, .data {
+                    color: $error;
+                }
+            }
+
+            .warning {
+                .status, .data {
+                    color: $warning;
+                }
+            }
         }
     }
 }

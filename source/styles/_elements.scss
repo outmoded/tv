@@ -5,47 +5,8 @@ html {
   box-sizing: inherit;
 }
 
-.table {
-
-  thead {
-    background-color: $table-header-bg;
-    color: $table-header;
-    tr > th {
-      font-weight: normal;
-      border: none;
-    }
-  }
-
-  tbody > tr {
-    border: solid transparent 2px;
-
-    & > td {
-      border: none;
-    }
-
-    &.light {
-      background-color: $table-row-bg;
-    }
-
-    td .date {
-        color: $table-row-secondary;
-    }
-
-    &.dark {
-      background-color: $table-row-alt-bg;
-    }
-
-    &.request {
-      cursor: pointer;
-
-      &:hover, &.active > td {
-        background-color: $table-row-hover;
-      }
-    }
-  }
-
-  tbody > tr > td.method {
-    text-transform: uppercase;
-  }
-
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
