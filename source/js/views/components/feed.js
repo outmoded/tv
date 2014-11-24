@@ -108,9 +108,7 @@ var FeedComponent = React.createClass({
 
         return (
             <div className={serverLogClasses}>
-                <div className="col-xs-3 tags">{serverLog.tags.join(', ')}</div>
-                <div className="col-xs-1"></div>
-                <div className="col-xs-1"></div>
+                <div className="col-xs-5 tags">{serverLog.tags.join(', ')}</div>
                 <div className="col-xs-5 data" dangerouslySetInnerHTML={{__html: jsonMarkup(serverLog.data)}} onClick={this._toggleServerLogData}></div>
                 <div className="col-xs-2 timestamp">
                     <span className="time">{formattedTimestamp.time}</span>
