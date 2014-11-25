@@ -12,6 +12,14 @@
     }
 
     .body {
+        .light {
+            background-color: $table-row-bg;
+        }
+
+        .dark {
+            background-color: $table-row-alt-bg;
+        }
+
         .date {
             color: $table-row-secondary;
             padding-left: 5px;
@@ -19,14 +27,6 @@
 
         .request {
             cursor: pointer;
-
-            &.light {
-                background-color: $table-row-bg;
-            }
-
-            &.dark {
-                background-color: $table-row-alt-bg;
-            }
 
             &:hover, &:hover > div, &.active, &.action > div {
                 background-color: $table-row-hover;
@@ -36,7 +36,7 @@
                 text-transform: uppercase;
             }
 
-            &.error {
+            .error {
                 .status, .data {
                     color: $error;
                 }

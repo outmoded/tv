@@ -13,7 +13,7 @@ var app = {
 
         webSocketManager.onMessage(function(message) {
             messageParser.addMessage(message);
-            rootComponent.setState(messageParser);
+            rootComponent.setState({requests: messageParser.requests});
         });
     }
 }

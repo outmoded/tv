@@ -1,7 +1,7 @@
 var app = require('./app');
 var WebSocketManager = require('./webSocketManager');
 var MessageParser = require('./messageParser');
-var AppComponent = require('./views/components/app');
+var AppComponent = require('./components/app');
 
 var ws = new WebSocket('ws://' + host + ':' + port);
 var webSocketManager = WebSocketManager.create(ws);

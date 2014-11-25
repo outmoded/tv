@@ -1,8 +1,8 @@
 var React = require('react');
 
-var FeedComponent = require('./feed');
+var Feed = require('./feed');
 
-var AppComponent = React.createClass({
+var App = React.createClass({
 
   getInitialState: function() { 
     return { requests: [] }
@@ -11,11 +11,11 @@ var AppComponent = React.createClass({
   render: function() {
     return (
       <div>
-        <FeedComponent requests={this.state.requests}/>
+        <Feed requests={this.state.requests}/>
       </div>
     );
   }
 
 });
 
-module.exports = AppComponent;
+module.exports = App;
