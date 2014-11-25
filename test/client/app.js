@@ -23,6 +23,7 @@ var context = lab.describe;
 var it = lab.it;
 var expect = Lab.expect;
 var spy = sinon.spy;
+var stub = sinon.stub;
 
 describe('app', function() {
 
@@ -33,17 +34,24 @@ describe('app', function() {
 
             this.mockWebSocket = { send: spy() };
             var mockWebSocketManager = WebSocketManager.create(this.mockWebSocket);
+
             this.messageParser = MessageParser.create();
             this.messageParserAddMessageSpy = sinon.stub(this.messageParser, 'addMessage', function() {});
-            this.rootComponent = { render: spy(), setState: spy() };
+
+            this.appComponent = { render: spy(), setState: spy() };
+
             this.setStateSpy = spy();
+            this.isScrolledToBottomStub = stub();
+            this.scrollToBottomSpy = spy();
             this.reactRenderSpy = sinon.stub(React, 'render', function() {
                 return {
-                    setState: this.setStateSpy
+                    setState: this.setStateSpy,
+                    isScrolledToBottom: isScrolledToBottomStub,
+                    scrollToBottom: scrollToBottomSpy
                 }
             }.bind(this));
 
-            app.start(mockWebSocketManager, this.messageParser, this.rootComponent);
+            app.start(mockWebSocketManager, this.messageParser, this.appComponent);
 
             done();
         });
@@ -57,13 +65,15 @@ describe('app', function() {
             delete this.messageParserAddMessageSpy;
             delete this.reactRenderSpy;
             delete this.setStateSpy;
-            delete this.rootComponent;
+            delete this.isScrolledToBottomStub;
+            delete this.scrollToBottomSpy;
+            delete this.appComponent;
             delete global.$;
 
             done();
         });
 
-        it('renders the rootComponent', function(done) {
+        it('renders the appComponent', function(done) {
             expect(this.reactRenderSpy.callCount).to.equal(1);
 
             done();
@@ -71,7 +81,7 @@ describe('app', function() {
 
         describe('when a response timeout occurs', function() {
 
-            it('resets the state of the root component', function(done) {
+            it('resets the state of the app component', function(done) {
                 this.messageParser.onResponseTimeout();
 
                 expect(this.setStateSpy.args[0][0].requests).to.equal(this.messageParser.requests);
@@ -94,7 +104,7 @@ describe('app', function() {
                 done();
             });
 
-            it('updates the root component\'s state to the message parser\'s results', function(done) {
+            it('updates the app component\'s state to the message parser\'s results', function(done) {
                 var message = 'fake message';
                 var parsedRequests = 'fake parsed requests'
                 this.messageParser.requests = parsedRequests;
@@ -105,6 +115,34 @@ describe('app', function() {
                 expect(this.setStateSpy.args[0][0]).to.have.property('requests', parsedRequests);
 
                 done();
+            });
+
+            context('with the browser window not scrolled to the bottom', function() {
+
+                it('does not scroll the browser window to the bottom after posting the new message', function(done) {
+                    this.isScrolledToBottomStub.returns(false);
+
+                    this.mockWebSocket.onmessage('fake message');
+
+                    expect(this.scrollToBottomSpy.callCount).to.equal(0);
+
+                    done();
+                });
+
+            });
+
+            context('with the browser window scrolled to the bottom', function() {
+
+                it('scrolls the browser window to the bottom after posting the new message', function(done) {
+                    this.isScrolledToBottomStub.returns(true);
+
+                    this.mockWebSocket.onmessage('fake message');
+
+                    expect(this.scrollToBottomSpy.callCount).to.equal(1);
+
+                    done();
+                });
+
             });
         });
 
