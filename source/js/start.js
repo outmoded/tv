@@ -1,7 +1,7 @@
 var app = require('./app');
 var WebSocketManager = require('./webSocketManager');
 var MessageParser = require('./messageParser');
-var AppComponent = require('./views/components/app');
+var AppComponent = require('./components/app');
 
 var ClientId = require('./clientId');
 var clientId = ClientId.install();
