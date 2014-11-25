@@ -5,22 +5,16 @@ var DateTimeFormatter = require('../utils/dateTimeFormatter');
 var ServerLogs = React.createClass({
 
     render: function() {
-        var classes = [this.props.stripe];
-
-        if(this.props.hidden) {
-            classes.push('hidden');
-        }
-
         return (
-            <div className={classes.join(' ')} >
+            <div className={this.props.stripe} >
                 {this.props.serverLogs.map(this._serverLogRow)}
             </div>
         );
     },
 
-    _serverLogRow: function(serverLog) {
+    _serverLogRow: function(serverLog, index) {
         return (
-            <div className="server-log row">
+            <div key={index} className="server-log row">
                 <div className="col-xs-5 tags">{serverLog.tags.join(', ')}</div>
                 <div className="col-xs-5 data" dangerouslySetInnerHTML={{__html: jsonMarkup(serverLog.data)}} onClick={this._toggleServerLogData}></div>
                 <div className="col-xs-2 timestamp">

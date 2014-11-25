@@ -25,12 +25,14 @@ var Requests = React.createClass({
             rowClasses.push('warning');
         }
 
+        var serverLogs = null;
         if(request.active) {
             rowClasses.push('active');
+            serverLogs = <ServerLogs stripe={stripe} serverLogs={request.serverLogs} />;
         }
 
         return (
-            <div>
+            <div key={request.id}>
                 <div className={rowClasses.join(' ')} onClick={this._toggle.bind(this, index)}>
                     <div className="col-xs-3 path">{request.path}</div>
                     <div className="col-xs-1 method">{request.method}</div>
@@ -41,7 +43,7 @@ var Requests = React.createClass({
                     <span className="date">{DateTimeFormatter.shortDate(request.timestamp)}</span>
                     </div>
                 </div>
-                <ServerLogs serverLogs={request.serverLogs} stripe={stripe} hidden={!request.active} />
+                {serverLogs}
             </div>
         );
     },
