@@ -13,7 +13,7 @@ var App = React.createClass({
         return (
             <div>
                 <Header
-                    Header clearHandler={this._handleClear}
+                    clearHandler={this._handleClear}
                     pauseHandler={this._handlePause}
                     resumeHandler={this._handleResume}
                 />
