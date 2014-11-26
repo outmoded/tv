@@ -1,4 +1,5 @@
 var React = require('react');
+var _ = require('lodash');
 
 var Header = require('./header');
 var Feed = require('./feed');
@@ -13,6 +14,7 @@ var App = React.createClass({
         return (
             <div>
                 <Header
+                    searchHandler={this._handleSearch}
                     clearHandler={this._handleClear}
                     pauseHandler={this._handlePause}
                     resumeHandler={this._handleResume}
@@ -25,7 +27,11 @@ var App = React.createClass({
     updateState: function() {
         var isScrolledToBottom = this._isScrolledToBottom();
 
-        this.setState({requests: this.props.messageParser.requests});
+        var requests = this.props.messageParser.requests;
+        if(this.searchFilter) {
+            requests = _.filter(requests, this.searchFilter.bind(this));
+        }
+        this.setState({requests: requests});
 
         if(isScrolledToBottom) {
             this._scrollToBottom();
@@ -43,6 +49,43 @@ var App = React.createClass({
 
     _handleResume: function() {
         this.props.webSocketManager.resume();
+    },
+
+    _handleSearch: function(e) {
+        var keywords = e.target.value.toLowerCase().split(' ');
+
+        if(keywords.length) {
+            this._setSearchFilter(keywords);
+        } else {
+            this._clearSearchFilter();
+        }
+    },
+
+    _setSearchFilter: function(keywords) {
+        this.searchFilter = function(request) {
+            var matches = true;
+
+            _.each(keywords, function(keyboard) {
+                if(!this._hasMatch(request, keyboard)) {
+                    matches = false;
+                }
+            }.bind(this));
+
+            return matches;
+        };
+
+        this.updateState();
+    },
+
+    _hasMatch: function(request, keyword) {
+        return request.path.indexOf(keyword) > -1 ||
+            keyword === request.method ||
+            keyword === request.statusCode;
+    },
+
+    _clearSearchFilter: function() {
+        this.searchFilter = null;
+        this.updateState();
     },
 
     _isScrolledToBottom: function() {
