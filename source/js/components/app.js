@@ -1,31 +1,32 @@
 var React = require('react');
-var SettingsStore = require('../settingsStore');
+var Header = require('./header');
 var Feed = require('./feed');
-var Intro = require('./intro');
+
+
 
 
 var App = React.createClass({
 
-  _store: SettingsStore,
+    getInitialState: function() {
+        return { requests: [] }
+    },
 
-  getInitialState: function() { 
-    return { requests: [] }
-  },
+    render: function() {
+        return (
+            <div>
+                <Header />
+                <Feed requests={this.state.requests}/>
+            </div>
+        );
+    },
 
-  intro: function() {
-    if (!this._store.get('channel')) {
-      return <Intro />
+    isScrolledToBottom: function() {
+        return ((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
+    },
+
+    scrollToBottom: function() {
+        window.scrollTo(0,document.body.scrollHeight);
     }
-  },
-
-  render: function() {
-    return (
-      <div>
-        <Feed requests={this.state.requests}/>
-        {this.intro()}
-      </div>
-    );
-  }
 
 });
 

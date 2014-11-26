@@ -26,6 +26,8 @@ var Intro = exports = module.exports = React.createClass({
                 
                 <p>Would you like to subscribe to all server requests or just yours?</p>
                 <ChannelSelector />
+
+                <button className="btn btn-default" name="save">Save</button>
             </div>
         );
     }
