@@ -39,8 +39,8 @@ var Requests = React.createClass({
                     <div className="col-xs-1 status">{statusCodeContent}</div>
                     <div className="col-xs-5 data">{JSON.stringify(request.data)}</div>
                     <div className="col-xs-2 timestamp">
-                    <span className="time">{DateTimeFormatter.longTime(request.timestamp)}</span>
-                    <span className="date">{DateTimeFormatter.shortDate(request.timestamp)}</span>
+                        <span className="time">{DateTimeFormatter.longTime(request.timestamp)}</span>
+                        <span className="date">{DateTimeFormatter.shortDate(request.timestamp)}</span>
                     </div>
                 </div>
                 {serverLogs}

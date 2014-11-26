@@ -1,5 +1,6 @@
 var React = require('react');
 
+var Header = require('./header');
 var Feed = require('./feed');
 
 var App = React.createClass({
@@ -11,6 +12,7 @@ var App = React.createClass({
     render: function() {
         return (
             <div>
+                <Header />
                 <Feed requests={this.state.requests}/>
             </div>
         );
