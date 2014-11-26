@@ -38,6 +38,10 @@ MessageParser.prototype.addMessage = function(raw_message) {
   }
 };
 
+MessageParser.prototype.clear = function() {
+    this.requests = [];
+};
+
 MessageParser.prototype._isResponse = function(message) {
   var isResponse =
       this._hasTags(message, 'response') ||
