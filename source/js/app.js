@@ -1,19 +1,27 @@
 var React = require('react');
 
 var app = {
-    start: function (webSocketManager, messageParser, RootComponent) {
-        var rootComponent = React.render(
-            React.createElement(RootComponent),
-            $('.main').get(0)
-        );
+    start: function (webSocketManager, messageParser, AppComponent) {
+        var element = React.createElement(AppComponent, {
+            messageParser: messageParser,
+            webSocketManager: webSocketManager
+        });
+
+        var appComponent = React.render( element, $('.main').get(0));
 
         messageParser.onResponseTimeout = function() {
-            rootComponent.setState(messageParser);
+            appComponent.setState({requests: messageParser.requests});
         };
 
         webSocketManager.onMessage(function(message) {
+            var isScrolledToBottom = appComponent.isScrolledToBottom();
+
             messageParser.addMessage(message);
-            rootComponent.setState({requests: messageParser.requests});
+            appComponent.setState({requests: messageParser.requests});
+
+            if(isScrolledToBottom) {
+                appComponent.scrollToBottom();
+            }
         });
     }
 }

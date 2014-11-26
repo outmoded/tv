@@ -1,7 +1,23 @@
 var React = require('react');
 var Requests = require('./requests');
+var Intro = require('./intro');
+var SettingsStore = require('../settingsStore');
+
+
+
 
 var Feed = React.createClass({
+
+    _store: SettingsStore,
+
+    content: function() {
+        console.log('this._store.get(\'channel\')', this._store.get('channel'));
+        if (!this._store.get('channel')) {
+            return <Intro />
+        } else {
+            return <Requests requests={this.props.requests} />
+        }
+    },
 
     render: function() {
         return (
@@ -14,11 +30,11 @@ var Feed = React.createClass({
                     <div className="col-xs-2 timestamp">Timestamp</div>
                 </div>
                 <div className="body">
-                  <Requests requests={this.props.requests} />
+                    {this.content()}
                 </div>
             </div>
         );
-    },
+    }
 
 });
 
