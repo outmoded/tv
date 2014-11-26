@@ -12,7 +12,11 @@ var App = React.createClass({
     render: function() {
         return (
             <div>
-                <Header clearHandler={this._handleClear} />
+                <Header
+                    Header clearHandler={this._handleClear}
+                    pauseHandler={this._handlePause}
+                    resumeHandler={this._handleResume}
+                />
                 <Feed requests={this.state.requests} />
             </div>
         );
@@ -31,6 +35,14 @@ var App = React.createClass({
     _handleClear: function() {
         this.props.messageParser.clear();
         this.updateState();
+    },
+
+    _handlePause: function() {
+        this.props.webSocketManager.pause();
+    },
+
+    _handleResume: function() {
+        this.props.webSocketManager.resume();
     },
 
     _isScrolledToBottom: function() {
