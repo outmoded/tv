@@ -1,14 +1,7 @@
 {
   "name": "tv",
   "description": "Interactive debug console plugin for hapi",
-  "version": "2.1.0",
-  "author": "Eran Hammer <eran@hammer.io> (http://hueniverse.com)",
-  "contributors": [
-    "Wyatt Preul <wpreul@gmail.com>",
-    "Van Nguyen <the.gol.effect@gmail.com>",
-    "Ben Nguyen <benobviate@gmail.com>",
-    "Alex Lande <alexlande@gmail.com>"
-  ],
+  "version": "3.0.0",
   "repository": "git://github.com/hapijs/tv",
   "main": "index",
   "keywords": [
@@ -18,7 +11,7 @@
     "plugin"
   ],
   "engines": {
-    "node": ">=0.10.30"
+    "node": ">=0.10.32"
   },
   "dependencies": {
     "hoek": "2.x.x",
@@ -26,11 +19,11 @@
     "handlebars": "2.0.x"
   },
   "peerDependencies": {
-    "hapi": ">=2.x.x"
+    "hapi": ">=8.x.x"
   },
   "devDependencies": {
     "code": "1.x.x",
-    "hapi": "7.x.x",
+    "hapi": "8.x.x",
     "lab": "5.x.x"
   },
   "scripts": {

@@ -1,0 +1,2721 @@
+
+> tv@3.0.0 test /home/eran/code/tv
+> make test-cov
+
+
+  
+  ....
+
+4 tests complete
+Test duration: 418 ms
+Assertions count: 0 (verbosity: 0.00)
+No global variable leaks detected
+Coverage: 100.00%
+Linting results:
+	index.js:
+		Line 1: eol-last - Newline required at end of file but not found.
+	public/js/handlebars.js:
+		Line 187: no-trailing-spaces - Trailing spaces not allowed.
+		Line 189: no-trailing-spaces - Trailing spaces not allowed.
+		Line 191: no-trailing-spaces - Trailing spaces not allowed.
+		Line 193: no-trailing-spaces - Trailing spaces not allowed.
+		Line 195: no-trailing-spaces - Trailing spaces not allowed.
+		Line 197: no-trailing-spaces - Trailing spaces not allowed.
+		Line 199: no-trailing-spaces - Trailing spaces not allowed.
+		Line 201: no-trailing-spaces - Trailing spaces not allowed.
+		Line 203: no-trailing-spaces - Trailing spaces not allowed.
+		Line 205: no-trailing-spaces - Trailing spaces not allowed.
+		Line 207: no-trailing-spaces - Trailing spaces not allowed.
+		Line 209: no-trailing-spaces - Trailing spaces not allowed.
+		Line 211: no-trailing-spaces - Trailing spaces not allowed.
+		Line 213: no-trailing-spaces - Trailing spaces not allowed.
+		Line 215: no-trailing-spaces - Trailing spaces not allowed.
+		Line 217: no-trailing-spaces - Trailing spaces not allowed.
+		Line 219: no-trailing-spaces - Trailing spaces not allowed.
+		Line 221: no-trailing-spaces - Trailing spaces not allowed.
+		Line 223: no-trailing-spaces - Trailing spaces not allowed.
+		Line 225: no-trailing-spaces - Trailing spaces not allowed.
+		Line 227: no-trailing-spaces - Trailing spaces not allowed.
+		Line 229: no-trailing-spaces - Trailing spaces not allowed.
+		Line 231: no-trailing-spaces - Trailing spaces not allowed.
+		Line 233: no-trailing-spaces - Trailing spaces not allowed.
+		Line 235: no-trailing-spaces - Trailing spaces not allowed.
+		Line 237: no-trailing-spaces - Trailing spaces not allowed.
+		Line 239: no-trailing-spaces - Trailing spaces not allowed.
+		Line 241: no-trailing-spaces - Trailing spaces not allowed.
+		Line 243: no-trailing-spaces - Trailing spaces not allowed.
+		Line 245: no-trailing-spaces - Trailing spaces not allowed.
+		Line 247: no-trailing-spaces - Trailing spaces not allowed.
+		Line 249: no-trailing-spaces - Trailing spaces not allowed.
+		Line 251: no-trailing-spaces - Trailing spaces not allowed.
+		Line 253: no-trailing-spaces - Trailing spaces not allowed.
+		Line 255: no-trailing-spaces - Trailing spaces not allowed.
+		Line 257: no-trailing-spaces - Trailing spaces not allowed.
+		Line 259: no-trailing-spaces - Trailing spaces not allowed.
+		Line 261: no-trailing-spaces - Trailing spaces not allowed.
+		Line 263: no-trailing-spaces - Trailing spaces not allowed.
+		Line 265: no-trailing-spaces - Trailing spaces not allowed.
+		Line 267: no-trailing-spaces - Trailing spaces not allowed.
+		Line 269: no-trailing-spaces - Trailing spaces not allowed.
+		Line 271: no-trailing-spaces - Trailing spaces not allowed.
+		Line 273: no-trailing-spaces - Trailing spaces not allowed.
+		Line 275: no-trailing-spaces - Trailing spaces not allowed.
+		Line 277: no-trailing-spaces - Trailing spaces not allowed.
+		Line 279: no-trailing-spaces - Trailing spaces not allowed.
+		Line 569: no-trailing-spaces - Trailing spaces not allowed.
+		Line 571: no-trailing-spaces - Trailing spaces not allowed.
+		Line 577: no-trailing-spaces - Trailing spaces not allowed.
+		Line 579: no-trailing-spaces - Trailing spaces not allowed.
+		Line 581: no-trailing-spaces - Trailing spaces not allowed.
+		Line 583: no-trailing-spaces - Trailing spaces not allowed.
+		Line 585: no-trailing-spaces - Trailing spaces not allowed.
+		Line 587: no-trailing-spaces - Trailing spaces not allowed.
+		Line 589: no-trailing-spaces - Trailing spaces not allowed.
+		Line 591: no-trailing-spaces - Trailing spaces not allowed.
+		Line 593: no-trailing-spaces - Trailing spaces not allowed.
+		Line 595: no-trailing-spaces - Trailing spaces not allowed.
+		Line 597: no-trailing-spaces - Trailing spaces not allowed.
+		Line 599: no-trailing-spaces - Trailing spaces not allowed.
+		Line 601: no-trailing-spaces - Trailing spaces not allowed.
+		Line 603: no-trailing-spaces - Trailing spaces not allowed.
+		Line 605: no-trailing-spaces - Trailing spaces not allowed.
+		Line 607: no-trailing-spaces - Trailing spaces not allowed.
+		Line 609: no-trailing-spaces - Trailing spaces not allowed.
+		Line 611: no-trailing-spaces - Trailing spaces not allowed.
+		Line 613: no-trailing-spaces - Trailing spaces not allowed.
+		Line 615: no-trailing-spaces - Trailing spaces not allowed.
+		Line 617: no-trailing-spaces - Trailing spaces not allowed.
+		Line 619: no-trailing-spaces - Trailing spaces not allowed.
+		Line 621: no-trailing-spaces - Trailing spaces not allowed.
+		Line 623: no-trailing-spaces - Trailing spaces not allowed.
+		Line 625: no-trailing-spaces - Trailing spaces not allowed.
+		Line 627: no-trailing-spaces - Trailing spaces not allowed.
+		Line 629: no-trailing-spaces - Trailing spaces not allowed.
+		Line 631: no-trailing-spaces - Trailing spaces not allowed.
+		Line 633: no-trailing-spaces - Trailing spaces not allowed.
+		Line 635: no-trailing-spaces - Trailing spaces not allowed.
+		Line 637: no-trailing-spaces - Trailing spaces not allowed.
+		Line 32: quotes - Strings must use singlequote.
+		Line 44: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 55: no-else-return - Unexpected 'else' after 'return'.
+		Line 53: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 56: quotes - Strings must use singlequote.
+		Line 56: quotes - Strings must use singlequote.
+		Line 60: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 60: quotes - Strings must use singlequote.
+		Line 63: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 66: quotes - Strings must use singlequote.
+		Line 69: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 71: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 73: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 73: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 75: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 75: quotes - Strings must use singlequote.
+		Line 78: no-else-return - Unexpected 'else' after 'return'.
+		Line 76: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 115: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 115: quotes - Strings must use singlequote.
+		Line 121: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 122: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 123: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 123: space-infix-ops - Infix operators must be spaced.
+		Line 128: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 129: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 130: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 138: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 147: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 151: no-else-return - Unexpected 'else' after 'return'.
+		Line 149: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 169: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 174: no-extra-semi - Unnecessary semicolon.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 180: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 181: quotes - Strings must use singlequote.
+		Line 188: no-unreachable - Found unexpected statement after a return.
+		Line 187: space-infix-ops - Infix operators must be spaced.
+		Line 191: space-infix-ops - Infix operators must be spaced.
+		Line 193: space-infix-ops - Infix operators must be spaced.
+		Line 203: space-infix-ops - Infix operators must be spaced.
+		Line 203: space-infix-ops - Infix operators must be spaced.
+		Line 205: space-infix-ops - Infix operators must be spaced.
+		Line 205: space-infix-ops - Infix operators must be spaced.
+		Line 205: space-infix-ops - Infix operators must be spaced.
+		Line 207: space-infix-ops - Infix operators must be spaced.
+		Line 207: space-infix-ops - Infix operators must be spaced.
+		Line 207: space-infix-ops - Infix operators must be spaced.
+		Line 217: space-infix-ops - Infix operators must be spaced.
+		Line 217: space-infix-ops - Infix operators must be spaced.
+		Line 219: space-infix-ops - Infix operators must be spaced.
+		Line 219: space-infix-ops - Infix operators must be spaced.
+		Line 221: space-infix-ops - Infix operators must be spaced.
+		Line 223: space-infix-ops - Infix operators must be spaced.
+		Line 223: space-infix-ops - Infix operators must be spaced.
+		Line 225: space-infix-ops - Infix operators must be spaced.
+		Line 225: space-infix-ops - Infix operators must be spaced.
+		Line 227: space-infix-ops - Infix operators must be spaced.
+		Line 229: space-infix-ops - Infix operators must be spaced.
+		Line 229: space-infix-ops - Infix operators must be spaced.
+		Line 233: space-infix-ops - Infix operators must be spaced.
+		Line 233: space-infix-ops - Infix operators must be spaced.
+		Line 235: space-infix-ops - Infix operators must be spaced.
+		Line 237: space-infix-ops - Infix operators must be spaced.
+		Line 243: space-infix-ops - Infix operators must be spaced.
+		Line 243: space-infix-ops - Infix operators must be spaced.
+		Line 259: space-infix-ops - Infix operators must be spaced.
+		Line 259: space-infix-ops - Infix operators must be spaced.
+		Line 263: space-infix-ops - Infix operators must be spaced.
+		Line 265: space-infix-ops - Infix operators must be spaced.
+		Line 267: space-infix-ops - Infix operators must be spaced.
+		Line 269: space-infix-ops - Infix operators must be spaced.
+		Line 271: space-infix-ops - Infix operators must be spaced.
+		Line 277: space-infix-ops - Infix operators must be spaced.
+		Line 277: space-infix-ops - Infix operators must be spaced.
+		Line 289: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 289: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 289: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 289: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 289: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 289: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 289: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 289: quotes - Strings must use singlequote.
+		Line 294: curly - Expected { after 'if' condition.
+		Line 294: eqeqeq - Expected '===' and instead saw '=='.
+		Line 294: quotes - Strings must use singlequote.
+		Line 299: curly - Expected { after 'if' condition.
+		Line 299: quotes - Strings must use singlequote.
+		Line 301: func-style - Expected a function expression.
+		Line 306: func-style - Expected a function expression.
+		Line 309: quotes - Strings must use singlequote.
+		Line 314: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 314: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 314: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 314: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 314: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 314: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 314: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 314: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 314: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 320: eqeqeq - Expected '===' and instead saw '=='.
+		Line 320: quotes - Strings must use singlequote.
+		Line 325: quotes - Strings must use singlequote.
+		Line 326: quotes - Strings must use singlequote.
+		Line 331: quotes - Strings must use singlequote.
+		Line 331: quotes - Strings must use singlequote.
+		Line 334: quotes - Strings must use singlequote.
+		Line 334: quotes - Strings must use singlequote.
+		Line 334: quotes - Strings must use singlequote.
+		Line 334: quotes - Strings must use singlequote.
+		Line 334: quotes - Strings must use singlequote.
+		Line 334: quotes - Strings must use singlequote.
+		Line 336: quotes - Strings must use singlequote.
+		Line 336: quotes - Strings must use singlequote.
+		Line 336: space-infix-ops - Infix operators must be spaced.
+		Line 336: eqeqeq - Expected '===' and instead saw '=='.
+		Line 336: quotes - Strings must use singlequote.
+		Line 336: quotes - Strings must use singlequote.
+		Line 336: quotes - Strings must use singlequote.
+		Line 342: quotes - Strings must use singlequote.
+		Line 342: quotes - Strings must use singlequote.
+		Line 356: curly - Expected { after 'if' condition.
+		Line 366: camelcase - Identifier 'first_line' is not in camel case.
+		Line 366: camelcase - Identifier 'last_line' is not in camel case.
+		Line 366: camelcase - Identifier 'first_column' is not in camel case.
+		Line 366: camelcase - Identifier 'last_column' is not in camel case.
+		Line 371: quotes - Strings must use singlequote.
+		Line 643: semi - Missing semicolon.
+		Line 408: camelcase - Identifier 'first_line' is not in camel case.
+		Line 408: camelcase - Identifier 'first_column' is not in camel case.
+		Line 408: camelcase - Identifier 'last_line' is not in camel case.
+		Line 408: camelcase - Identifier 'last_column' is not in camel case.
+		Line 409: curly - Expected { after 'if' condition.
+		Line 427: curly - Expected { after 'if' condition.
+		Line 437: space-infix-ops - Infix operators must be spaced.
+		Line 437: space-infix-ops - Infix operators must be spaced.
+		Line 441: space-infix-ops - Infix operators must be spaced.
+		Line 442: space-infix-ops - Infix operators must be spaced.
+		Line 444: curly - Expected { after 'if' condition.
+		Line 444: space-infix-ops - Infix operators must be spaced.
+		Line 444: space-infix-ops - Infix operators must be spaced.
+		Line 447: camelcase - Identifier 'first_line' is not in camel case.
+		Line 448: camelcase - Identifier 'last_line' is not in camel case.
+		Line 448: space-infix-ops - Infix operators must be spaced.
+		Line 449: camelcase - Identifier 'first_column' is not in camel case.
+		Line 450: camelcase - Identifier 'last_column' is not in camel case.
+		Line 450: space-infix-ops - Infix operators must be spaced.
+		Line 469: space-infix-ops - Infix operators must be spaced.
+		Line 469: quotes - Strings must use singlequote.
+		Line 474: space-infix-ops - Infix operators must be spaced.
+		Line 476: space-infix-ops - Infix operators must be spaced.
+		Line 476: space-infix-ops - Infix operators must be spaced.
+		Line 476: quotes - Strings must use singlequote.
+		Line 480: quotes - Strings must use singlequote.
+		Line 481: space-infix-ops - Infix operators must be spaced.
+		Line 481: quotes - Strings must use singlequote.
+		Line 481: quotes - Strings must use singlequote.
+		Line 487: curly - Expected { after 'if' condition.
+		Line 490: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 491: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 492: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 493: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 494: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 500: space-infix-ops - Infix operators must be spaced.
+		Line 505: curly - Expected { after 'if' condition.
+		Line 510: curly - Expected { after 'if' condition.
+		Line 511: camelcase - Identifier 'first_line' is not in camel case.
+		Line 512: camelcase - Identifier 'last_line' is not in camel case.
+		Line 512: space-infix-ops - Infix operators must be spaced.
+		Line 513: camelcase - Identifier 'first_column' is not in camel case.
+		Line 514: camelcase - Identifier 'last_column' is not in camel case.
+		Line 514: space-infix-ops - Infix operators must be spaced.
+		Line 514: space-infix-ops - Infix operators must be spaced.
+		Line 514: space-infix-ops - Infix operators must be spaced.
+		Line 525: space-infix-ops - Infix operators must be spaced.
+		Line 526: curly - Expected { after 'if' condition.
+		Line 528: no-else-return - Unexpected 'else' after 'return'.
+		Line 527: curly - Expected { after 'if' condition.
+		Line 527: curly - Expected { after 'else'.
+		Line 532: no-else-return - Unexpected 'else' after 'return'.
+		Line 530: quotes - Strings must use singlequote.
+		Line 533: space-infix-ops - Infix operators must be spaced.
+		Line 533: space-infix-ops - Infix operators must be spaced.
+		Line 533: space-infix-ops - Infix operators must be spaced.
+		Line 533: space-infix-ops - Infix operators must be spaced.
+		Line 534: quotes - Strings must use singlequote.
+		Line 541: no-else-return - Unexpected 'else' after 'return'.
+		Line 552: space-infix-ops - Infix operators must be spaced.
+		Line 555: space-infix-ops - Infix operators must be spaced.
+		Line 561: camelcase - Identifier '$avoiding_name_collisions' is not in camel case.
+		Line 563: semi - Missing semicolon.
+		Line 563: space-infix-ops - Infix operators must be spaced.
+		Line 564: space-after-keywords - Keyword "switch" must be followed by whitespace.
+		Line 564: camelcase - Identifier '$avoiding_name_collisions' is not in camel case.
+		Line 566: curly - Expected { after 'if' condition.
+		Line 566: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 566: quotes - Strings must use singlequote.
+		Line 566: quotes - Strings must use singlequote.
+		Line 567: curly - Expected { after 'if' condition.
+		Line 567: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 567: quotes - Strings must use singlequote.
+		Line 567: no-sequences - Unexpected use of comma operator.
+		Line 567: space-infix-ops - Infix operators must be spaced.
+		Line 567: quotes - Strings must use singlequote.
+		Line 568: curly - Expected { after 'if' condition.
+		Line 568: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 572: no-unreachable - Found unexpected statement after a return.
+		Line 574: curly - Expected { after 'if' condition.
+		Line 574: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 574: quotes - Strings must use singlequote.
+		Line 575: curly - Expected { after 'if' condition.
+		Line 575: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 575: quotes - Strings must use singlequote.
+		Line 575: space-infix-ops - Infix operators must be spaced.
+		Line 578: no-unreachable - Found unexpected statement after a return.
+		Line 579: space-infix-ops - Infix operators must be spaced.
+		Line 580: no-unreachable - Found unexpected statement after a return.
+		Line 581: quotes - Strings must use singlequote.
+		Line 582: no-unreachable - Found unexpected statement after a return.
+		Line 584: no-unreachable - Found unexpected statement after a return.
+		Line 586: no-unreachable - Found unexpected statement after a return.
+		Line 588: no-unreachable - Found unexpected statement after a return.
+		Line 590: no-unreachable - Found unexpected statement after a return.
+		Line 592: no-unreachable - Found unexpected statement after a return.
+		Line 594: no-unreachable - Found unexpected statement after a return.
+		Line 597: space-infix-ops - Infix operators must be spaced.
+		Line 598: no-unreachable - Found unexpected statement after a return.
+		Line 600: no-unreachable - Found unexpected statement after a return.
+		Line 602: no-unreachable - Found unexpected statement after a return.
+		Line 604: no-unreachable - Found unexpected statement after a return.
+		Line 606: no-unreachable - Found unexpected statement after a return.
+		Line 608: no-unreachable - Found unexpected statement after a return.
+		Line 612: no-unreachable - Found unexpected statement after a return.
+		Line 614: no-unreachable - Found unexpected statement after a return.
+		Line 615: space-infix-ops - Infix operators must be spaced.
+		Line 616: no-unreachable - Found unexpected statement after a return.
+		Line 617: space-infix-ops - Infix operators must be spaced.
+		Line 617: quotes - Strings must use singlequote.
+		Line 618: no-unreachable - Found unexpected statement after a return.
+		Line 620: no-unreachable - Found unexpected statement after a return.
+		Line 622: no-unreachable - Found unexpected statement after a return.
+		Line 624: no-unreachable - Found unexpected statement after a return.
+		Line 626: no-unreachable - Found unexpected statement after a return.
+		Line 628: no-unreachable - Found unexpected statement after a return.
+		Line 629: space-infix-ops - Infix operators must be spaced.
+		Line 630: no-unreachable - Found unexpected statement after a return.
+		Line 632: no-unreachable - Found unexpected statement after a return.
+		Line 636: no-unreachable - Found unexpected statement after a return.
+		Line 638: no-unreachable - Found unexpected statement after a return.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 642: quotes - Strings must use singlequote.
+		Line 645: func-style - Expected a function expression.
+		Line 646: new-parens - Missing '()' invoking a constructor
+		Line 647: no-extra-semi - Unnecessary semicolon.
+		Line 654: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 662: no-extra-semi - Unnecessary semicolon.
+		Line 669: quotes - Strings must use singlequote.
+		Line 671: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 675: quotes - Strings must use singlequote.
+		Line 697: quotes - Strings must use singlequote.
+		Line 703: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 704: quotes - Strings must use singlequote.
+		Line 710: quotes - Strings must use singlequote.
+		Line 721: quotes - Strings must use singlequote.
+		Line 726: quotes - Strings must use singlequote.
+		Line 731: quotes - Strings must use singlequote.
+		Line 732: quotes - Strings must use singlequote.
+		Line 734: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 736: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 736: space-infix-ops - Infix operators must be spaced.
+		Line 736: space-infix-ops - Infix operators must be spaced.
+		Line 736: space-infix-ops - Infix operators must be spaced.
+		Line 739: quotes - Strings must use singlequote.
+		Line 739: quotes - Strings must use singlequote.
+		Line 739: quotes - Strings must use singlequote.
+		Line 740: quotes - Strings must use singlequote.
+		Line 741: quotes - Strings must use singlequote.
+		Line 759: quotes - Strings must use singlequote.
+		Line 764: quotes - Strings must use singlequote.
+		Line 769: quotes - Strings must use singlequote.
+		Line 775: quotes - Strings must use singlequote.
+		Line 781: quotes - Strings must use singlequote.
+		Line 783: quotes - Strings must use singlequote.
+		Line 787: quotes - Strings must use singlequote.
+		Line 791: no-extra-semi - Unnecessary semicolon.
+		Line 816: quotes - Strings must use singlequote.
+		Line 816: quotes - Strings must use singlequote.
+		Line 817: quotes - Strings must use singlequote.
+		Line 817: quotes - Strings must use singlequote.
+		Line 818: quotes - Strings must use singlequote.
+		Line 818: quotes - Strings must use singlequote.
+		Line 819: quotes - Strings must use singlequote.
+		Line 820: quotes - Strings must use singlequote.
+		Line 820: quotes - Strings must use singlequote.
+		Line 821: quotes - Strings must use singlequote.
+		Line 821: quotes - Strings must use singlequote.
+		Line 828: quotes - Strings must use singlequote.
+		Line 836: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 837: quotes - Strings must use singlequote.
+		Line 840: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 849: no-else-return - Unexpected 'else' after 'return'.
+		Line 847: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 847: quotes - Strings must use singlequote.
+		Line 854: no-extra-semi - Unnecessary semicolon.
+		Line 871: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 871: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 873: space-infix-ops - Infix operators must be spaced.
+		Line 873: space-infix-ops - Infix operators must be spaced.
+		Line 873: space-infix-ops - Infix operators must be spaced.
+		Line 877: quotes - Strings must use singlequote.
+		Line 877: quotes - Strings must use singlequote.
+		Line 880: space-infix-ops - Infix operators must be spaced.
+		Line 880: space-infix-ops - Infix operators must be spaced.
+		Line 882: quotes - Strings must use singlequote.
+		Line 883: quotes - Strings must use singlequote.
+		Line 883: quotes - Strings must use singlequote.
+		Line 883: quotes - Strings must use singlequote.
+		Line 883: quotes - Strings must use singlequote.
+		Line 887: quotes - Strings must use singlequote.
+		Line 887: quotes - Strings must use singlequote.
+		Line 891: quotes - Strings must use singlequote.
+		Line 946: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 949: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 949: space-infix-ops - Infix operators must be spaced.
+		Line 949: space-infix-ops - Infix operators must be spaced.
+		Line 949: space-infix-ops - Infix operators must be spaced.
+		Line 964: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 970: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 970: space-infix-ops - Infix operators must be spaced.
+		Line 970: space-infix-ops - Infix operators must be spaced.
+		Line 970: space-infix-ops - Infix operators must be spaced.
+		Line 973: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 983: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 995: quotes - Strings must use singlequote.
+		Line 997: quotes - Strings must use singlequote.
+		Line 1021: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1025: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 1025: space-infix-ops - Infix operators must be spaced.
+		Line 1025: space-infix-ops - Infix operators must be spaced.
+		Line 1025: space-infix-ops - Infix operators must be spaced.
+		Line 1044: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1062: quotes - Strings must use singlequote.
+		Line 1064: quotes - Strings must use singlequote.
+		Line 1070: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1080: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1080: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 1080: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 1109: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1114: quotes - Strings must use singlequote.
+		Line 1131: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 1131: space-infix-ops - Infix operators must be spaced.
+		Line 1131: space-infix-ops - Infix operators must be spaced.
+		Line 1131: space-infix-ops - Infix operators must be spaced.
+		Line 1165: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1165: quotes - Strings must use singlequote.
+		Line 1166: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1168: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1190: quotes - Strings must use singlequote.
+		Line 1192: no-else-return - Unexpected 'else' after 'return'.
+		Line 1191: quotes - Strings must use singlequote.
+		Line 1192: quotes - Strings must use singlequote.
+		Line 1198: space-after-keywords - Keyword "while" must be followed by whitespace.
+		Line 1201: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1202: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1218: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1235: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1254: quotes - Strings must use singlequote.
+		Line 1254: quotes - Strings must use singlequote.
+		Line 1258: no-else-return - Unexpected 'else' after 'return'.
+		Line 1256: quotes - Strings must use singlequote.
+		Line 1259: quotes - Strings must use singlequote.
+		Line 1259: quotes - Strings must use singlequote.
+		Line 1266: no-else-return - Unexpected 'else' after 'return'.
+		Line 1265: quotes - Strings must use singlequote.
+		Line 1265: quotes - Strings must use singlequote.
+		Line 1270: quotes - Strings must use singlequote.
+		Line 1270: quotes - Strings must use singlequote.
+		Line 1276: quotes - Strings must use singlequote.
+		Line 1279: quotes - Strings must use singlequote.
+		Line 1286: quotes - Strings must use singlequote.
+		Line 1306: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1310: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 1310: space-infix-ops - Infix operators must be spaced.
+		Line 1310: space-infix-ops - Infix operators must be spaced.
+		Line 1313: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1337: quotes - Strings must use singlequote.
+		Line 1337: quotes - Strings must use singlequote.
+		Line 1338: quotes - Strings must use singlequote.
+		Line 1338: quotes - Strings must use singlequote.
+		Line 1339: quotes - Strings must use singlequote.
+		Line 1346: quotes - Strings must use singlequote.
+		Line 1348: quotes - Strings must use singlequote.
+		Line 1360: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1361: quotes - Strings must use singlequote.
+		Line 1361: quotes - Strings must use singlequote.
+		Line 1372: quotes - Strings must use singlequote.
+		Line 1372: quotes - Strings must use singlequote.
+		Line 1381: quotes - Strings must use singlequote.
+		Line 1384: quotes - Strings must use singlequote.
+		Line 1384: quotes - Strings must use singlequote.
+		Line 1384: quotes - Strings must use singlequote.
+		Line 1384: quotes - Strings must use singlequote.
+		Line 1384: quotes - Strings must use singlequote.
+		Line 1384: quotes - Strings must use singlequote.
+		Line 1384: quotes - Strings must use singlequote.
+		Line 1386: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 1386: space-infix-ops - Infix operators must be spaced.
+		Line 1386: space-infix-ops - Infix operators must be spaced.
+		Line 1386: space-infix-ops - Infix operators must be spaced.
+		Line 1387: quotes - Strings must use singlequote.
+		Line 1396: space-infix-ops - Infix operators must be spaced.
+		Line 1396: space-infix-ops - Infix operators must be spaced.
+		Line 1396: space-infix-ops - Infix operators must be spaced.
+		Line 1396: space-infix-ops - Infix operators must be spaced.
+		Line 1396: space-infix-ops - Infix operators must be spaced.
+		Line 1396: quotes - Strings must use singlequote.
+		Line 1396: quotes - Strings must use singlequote.
+		Line 1396: quotes - Strings must use singlequote.
+		Line 1403: no-else-return - Unexpected 'else' after 'return'.
+		Line 1405: quotes - Strings must use singlequote.
+		Line 1413: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1445: quotes - Strings must use singlequote.
+		Line 1450: quotes - Strings must use singlequote.
+		Line 1450: quotes - Strings must use singlequote.
+		Line 1450: quotes - Strings must use singlequote.
+		Line 1463: quotes - Strings must use singlequote.
+		Line 1470: space-infix-ops - Infix operators must be spaced.
+		Line 1472: quotes - Strings must use singlequote.
+		Line 1472: quotes - Strings must use singlequote.
+		Line 1472: quotes - Strings must use singlequote.
+		Line 1472: quotes - Strings must use singlequote.
+		Line 1472: quotes - Strings must use singlequote.
+		Line 1499: quotes - Strings must use singlequote.
+		Line 1499: quotes - Strings must use singlequote.
+		Line 1499: quotes - Strings must use singlequote.
+		Line 1499: quotes - Strings must use singlequote.
+		Line 1501: quotes - Strings must use singlequote.
+		Line 1501: quotes - Strings must use singlequote.
+		Line 1501: quotes - Strings must use singlequote.
+		Line 1514: quotes - Strings must use singlequote.
+		Line 1514: quotes - Strings must use singlequote.
+		Line 1525: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1562: quotes - Strings must use singlequote.
+		Line 1562: quotes - Strings must use singlequote.
+		Line 1562: quotes - Strings must use singlequote.
+		Line 1575: quotes - Strings must use singlequote.
+		Line 1575: quotes - Strings must use singlequote.
+		Line 1575: quotes - Strings must use singlequote.
+		Line 1671: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 1695: quotes - Strings must use singlequote.
+		Line 1695: quotes - Strings must use singlequote.
+		Line 1696: quotes - Strings must use singlequote.
+		Line 1709: quotes - Strings must use singlequote.
+		Line 1709: quotes - Strings must use singlequote.
+		Line 1747: quotes - Strings must use singlequote.
+		Line 1747: quotes - Strings must use singlequote.
+		Line 1747: quotes - Strings must use singlequote.
+		Line 1747: quotes - Strings must use singlequote.
+		Line 1750: quotes - Strings must use singlequote.
+		Line 1753: quotes - Strings must use singlequote.
+		Line 1754: quotes - Strings must use singlequote.
+		Line 1754: quotes - Strings must use singlequote.
+		Line 1754: quotes - Strings must use singlequote.
+		Line 1766: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1775: quotes - Strings must use singlequote.
+		Line 1775: quotes - Strings must use singlequote.
+		Line 1777: quotes - Strings must use singlequote.
+		Line 1777: quotes - Strings must use singlequote.
+		Line 1777: quotes - Strings must use singlequote.
+		Line 1785: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1787: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 1787: space-infix-ops - Infix operators must be spaced.
+		Line 1787: space-infix-ops - Infix operators must be spaced.
+		Line 1787: space-infix-ops - Infix operators must be spaced.
+		Line 1793: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 1816: quotes - Strings must use singlequote.
+		Line 1818: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1818: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 1819: quotes - Strings must use singlequote.
+		Line 1823: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1825: quotes - Strings must use singlequote.
+		Line 1827: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 1827: space-infix-ops - Infix operators must be spaced.
+		Line 1827: space-infix-ops - Infix operators must be spaced.
+		Line 1830: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1830: quotes - Strings must use singlequote.
+		Line 1831: quotes - Strings must use singlequote.
+		Line 1836: no-else-return - Unexpected 'else' after 'return'.
+		Line 1834: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1835: quotes - Strings must use singlequote.
+		Line 1835: quotes - Strings must use singlequote.
+		Line 1835: quotes - Strings must use singlequote.
+		Line 1838: quotes - Strings must use singlequote.
+		Line 1838: quotes - Strings must use singlequote.
+		Line 1838: quotes - Strings must use singlequote.
+		Line 1844: quotes - Strings must use singlequote.
+		Line 1844: quotes - Strings must use singlequote.
+		Line 1848: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1863: quotes - Strings must use singlequote.
+		Line 1863: quotes - Strings must use singlequote.
+		Line 1871: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1906: quotes - Strings must use singlequote.
+		Line 1906: quotes - Strings must use singlequote.
+		Line 1917: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1917: quotes - Strings must use singlequote.
+		Line 1921: quotes - Strings must use singlequote.
+		Line 1947: no-else-return - Unexpected 'else' after 'return'.
+		Line 1957: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1961: no-else-return - Unexpected 'else' after 'return'.
+		Line 1982: quotes - Strings must use singlequote.
+		Line 1982: quotes - Strings must use singlequote.
+		Line 1983: quotes - Strings must use singlequote.
+		Line 1983: quotes - Strings must use singlequote.
+		Line 1990: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1990: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1990: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1990: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1992: quotes - Strings must use singlequote.
+		Line 2001: quotes - Strings must use singlequote.
+		Line 2002: quotes - Strings must use singlequote.
+		Line 2006: quotes - Strings must use singlequote.
+		Line 2007: quotes - Strings must use singlequote.
+		Line 2010: quotes - Strings must use singlequote.
+		Line 2011: quotes - Strings must use singlequote.
+		Line 2014: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 2014: space-infix-ops - Infix operators must be spaced.
+		Line 2014: space-infix-ops - Infix operators must be spaced.
+		Line 2018: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 2025: quotes - Strings must use singlequote.
+		Line 2025: quotes - Strings must use singlequote.
+		Line 2025: quotes - Strings must use singlequote.
+		Line 2026: quotes - Strings must use singlequote.
+		Line 2026: quotes - Strings must use singlequote.
+		Line 2026: quotes - Strings must use singlequote.
+		Line 2027: quotes - Strings must use singlequote.
+		Line 2030: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 2031: quotes - Strings must use singlequote.
+		Line 2034: quotes - Strings must use singlequote.
+		Line 2034: quotes - Strings must use singlequote.
+		Line 2034: quotes - Strings must use singlequote.
+		Line 2041: quotes - Strings must use singlequote.
+		Line 2046: quotes - Strings must use singlequote.
+		Line 2047: quotes - Strings must use singlequote.
+		Line 2048: quotes - Strings must use singlequote.
+		Line 2049: quotes - Strings must use singlequote.
+		Line 2050: quotes - Strings must use singlequote.
+		Line 2051: quotes - Strings must use singlequote.
+		Line 2052: quotes - Strings must use singlequote.
+		Line 2053: quotes - Strings must use singlequote.
+		Line 2054: quotes - Strings must use singlequote.
+		Line 2055: quotes - Strings must use singlequote.
+		Line 2056: quotes - Strings must use singlequote.
+		Line 2057: quotes - Strings must use singlequote.
+		Line 2058: quotes - Strings must use singlequote.
+		Line 2059: quotes - Strings must use singlequote.
+		Line 2060: quotes - Strings must use singlequote.
+		Line 2061: quotes - Strings must use singlequote.
+		Line 2065: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 2065: space-infix-ops - Infix operators must be spaced.
+		Line 2065: space-infix-ops - Infix operators must be spaced.
+		Line 2065: space-infix-ops - Infix operators must be spaced.
+		Line 2070: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 2080: quotes - Strings must use singlequote.
+		Line 2094: quotes - Strings must use singlequote.
+		Line 2102: func-style - Expected a function expression.
+		Line 2117: no-extra-semi - Unnecessary semicolon.
+		Line 2128: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 2132: no-else-return - Unexpected 'else' after 'return'.
+		Line 2130: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 2153: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2154: space-infix-ops - Infix operators must be spaced.
+		Line 2154: space-infix-ops - Infix operators must be spaced.
+		Line 2154: space-infix-ops - Infix operators must be spaced.
+		Line 2154: space-infix-ops - Infix operators must be spaced.
+		Line 2154: space-infix-ops - Infix operators must be spaced.
+		Line 2154: quotes - Strings must use singlequote.
+		Line 2155: quotes - Strings must use singlequote.
+		Line 2155: quotes - Strings must use singlequote.
+		Line 2155: quotes - Strings must use singlequote.
+		Line 2158: space-infix-ops - Infix operators must be spaced.
+		Line 2158: space-infix-ops - Infix operators must be spaced.
+		Line 2158: space-infix-ops - Infix operators must be spaced.
+		Line 2158: quotes - Strings must use singlequote.
+		Line 2159: quotes - Strings must use singlequote.
+		Line 2159: quotes - Strings must use singlequote.
+		Line 2183: quotes - Strings must use singlequote.
+		Line 2187: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 2188: quotes - Strings must use singlequote.
+		Line 2188: quotes - Strings must use singlequote.
+		Line 2189: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 2192: quotes - Strings must use singlequote.
+		Line 2192: quotes - Strings must use singlequote.
+		Line 2201: no-extra-semi - Unnecessary semicolon.
+	public/js/interact.js:
+		Line 3162: eol-last - Newline required at end of file but not found.
+		Line 8: no-spaced-func - Unexpected space between function name and paren.
+		Line 12: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 13: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 14: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 15: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 21: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 22: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 27: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 28: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 30: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 43: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 44: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 45: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 47: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 48: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 49: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 51: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 52: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 53: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 55: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 96: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 109: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 183: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 186: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 188: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 189: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 190: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 191: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 192: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 193: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 194: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 195: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 200: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 223: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 230: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 233: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 235: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 252: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 254: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 261: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 266: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 273: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 276: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 280: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 284: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 288: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 294: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 134: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 135: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 136: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 137: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 154: space-infix-ops - Infix operators must be spaced.
+		Line 154: space-infix-ops - Infix operators must be spaced.
+		Line 155: space-infix-ops - Infix operators must be spaced.
+		Line 155: space-infix-ops - Infix operators must be spaced.
+		Line 186: space-infix-ops - Infix operators must be spaced.
+		Line 233: space-infix-ops - Infix operators must be spaced.
+		Line 261: eqeqeq - Expected '===' and instead saw '=='.
+		Line 266: space-infix-ops - Infix operators must be spaced.
+		Line 267: space-infix-ops - Infix operators must be spaced.
+		Line 268: space-infix-ops - Infix operators must be spaced.
+		Line 269: space-infix-ops - Infix operators must be spaced.
+		Line 298: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 299: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 300: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 302: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 303: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 298: space-infix-ops - Infix operators must be spaced.
+		Line 299: space-infix-ops - Infix operators must be spaced.
+		Line 300: space-infix-ops - Infix operators must be spaced.
+		Line 306: no-extend-native - Array prototype is read only, properties should not be added.
+		Line 310: space-infix-ops - Infix operators must be spaced.
+		Line 346: no-shadow - target is already declared in the upper scope.
+		Line 345: func-style - Expected a function expression.
+		Line 392: no-shadow - target is already declared in the upper scope.
+		Line 390: func-style - Expected a function expression.
+		Line 452: func-style - Expected a function expression.
+		Line 454: func-style - Expected a function expression.
+		Line 463: func-style - Expected a function expression.
+		Line 471: space-infix-ops - Infix operators must be spaced.
+		Line 488: func-style - Expected a function expression.
+		Line 501: func-style - Expected a function expression.
+		Line 503: space-infix-ops - Infix operators must be spaced.
+		Line 506: func-style - Expected a function expression.
+		Line 513: func-style - Expected a function expression.
+		Line 516: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 517: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 518: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 519: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 537: func-style - Expected a function expression.
+		Line 544: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 545: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 546: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 547: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 550: space-infix-ops - Infix operators must be spaced.
+		Line 553: space-infix-ops - Infix operators must be spaced.
+		Line 566: func-style - Expected a function expression.
+		Line 570: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 571: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 585: func-style - Expected a function expression.
+		Line 589: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 590: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 608: space-infix-ops - Infix operators must be spaced.
+		Line 611: space-infix-ops - Infix operators must be spaced.
+		Line 614: space-infix-ops - Infix operators must be spaced.
+		Line 617: space-infix-ops - Infix operators must be spaced.
+		Line 624: func-style - Expected a function expression.
+		Line 631: func-style - Expected a function expression.
+		Line 635: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 637: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 638: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 639: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 640: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 641: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 677: space-after-keywords - Keyword "while" must be followed by whitespace.
+		Line 712: no-shadow - elements is already declared in the upper scope.
+		Line 708: func-style - Expected a function expression.
+		Line 711: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 712: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 715: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 727: space-infix-ops - Infix operators must be spaced.
+		Line 734: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 773: func-style - Expected a function expression.
+		Line 776: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 779: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 779: space-infix-ops - Infix operators must be spaced.
+		Line 935: func-style - Expected a function expression.
+		Line 940: space-infix-ops - Infix operators must be spaced.
+		Line 973: no-shadow - elements is already declared in the upper scope.
+		Line 957: func-style - Expected a function expression.
+		Line 970: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 973: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 979: space-infix-ops - Infix operators must be spaced.
+		Line 1001: func-style - Expected a function expression.
+		Line 1008: space-infix-ops - Infix operators must be spaced.
+		Line 1019: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1051: space-infix-ops - Infix operators must be spaced.
+		Line 1053: space-infix-ops - Infix operators must be spaced.
+		Line 1055: space-infix-ops - Infix operators must be spaced.
+		Line 1073: func-style - Expected a function expression.
+		Line 1081: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1082: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1083: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1084: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1086: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1087: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1088: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1089: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1089: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1112: space-infix-ops - Infix operators must be spaced.
+		Line 1126: space-infix-ops - Infix operators must be spaced.
+		Line 1128: space-infix-ops - Infix operators must be spaced.
+		Line 1194: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1195: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1196: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1218: space-infix-ops - Infix operators must be spaced.
+		Line 1328: no-shadow - dropTarget is already declared in the upper scope.
+		Line 1322: func-style - Expected a function expression.
+		Line 1326: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1344: space-infix-ops - Infix operators must be spaced.
+		Line 1384: func-style - Expected a function expression.
+		Line 1403: func-style - Expected a function expression.
+		Line 1445: func-style - Expected a function expression.
+		Line 1448: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1458: func-style - Expected a function expression.
+		Line 1463: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1478: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1511: func-style - Expected a function expression.
+		Line 1528: func-style - Expected a function expression.
+		Line 1555: func-style - Expected a function expression.
+		Line 1566: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1567: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1568: space-infix-ops - Infix operators must be spaced.
+		Line 1646: func-style - Expected a function expression.
+		Line 1679: func-style - Expected a function expression.
+		Line 1684: func-style - Expected a function expression.
+		Line 1701: func-style - Expected a function expression.
+		Line 1713: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 1731: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1732: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1737: no-space-before-semi - Expression called with trailing whitespace before semicolon
+		Line 1738: no-space-before-semi - Expression called with trailing whitespace before semicolon
+		Line 1798: space-infix-ops - Infix operators must be spaced.
+		Line 1808: space-infix-ops - Infix operators must be spaced.
+		Line 1815: space-infix-ops - Infix operators must be spaced.
+		Line 1849: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2156: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2157: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2158: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2159: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2172: space-infix-ops - Infix operators must be spaced.
+		Line 2172: space-infix-ops - Infix operators must be spaced.
+		Line 2173: space-infix-ops - Infix operators must be spaced.
+		Line 2175: space-infix-ops - Infix operators must be spaced.
+		Line 2228: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2228: space-infix-ops - Infix operators must be spaced.
+		Line 2363: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2368: no-else-return - Unexpected 'else' after 'return'.
+		Line 2377: no-else-return - Unexpected 'else' after 'return'.
+		Line 2386: no-else-return - Unexpected 'else' after 'return'.
+		Line 2395: no-else-return - Unexpected 'else' after 'return'.
+		Line 2404: no-else-return - Unexpected 'else' after 'return'.
+		Line 2444: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2445: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2446: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2596: no-spaced-func - Unexpected space between function name and paren.
+		Line 2596: space-infix-ops - Infix operators must be spaced.
+		Line 2597: no-spaced-func - Unexpected space between function name and paren.
+		Line 2597: space-infix-ops - Infix operators must be spaced.
+		Line 2598: no-spaced-func - Unexpected space between function name and paren.
+		Line 2598: space-infix-ops - Infix operators must be spaced.
+		Line 2599: space-infix-ops - Infix operators must be spaced.
+		Line 2601: no-spaced-func - Unexpected space between function name and paren.
+		Line 2629: no-spaced-func - Unexpected space between function name and paren.
+		Line 2708: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2726: space-infix-ops - Infix operators must be spaced.
+		Line 2905: no-space-before-semi - Expression called with trailing whitespace before semicolon
+		Line 2906: no-space-before-semi - Expression called with trailing whitespace before semicolon
+		Line 2907: no-space-before-semi - Expression called with trailing whitespace before semicolon
+		Line 2909: space-infix-ops - Infix operators must be spaced.
+		Line 2924: space-infix-ops - Infix operators must be spaced.
+	public/js/lodash.js:
+		Line 6785: eol-last - Newline required at end of file but not found.
+		Line 10: no-extra-semi - Unnecessary semicolon.
+		Line 13: no-shadow-restricted-names - Shadowing of global property "undefined".
+		Line 23: new-parens - Missing '()' invoking a constructor
+		Line 132: quotes - Strings must use singlequote.
+		Line 132: quotes - Strings must use singlequote.
+		Line 170: func-style - Expected a function expression.
+		Line 191: func-style - Expected a function expression.
+		Line 195: eqeqeq - Expected '===' and instead saw '=='.
+		Line 195: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 198: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 198: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 201: eqeqeq - Expected '===' and instead saw '=='.
+		Line 204: eqeqeq - Expected '===' and instead saw '=='.
+		Line 215: func-style - Expected a function expression.
+		Line 219: eqeqeq - Expected '===' and instead saw '=='.
+		Line 219: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 222: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 222: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 225: eqeqeq - Expected '===' and instead saw '=='.
+		Line 228: eqeqeq - Expected '===' and instead saw '=='.
+		Line 244: func-style - Expected a function expression.
+		Line 257: func-style - Expected a function expression.
+		Line 265: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 268: eqeqeq - Expected '===' and instead saw '=='.
+		Line 271: eqeqeq - Expected '===' and instead saw '=='.
+		Line 292: func-style - Expected a function expression.
+		Line 295: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 297: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 299: eqeqeq - Expected '===' and instead saw '=='.
+		Line 300: eqeqeq - Expected '===' and instead saw '=='.
+		Line 300: eqeqeq - Expected '===' and instead saw '=='.
+		Line 304: dot-notation - ['undefined'] is better written in dot notation.
+		Line 325: func-style - Expected a function expression.
+		Line 335: func-style - Expected a function expression.
+		Line 345: func-style - Expected a function expression.
+		Line 369: func-style - Expected a function expression.
+		Line 382: func-style - Expected a function expression.
+		Line 406: func-style - Expected a function expression.
+		Line 408: eqeqeq - Expected '===' and instead saw '=='.
+		Line 432: func-style - Expected a function expression.
+		Line 492: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 587: func-style - Expected a function expression.
+		Line 589: eqeqeq - Expected '===' and instead saw '=='.
+		Line 602: func-style - Expected a function expression.
+		Line 633: eqeqeq - Expected '===' and instead saw '=='.
+		Line 706: func-style - Expected a function expression.
+		Line 726: no-shadow - result is already declared in the upper scope.
+		Line 711: func-style - Expected a function expression.
+		Line 726: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 749: no-shadow - result is already declared in the upper scope.
+		Line 747: func-style - Expected a function expression.
+		Line 750: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 788: eqeqeq - Expected '===' and instead saw '=='.
+		Line 835: func-style - Expected a function expression.
+		Line 840: no-func-assign - 'baseCreate' is a function.
+		Line 841: func-style - Expected a function expression.
+		Line 845: no-new-object - The object literal notation {} is preferrable.
+		Line 845: new-parens - Missing '()' invoking a constructor
+		Line 863: func-style - Expected a function expression.
+		Line 864: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 868: eqeqeq - Expected '===' and instead saw '=='.
+		Line 872: eqeqeq - Expected '===' and instead saw '=='.
+		Line 918: func-style - Expected a function expression.
+		Line 920: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 924: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 954: no-shadow - result is already declared in the upper scope.
+		Line 932: func-style - Expected a function expression.
+		Line 974: no-shadow - indexOf is already declared in the upper scope.
+		Line 977: no-shadow - result is already declared in the upper scope.
+		Line 972: func-style - Expected a function expression.
+		Line 976: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1014: no-shadow - result is already declared in the upper scope.
+		Line 1011: func-style - Expected a function expression.
+		Line 1019: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1019: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1027: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1056: no-shadow - result is already declared in the upper scope.
+		Line 1151: no-shadow - size is already declared in the upper scope.
+		Line 1053: func-style - Expected a function expression.
+		Line 1057: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 1064: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1067: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1077: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 1077: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 1084: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1087: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1090: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 1098: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1102: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 1103: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 1105: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1105: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1105: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1111: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1113: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1123: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 1131: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 1147: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1148: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1163: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1191: no-return-assign - Return statement should not contain assignment.
+		Line 1200: no-return-assign - Return statement should not contain assignment.
+		Line 1226: func-style - Expected a function expression.
+		Line 1237: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1246: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 1268: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1272: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 1289: func-style - Expected a function expression.
+		Line 1305: no-shadow - indexOf is already declared in the upper scope.
+		Line 1307: no-shadow - result is already declared in the upper scope.
+		Line 1303: func-style - Expected a function expression.
+		Line 1319: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1350: func-style - Expected a function expression.
+		Line 1358: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1394: func-style - Expected a function expression.
+		Line 1403: new-parens - Missing '()' invoking a constructor
+		Line 1448: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1459: func-style - Expected a function expression.
+		Line 1472: no-shadow - result is already declared in the upper scope.
+		Line 1471: func-style - Expected a function expression.
+		Line 1483: func-style - Expected a function expression.
+		Line 1484: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1511: no-shadow - result is already declared in the upper scope.
+		Line 1509: func-style - Expected a function expression.
+		Line 1514: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1524: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1534: func-style - Expected a function expression.
+		Line 1556: func-style - Expected a function expression.
+		Line 1557: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1557: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1558: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1579: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1579: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1580: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1594: curly - Expected { after 'if' condition.
+		Line 1595: curly - Expected { after 'if' condition.
+		Line 1601: semi - Missing semicolon.
+		Line 1637: quotes - Strings must use singlequote.
+		Line 1681: curly - Expected { after 'if' condition.
+		Line 1684: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1685: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1687: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1695: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1703: semi - Missing semicolon.
+		Line 1746: func-style - Expected a function expression.
+		Line 1749: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 1749: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 1754: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1798: func-style - Expected a function expression.
+		Line 1799: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1834: no-shadow - result is already declared in the upper scope.
+		Line 1833: func-style - Expected a function expression.
+		Line 1860: curly - Expected { after 'if' condition.
+		Line 1863: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1869: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 1873: curly - Expected { after 'if' condition.
+		Line 1873: eqeqeq - Expected '===' and instead saw '=='.
+		Line 1877: semi - Missing semicolon.
+		Line 1922: no-shadow - result is already declared in the upper scope.
+		Line 1921: func-style - Expected a function expression.
+		Line 1975: no-shadow - result is already declared in the upper scope.
+		Line 1974: func-style - Expected a function expression.
+		Line 2019: curly - Expected { after 'if' condition.
+		Line 2020: curly - Expected { after 'if' condition.
+		Line 2021: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2023: curly - Expected { after 'if' condition.
+		Line 2025: semi - Missing semicolon.
+		Line 2057: no-shadow - pairs is already declared in the upper scope.
+		Line 2056: func-style - Expected a function expression.
+		Line 2096: curly - Expected { after 'if' condition.
+		Line 2097: curly - Expected { after 'if' condition.
+		Line 2098: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2101: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2105: curly - Expected { after 'if' condition.
+		Line 2107: semi - Missing semicolon.
+		Line 2128: func-style - Expected a function expression.
+		Line 2130: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2158: no-shadow - result is already declared in the upper scope.
+		Line 2157: func-style - Expected a function expression.
+		Line 2182: func-style - Expected a function expression.
+		Line 2203: no-shadow - result is already declared in the upper scope.
+		Line 2199: func-style - Expected a function expression.
+		Line 2202: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2225: func-style - Expected a function expression.
+		Line 2227: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2227: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2243: func-style - Expected a function expression.
+		Line 2244: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2244: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2260: func-style - Expected a function expression.
+		Line 2286: no-shadow - result is already declared in the upper scope.
+		Line 2285: func-style - Expected a function expression.
+		Line 2293: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2293: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2293: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2294: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2294: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2298: no-return-assign - Return statement should not contain assignment.
+		Line 2341: func-style - Expected a function expression.
+		Line 2342: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2373: func-style - Expected a function expression.
+		Line 2390: func-style - Expected a function expression.
+		Line 2391: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2414: func-style - Expected a function expression.
+		Line 2447: func-style - Expected a function expression.
+		Line 2450: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 2469: func-style - Expected a function expression.
+		Line 2488: func-style - Expected a function expression.
+		Line 2489: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2490: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2490: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2518: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2522: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2525: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2525: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2542: func-style - Expected a function expression.
+		Line 2543: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2543: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2559: func-style - Expected a function expression.
+		Line 2560: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2561: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2561: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2577: func-style - Expected a function expression.
+		Line 2578: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2618: no-shadow - result is already declared in the upper scope.
+		Line 2617: func-style - Expected a function expression.
+		Line 2678: func-style - Expected a function expression.
+		Line 2687: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 2690: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2692: eqeqeq - Expected '===' and instead saw '=='.
+		Line 2696: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2735: no-shadow - result is already declared in the upper scope.
+		Line 2734: func-style - Expected a function expression.
+		Line 2736: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 2779: no-shadow - result is already declared in the upper scope.
+		Line 2775: func-style - Expected a function expression.
+		Line 2778: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2816: no-shadow - result is already declared in the upper scope.
+		Line 2815: func-style - Expected a function expression.
+		Line 2817: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 2820: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2870: func-style - Expected a function expression.
+		Line 2872: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 2908: no-shadow - result is already declared in the upper scope.
+		Line 2904: func-style - Expected a function expression.
+		Line 2907: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2944: no-shadow - result is already declared in the upper scope.
+		Line 2939: func-style - Expected a function expression.
+		Line 2943: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2946: space-after-keywords - Keyword "while" must be followed by whitespace.
+		Line 2981: no-shadow - indexOf is already declared in the upper scope.
+		Line 2983: no-shadow - result is already declared in the upper scope.
+		Line 2979: func-style - Expected a function expression.
+		Line 2988: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3080: no-shadow - result is already declared in the upper scope.
+		Line 3079: func-style - Expected a function expression.
+		Line 3086: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3094: no-return-assign - Return statement should not contain assignment.
+		Line 3141: no-shadow - result is already declared in the upper scope.
+		Line 3140: func-style - Expected a function expression.
+		Line 3147: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3221: no-shadow - result is already declared in the upper scope.
+		Line 3207: func-style - Expected a function expression.
+		Line 3213: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3253: no-shadow - result is already declared in the upper scope.
+		Line 3252: func-style - Expected a function expression.
+		Line 3290: func-style - Expected a function expression.
+		Line 3294: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3295: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3324: func-style - Expected a function expression.
+		Line 3326: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3327: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3453: no-shadow - result is already declared in the upper scope.
+		Line 3448: func-style - Expected a function expression.
+		Line 3451: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3453: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3506: no-shadow - result is already declared in the upper scope.
+		Line 3500: func-style - Expected a function expression.
+		Line 3505: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3561: no-shadow - result is already declared in the upper scope.
+		Line 3559: func-style - Expected a function expression.
+		Line 3565: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 3568: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 3579: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 3636: no-shadow - result is already declared in the upper scope.
+		Line 3634: func-style - Expected a function expression.
+		Line 3640: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 3643: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 3654: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 3721: func-style - Expected a function expression.
+		Line 3722: curly - Expected { after 'if' condition.
+		Line 3729: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3740: semi - Missing semicolon.
+		Line 3765: func-style - Expected a function expression.
+		Line 3814: func-style - Expected a function expression.
+		Line 3847: no-shadow - result is already declared in the upper scope.
+		Line 3840: func-style - Expected a function expression.
+		Line 3841: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 3844: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 3869: no-shadow - result is already declared in the upper scope.
+		Line 3866: func-style - Expected a function expression.
+		Line 3869: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3899: func-style - Expected a function expression.
+		Line 3901: eqeqeq - Expected '===' and instead saw '=='.
+		Line 3947: no-shadow - result is already declared in the upper scope.
+		Line 3946: func-style - Expected a function expression.
+		Line 3953: eqeqeq - Expected '===' and instead saw '=='.
+		Line 4020: no-shadow - result is already declared in the upper scope.
+		Line 4016: func-style - Expected a function expression.
+		Line 4020: eqeqeq - Expected '===' and instead saw '=='.
+		Line 4062: func-style - Expected a function expression.
+		Line 4063: eqeqeq - Expected '===' and instead saw '=='.
+		Line 4115: no-shadow - result is already declared in the upper scope.
+		Line 4112: func-style - Expected a function expression.
+		Line 4141: func-style - Expected a function expression.
+		Line 4186: func-style - Expected a function expression.
+		Line 4240: func-style - Expected a function expression.
+		Line 4302: func-style - Expected a function expression.
+		Line 4304: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 4306: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 4306: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 4314: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 4362: func-style - Expected a function expression.
+		Line 4364: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 4364: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 4366: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 4369: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 4399: func-style - Expected a function expression.
+		Line 4400: eqeqeq - Expected '===' and instead saw '=='.
+		Line 4460: func-style - Expected a function expression.
+		Line 4462: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 4464: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 4464: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 4471: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 4495: no-shadow - indexOf is already declared in the upper scope.
+		Line 4510: no-shadow - result is already declared in the upper scope.
+		Line 4490: func-style - Expected a function expression.
+		Line 4497: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 4512: no-labels - Unexpected labeled statement.
+		Line 4523: no-labels - Unexpected label in continue statement.
+		Line 4590: func-style - Expected a function expression.
+		Line 4592: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 4594: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 4594: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 4602: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 4636: func-style - Expected a function expression.
+		Line 4638: eqeqeq - Expected '===' and instead saw '=='.
+		Line 4666: func-style - Expected a function expression.
+		Line 4729: no-shadow - result is already declared in the upper scope.
+		Line 4717: func-style - Expected a function expression.
+		Line 4719: eqeqeq - Expected '===' and instead saw '=='.
+		Line 4721: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 4773: no-shadow - result is already declared in the upper scope.
+		Line 4770: func-style - Expected a function expression.
+		Line 4839: func-style - Expected a function expression.
+		Line 4840: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 4840: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 4842: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 4843: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 4850: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 4903: func-style - Expected a function expression.
+		Line 4905: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 4934: func-style - Expected a function expression.
+		Line 4982: func-style - Expected a function expression.
+		Line 4984: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 4984: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 4986: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 4989: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 5010: func-style - Expected a function expression.
+		Line 5038: no-shadow - result is already declared in the upper scope.
+		Line 5031: func-style - Expected a function expression.
+		Line 5066: no-shadow - result is already declared in the upper scope.
+		Line 5062: func-style - Expected a function expression.
+		Line 5095: no-shadow - result is already declared in the upper scope.
+		Line 5092: func-style - Expected a function expression.
+		Line 5137: func-style - Expected a function expression.
+		Line 5139: new-parens - Missing '()' invoking a constructor
+		Line 5170: func-style - Expected a function expression.
+		Line 5200: func-style - Expected a function expression.
+		Line 5246: func-style - Expected a function expression.
+		Line 5282: func-style - Expected a function expression.
+		Line 5288: new-parens - Missing '()' invoking a constructor
+		Line 5330: func-style - Expected a function expression.
+		Line 5331: eqeqeq - Expected '===' and instead saw '=='.
+		Line 5377: no-shadow - result is already declared in the upper scope.
+		Line 5374: func-style - Expected a function expression.
+		Line 5382: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 5383: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 5384: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 5387: new-parens - Missing '()' invoking a constructor
+		Line 5445: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 5490: func-style - Expected a function expression.
+		Line 5492: new-parens - Missing '()' invoking a constructor
+		Line 5514: func-style - Expected a function expression.
+		Line 5516: new-parens - Missing '()' invoking a constructor
+		Line 5559: func-style - Expected a function expression.
+		Line 5561: new-parens - Missing '()' invoking a constructor
+		Line 5570: semi - Missing semicolon.
+		Line 5594: no-shadow - result is already declared in the upper scope.
+		Line 5592: func-style - Expected a function expression.
+		Line 5597: new-parens - Missing '()' invoking a constructor
+		Line 5630: func-style - Expected a function expression.
+		Line 5661: func-style - Expected a function expression.
+		Line 5696: func-style - Expected a function expression.
+		Line 5701: new-parens - Missing '()' invoking a constructor
+		Line 5737: func-style - Expected a function expression.
+		Line 5758: func-style - Expected a function expression.
+		Line 5795: func-style - Expected a function expression.
+		Line 5797: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 5797: eqeqeq - Expected '===' and instead saw '=='.
+		Line 5801: eqeqeq - Expected '!==' and instead saw '!='.
+		Line 5805: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 5806: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 5809: eqeqeq - Expected '===' and instead saw '=='.
+		Line 5814: eqeqeq - Expected '===' and instead saw '=='.
+		Line 5844: func-style - Expected a function expression.
+		Line 5845: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 5862: func-style - Expected a function expression.
+		Line 5895: no-shadow - chain is already declared in the upper scope.
+		Line 5894: func-style - Expected a function expression.
+		Line 5899: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 5921: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 5950: func-style - Expected a function expression.
+		Line 5967: func-style - Expected a function expression.
+		Line 6007: eqeqeq - Expected '===' and instead saw '=='.
+		Line 6036: func-style - Expected a function expression.
+		Line 6069: func-style - Expected a function expression.
+		Line 6071: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 6070: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 6071: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 6073: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 6074: eqeqeq - Expected '===' and instead saw '=='.
+		Line 6078: eqeqeq - Expected '===' and instead saw '=='.
+		Line 6095: space-infix-ops - Infix operators must be spaced.
+		Line 6127: func-style - Expected a function expression.
+		Line 6305: no-shadow - result is already declared in the upper scope.
+		Line 6220: func-style - Expected a function expression.
+		Line 6236: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 6237: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 6238: quotes - Strings must use singlequote.
+		Line 6256: quotes - Strings must use singlequote.
+		Line 6256: quotes - Strings must use singlequote.
+		Line 6260: quotes - Strings must use singlequote.
+		Line 6260: quotes - Strings must use singlequote.
+		Line 6263: quotes - Strings must use singlequote.
+		Line 6263: quotes - Strings must use singlequote.
+		Line 6272: quotes - Strings must use singlequote.
+		Line 6277: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 6291: quotes - Strings must use singlequote.
+		Line 6294: quotes - Strings must use singlequote.
+		Line 6346: no-shadow - result is already declared in the upper scope.
+		Line 6343: func-style - Expected a function expression.
+		Line 6370: func-style - Expected a function expression.
+		Line 6371: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 6390: func-style - Expected a function expression.
+		Line 6392: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 6421: func-style - Expected a function expression.
+		Line 6447: func-style - Expected a function expression.
+		Line 6477: func-style - Expected a function expression.
+		Line 6494: func-style - Expected a function expression.
+		Line 6511: func-style - Expected a function expression.
+		Line 6668: semi - Missing semicolon.
+		Line 6691: space-infix-ops - Infix operators must be spaced.
+		Line 6695: no-eq-null - Use ‘===’ to compare with ‘null’.
+		Line 6695: eqeqeq - Expected '===' and instead saw '=='.
+		Line 6758: eqeqeq - Expected '===' and instead saw '=='.
+		Line 6758: eqeqeq - Expected '===' and instead saw '=='.
+	public/js/prettify.js:
+		Line 30: semi - Missing semicolon.
+		Line 1: space-infix-ops - Infix operators must be spaced.
+		Line 1: space-infix-ops - Infix operators must be spaced.
+		Line 20: no-redeclare - y is already defined
+		Line 19: no-redeclare - E is already defined
+		Line 6: no-redeclare - k is already defined
+		Line 6: no-redeclare - c is already defined
+		Line 2: func-style - Expected a function expression.
+		Line 2: no-shadow - b is already declared in the upper scope.
+		Line 2: no-shadow - a is already declared in the upper scope.
+		Line 2: func-style - Expected a function expression.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: curly - Expected { after 'if' condition.
+		Line 2: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: semi - Missing semicolon.
+		Line 2: space-return-throw-case - Keyword "return" must be followed by whitespace.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: yoda - Expected literal to be on the right side of <=.
+		Line 2: quotes - Strings must use singlequote.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: quotes - Strings must use singlequote.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: quotes - Strings must use singlequote.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: quotes - Strings must use singlequote.
+		Line 2: func-style - Expected a function expression.
+		Line 2: curly - Expected { after 'if' condition.
+		Line 2: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-return-throw-case - Keyword "return" must be followed by whitespace.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: quotes - Strings must use singlequote.
+		Line 2: quotes - Strings must use singlequote.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: semi - Missing semicolon.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: quotes - Strings must use singlequote.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: quotes - Strings must use singlequote.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: quotes - Strings must use singlequote.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: quotes - Strings must use singlequote.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: quotes - Strings must use singlequote.
+		Line 2: no-redeclare - e is already defined
+		Line 3: no-redeclare - a is already defined
+		Line 3: no-redeclare - h is already defined
+		Line 2: no-shadow - b is already declared in the upper scope.
+		Line 2: no-shadow - a is already declared in the upper scope.
+		Line 3: no-shadow - c is already declared in the upper scope.
+		Line 2: func-style - Expected a function expression.
+		Line 2: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 3: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 2: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: quotes - Strings must use singlequote.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: quotes - Strings must use singlequote.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: quotes - Strings must use singlequote.
+		Line 3: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: curly - Expected { after 'if' condition.
+		Line 3: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 3: space-after-keywords - Keyword "else" must be followed by whitespace.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: yoda - Expected literal to be on the right side of ===.
+		Line 3: quotes - Strings must use singlequote.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: semi - Missing semicolon.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: semi - Missing semicolon.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: curly - Expected { after 'for' condition.
+		Line 3: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: no-sequences - Unexpected use of comma operator.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: curly - Expected { after 'for' condition.
+		Line 3: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: no-sequences - Unexpected use of comma operator.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 3: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: quotes - Strings must use singlequote.
+		Line 4: quotes - Strings must use singlequote.
+		Line 4: semi - Missing semicolon.
+		Line 4: quotes - Strings must use singlequote.
+		Line 4: no-shadow - a is already declared in the upper scope.
+		Line 4: no-shadow - c is already declared in the upper scope.
+		Line 4: no-shadow - d is already declared in the upper scope.
+		Line 4: func-style - Expected a function expression.
+		Line 4: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: semi - Missing semicolon.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: quotes - Strings must use singlequote.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: yoda - Expected literal to be on the right side of ===.
+		Line 4: quotes - Strings must use singlequote.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: curly - Expected { after 'for' condition.
+		Line 4: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: curly - Expected { after 'for' condition.
+		Line 4: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: no-sequences - Unexpected use of comma operator.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: quotes - Strings must use singlequote.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: quotes - Strings must use singlequote.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: yoda - Expected literal to be on the right side of ===.
+		Line 4: quotes - Strings must use singlequote.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 4: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: quotes - Strings must use singlequote.
+		Line 5: curly - Expected { after 'for' condition.
+		Line 5: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: yoda - Expected literal to be on the right side of ===.
+		Line 5: quotes - Strings must use singlequote.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: yoda - Expected literal to be on the right side of !==.
+		Line 5: quotes - Strings must use singlequote.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: quotes - Strings must use singlequote.
+		Line 5: curly - Expected { after 'if' condition.
+		Line 5: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: curly - Expected { after 'for' condition.
+		Line 5: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: no-sequences - Unexpected use of comma operator.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: quotes - Strings must use singlequote.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: quotes - Strings must use singlequote.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: no-loop-func - Don't make functions within a loop
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: semi - Missing semicolon.
+		Line 5: space-return-throw-case - Keyword "return" must be followed by whitespace.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: quotes - Strings must use singlequote.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: quotes - Strings must use singlequote.
+		Line 5: semi - Missing semicolon.
+		Line 5: quotes - Strings must use singlequote.
+		Line 5: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 5: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 5: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 5: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 5: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: curly - Expected { after 'if' condition.
+		Line 5: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 5: quotes - Strings must use singlequote.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 5: semi - Missing semicolon.
+		Line 5: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 6: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 6: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 6: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 5: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: curly - Expected { after 'if' condition.
+		Line 6: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: quotes - Strings must use singlequote.
+		Line 6: semi - Missing semicolon.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: quotes - Strings must use singlequote.
+		Line 6: quotes - Strings must use singlequote.
+		Line 6: semi - Missing semicolon.
+		Line 6: quotes - Strings must use singlequote.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: quotes - Strings must use singlequote.
+		Line 6: quotes - Strings must use singlequote.
+		Line 6: func-style - Expected a function expression.
+		Line 6: func-style - Expected a function expression.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 6: eqeqeq - Expected '===' and instead saw '=='.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 6: curly - Expected { after 'for' condition.
+		Line 6: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: curly - Expected { after 'if' condition.
+		Line 6: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: yoda - Expected literal to be on the right side of ===.
+		Line 6: quotes - Strings must use singlequote.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: yoda - Expected literal to be on the right side of ===.
+		Line 6: quotes - Strings must use singlequote.
+		Line 6: semi - Missing semicolon.
+		Line 6: no-sequences - Unexpected use of comma operator.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: quotes - Strings must use singlequote.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: curly - Expected { after 'if' condition.
+		Line 6: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: eqeqeq - Expected '===' and instead saw '=='.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: eqeqeq - Expected '===' and instead saw '=='.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 7: semi - Missing semicolon.
+		Line 6: no-sequences - Unexpected use of comma operator.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: quotes - Strings must use singlequote.
+		Line 6: quotes - Strings must use singlequote.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 6: space-infix-ops - Infix operators must be spaced.
+		Line 7: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 7: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: semi - Missing semicolon.
+		Line 7: space-return-throw-case - Keyword "return" must be followed by whitespace.
+		Line 7: quotes - Strings must use singlequote.
+		Line 7: quotes - Strings must use singlequote.
+		Line 7: func-style - Expected a function expression.
+		Line 7: semi - Missing semicolon.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: no-redeclare - d is already defined
+		Line 7: func-style - Expected a function expression.
+		Line 7: curly - Expected { after 'for' condition.
+		Line 7: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: semi - Missing semicolon.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: func-style - Expected a function expression.
+		Line 7: func-style - Expected a function expression.
+		Line 7: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 7: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 7: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 7: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 7: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: quotes - Strings must use singlequote.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 7: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 7: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: curly - Expected { after 'if' condition.
+		Line 7: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 7: space-after-keywords - Keyword "else" must be followed by whitespace.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: quotes - Strings must use singlequote.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 7: space-infix-ops - Infix operators must be spaced.
+		Line 8: curly - Expected { after 'if' condition.
+		Line 8: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 8: space-after-keywords - Keyword "else" must be followed by whitespace.
+		Line 8: no-sequences - Unexpected use of comma operator.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: curly - Expected { after 'for' condition.
+		Line 8: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 8: no-sequences - Unexpected use of comma operator.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: semi - Missing semicolon.
+		Line 8: semi - Missing semicolon.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: quotes - Strings must use singlequote.
+		Line 8: curly - Expected { after 'if' condition.
+		Line 8: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: yoda - Expected literal to be on the right side of ===.
+		Line 8: quotes - Strings must use singlequote.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: quotes - Strings must use singlequote.
+		Line 8: no-sequences - Unexpected use of comma operator.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: quotes - Strings must use singlequote.
+		Line 8: semi - Missing semicolon.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: curly - Expected { after 'else'.
+		Line 8: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: semi - Missing semicolon.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: semi - Missing semicolon.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: semi - Missing semicolon.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 8: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 8: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 9: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 8: space-infix-ops - Infix operators must be spaced.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: curly - Expected { after 'if' condition.
+		Line 9: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 9: curly - Expected { after 'for' condition.
+		Line 9: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: quotes - Strings must use singlequote.
+		Line 9: semi - Missing semicolon.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: semi - Missing semicolon.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: semi - Missing semicolon.
+		Line 9: func-style - Expected a function expression.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: quotes - Strings must use singlequote.
+		Line 9: quotes - Strings must use singlequote.
+		Line 9: space-infix-ops - Infix operators must be spaced.
+		Line 9: quotes - Strings must use singlequote.
+		Line 10: quotes - Strings must use singlequote.
+		Line 10: quotes - Strings must use singlequote.
+		Line 10: quotes - Strings must use singlequote.
+		Line 10: space-infix-ops - Infix operators must be spaced.
+		Line 10: quotes - Strings must use singlequote.
+		Line 10: space-infix-ops - Infix operators must be spaced.
+		Line 10: space-infix-ops - Infix operators must be spaced.
+		Line 10: space-infix-ops - Infix operators must be spaced.
+		Line 10: space-infix-ops - Infix operators must be spaced.
+		Line 10: space-infix-ops - Infix operators must be spaced.
+		Line 10: space-infix-ops - Infix operators must be spaced.
+		Line 10: quotes - Strings must use singlequote.
+		Line 10: quotes - Strings must use singlequote.
+		Line 10: quotes - Strings must use singlequote.
+		Line 10: quotes - Strings must use singlequote.
+		Line 10: quotes - Strings must use singlequote.
+		Line 10: quotes - Strings must use singlequote.
+		Line 11: quotes - Strings must use singlequote.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: quotes - Strings must use singlequote.
+		Line 11: quotes - Strings must use singlequote.
+		Line 11: no-cond-assign - Expected a conditional expression and instead saw an assignment.
+		Line 11: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: quotes - Strings must use singlequote.
+		Line 11: quotes - Strings must use singlequote.
+		Line 11: quotes - Strings must use singlequote.
+		Line 11: quotes - Strings must use singlequote.
+		Line 12: semi - Missing semicolon.
+		Line 11: quotes - Strings must use singlequote.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: quotes - Strings must use singlequote.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: space-infix-ops - Infix operators must be spaced.
+		Line 11: quotes - Strings must use singlequote.
+		Line 11: quotes - Strings must use singlequote.
+		Line 11: quotes - Strings must use singlequote.
+		Line 11: quotes - Strings must use singlequote.
+		Line 11: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: space-infix-ops - Infix operators must be spaced.
+		Line 12: space-infix-ops - Infix operators must be spaced.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: space-infix-ops - Infix operators must be spaced.
+		Line 12: space-infix-ops - Infix operators must be spaced.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: space-infix-ops - Infix operators must be spaced.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: space-infix-ops - Infix operators must be spaced.
+		Line 12: space-infix-ops - Infix operators must be spaced.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: space-infix-ops - Infix operators must be spaced.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: space-infix-ops - Infix operators must be spaced.
+		Line 12: space-infix-ops - Infix operators must be spaced.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 13: quotes - Strings must use singlequote.
+		Line 13: semi - Missing semicolon.
+		Line 15: no-redeclare - d is already defined
+		Line 15: no-redeclare - i is already defined
+		Line 13: func-style - Expected a function expression.
+		Line 13: no-shadow - c is already declared in the upper scope.
+		Line 13: no-shadow - d is already declared in the upper scope.
+		Line 13: no-shadow - i is already declared in the upper scope.
+		Line 13: func-style - Expected a function expression.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: curly - Expected { after 'if' condition.
+		Line 13: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: eqeqeq - Expected '===' and instead saw '=='.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: curly - Expected { after 'if' condition.
+		Line 13: curly - Expected { after 'else'.
+		Line 13: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: yoda - Expected literal to be on the right side of ===.
+		Line 13: quotes - Strings must use singlequote.
+		Line 13: no-sequences - Unexpected use of comma operator.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: curly - Expected { after 'for' condition.
+		Line 13: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: eqeqeq - Expected '===' and instead saw '=='.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: eqeqeq - Expected '===' and instead saw '=='.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: curly - Expected { after 'if' condition.
+		Line 13: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 13: semi - Missing semicolon.
+		Line 13: no-sequences - Unexpected use of comma operator.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 14: no-redeclare - a is already defined
+		Line 13: no-shadow - b is already declared in the upper scope.
+		Line 14: no-shadow - d is already declared in the upper scope.
+		Line 13: func-style - Expected a function expression.
+		Line 14: no-redeclare - e is already defined
+		Line 13: no-shadow - d is already declared in the upper scope.
+		Line 13: no-shadow - d is already declared in the upper scope.
+		Line 14: no-shadow - g is already declared in the upper scope.
+		Line 14: no-shadow - i is already declared in the upper scope.
+		Line 13: func-style - Expected a function expression.
+		Line 13: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: curly - Expected { after 'for' condition.
+		Line 14: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: semi - Missing semicolon.
+		Line 14: no-sequences - Unexpected use of comma operator.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: semi - Missing semicolon.
+		Line 14: curly - Expected { after 'for' condition.
+		Line 14: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 14: curly - Expected { after 'if' condition.
+		Line 14: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 14: no-sequences - Unexpected use of comma operator.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: curly - Expected { after 'for' condition.
+		Line 14: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: semi - Missing semicolon.
+		Line 14: curly - Expected { after 'for' condition.
+		Line 14: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 14: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 14: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 14: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: quotes - Strings must use singlequote.
+		Line 14: curly - Expected { after 'for' condition.
+		Line 14: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: quotes - Strings must use singlequote.
+		Line 14: space-infix-ops - Infix operators must be spaced.
+		Line 14: quotes - Strings must use singlequote.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: quotes - Strings must use singlequote.
+		Line 15: curly - Expected { after 'for' condition.
+		Line 15: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: no-sequences - Unexpected use of comma operator.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: quotes - Strings must use singlequote.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: quotes - Strings must use singlequote.
+		Line 15: semi - Missing semicolon.
+		Line 15: func-style - Expected a function expression.
+		Line 15: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: semi - Missing semicolon.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: quotes - Strings must use singlequote.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: func-style - Expected a function expression.
+		Line 15: curly - Expected { after 'if' condition.
+		Line 15: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: quotes - Strings must use singlequote.
+		Line 15: quotes - Strings must use singlequote.
+		Line 15: semi - Missing semicolon.
+		Line 16: no-redeclare - d is already defined
+		Line 16: no-redeclare - g is already defined
+		Line 16: no-redeclare - b is already defined
+		Line 16: no-redeclare - s is already defined
+		Line 16: no-redeclare - t is already defined
+		Line 16: no-shadow - p is already declared in the upper scope.
+		Line 17: no-shadow - v is already declared in the upper scope.
+		Line 15: func-style - Expected a function expression.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-after-keywords - Keyword "try" must be followed by whitespace.
+		Line 15: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 15: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: curly - Expected { after 'for' condition.
+		Line 16: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: curly - Expected { after 'for' condition.
+		Line 16: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: semi - Missing semicolon.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: curly - Expected { after 'if' condition.
+		Line 16: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 16: no-sequences - Unexpected use of comma operator.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: quotes - Strings must use singlequote.
+		Line 16: space-after-keywords - Keyword "try" must be followed by whitespace.
+		Line 17: space-after-keywords - Keyword "finally" must be followed by whitespace.
+		Line 16: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 16: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: quotes - Strings must use singlequote.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: quotes - Strings must use singlequote.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: semi - Missing semicolon.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: semi - Missing semicolon.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: curly - Expected { after 'if' condition.
+		Line 17: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 17: semi - Missing semicolon.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: semi - Missing semicolon.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 18: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 18: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 19: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 19: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 19: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 20: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 20: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 20: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 21: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 21: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 21: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: quotes - Strings must use singlequote.
+		Line 17: space-infix-ops - Infix operators must be spaced.
+		Line 17: quotes - Strings must use singlequote.
+		Line 18: quotes - Strings must use singlequote.
+		Line 18: space-infix-ops - Infix operators must be spaced.
+		Line 18: quotes - Strings must use singlequote.
+		Line 18: space-infix-ops - Infix operators must be spaced.
+		Line 18: quotes - Strings must use singlequote.
+		Line 19: space-infix-ops - Infix operators must be spaced.
+		Line 19: quotes - Strings must use singlequote.
+		Line 19: space-infix-ops - Infix operators must be spaced.
+		Line 19: quotes - Strings must use singlequote.
+		Line 19: space-infix-ops - Infix operators must be spaced.
+		Line 19: quotes - Strings must use singlequote.
+		Line 20: space-infix-ops - Infix operators must be spaced.
+		Line 20: quotes - Strings must use singlequote.
+		Line 20: space-infix-ops - Infix operators must be spaced.
+		Line 20: quotes - Strings must use singlequote.
+		Line 20: space-infix-ops - Infix operators must be spaced.
+		Line 20: quotes - Strings must use singlequote.
+		Line 20: space-infix-ops - Infix operators must be spaced.
+		Line 21: space-infix-ops - Infix operators must be spaced.
+		Line 21: space-infix-ops - Infix operators must be spaced.
+		Line 21: quotes - Strings must use singlequote.
+		Line 21: space-infix-ops - Infix operators must be spaced.
+		Line 21: quotes - Strings must use singlequote.
+		Line 21: quotes - Strings must use singlequote.
+		Line 21: quotes - Strings must use singlequote.
+		Line 21: quotes - Strings must use singlequote.
+		Line 21: quotes - Strings must use singlequote.
+		Line 21: quotes - Strings must use singlequote.
+		Line 21: quotes - Strings must use singlequote.
+		Line 21: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 25: quotes - Strings must use singlequote.
+		Line 25: quotes - Strings must use singlequote.
+		Line 25: quotes - Strings must use singlequote.
+		Line 25: quotes - Strings must use singlequote.
+		Line 25: quotes - Strings must use singlequote.
+		Line 25: quotes - Strings must use singlequote.
+		Line 25: quotes - Strings must use singlequote.
+		Line 25: quotes - Strings must use singlequote.
+		Line 25: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: space-infix-ops - Infix operators must be spaced.
+		Line 26: space-infix-ops - Infix operators must be spaced.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: space-infix-ops - Infix operators must be spaced.
+		Line 26: space-infix-ops - Infix operators must be spaced.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: space-infix-ops - Infix operators must be spaced.
+		Line 26: space-infix-ops - Infix operators must be spaced.
+		Line 26: space-infix-ops - Infix operators must be spaced.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: quotes - Strings must use singlequote.
+		Line 26: space-infix-ops - Infix operators must be spaced.
+		Line 26: space-infix-ops - Infix operators must be spaced.
+		Line 27: semi - Missing semicolon.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 29: no-redeclare - b is already defined
+		Line 29: no-redeclare - b is already defined
+		Line 28: no-redeclare - m is already defined
+		Line 28: no-redeclare - o is already defined
+		Line 28: no-redeclare - o is already defined
+		Line 27: no-shadow - b is already declared in the upper scope.
+		Line 27: no-shadow - d is already declared in the upper scope.
+		Line 27: no-shadow - j is already declared in the upper scope.
+		Line 27: no-shadow - k is already declared in the upper scope.
+		Line 27: no-shadow - m is already declared in the upper scope.
+		Line 28: no-shadow - y is already declared in the upper scope.
+		Line 27: func-style - Expected a function expression.
+		Line 27: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: no-cond-assign - Expected a conditional expression and instead saw an assignment.
+		Line 27: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: curly - Expected { after 'if' condition.
+		Line 27: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: no-loop-func - Don't make functions within a loop
+		Line 27: semi - Missing semicolon.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: semi - Missing semicolon.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: curly - Expected { after 'for' condition.
+		Line 27: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 27: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: semi - Missing semicolon.
+		Line 28: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: quotes - Strings must use singlequote.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: curly - Expected { after 'if' condition.
+		Line 28: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: semi - Missing semicolon.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: curly - Expected { after 'if' condition.
+		Line 28: curly - Expected { after 'else'.
+		Line 28: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: quotes - Strings must use singlequote.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: yoda - Expected literal to be on the right side of ===.
+		Line 28: quotes - Strings must use singlequote.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: curly - Expected { after 'if' condition.
+		Line 28: space-after-keywords - Keyword "if" must be followed by whitespace.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: quotes - Strings must use singlequote.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 28: space-infix-ops - Infix operators must be spaced.
+		Line 29: semi - Missing semicolon.
+		Line 29: semi - Missing semicolon.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: yoda - Expected literal to be on the right side of ===.
+		Line 29: quotes - Strings must use singlequote.
+		Line 29: curly - Expected { after 'for' condition.
+		Line 29: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 29: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 29: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 29: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: quotes - Strings must use singlequote.
+		Line 29: quotes - Strings must use singlequote.
+		Line 29: quotes - Strings must use singlequote.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: curly - Expected { after 'for' condition.
+		Line 29: space-after-keywords - Keyword "for" must be followed by whitespace.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: semi - Missing semicolon.
+		Line 29: space-return-throw-case - Keyword "return" must be followed by whitespace.
+		Line 29: new-parens - Missing '()' invoking a constructor
+		Line 29: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 29: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 29: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 29: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 30: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 29: space-infix-ops - Infix operators must be spaced.
+		Line 30: space-infix-ops - Infix operators must be spaced.
+		Line 30: semi - Missing semicolon.
+		Line 30: semi - Missing semicolon.
+		Line 30: space-infix-ops - Infix operators must be spaced.
+		Line 30: space-infix-ops - Infix operators must be spaced.
+		Line 30: space-infix-ops - Infix operators must be spaced.
+		Line 30: quotes - Strings must use singlequote.
+		Line 30: quotes - Strings must use singlequote.
+		Line 30: semi - Missing semicolon.
+	public/js/ui.js:
+		Line 675: eol-last - Newline required at end of file but not found.
+		Line 8: quotes - Strings must use singlequote.
+		Line 9: quotes - Strings must use singlequote.
+		Line 10: quotes - Strings must use singlequote.
+		Line 11: quotes - Strings must use singlequote.
+		Line 12: quotes - Strings must use singlequote.
+		Line 13: quotes - Strings must use singlequote.
+		Line 14: quotes - Strings must use singlequote.
+		Line 15: quotes - Strings must use singlequote.
+		Line 16: quotes - Strings must use singlequote.
+		Line 17: quotes - Strings must use singlequote.
+		Line 18: quotes - Strings must use singlequote.
+		Line 21: quotes - Strings must use singlequote.
+		Line 21: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 22: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 23: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 24: quotes - Strings must use singlequote.
+		Line 25: quotes - Strings must use singlequote.
+		Line 25: quotes - Strings must use singlequote.
+		Line 28: quotes - Strings must use singlequote.
+		Line 33: func-style - Expected a function expression.
+		Line 46: func-style - Expected a function expression.
+		Line 63: func-style - Expected a function expression.
+		Line 101: func-style - Expected a function expression.
+		Line 154: func-style - Expected a function expression.
+		Line 180: func-style - Expected a function expression.
+		Line 182: quotes - Strings must use singlequote.
+		Line 182: quotes - Strings must use singlequote.
+		Line 201: func-style - Expected a function expression.
+		Line 203: space-infix-ops - Infix operators must be spaced.
+		Line 206: func-style - Expected a function expression.
+		Line 214: func-style - Expected a function expression.
+		Line 217: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 225: eqeqeq - Expected '===' and instead saw '=='.
+		Line 226: space-infix-ops - Infix operators must be spaced.
+		Line 226: space-infix-ops - Infix operators must be spaced.
+		Line 228: space-infix-ops - Infix operators must be spaced.
+		Line 228: space-infix-ops - Infix operators must be spaced.
+		Line 236: func-style - Expected a function expression.
+		Line 309: quotes - Strings must use singlequote.
+		Line 333: quotes - Strings must use singlequote.
+		Line 337: quotes - Strings must use singlequote.
+		Line 362: quotes - Strings must use singlequote.
+		Line 375: func-style - Expected a function expression.
+		Line 376: quotes - Strings must use singlequote.
+		Line 377: quotes - Strings must use singlequote.
+		Line 382: func-style - Expected a function expression.
+		Line 386: func-style - Expected a function expression.
+		Line 398: func-style - Expected a function expression.
+		Line 418: func-style - Expected a function expression.
+		Line 421: quotes - Strings must use singlequote.
+		Line 434: func-style - Expected a function expression.
+		Line 435: quotes - Strings must use singlequote.
+		Line 438: func-style - Expected a function expression.
+		Line 439: quotes - Strings must use singlequote.
+		Line 446: func-style - Expected a function expression.
+		Line 550: no-else-return - Unexpected 'else' after 'return'.
+		Line 554: no-else-return - Unexpected 'else' after 'return'.
+		Line 551: eqeqeq - Expected '===' and instead saw '=='.
+		Line 582: quotes - Strings must use singlequote.
+		Line 605: quotes - Strings must use singlequote.
+		Line 606: quotes - Strings must use singlequote.
+		Line 632: curly - Expected { after 'if' condition.
+		Line 635: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 642: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 653: sort-vars - Variables within the same declaration block should be sorted alphabetically
+		Line 664: sort-vars - Variables within the same declaration block should be sorted alphabetically

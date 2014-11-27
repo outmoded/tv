@@ -22,18 +22,19 @@ var expect = Code.expect;
 
 it('reports a request event', function (done) {
 
-    var server = new Hapi.Server(0);
+    var server = new Hapi.Server();
+    server.connection();
 
     server.route({
         method: 'GET',
         path: '/',
         handler: function (request, reply) {
 
-            reply('1');
+            return reply('1');
         }
     });
 
-    server.pack.register({ plugin: Tv, options: { port: 0 } }, function (err) {
+    server.register({ register: Tv, options: { port: 0 } }, function (err) {
 
         expect(err).to.not.exist();
 
@@ -70,18 +71,19 @@ it('reports a request event', function (done) {
 
 it('handles reconnects gracefully', function (done) {
 
-    var server = new Hapi.Server(0);
+    var server = new Hapi.Server();
+    server.connection();
 
     server.route({
         method: 'GET',
         path: '/',
         handler: function (request, reply) {
 
-            reply('1');
+            return reply('1');
         }
     });
 
-    server.pack.register({ plugin: Tv, options: { port: 0, host: 'localhost' }}, function (err) {
+    server.register({ register: Tv, options: { port: 0, host: 'localhost' }}, function (err) {
 
         expect(err).to.not.exist();
 
@@ -125,38 +127,19 @@ it('handles reconnects gracefully', function (done) {
 
 it('uses specified hostname', function (done) {
 
-    var server = new Hapi.Server(0);
+    var server = new Hapi.Server();
+    server.connection();
 
     server.route({
         method: 'GET',
         path: '/',
         handler: function (request, reply) {
 
-            reply('1');
+            return reply('1');
         }
     });
 
-    server.pack.register({plugin: Tv, options: { host: '127.0.0.1', port: 0 } }, function (err) {
-
-        expect(err).to.not.exist();
-        done();
-    });
-});
-
-it('uses specified public hostname', function (done) {
-
-    var server = new Hapi.Server(0);
-
-    server.route({
-        method: 'GET',
-        path: '/',
-        handler: function (request, reply) {
-
-            reply('1');
-        }
-    });
-
-    server.pack.register({ plugin: Tv, options: { port: 0, host: 'localhost', publicHost: '127.0.0.1' }}, function (err) {
+    server.register({register: Tv, options: { host: '127.0.0.1', port: 0 } }, function (err) {
 
         expect(err).to.not.exist();
 
@@ -166,7 +149,37 @@ it('uses specified public hostname', function (done) {
             expect(res.result).to.contain('Debug Console');
 
             var host = res.result.match(/var host = '([^']+)'/)[1];
+            expect(host).to.equal('127.0.0.1');
+            done();
 
+        });
+    });
+});
+
+it('uses specified public hostname', function (done) {
+
+    var server = new Hapi.Server();
+    server.connection();
+
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: function (request, reply) {
+
+            return reply('1');
+        }
+    });
+
+    server.register({ register: Tv, options: { port: 0, host: 'localhost', publicHost: '127.0.0.1' }}, function (err) {
+
+        expect(err).to.not.exist();
+
+        server.inject('/debug/console', function (res) {
+
+            expect(res.statusCode).to.equal(200);
+            expect(res.result).to.contain('Debug Console');
+
+            var host = res.result.match(/var host = '([^']+)'/)[1];
             expect(host).to.equal('127.0.0.1');
             done();
 
