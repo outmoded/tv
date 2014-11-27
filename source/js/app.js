@@ -14,8 +14,11 @@ var app = {
         };
 
         webSocketManager.onMessage(function(message) {
-            messageParser.addMessage(message);
-            appComponent.updateState();
+            var request = messageParser.addMessage(message);
+            if(request) {
+                appComponent.addRequest(request);
+            }
+            appComponent.refresh();
         });
     }
 }

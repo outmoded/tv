@@ -24,23 +24,44 @@ var App = React.createClass({
         );
     },
 
-    updateState: function() {
+    addRequest: function(request) {
+        this._checkToScrollToBottom( function() {
+            if(this._searchFilter) {
+                if(this._searchFilter(request)) {
+                    this.state.requests.push(request);
+                }
+            } else {
+                this.state.requests.push(request);
+            }
+            this.setState({requests: this.state.requests});
+        }.bind(this) );
+    },
+
+    refresh: function(request) {
+        this.setState({requests: this.state.requests});
+    },
+
+    _checkToScrollToBottom: function(fn) {
         var isScrolledToBottom = this._isScrolledToBottom();
 
-        var requests = this.props.messageParser.requests;
-        if(this.searchFilter) {
-            requests = _.filter(requests, this.searchFilter.bind(this));
-        }
-        this.setState({requests: requests});
+        fn();
 
         if(isScrolledToBottom) {
             this._scrollToBottom();
         }
     },
 
+    _updateState: function() {
+        var requests = this.props.messageParser.requests;
+        if(this.searchFilter) {
+            requests = _.filter(requests, this.searchFilter.bind(this));
+        }
+        this.setState({requests: requests});
+    },
+
     _handleClear: function() {
         this.props.messageParser.clear();
-        this.updateState();
+        this._updateState();
     },
 
     _handlePause: function() {
@@ -51,15 +72,15 @@ var App = React.createClass({
         this.props.webSocketManager.resume();
     },
 
-    _handleSearch: function(e) {
-        var keywords = e.target.value.toLowerCase().split(' ');
+    _handleSearch: _.debounce(function(e) {
+        var keywords = $('input.search').val().toLowerCase().split(' ');
 
         if(keywords.length) {
             this._setSearchFilter(keywords);
         } else {
             this._clearSearchFilter();
         }
-    },
+    }, 200),
 
     _setSearchFilter: function(keywords) {
         this.searchFilter = function(request) {
@@ -74,7 +95,7 @@ var App = React.createClass({
             return matches;
         };
 
-        this.updateState();
+        this._updateState();
     },
 
     _hasMatch: function(request, keyword) {
@@ -85,7 +106,7 @@ var App = React.createClass({
 
     _clearSearchFilter: function() {
         this.searchFilter = null;
-        this.updateState();
+        this._updateState();
     },
 
     _isScrolledToBottom: function() {

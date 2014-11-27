@@ -22,8 +22,9 @@ MessageParser.prototype.addMessage = function(raw_message) {
   var message = JSON.parse(raw_message.data);
   console.log('message', message);
 
+  var request;
   if (this._isFirstMessageForNewRequest(message)) {
-    this._addRequest(message);
+    request = this._addRequest(message);
     this._addServerLog(message);
     this._refreshResponseTimeout(message);
   }
@@ -36,6 +37,8 @@ MessageParser.prototype.addMessage = function(raw_message) {
   } else {
     // disregard message
   }
+
+  return request;
 };
 
 MessageParser.prototype.clear = function() {
@@ -79,6 +82,8 @@ MessageParser.prototype._addRequest = function(message) {
   }
   console.log('adding request', request);
   this.requests.push(request);
+
+  return request;
 };
 
 MessageParser.prototype._updateRequestWithResponse = function(message) {
@@ -91,7 +96,8 @@ MessageParser.prototype._updateRequestWithResponse = function(message) {
 MessageParser.prototype._findRequest = function(message) {
   var requestId = message.request;
 
-  return _.find(this.requests, function(request) {
+  // findLast looks in reverse order since the request is most likely to be last
+  return _.findLast(this.requests, function(request) {
       return request.id === requestId;
   });
 };
