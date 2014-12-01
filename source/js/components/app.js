@@ -33,11 +33,10 @@ var App = React.createClass({
             } else {
                 this.state.requests.push(request);
             }
-            this.setState({requests: this.state.requests});
         }.bind(this) );
     },
 
-    refresh: function(request) {
+    refresh: function() {
         this.setState({requests: this.state.requests});
     },
 
