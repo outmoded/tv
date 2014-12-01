@@ -40,15 +40,9 @@ describe('app', function() {
 
             this.appComponent = { render: spy(), setState: spy() };
 
-            this.setStateSpy = spy();
-            this.isScrolledToBottomStub = stub();
-            this.scrollToBottomSpy = spy();
+            this.updateStateSpy = spy();
             this.reactRenderSpy = sinon.stub(React, 'render', function() {
-                return {
-                    setState: this.setStateSpy,
-                    isScrolledToBottom: isScrolledToBottomStub,
-                    scrollToBottom: scrollToBottomSpy
-                }
+                return { updateState: this.updateStateSpy }
             }.bind(this));
 
             app.start(mockWebSocketManager, this.messageParser, this.appComponent);
@@ -64,9 +58,7 @@ describe('app', function() {
             delete this.mockWebSocket;
             delete this.messageParserAddMessageSpy;
             delete this.reactRenderSpy;
-            delete this.setStateSpy;
-            delete this.isScrolledToBottomStub;
-            delete this.scrollToBottomSpy;
+            delete this.updateStateSpy;
             delete this.appComponent;
             delete global.$;
 
@@ -84,7 +76,7 @@ describe('app', function() {
             it('resets the state of the app component', function(done) {
                 this.messageParser.onResponseTimeout();
 
-                expect(this.setStateSpy.args[0][0].requests).to.equal(this.messageParser.requests);
+                expect(this.updateStateSpy.called).to.be.true;
 
                 done();
             });
@@ -111,39 +103,12 @@ describe('app', function() {
 
                 this.mockWebSocket.onmessage(message);
 
-                expect(this.setStateSpy.callCount).to.equal(1);
-                expect(this.setStateSpy.args[0][0]).to.have.property('requests', parsedRequests);
+                expect(this.updateStateSpy.callCount).to.equal(1);
+                expect(this.updateStateSpy.called).to.be.true;
 
                 done();
             });
 
-            context('with the browser window not scrolled to the bottom', function() {
-
-                it('does not scroll the browser window to the bottom after posting the new message', function(done) {
-                    this.isScrolledToBottomStub.returns(false);
-
-                    this.mockWebSocket.onmessage('fake message');
-
-                    expect(this.scrollToBottomSpy.callCount).to.equal(0);
-
-                    done();
-                });
-
-            });
-
-            context('with the browser window scrolled to the bottom', function() {
-
-                it('scrolls the browser window to the bottom after posting the new message', function(done) {
-                    this.isScrolledToBottomStub.returns(true);
-
-                    this.mockWebSocket.onmessage('fake message');
-
-                    expect(this.scrollToBottomSpy.callCount).to.equal(1);
-
-                    done();
-                });
-
-            });
         });
 
     });

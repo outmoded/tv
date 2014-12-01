@@ -29,18 +29,12 @@ var app = {
         var appComponent = React.render( element, $('.main').get(0));
 
         messageParser.onResponseTimeout = function() {
-            appComponent.setState({requests: messageParser.requests});
+            appComponent.updateState();
         };
 
         webSocketManager.onMessage(function(message) {
-            var isScrolledToBottom = appComponent.isScrolledToBottom();
-
             messageParser.addMessage(message);
-            appComponent.setState({requests: messageParser.requests});
-
-            if(isScrolledToBottom) {
-                appComponent.scrollToBottom();
-            }
+            appComponent.updateState();
         });
     }
 }

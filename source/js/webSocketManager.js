@@ -23,8 +23,16 @@ WebSocketManager.prototype.clearFilter = function() {
     this.applyFilter("*");
 }
 
+WebSocketManager.prototype.resume = function() {
+    this.webSocket.onmessage = this.onMessageCallback;
+}
+
+WebSocketManager.prototype.pause = function() {
+    this.webSocket.onmessage = null;
+}
+
 WebSocketManager.prototype.onMessage = function(fn) {
-    this.webSocket.onmessage = fn;
+    this.webSocket.onmessage = this.onMessageCallback = fn;
 }
 
 module.exports = WebSocketManager;
