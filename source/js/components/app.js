@@ -100,8 +100,8 @@ var App = React.createClass({
 
     _hasMatch: function(request, keyword) {
         return request.path.indexOf(keyword) > -1 ||
-            keyword === request.method ||
-            keyword === request.statusCode;
+            request.method.indexOf(keyword) > -1 ||
+            request.statusCode.indexOf(keyword) > -1;
     },
 
     _clearSearchFilter: function() {
