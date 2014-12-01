@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var SettingsStore = require('./settingsStore');
 
 
 
@@ -20,27 +21,9 @@ internals.localStorageKey = 'clientId';
 
 exports = module.exports = internals.ClientId = {};
 
-internals.ClientId.install = function(options) {
-    var clientId, existingClientId = this._store.get(internals.localStorageKey);
-    
-    if (!existingClientId) {
-        clientId = this._store.set(internals.localStorageKey, this._generateClientId(options));
-    }
-    
-    return clientId;
-};
+internals.ClientId._store = SettingsStore;
 
-internals.ClientId._store = {
-    get: function(key) {
-        return localStorage.getItem(key);
-    },
-    set: function(key, value) {
-        localStorage.setItem(key, value);
-        return value;
-    }
-};
-
-internals.ClientId._generateClientId = function(options) {
+internals.ClientId.generate = function(options) {
     options = _.defaults(options || {}, internals.defaults);
 
     var possible = (options.letters ? internals.letters : '') + (options.numbers ? internals.numbers : '');

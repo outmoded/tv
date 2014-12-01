@@ -33,6 +33,14 @@ var ChannelSelector = exports = module.exports = React.createClass({
             return 'active';
     },
 
+    componentDidMount: function() {
+        $('input').val(this.state.channel);
+
+        $('input').keyup(function(e) {
+            this.setState({ channel: $(e.currentTarget).val() });
+        }.bind(this));
+    },
+
     render: function() {
         var buttonClasses = function(channel) {
             return ['btn', 'btn-default', this.buttonIsActive(channel)].join(' ');
@@ -41,7 +49,8 @@ var ChannelSelector = exports = module.exports = React.createClass({
         return (
             <div className="btn-group" role="group" aria-label="...">
                 <button type="button" onClick={this.changeChannel} data-channel="*" className={buttonClasses('*')}>All</button>
-                <button type="button" onClick={this.changeChannel} data-channel={this.getClientId()} className={buttonClasses(this.getClientId())}>Client ID: {this.getClientId()}</button>
+                <button type="button" onClick={this.changeChannel} data-channel={this.getClientId()} className={buttonClasses(this.getClientId())}>Client ID</button>
+                <input className="form-control" type="text" name="client-id"></input>
             </div>
         );
     }

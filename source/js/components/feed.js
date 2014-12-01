@@ -11,7 +11,6 @@ var Feed = React.createClass({
     _store: SettingsStore,
 
     content: function() {
-        console.log('this._store.get(\'channel\')', this._store.get('channel'));
         if (!this._store.get('channel')) {
             return <Intro />
         } else {
