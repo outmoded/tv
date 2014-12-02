@@ -1,24 +1,16 @@
-var React = require('react');
+var AppView = require('./views/app');
 
 var app = {
-    start: function (webSocketManager, messageParser, AppComponent) {
-        var element = React.createElement(AppComponent, {
-            messageParser: messageParser,
+    start: function (webSocketManager, messageParser) {
+        var appView = new AppView({
+            collection: messageParser.requests,
             webSocketManager: webSocketManager
         });
 
-        var appComponent = React.render( element, $('.main').get(0));
-
-        messageParser.onResponseTimeout = function() {
-            appComponent.updateState();
-        };
+        $('body').html(appView.render().el);
 
         webSocketManager.onMessage(function(message) {
-            var request = messageParser.addMessage(message);
-            if(request) {
-                appComponent.addRequest(request);
-            }
-            appComponent.refresh();
+            messageParser.addMessage(message);
         });
     }
 }

@@ -1,6 +1,7 @@
 .feed {
     .header > div, .request > div, .server-log > div {
-        padding: 5px 0px 5px 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
         @extend .truncate;
     }
 
@@ -12,14 +13,6 @@
     }
 
     .body {
-        .light {
-            background-color: $table-row-bg;
-        }
-
-        .dark {
-            background-color: $table-row-alt-bg;
-        }
-
         .date {
             color: $table-row-secondary;
             padding-left: 5px;
@@ -28,21 +21,27 @@
         .request {
             cursor: pointer;
 
-            &:hover, &:hover > div, &.active, &.action > div {
-                background-color: $table-row-hover;
+            &:nth-child(2n+2) {
+                background-color: $table-row-alt-bg;
+            }
+
+            .request-details {
+                &:hover, &:hover > div {
+                    background-color: $table-row-hover;
+                }
             }
 
             .method {
                 text-transform: uppercase;
             }
 
-            .error {
+            &.error {
                 .status, .data {
                     color: $error;
                 }
             }
 
-            .warning {
+            &.warning {
                 .status, .data {
                     color: $warning;
                 }
