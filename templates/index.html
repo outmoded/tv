@@ -19,7 +19,7 @@
         <script type="text/javascript">
             // for dev purposes so we can quickly generate request entries
             $(document).keypress(function(e) {
-                if(e.keyCode === 114) {
+                if(e.keyCode === 114 && e.target.nodeName !== "INPUT") {
                     $.get(location.origin);
                 }
             });

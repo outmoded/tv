@@ -1,18 +1,17 @@
 var _ = require('lodash');
+var Backbone = require('backbone');
+var Request = require('./models/request');
 
 var MessageParser = function(opts) {
   opts = opts || {};
 
-  this.requests = [];
+  this.requests = new Backbone.Collection();
   this.responseTimeout = opts.responseTimeout || 2000;
 };
 
 MessageParser.create = function(opts) {
   return new MessageParser(opts);
 };
-
-MessageParser.RESPONSE_TIMEOUT_ERROR_MESSAGE =
-  'Response Timeout: Never received the response log entry from the server.';
 
 // There is a possibility that the websocket will initialize in the 
 // middle of a request, returning a set of server logs that are 
@@ -22,8 +21,9 @@ MessageParser.prototype.addMessage = function(raw_message) {
   var message = JSON.parse(raw_message.data);
   console.log('message', message);
 
+  var request;
   if (this._isFirstMessageForNewRequest(message)) {
-    this._addRequest(message);
+    request = this._addRequest(message);
     this._addServerLog(message);
     this._refreshResponseTimeout(message);
   }
@@ -36,10 +36,8 @@ MessageParser.prototype.addMessage = function(raw_message) {
   } else {
     // disregard message
   }
-};
 
-MessageParser.prototype.clear = function() {
-    this.requests = [];
+  return request;
 };
 
 MessageParser.prototype._isResponse = function(message) {
@@ -70,28 +68,31 @@ MessageParser.prototype._isFirstMessageForNewRequest = function(message) {
 };
 
 MessageParser.prototype._addRequest = function(message) {
-  var request = {
+  var request = new Request({
     id: message.request,
     path: message.data.url,
     method: message.data.method,
     timestamp: message.timestamp,
-    serverLogs: []
-  }
+    serverLogs: new Backbone.Collection()
+  });
   console.log('adding request', request);
-  this.requests.push(request);
+  this.requests.add(request);
+
+  return request;
 };
 
 MessageParser.prototype._updateRequestWithResponse = function(message) {
   var request = this._findRequest(message);
 
-  request.statusCode = '--'; // message.data.statusCode;
-  request.data = '--'; // message.data;
+  request.set('statusCode', '--'); // message.data.statusCode;
+  request.set('data', '--'); // message.data;
 };
 
 MessageParser.prototype._findRequest = function(message) {
   var requestId = message.request;
 
-  return _.find(this.requests, function(request) {
+  // findLast looks in reverse order since the request is most likely to be last
+  return _.findLast(this.requests.models, function(request) {
       return request.id === requestId;
   });
 };
@@ -105,24 +106,22 @@ MessageParser.prototype._addServerLog = function(message) {
 
   console.log('adding server log', serverLog);
 
-  this._findRequest(message).serverLogs.push(serverLog);
+  this._findRequest(message).get('serverLogs').add(serverLog);
 };
 
 MessageParser.prototype._refreshResponseTimeout = function(message) {
   var request = this._findRequest(message);
 
-  clearTimeout(request.timeout);
+  clearTimeout(request.timer);
 
-  if(request.responseTimeout) {
-      request.data = undefined;
-      request.responseTimeout = false;
+  if(request.get('responseTimeout')) {
+      request.set('responseTimeout', false);
   }
 
   if(!this._isResponse(message)) {
-    request.timeout = setTimeout(function(){
-      request.data = MessageParser.RESPONSE_TIMEOUT_ERROR_MESSAGE;
-      request.statusCode = null;
-      request.responseTimeout = true;
+    request.timer = setTimeout(function(){
+      request.set('statusCode', "timeout");
+      request.set('responseTimeout', true);
 
       this.onResponseTimeout && this.onResponseTimeout();
     }.bind(this), this.responseTimeout);

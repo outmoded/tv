@@ -309,18 +309,4 @@ describe('MessageParser', function() {
 
     });
 
-    describe('#clear', function() {
-
-        it('clears the out the parsed requests', function(done) {
-            this.messageParser.addMessage(createMessage(RECEIVED));
-
-            this.messageParser.clear();
-
-            expect(this.messageParser.requests).to.be.empty;
-
-            done();
-        });
-
-    });
-
 });
