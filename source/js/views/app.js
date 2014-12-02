@@ -72,6 +72,8 @@ var AppView = Backbone.View.extend({
         _.each(this.requestViews, function(requestView) {
             requestView.remove();
         });
+
+        this.requestViews = [];
     },
 
     _pauseRequests: function() {
