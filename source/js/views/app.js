@@ -4,13 +4,17 @@ var _ = require('lodash');
 var HeaderView = require('./header');
 var FeedView = require('./feed');
 var RequestView = require('./request');
+var SettingsView = require('./settings');
 var SearchQuery = require('../utils/searchQuery');
+var Settings = require('../models/settings');
 
 var AppView = Backbone.View.extend({
 
     template: require('../templates/app.hbs'),
 
     initialize: function(opts) {
+        this.model = new Settings({webSocketManager: opts.webSocketManager});
+
         this.webSocketManager = opts.webSocketManager;
 
         this.requestViews = [];
@@ -28,8 +32,9 @@ var AppView = Backbone.View.extend({
     render: function() {
         var $markup = $(this.template());
 
-        this.headerView = new HeaderView({ el: $markup.siblings('.header') }).render();
-        this.feedView = new FeedView({ el: $markup.siblings('.feed') }).render();
+        this.headerView = new HeaderView({ el: $markup.siblings('.header'), model: this.model, appView: this }).render();
+        this.feedView = new FeedView({ el: $markup.siblings('.feed'), model: this.model }).render();
+        this.settingsView = new SettingsView({ el: $markup.siblings('.settings-modal-container'), settingsModel: this.model }).render();
 
         this.$el.html($markup);
 

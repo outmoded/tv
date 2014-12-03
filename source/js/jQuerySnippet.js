@@ -1,4 +1,4 @@
-exports = module.exports = function(clientId) {
+exports.generate = function(clientId) {
     return [
         'jQuery.ajaxSetup({',
         '    beforeSend: function(xhr, settings) {',

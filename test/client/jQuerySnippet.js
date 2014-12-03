@@ -23,24 +23,28 @@ var spy = Sinon.spy;
 
 
 var executeSnippet = function(clientId) {
-    eval(JQuerySnippet(clientId));
+    eval(JQuerySnippet.generate(clientId));
 };
 
 describe('JQuerySnippet', function() {
   
-    beforeEach(function(done) {
-        jQuery.ajaxSetup = spy();
-        
-        done();
+    describe('#generate', function() {
+      
+        beforeEach(function(done) {
+            jQuery.ajaxSetup = spy();
+            
+            done();
+        });
+
+        it('evaluates to a valid function', function(done) {
+            expect(executeSnippet('foobar')).to.not.throw;
+
+            done();
+        });
+
+        // eventually add tests calling jQuery directly, 
+        // ensuring the url has the values as a query string
+
     });
-
-    it('evaluates to a valid function', function(done) {
-        expect(executeSnippet('foobar')).to.not.throw;
-
-        done();
-    });
-
-    // eventually add tests calling jQuery directly, 
-    // ensuring the url has the values as a query string
 
 });

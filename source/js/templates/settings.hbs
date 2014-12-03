@@ -1,0 +1,19 @@
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Settings</h4>
+      </div>
+      <div class="modal-body">
+        <textarea class="jquery-snippet json-markup expanded">{{jQuerySnippet clientId}}</textarea>
+        <p>Choose a new Client ID</p>
+        <input name="client-id" type="text" value={{clientId}}>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary submit">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
