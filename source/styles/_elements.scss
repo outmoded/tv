@@ -1,30 +1,31 @@
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
 
-  body {
-      font-family: 'Open Sans';
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1.5em;
-      -webkit-font-smoothing: antialiased;
-  }
+    body {
+        font-family: 'Open Sans';
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.5em;
+        -webkit-font-smoothing: antialiased;
+        background-color: $background-accent;
+    }
 }
 
 button {
-   border-radius: 24px;
-   font-weight: 400;
-   border: none;
-   box-shadow: 1px 1px 0px $shadow;
-   font-size: 12px;
-   -webkit-font-smoothing: antialiased;
+    border-radius: 24px;
+    font-weight: 400;
+    border: none;
+    box-shadow: 1px 1px 0px $dark-shadow;
+    font-size: 12px;
+    -webkit-font-smoothing: antialiased;
 }
 
 *, *:before, *:after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 .truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

@@ -1,13 +1,15 @@
 // Palette
 
 // greys
-$black:        black;
-$darkest-grey: #1C1C1C;
-$darker-grey:  #333333;
-$dark-grey:    #444444;
-$grey:         grey;
-$light-grey:   #F8F8F8;
-$white:        white;
+$black:         #000000;
+$darkest-grey:  #1C1C1C;
+$darker-grey:   #333333;
+$dark-grey:     #444444;
+$grey:          #888888;
+$light-grey:    #DFDFDF;
+$lighter-grey:  #EEEEEE;
+$lightest-grey: #F6F6F6;
+$white:         #FFFFFF;
 
 // other colors
 $blue:         blue;
@@ -30,7 +32,11 @@ $light-green:  darkturquoise;
 $warning:              $orange;
 $error:                $red;
 
-$shadow:               $darkest-grey;
+$background:           $white;
+$background-accent:    $lighter-grey;
+$dark-shadow:          $darkest-grey;
+$light-shadow:         $light-grey;
+$font-color-secondary: $grey;
 
 $toolbar-bg:           $darker-grey;
 $toolbar-accent:       $darkest-grey;
@@ -41,12 +47,12 @@ $toolbar-button:       $white;
 $table-header-bg:      $darker-grey;
 $table-header:         $white;
 $table-row-bg:         $white;
-$table-row-alt-bg:     $light-grey;
+$table-row-alt-bg:     $lightest-grey;
 $table-row-bg:         $white;
-$table-row-alt-bg:     $light-grey;
+$table-row-alt-bg:     $lightest-grey;
 $table-row:            $black;
 $table-row-secondary:  $grey;
-$table-row-hr:         $light-grey;
+$table-row-hr:         $lightest-grey;
 $table-row-hr-alt:     $grey;
 $table-cell-spinner:   $darker-grey;
 $table-row-hover:      $light-blue;

@@ -1,54 +1,60 @@
-.server-log {
-    .data {
-        cursor: pointer;
+.server-logs {
+    font-size: 1.5rem;
+    color: $font-color-secondary;
+    padding: 15px 0;
 
-        ul {
-            position: relative;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
-            height: 16px;
-            margin: 0;
-            padding: 0 10px 0 32px;
-
+    .server-log {
+        .data {
             cursor: pointer;
-            font-family: monospace, serif;
-            list-style: none;
-            white-space: nowrap;
-        }
 
-        ul:before {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 16px;
+            ul {
+                position: relative;
+                overflow: hidden;
+                text-overflow: ellipsis;
 
-            display: block;
-            border: 4px solid transparent;
-            border-left: 6px solid #666;
-        }
+                height: 16px;
+                margin: 0;
+                padding: 0 10px 0 32px;
 
-        li {
-            overflow: hidden;
-            text-overflow: ellipsis;
+                cursor: pointer;
+                font-family: monospace, serif;
+                list-style: none;
+                white-space: nowrap;
+            }
 
-            display: inline;
-            vertical-align: top;
-            white-space: nowrap;
-        }
+            ul:before {
+                content: '';
+                position: absolute;
+                top: 5px;
+                left: 16px;
 
-        li:before {
-            content: ', ';
-        }
+                display: block;
+                border: 4px solid transparent;
+                border-left: 6px solid #666;
+            }
 
-        li:first-child:before {
-            content: '';
+            li {
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                display: inline;
+                vertical-align: top;
+                white-space: nowrap;
+            }
+
+            li:before {
+                content: ', ';
+            }
+
+            li:first-child:before {
+                content: '';
+            }
         }
     }
 }
 
 .json-markup {
-    line-height: 17px;
+    line-height: 21px;
     font-size: 13px;
     font-family: monospace;
     width: auto !important;

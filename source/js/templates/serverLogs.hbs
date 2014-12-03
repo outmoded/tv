@@ -1,14 +1,11 @@
 {{#each .}}
-    <div class="server-log row">
+    <div class="server-log">
         <div class="col-xs-3 tags">
             {{#each tags}}
                 <span>{{.}}</span>
             {{/each}}
         </div>
         <div class="col-xs-7 data">{{{jsonMarkup data}}}</div>
-        <div class="col-xs-2 timestamp">
-            <span class="time">{{longTime timestamp}}</span>
-            <span class="date">{{shortDate timestamp}}</span>
-        </div>
+        <div class="col-xs-2 timestamp">{{longTime timestamp}}</div>
     </div>
 {{/each}}
