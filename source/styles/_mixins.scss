@@ -1,0 +1,7 @@
+@mixin rotate($degrees) {
+    -webkit-transform: rotate($degrees);
+    -moz-transform: rotate($degrees);
+    -ms-transform: rotate($degrees);
+    -o-transform: rotate($degrees);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}

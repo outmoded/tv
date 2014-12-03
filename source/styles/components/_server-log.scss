@@ -27,8 +27,8 @@
             &.expanded {
                 .expander {
                     padding: 0;
-                    transform: rotate(90deg);
                     color: $secondary-font-color;
+                    @include rotate(90deg);
                 }
 
                 .json-markup {

@@ -49,7 +49,7 @@
                 .expander {
                     color: $primary-font-color;
                     padding: 4px 3px 0px 6px;
-                    transform: rotate(90deg);
+                    @include rotate(90deg);
                 }
             }
 
