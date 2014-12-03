@@ -69,6 +69,138 @@ it('reports a request event', function (done) {
     });
 });
 
+it('handles subscribe and unsubscribe', function(done) {
+
+    var server = new Hapi.Server();
+    server.connection();
+
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: function (request, reply) {
+
+            return reply('1');
+        }
+    });
+
+    server.register({ register: Tv, options: { port: 0 } }, function (err) {
+
+        expect(err).to.not.exist();
+
+        server.inject('/debug/console', function (res) {
+
+            expect(res.statusCode).to.equal(200);
+            expect(res.result).to.contain('Debug Console');
+
+            var host = res.result.match(/var host = '([^']+)'/)[1];
+            var port = res.result.match(/var port = (\d+)/)[1];
+            var ws = new Ws('ws://' + host + ':' + port);
+            var messageCount = 0;
+            var wait = function(fn) { setTimeout(fn, 100); };
+
+            ws.once('open', function () {
+
+                ws.send('subscribe:*');
+
+                wait(function () {
+
+                    server.inject('/?debug=123', function() {
+
+                        wait(function() {
+
+                            var singleRequestMessageCount = messageCount;
+                            ws.send('unsubscribe:*');
+
+                            wait(function() {
+
+                                server.inject('/?debug=123', function() {
+
+                                    wait(function() {
+
+                                        expect(messageCount).to.equal(singleRequestMessageCount);
+
+                                        done();
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+
+            ws.on('message', function (data, flags) {
+                ++messageCount;
+            });
+        });
+    });
+});
+
+it('does not resubscribe for the same socket', function(done) {
+
+    var server = new Hapi.Server();
+    server.connection();
+
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: function (request, reply) {
+
+            return reply('1');
+        }
+    });
+
+    server.register({ register: Tv, options: { port: 0 } }, function (err) {
+
+        expect(err).to.not.exist();
+
+        server.inject('/debug/console', function (res) {
+
+            expect(res.statusCode).to.equal(200);
+            expect(res.result).to.contain('Debug Console');
+
+            var host = res.result.match(/var host = '([^']+)'/)[1];
+            var port = res.result.match(/var port = (\d+)/)[1];
+            var ws = new Ws('ws://' + host + ':' + port);
+            var messageCount = 0;
+            var wait = function(fn) { setTimeout(fn, 100); };
+
+            ws.once('open', function () {
+
+                ws.send('subscribe:*');
+
+                wait(function () {
+
+                    server.inject('/?debug=123', function() {
+
+                        wait(function() {
+
+                            var singleRequestMessageCount = messageCount;
+                            ws.send('subscribe:*');
+
+                            wait(function() {
+
+                                server.inject('/?debug=123', function() {
+
+                                    wait(function() {
+
+                                        expect(messageCount).to.equal(singleRequestMessageCount * 2);
+
+                                        done();
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+
+            ws.on('message', function (data, flags) {
+                ++messageCount;
+            });
+        });
+    });
+});
+
 it('handles reconnects gracefully', function (done) {
 
     var server = new Hapi.Server();
