@@ -13,7 +13,14 @@ var ChannelSelectorView = Backbone.View.extend({
     },
 
     initialize: function() {
-        this.listenTo(this.model, 'change:clientId change:channel', this.render);
+        this.listenTo(this.model, 'change:clientId', function(model, clientId) {
+            this.$('[data-channel]').attr('data-channel', clientId).find('span').html(clientId);
+        });
+
+        this.listenTo(this.model, 'change:channel', function(model, channel) {
+            this.$('.active').removeClass('active');
+            this.$('[data-channel="' + channel + '"]').addClass('active');
+        });
     },
 
     render: function() {

@@ -6,7 +6,7 @@ var ToolbarView = Backbone.View.extend({
     template: require('../templates/toolbar.hbs'),
 
     events: {
-        'click .settings': function(e) { console.log('this.appView.settingsView', this.appView.settingsView);this.appView.settingsView.show(); }
+        'click .settings': function(e) { this.appView.settingsView.show(); }
     },
 
     initialize: function(options) {
@@ -22,3 +22,5 @@ var ToolbarView = Backbone.View.extend({
     }
 
 });
+
+module.exports = ToolbarView;
