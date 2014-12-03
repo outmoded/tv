@@ -13,6 +13,11 @@
     .header {
         .expander {
             color: $dark-grey;
+            cursor: pointer;
+        }
+
+        .expander:hover {
+            color: $table-header;
         }
 
         div {

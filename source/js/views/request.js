@@ -26,10 +26,10 @@ var RequestView = Backbone.View.extend({
     },
 
     _toggleServerLogs: function() {
-        this.active = !this.active;
-        this.$el.toggleClass('active', this.active);
+        var active = !this.$el.hasClass('active');
+        this.$el.toggleClass('active', active);
 
-        if(this.active) {
+        if(active) {
             if(!this.serverLogsView) {
                 this.serverLogsView = new ServerLogsView({
                     el: this.$('.server-logs'),
