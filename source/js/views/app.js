@@ -106,7 +106,17 @@ var AppView = Backbone.View.extend({
     },
 
     _hasMatch: function(request, property, values) {
-        return !_.isUndefined(request.get(property)) && values.indexOf(request.get(property)) > -1;
+        var modelValue;
+        
+        if (property === 'tags') {
+            modelValue = _.uniq(_.flatten(request.get('serverLogs').pluck('tags'))); // unique list of all tags across all server logs
+        } else {
+            modelValue = [request.get(property)];
+        }
+
+        var modelValues = _.flatten(modelValue);
+        
+        return modelValues.length >= 1 && _.difference(values, modelValues).length === 0;
     },
 
     _clearSearchFilter: function() {
