@@ -26,20 +26,20 @@
             &:nth-child(2n+1) {
                 .request-details {
                     background-color: $table-row-bg;
-                }
 
-                .expander {
-                    color: $table-row-bg;
+                    .expander {
+                        color: $table-row-bg;
+                    }
                 }
             }
 
             &:nth-child(2n+2) {
                 .request-details {
                     background-color: $table-row-alt-bg;
-                }
 
-                .expander {
-                    color: $table-row-alt-bg;
+                    .expander {
+                        color: $table-row-alt-bg;
+                    }
                 }
             }
 

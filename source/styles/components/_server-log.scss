@@ -13,6 +13,36 @@
         .data {
             cursor: pointer;
 
+            &:hover .expander {
+                color: $background;
+            }
+
+            .expander {
+                float: left;
+                margin: 5px auto auto 2px;
+                color: $background-accent;
+                font-size: 1rem;
+            }
+
+            &.expanded {
+                .expander {
+                    padding: 0;
+                    transform: rotate(90deg);
+                    color: $secondary-font-color;
+                }
+
+                .json-markup {
+                    white-space: pre-wrap;
+                    padding-left: 21px;
+                }
+            }
+
+            &:not(.expanded) .json-markup {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
             ul {
                 position: relative;
                 overflow: hidden;
@@ -63,16 +93,6 @@
     font-size: 13px;
     font-family: monospace;
     width: auto !important;
-
-    &.expanded {
-        white-space: pre-wrap;
-    }
-
-    &:not(.expanded) {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
 }
 
 .json-markup-key {

@@ -21,7 +21,10 @@ var ServerLogsView = Backbone.View.extend({
     },
 
     _toggleServerLogData: function(e) {
-        $(e.currentTarget).find('.json-markup').toggleClass('expanded');
+        $data = $(e.currentTarget);
+
+        $data.find('.json-markup').toggleClass('expanded');
+        $data.toggleClass('expanded');
     }
 
 });

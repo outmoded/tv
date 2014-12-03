@@ -5,7 +5,12 @@
                 <span>{{.}}</span>
             {{/each}}
         </div>
-        <div class="col-xs-7 data">{{{jsonMarkup data}}}</div>
+        <div class="col-xs-7 data">
+            {{#if data}}
+                <span class="expander glyphicon glyphicon-play"></span>
+                {{{jsonMarkup data}}}
+            {{/if}}
+        </div>
         <div class="col-xs-2 timestamp">{{longTime timestamp}}</div>
     </div>
 {{/each}}
