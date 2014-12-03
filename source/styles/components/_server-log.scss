@@ -1,9 +1,11 @@
 .server-logs {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: $secondary-font-color;
-    padding: 15px 0;
+    padding: 12px 0;
 
     .server-log {
+        padding: 3px 0;
+
         .data {
             cursor: pointer;
 
