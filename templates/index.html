@@ -25,6 +25,9 @@
                 if(e.keyCode === 114 && e.target.nodeName !== "INPUT") {
                     $.get(location.origin);
                 }
+                if(e.keyCode === 101 && e.target.nodeName !== "INPUT") {
+                    $.post(location.origin + '/foo/bar', {foo: 'bar'});
+                }
             });
         </script>
     </body>

@@ -32,7 +32,6 @@
     "lodash": "^2.4.1",
     "moment": "^2.8.4",
     "prettify": "^0.1.7",
-    "react": "^0.12.0",
     "ws": "0.4.x"
   },
   "peerDependencies": {
@@ -43,17 +42,17 @@
     "hapi": "6.x.x",
     "lab": "4.x.x",
     "node-sass": "^1.2.2",
-    "reactify": "^0.16.0",
+    "rewire": "^2.1.3",
     "sinon": "^1.12.1",
     "watchify": "^2.1.1"
   },
   "scripts": {
     "test": "make test-cov",
-    "watch-js": "watchify -t hbsfy -t reactify -e source/js/start.js source/js/**/*.js -o public/js/main.js -d -v",
+    "watch-js": "watchify -t hbsfy -e source/js/start.js source/js/**/*.js -o public/js/main.js -d -v",
     "watch-styles": "node-sass source/styles/style.scss public/css/style.css -w source/styles -r",
     "watch": "npm run build && npm run watch-js & npm run watch-styles",
     "copy-fonts": "cp -R source/fonts/vendor/bootstrap public/fonts",
-    "build-js": "browserify -t hbsfy -t reactify -e source/js/start.js source/js/**/*.js > public/js/main.js -d",
+    "build-js": "browserify -t hbsfy -e source/js/start.js source/js/**/*.js > public/js/main.js -d",
     "build-styles": "node-sass source/styles/style.scss public/css/style.css",
     "build": "npm run build-js && npm run build-styles && npm run copy-fonts",
     "boot": "node examples/simple.js",

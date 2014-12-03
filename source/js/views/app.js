@@ -4,12 +4,17 @@ var _ = require('lodash');
 var ToolbarView = require('./toolbar');
 var FeedView = require('./feed');
 var RequestView = require('./request');
+var SettingsView = require('./settings');
+var SearchQuery = require('../utils/searchQuery');
+var Settings = require('../models/settings');
 
 var AppView = Backbone.View.extend({
 
     template: require('../templates/app.hbs'),
 
     initialize: function(opts) {
+        this.model = new Settings({webSocketManager: opts.webSocketManager});
+
         this.webSocketManager = opts.webSocketManager;
 
         this.requestViews = [];
@@ -27,8 +32,9 @@ var AppView = Backbone.View.extend({
     render: function() {
         var $markup = $(this.template());
 
-        new ToolbarView({ el: $markup.siblings('.toolbar') }).render();
-        new FeedView({ el: $markup.siblings('.feed') }).render();
+        this.toolbarView = new ToolbarView({ el: $markup.siblings('.toolbar'), model: this.model, appView: this }).render();
+        this.feedView = new FeedView({ el: $markup.siblings('.feed'), model: this.model }).render();
+        this.settingsView = new SettingsView({ el: $markup.siblings('.settings-modal-container'), settingsModel: this.model }).render();
 
         this.$el.html($markup);
 
@@ -89,19 +95,19 @@ var AppView = Backbone.View.extend({
     },
 
     _filterRequests: _.debounce(function(e) {
-        var keywords = $('input.search').val().toLowerCase().split(' ');
-
-        if(keywords.length && keywords[0].length) {
-            this._setSearchFilter(keywords);
+        var query = SearchQuery.toObject($('input.search').val());
+        
+        if(query) {
+            this._setSearchFilter(query);
         } else {
             this._clearSearchFilter();
         }
     }, 200),
 
-    _setSearchFilter: function(keywords) {
+    _setSearchFilter: function(query) {
         this.searchFilter = function(requestView) {
-            return _.every(keywords, function(keyword) {
-                return this._hasMatch(requestView.model, keyword);
+            return _.every(query, function(values, property) {
+                return this._hasMatch(requestView.model, property, values);
             }.bind(this));
         };
 
@@ -110,11 +116,18 @@ var AppView = Backbone.View.extend({
         }.bind(this));
     },
 
-    _hasMatch: function(request, keyword) {
-        return request.get('path').indexOf(keyword) > -1 ||
-            request.get('method').indexOf(keyword) > -1 ||
-            ( _.isString(request.get('statusCode')) &&
-              request.get('statusCode').indexOf(keyword) > -1 );
+    _hasMatch: function(request, property, values) {
+        var modelValue;
+        
+        if (property === 'tags') {
+            modelValue = _.uniq(_.flatten(request.get('serverLogs').pluck('tags'))); // unique list of all tags across all server logs
+        } else {
+            modelValue = [request.get(property)];
+        }
+
+        var modelValues = _.flatten(modelValue);
+        
+        return modelValues.length >= 1 && _.difference(values, modelValues).length === 0;
     },
 
     _clearSearchFilter: function() {

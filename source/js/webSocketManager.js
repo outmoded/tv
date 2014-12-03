@@ -1,10 +1,9 @@
 var WebSocketManager = function(webSocket, clientId) {
-    this.clientId = clientId || '*';
     this.webSocket = webSocket;
 
     this.webSocket.onopen = function() {
-        this.webSocket.send(this.clientId);
         this.isOpen = true;
+        if (this.onSocketOpen) this.onSocketOpen();
     }.bind(this);
 };
 
