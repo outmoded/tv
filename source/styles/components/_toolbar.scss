@@ -29,6 +29,11 @@
         padding: 2px 12px;
         margin-left: 8px;
 
+        &:hover {
+            color: $primary-font-color;
+            background-color: $background;
+        }
+
         .icon {
             float: left;
             padding-right: 7px;

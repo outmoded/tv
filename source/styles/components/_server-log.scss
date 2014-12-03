@@ -1,6 +1,6 @@
 .server-logs {
     font-size: 1.5rem;
-    color: $font-color-secondary;
+    color: $secondary-font-color;
     padding: 15px 0;
 
     .server-log {
@@ -16,7 +16,6 @@
                 margin: 0;
                 padding: 0 10px 0 32px;
 
-                cursor: pointer;
                 font-family: monospace, serif;
                 list-style: none;
                 white-space: nowrap;
