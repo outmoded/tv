@@ -4,6 +4,7 @@ var _ = require('lodash');
 var HeaderView = require('./header');
 var FeedView = require('./feed');
 var RequestView = require('./request');
+var SearchQuery = require('../utils/searchQuery');
 
 var AppView = Backbone.View.extend({
 
@@ -27,8 +28,8 @@ var AppView = Backbone.View.extend({
     render: function() {
         var $markup = $(this.template());
 
-        new HeaderView({ el: $markup.siblings('.header') }).render();
-        new FeedView({ el: $markup.siblings('.feed') }).render();
+        this.headerView = new HeaderView({ el: $markup.siblings('.header') }).render();
+        this.feedView = new FeedView({ el: $markup.siblings('.feed') }).render();
 
         this.$el.html($markup);
 
@@ -83,19 +84,19 @@ var AppView = Backbone.View.extend({
     },
 
     _filterRequests: _.debounce(function(e) {
-        var keywords = $('input.search').val().toLowerCase().split(' ');
-
-        if(keywords.length && keywords[0].length) {
-            this._setSearchFilter(keywords);
+        var query = SearchQuery.toObject($('input.search').val());
+        
+        if(query) {
+            this._setSearchFilter(query);
         } else {
             this._clearSearchFilter();
         }
     }, 200),
 
-    _setSearchFilter: function(keywords) {
+    _setSearchFilter: function(query) {
         this.searchFilter = function(requestView) {
-            return _.every(keywords, function(keyword) {
-                return this._hasMatch(requestView.model, keyword);
+            return _.every(query, function(values, property) {
+                return this._hasMatch(requestView.model, property, values);
             }.bind(this));
         };
 
@@ -104,11 +105,8 @@ var AppView = Backbone.View.extend({
         }.bind(this));
     },
 
-    _hasMatch: function(request, keyword) {
-        return request.get('path').indexOf(keyword) > -1 ||
-            request.get('method').indexOf(keyword) > -1 ||
-            ( _.isString(request.get('statusCode')) &&
-              request.get('statusCode').indexOf(keyword) > -1 );
+    _hasMatch: function(request, property, values) {
+        return !_.isUndefined(request.get(property)) && values.indexOf(request.get(property)) > -1;
     },
 
     _clearSearchFilter: function() {
