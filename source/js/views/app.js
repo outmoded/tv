@@ -1,7 +1,7 @@
 var Backbone = require('backbone');
 var _ = require('lodash');
 
-var HeaderView = require('./header');
+var ToolbarView = require('./toolbar');
 var FeedView = require('./feed');
 var RequestView = require('./request');
 
@@ -27,7 +27,7 @@ var AppView = Backbone.View.extend({
     render: function() {
         var $markup = $(this.template());
 
-        new HeaderView({ el: $markup.siblings('.header') }).render();
+        new ToolbarView({ el: $markup.siblings('.toolbar') }).render();
         new FeedView({ el: $markup.siblings('.feed') }).render();
 
         this.$el.html($markup);
@@ -78,10 +78,14 @@ var AppView = Backbone.View.extend({
 
     _pauseRequests: function() {
         this.webSocketManager.pause();
+        this.$el.find('.pause').addClass('hidden');
+        this.$el.find('.resume').removeClass('hidden');
     },
 
     _resumeRequests: function() {
         this.webSocketManager.resume();
+        this.$el.find('.pause').removeClass('hidden');
+        this.$el.find('.resume').addClass('hidden');
     },
 
     _filterRequests: _.debounce(function(e) {

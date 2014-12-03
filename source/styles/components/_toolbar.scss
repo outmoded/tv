@@ -1,0 +1,62 @@
+.toolbar {
+    background-color: $toolbar-bg;
+    border-bottom: 1px solid $toolbar-accent;
+
+    .search-icon {
+        color: $white;
+        margin-right: -26px;
+        margin-left: 10px;
+        font-size: 1.3rem;
+    }
+
+    .search {
+        width: 40%;
+        background-color: $toolbar-accent;
+        padding: 6px 0 7px 0;
+        border: 1px solid $toolbar-accent;
+        color: $white;
+        outline: none;
+        text-indent: 30px;
+
+        &:focus {
+            border: 1px solid $toolbar-highlight;
+        }
+    }
+
+    button {
+        color: $toolbar-button;
+        background-color: $toolbar-button-bg;
+        padding: 2px 12px;
+        margin-left: 8px;
+
+        .icon {
+            float: left;
+            padding-right: 7px;
+        }
+    }
+
+    .pause {
+        padding-left: 10px;
+
+        .icon {
+            font-size: 1.7rem;
+            margin-top: 1px;
+            padding-right: 3px;
+        }
+    }
+
+    .resume {
+        .icon {
+            font-size: 1.4rem;
+            padding-top: 2px;
+            padding-right: 5px;
+        }
+    }
+
+    .clear {
+        .icon {
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+    }
+}

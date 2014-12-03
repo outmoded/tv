@@ -1,22 +1,25 @@
 // Palette
 
 // greys
-$black:       black;
-$dark-grey:   #333333;
-$grey:        grey;
-$light-grey:  #f8f8f8;
-$white:       white;
+$black:        black;
+$darkest-grey: #1C1C1C;
+$darker-grey:  #333333;
+$dark-grey:    #444444;
+$grey:         grey;
+$light-grey:   #F8F8F8;
+$white:        white;
 
 // other colors
-$blue:        blue;
-$light-blue:  #d9eafd;
+$blue:         blue;
+$light-blue:   #D9EAFD;
 
-$orange:      #f4a726;
+$orange:       #F4A726;
 
-$dark-red:    firebrick;
-$red:         #f37b65;
+$dark-red:     firebrick;
+$red:          #F37B65;
 
-$green:       green;
+$green:        green;
+$light-green:  darkturquoise;
 
 // Components
 // Notes: Only palette color references below.
@@ -24,25 +27,33 @@ $green:       green;
 // the component color variables below (not css colors 
 // directly or the color variables above)
 
-$warning:             $orange;
-$error:               $red;
+$warning:              $orange;
+$error:                $red;
 
-$table-header-bg:     $dark-grey;
-$table-header:        $white;
-$table-row-bg:        $white;
-$table-row-alt-bg:    $light-grey;
-$table-row-bg:        $white;
-$table-row-alt-bg:    $light-grey;
-$table-row:           $black;
-$table-row-secondary: $grey;
-$table-row-hr:        $light-grey;
-$table-row-hr-alt:    $grey;
-$table-cell-spinner:  $dark-grey;
-$table-row-hover:     $light-blue;
+$shadow:               $darkest-grey;
 
-$json-markup-boolean: $dark-red;
-$json-markup-string:  $green;
-$json-markup-null:    $grey;
-$json-markup-number:  $blue;
+$toolbar-bg:           $darker-grey;
+$toolbar-accent:       $darkest-grey;
+$toolbar-highlight:    $light-green;
+$toolbar-button-bg:    $dark-grey;
+$toolbar-button:       $white;
 
-$expander:            $dark-grey;
+$table-header-bg:      $darker-grey;
+$table-header:         $white;
+$table-row-bg:         $white;
+$table-row-alt-bg:     $light-grey;
+$table-row-bg:         $white;
+$table-row-alt-bg:     $light-grey;
+$table-row:            $black;
+$table-row-secondary:  $grey;
+$table-row-hr:         $light-grey;
+$table-row-hr-alt:     $grey;
+$table-cell-spinner:   $darker-grey;
+$table-row-hover:      $light-blue;
+
+$json-markup-boolean:  $dark-red;
+$json-markup-string:   $green;
+$json-markup-null:     $grey;
+$json-markup-number:   $blue;
+
+$expander:             $darker-grey;
