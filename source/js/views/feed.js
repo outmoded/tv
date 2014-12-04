@@ -21,6 +21,7 @@ var FeedView = Backbone.View.extend({
     _collapseAllExpandedRequests: function() {
         this.$('.request.active').removeClass('active');
         this.$('.request .server-logs').hide();
+        this.$('.header .expander').removeClass('expanded');
     }
 
 });

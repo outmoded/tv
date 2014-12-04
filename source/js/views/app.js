@@ -45,6 +45,10 @@ var AppView = Backbone.View.extend({
             var requestView = new RequestView({ model: request }).render();
             this.requestViews.push(requestView);
 
+            this.listenTo(requestView, 'serverLogsExpanded', function() {
+                this._showCollapseAll();
+            });
+
             this._updateRequestVisibility(requestView);
 
             this.listenTo(request, 'change:statusCode', function() {
@@ -53,6 +57,10 @@ var AppView = Backbone.View.extend({
 
             this.$('.feed .body').append(requestView.el);
         }.bind(this) );
+    },
+
+    _showCollapseAll: function() {
+        this.$('.header .expander').addClass('expanded');
     },
 
     _updateRequestVisibility: function(requestView) {

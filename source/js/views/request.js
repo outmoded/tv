@@ -35,7 +35,10 @@ var RequestView = Backbone.View.extend({
                     el: this.$('.server-logs'),
                     collection: this.model.get('serverLogs') }).render();
             }
+
             this.serverLogsView.$el.show();
+
+            this.trigger('serverLogsExpanded');
         } else if(this.serverLogsView) {
             this.serverLogsView.$el.hide();
         }
