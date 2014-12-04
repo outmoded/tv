@@ -42,7 +42,7 @@ MessageParser.prototype.addMessage = function(raw_message) {
 
 MessageParser.prototype._isResponse = function(message) {
   var isResponse =
-      this._hasTags(message, 'response') ||
+      message.response ||
       this._hasTags(message, ['error', 'internal']);
 
   return isResponse;
@@ -62,7 +62,7 @@ MessageParser.prototype._isForExistingRequest = function(message) {
 
 MessageParser.prototype._isFirstMessageForNewRequest = function(message) {
   var found = this._findRequest(message);
-  var hasReceivedTag = message.tags.indexOf('received') !== -1;
+  var hasReceivedTag = message.tags && message.tags.indexOf('received') !== -1;
 
   return !found && hasReceivedTag;
 };
@@ -84,8 +84,7 @@ MessageParser.prototype._addRequest = function(message) {
 MessageParser.prototype._updateRequestWithResponse = function(message) {
   var request = this._findRequest(message);
 
-  request.set('statusCode', '--'); // message.data.statusCode;
-  request.set('data', '--'); // message.data;
+  request.set('statusCode', message.data.statusCode);
 };
 
 MessageParser.prototype._findRequest = function(message) {
