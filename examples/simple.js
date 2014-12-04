@@ -8,7 +8,8 @@ var Tv = require('../');
 var internals = {};
 
 
-var server = new Hapi.Server(8080);
+var server = new Hapi.Server();
+server.connection({ port: 8000 });
 
 server.route({
     method: 'GET',
@@ -20,7 +21,7 @@ server.route({
 });
 
 
-server.pack.register(Tv, function (err) {
+server.register(Tv, function (err) {
 
     if (err) {
         console.log(err);
