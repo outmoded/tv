@@ -291,7 +291,7 @@
         $('#subscribe').click(function (e) {
 
             $('#filterButton').show();
-            ws.send($('#session').val());
+            ws.send('subscribe:' + $('#session').val());
             $('#active-subscriber').addClass('active');
             e.preventDefault();
         });
