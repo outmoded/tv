@@ -49,7 +49,7 @@ it('reports a request event', function (done) {
 
             ws.once('open', function () {
 
-                ws.send('*');
+                ws.send('subscribe:*');
 
                 setTimeout(function () {
 
@@ -96,7 +96,7 @@ it('handles subscribe and unsubscribe', function(done) {
             var port = res.result.match(/var port = (\d+)/)[1];
             var ws = new Ws('ws://' + host + ':' + port);
             var messageCount = 0;
-            var wait = function(fn) { setTimeout(fn, 100); };
+            var wait = function(fn) { setTimeout(fn, 50); };
 
             ws.once('open', function () {
 
@@ -230,13 +230,13 @@ it('handles reconnects gracefully', function (done) {
 
             ws1.once('open', function () {
 
-                ws1.send('*');
+                ws1.send('subscribe:*');
                 ws1.close();
                 var ws2 = new Ws('ws://' + host + ':' + port);
 
                 ws2.once('open', function () {
 
-                    ws2.send('*');
+                    ws2.send('subscribe:*');
                     setTimeout(function () {
 
                         server.inject('/?debug=123', function (res) {
