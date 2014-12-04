@@ -28,11 +28,11 @@
     "ws": "0.4.x"
   },
   "peerDependencies": {
-    "hapi": ">=8.x.x"
+    "hapi": ">=8.0.0-rc8"
   },
   "devDependencies": {
     "browserify": "^6.3.2",
-    "hapi": "8.x.x",
+    "hapi": "8.0.0-rc8",
     "lab": "5.x.x",
     "node-sass": "^1.2.2",
     "rewire": "^2.1.3",
