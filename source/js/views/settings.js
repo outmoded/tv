@@ -54,6 +54,10 @@ var SettingsView = Backbone.View.extend({
 
     submit: function(e) {
         this.settingsModel.set('clientId', this.model.get('clientId'));
+        if (this.settingsModel.get('channel') && this.settingsModel.get('channel') !== '*') {
+            this.settingsModel.set('channel', this.model.get('clientId'));
+        }
+
         this.hide();
     }
 

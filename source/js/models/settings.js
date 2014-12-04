@@ -19,13 +19,6 @@ var Settings = Backbone.Model.extend({
         this.on('change:channel', function(model, channel) {
             options.webSocketManager.applyFilter(channel);
         });
-        this.on('change:clientId', function(model, clientId) {
-            // if we're listening to clientId and it changes,
-            // refresh the subscription
-            if (model.get('channel') && model.get('channel') !== '*') {
-                model.set('channel', clientId);
-            }
-        });
     },
 
     _updateSettingsStore: function(model) {

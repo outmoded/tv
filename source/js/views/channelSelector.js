@@ -4,8 +4,6 @@ var SettingsStore = require('../settingsStore');
 
 var ChannelSelectorView = Backbone.View.extend({
 
-    _store: SettingsStore,
-
     template: require('../templates/channelSelector.hbs'),
 
     events: {
@@ -14,7 +12,7 @@ var ChannelSelectorView = Backbone.View.extend({
 
     initialize: function() {
         this.listenTo(this.model, 'change:clientId', function(model, clientId) {
-            this.$('[data-channel]').attr('data-channel', clientId).find('span').html(clientId);
+            this.$('.client-id').attr('data-channel', clientId).find('span').html(clientId);
         });
 
         this.listenTo(this.model, 'change:channel', function(model, channel) {
@@ -26,7 +24,7 @@ var ChannelSelectorView = Backbone.View.extend({
     render: function() {
         var data = {
             clientId: this.model.get('clientId'),
-            channel: this._store.get('channel')
+            channel: this.model.get('channel')
         };
 
         this.$el.html(this.template(data));
