@@ -18,7 +18,7 @@ var lab = exports.lab = Lab.script();
 var describe = lab.describe;
 var it = lab.it;
 var expect = Code.expect;
-
+var waitForSocketMessages = function(fn) { setTimeout(fn, 50); };
 
 it('reports a request event', function (done) {
 
@@ -51,13 +51,13 @@ it('reports a request event', function (done) {
 
                 ws.send('subscribe:*');
 
-                setTimeout(function () {
+                waitForSocketMessages(function () {
 
                     server.inject('/?debug=123', function (res) {
 
                         expect(res.result).to.equal('1');
                     });
-                }, 100);
+                });
             });
 
             ws.once('message', function (data, flags) {
@@ -96,26 +96,25 @@ it('handles subscribe and unsubscribe', function(done) {
             var port = res.result.match(/var port = (\d+)/)[1];
             var ws = new Ws('ws://' + host + ':' + port);
             var messageCount = 0;
-            var wait = function(fn) { setTimeout(fn, 50); };
 
             ws.once('open', function () {
 
                 ws.send('subscribe:*');
 
-                wait(function () {
+                waitForSocketMessages(function () {
 
                     server.inject('/?debug=123', function() {
 
-                        wait(function() {
+                        waitForSocketMessages(function() {
 
                             var singleRequestMessageCount = messageCount;
                             ws.send('unsubscribe:*');
 
-                            wait(function() {
+                            waitForSocketMessages(function() {
 
                                 server.inject('/?debug=123', function() {
 
-                                    wait(function() {
+                                    waitForSocketMessages(function() {
 
                                         expect(messageCount).to.equal(singleRequestMessageCount);
 
@@ -162,26 +161,25 @@ it('does not resubscribe for the same socket', function(done) {
             var port = res.result.match(/var port = (\d+)/)[1];
             var ws = new Ws('ws://' + host + ':' + port);
             var messageCount = 0;
-            var wait = function(fn) { setTimeout(fn, 100); };
 
             ws.once('open', function () {
 
                 ws.send('subscribe:*');
 
-                wait(function () {
+                waitForSocketMessages(function () {
 
                     server.inject('/?debug=123', function() {
 
-                        wait(function() {
+                        waitForSocketMessages(function() {
 
                             var singleRequestMessageCount = messageCount;
                             ws.send('subscribe:*');
 
-                            wait(function() {
+                            waitForSocketMessages(function() {
 
                                 server.inject('/?debug=123', function() {
 
-                                    wait(function() {
+                                    waitForSocketMessages(function() {
 
                                         expect(messageCount).to.equal(singleRequestMessageCount * 2);
 
@@ -237,13 +235,13 @@ it('handles reconnects gracefully', function (done) {
                 ws2.once('open', function () {
 
                     ws2.send('subscribe:*');
-                    setTimeout(function () {
+                    waitForSocketMessages(function () {
 
                         server.inject('/?debug=123', function (res) {
 
                             expect(res.result).to.equal('1');
                         });
-                    }, 100);
+                    });
                 });
 
                 // Shouldn't get called
