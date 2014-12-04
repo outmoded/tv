@@ -1,12 +1,32 @@
 .toolbar {
+    color: $toolbar;
     background-color: $toolbar-bg;
     border-bottom: 1px solid $toolbar-accent;
 
     .search-icon {
-        color: $white;
         margin-right: -26px;
         margin-left: 10px;
         font-size: 1.3rem;
+    }
+
+    .settings {
+        float: right;
+        margin: 7px;
+        font-size: 2rem;
+        cursor: pointer;
+    }
+
+    .channel-selector-container {
+        float: right;
+        margin-top: 6px;
+
+        button.active {
+            background-color: $toolbar-accent;
+            cursor: default;
+            &:hover {
+                color: $toolbar;
+            }
+        }
     }
 
     .search {
@@ -24,7 +44,6 @@
     }
 
     button {
-        color: $toolbar-button;
         background-color: $toolbar-button-bg;
         padding: 2px 12px;
         margin-left: 8px;

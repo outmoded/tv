@@ -1,4 +1,2 @@
-<div className="btn-group" role="group" aria-label="...">
-    <button type="button" data-channel="*" class="{{#isEq '*' channel}}active{{/isEq}}">All Traffic</button>
-    <button type="button" data-channel={{clientId}} class="{{#isEq clientId channel}}active{{/isEq}}">Your Traffic '<span class="client-id">{{clientId}}</span>'</button>
-</div>
+<button type="button" data-channel="*" class="{{#isEq '*' channel}}active{{/isEq}}">All Traffic</button>
+<button type="button" data-channel={{clientId}} class="{{#isEq clientId channel}}active{{/isEq}}">Your Traffic '<span class="client-id">{{clientId}}</span>'</button>

@@ -20,6 +20,29 @@ button {
     -webkit-font-smoothing: antialiased;
 }
 
+.button-group {
+
+    button:not(:first-child):not(:last-child) {
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
+        margin-left: -3px;
+    }
+
+    button:first-child {
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+
+    button:last-child {
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
+        margin-left: -3px;
+    }
+
+}
+
 *, *:before, *:after {
     box-sizing: inherit;
 }
