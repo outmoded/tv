@@ -1,0 +1,41 @@
+.feed {
+    .expander {
+        padding-right: 9px;
+        font-size: 1.2rem;
+    }
+
+    .header > div, .request-details > div {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        @extend .truncate;
+    }
+
+    .header {
+        .expander {
+            color: $darker-grey;
+            cursor: pointer;
+            @include rotate(90deg);
+            padding: 2px 2px 0px 5px;
+        }
+
+        .expander.expanded {
+            color: $dark-grey;
+        }
+
+        .expander {
+            &:hover {
+                color: $table-header;
+            }
+
+            &:not(.expanded), &:not(.expanded):hover {
+                color: $darker-grey;
+                cursor: default;
+            }
+        }
+
+        div {
+            background-color: $table-header-bg;
+            color: $table-header;
+        }
+    }
+}

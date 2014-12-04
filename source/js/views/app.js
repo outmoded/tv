@@ -113,7 +113,7 @@ var AppView = Backbone.View.extend({
 
     _filterRequests: _.debounce(function(e) {
         var query = SearchQuery.toObject($('input.search').val());
-        
+
         if(query) {
             this._setSearchFilter(query);
         } else {
@@ -135,7 +135,7 @@ var AppView = Backbone.View.extend({
 
     _hasMatch: function(request, property, values) {
         var modelValue;
-        
+
         if (property === 'tags') {
             modelValue = _.uniq(_.flatten(request.get('serverLogs').pluck('tags'))); // unique list of all tags across all server logs
         } else {
@@ -143,7 +143,7 @@ var AppView = Backbone.View.extend({
         }
 
         var modelValues = _.flatten(modelValue);
-        
+
         return modelValues.length >= 1 && _.any(values, function(value) {
             return _.any(modelValues, function(modelValue) {
                 return modelValue.indexOf(value) !== -1;
