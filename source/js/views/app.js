@@ -144,7 +144,11 @@ var AppView = Backbone.View.extend({
 
         var modelValues = _.flatten(modelValue);
         
-        return modelValues.length >= 1 && _.difference(values, modelValues).length === 0;
+        return modelValues.length >= 1 && _.any(values, function(value) {
+            return _.any(modelValues, function(modelValue) {
+                return modelValue.indexOf(value) !== -1;
+            });
+        });
     },
 
     _clearSearchFilter: function() {
