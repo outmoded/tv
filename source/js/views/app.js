@@ -25,8 +25,7 @@ var AppView = Backbone.View.extend({
     events: {
         'keyup .search': '_filterRequests',
         'click .clear': '_clearRequests',
-        'click .pause': '_pauseRequests',
-        'click .resume': '_resumeRequests'
+        'click .pause-resume': '_pauseResumeRequests',
     },
 
     render: function() {
@@ -80,6 +79,16 @@ var AppView = Backbone.View.extend({
         });
 
         this.requestViews = [];
+    },
+
+    _pauseResumeRequests: function(e) {
+        var paused = $(e.currentTarget).find('.resume:visible').length === 1;
+
+        if(paused) {
+            this._resumeRequests();
+        } else {
+            this._pauseRequests();
+        }
     },
 
     _pauseRequests: function() {

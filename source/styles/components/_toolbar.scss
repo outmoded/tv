@@ -28,6 +28,7 @@
         background-color: $toolbar-button-bg;
         padding: 2px 12px;
         margin-left: 8px;
+        outline: none;
 
         &:hover {
             color: $primary-font-color;
@@ -41,8 +42,6 @@
     }
 
     .pause {
-        padding-left: 10px;
-
         .icon {
             font-size: 1.7rem;
             margin-top: 1px;
