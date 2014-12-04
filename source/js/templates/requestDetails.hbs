@@ -10,4 +10,10 @@
         <div class="spinner"></div>
     {{/if}}
 </div>
-<div class="col-xs-2 timestamp">{{longTime timestamp}}</div>
+<div class="col-xs-2 timestamp">
+    <div class="favorite">
+        <span class="glyphicon glyphicon-star background"></span>
+        <span class="glyphicon glyphicon-star foreground"></span>
+    </div>
+    {{longTime timestamp}}
+</div>

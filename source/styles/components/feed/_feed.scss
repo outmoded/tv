@@ -36,15 +36,62 @@
             }
         }
 
-        .favorite {
-            .empty {
-                color: $table-header-icon;
-            }
-        }
-
         div {
             background-color: $table-header-bg;
             color: $table-header;
         }
+
+        .favorite {
+            margin-right: -1px;
+
+            &.enabled {
+                color: $table-header-icon;
+                cursor: pointer;
+
+                &:hover {
+                    color: $favorite;
+                }
+            }
+
+            &.active {
+                cursor: pointer;
+                color: $favorite;
+            }
+        }
+    }
+}
+
+.favorite {
+    font-size: 1.8rem;
+    float: right;
+
+    .background {
+        font-size: 1.9rem;
+        margin-right: -22px;
+        top: 3px;
+    }
+
+    .foreground {
+        font-size: 1.5rem;
+    }
+
+    .background:hover {
+        color: grey;
+    }
+
+    &.empty {
+        color: $table-header-icon-disabled;
+        cursor: default;
+    }
+}
+
+
+.favorite:hover, .favorite.active {
+    .foreground {
+        color: $favorite;
+    }
+
+    .background {
+        color: grey;
     }
 }

@@ -5,7 +5,7 @@
                 .request-details {
                     background-color: $table-row-bg;
 
-                    .expander {
+                    .expander, .favorite {
                         color: $table-row-bg;
                     }
                 }
@@ -15,7 +15,7 @@
                 .request-details {
                     background-color: $table-row-alt-bg;
 
-                    .expander {
+                    .expander, .favorite {
                         color: $table-row-alt-bg;
                     }
                 }

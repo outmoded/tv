@@ -26,6 +26,8 @@ var AppView = Backbone.View.extend({
         'keyup .search': '_filterRequests',
         'click .clear': '_clearRequests',
         'click .pause-resume': '_pauseResumeRequests',
+        'click .favorite.enabled': '_filterRequestsToFavorites',
+        'click .favorite.active': '_removeFavoritesFilter'
     },
 
     render: function() {
@@ -45,8 +47,10 @@ var AppView = Backbone.View.extend({
             var requestView = new RequestView({ model: request }).render();
             this.requestViews.push(requestView);
 
-            this.listenTo(requestView, 'serverLogsExpanded', this._showCollapseAllAction);
-            this.listenTo(requestView, 'serverLogsCollapsed', this._checkToHideCollapseAllAction);
+            this.listenTo(requestView, 'serverLogsExpanded', this._enableCollapseAllAction);
+            this.listenTo(requestView, 'serverLogsCollapsed', this._checkToDisableCollapseAllAction);
+            this.listenTo(requestView, 'favorited', this._enableFilterFavoritesAction);
+            this.listenTo(requestView, 'unfavorited', this._checkToDisableFilterFavoritesAction);
 
             this._updateRequestVisibility(requestView);
 
@@ -58,14 +62,23 @@ var AppView = Backbone.View.extend({
         }.bind(this) );
     },
 
-    _showCollapseAllAction: function() {
+    _enableCollapseAllAction: function() {
         this.$('.header .expander').addClass('expanded');
     },
 
-    _checkToHideCollapseAllAction: function() {
-        debugger;
+    _checkToDisableCollapseAllAction: function() {
         if(this.$('.request.active').length === 0) {
             this.$('.header .expander').removeClass('expanded');
+        }
+    },
+
+    _enableFilterFavoritesAction: function() {
+        this.$('.header .favorite').addClass('enabled');
+    },
+
+    _checkToDisableFilterFavoritesAction: function() {
+        if(this.$('.request .favorite.active').length === 0) {
+            this.$('.header .favorite').removeClass('enabled');
         }
     },
 
@@ -143,6 +156,16 @@ var AppView = Backbone.View.extend({
         _.each(this.requestViews, function(requestView) {
             requestView.$el.toggle(true);
         });
+    },
+
+    _filterRequestsToFavorites: function(e) {
+        var $favorite = $(e.currentTarget);
+        $favorite.removeClass('enabled').addClass('active');
+    },
+
+    _removeFavoritesFilter: function(e) {
+        var $favorite = $(e.currentTarget);
+        $favorite.removeClass('active').addClass('enabled');
     },
 
     _isScrolledToBottom: function() {

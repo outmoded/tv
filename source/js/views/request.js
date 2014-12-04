@@ -8,7 +8,8 @@ var RequestView = Backbone.View.extend({
     className: "request",
 
     events: {
-        'click .request-details': '_toggleServerLogs'
+        'click .request-details': '_toggleServerLogs',
+        'click .favorite': '_toggleFavorite'
     },
 
     render: function() {
@@ -43,6 +44,21 @@ var RequestView = Backbone.View.extend({
             this.serverLogsView.$el.hide();
 
             this.trigger('serverLogsCollapsed');
+        }
+    },
+
+    _toggleFavorite: function(e) {
+        e.stopPropagation();
+
+        var $favorite = this.$('.favorite');
+        var active = !$favorite.hasClass('active');
+
+        $favorite.toggleClass('active', active);
+
+        if(active) {
+            this.trigger('favorited');
+        } else {
+            this.trigger('unfavorited');
         }
     }
 
