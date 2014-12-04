@@ -19,7 +19,11 @@ var lab = exports.lab = Lab.script();
 var describe = lab.describe;
 var it = lab.it;
 var expect = Code.expect;
-var waitForSocketMessages = function(fn) { setTimeout(fn, 50); };
+
+internals.waitForSocketMessages = function(fn) {
+    setTimeout(fn, 50);
+};
+
 
 it('reports a request event', function (done) {
 
@@ -52,7 +56,7 @@ it('reports a request event', function (done) {
 
                 ws.send('subscribe:*');
 
-                waitForSocketMessages(function () {
+                internals.waitForSocketMessages(function () {
 
                     server.inject('/?debug=123', function (res) {
 
@@ -102,20 +106,20 @@ it('handles subscribe and unsubscribe', function(done) {
 
                 ws.send('subscribe:*');
 
-                waitForSocketMessages(function () {
+                internals.waitForSocketMessages(function () {
 
                     server.inject('/?debug=123', function() {
 
-                        waitForSocketMessages(function() {
+                        internals.waitForSocketMessages(function() {
 
                             var singleRequestMessageCount = messageCount;
                             ws.send('unsubscribe:*');
 
-                            waitForSocketMessages(function() {
+                            internals.waitForSocketMessages(function() {
 
                                 server.inject('/?debug=123', function() {
 
-                                    waitForSocketMessages(function() {
+                                    internals.waitForSocketMessages(function() {
 
                                         expect(messageCount).to.equal(singleRequestMessageCount);
 
@@ -167,20 +171,20 @@ it('does not resubscribe for the same socket', function(done) {
 
                 ws.send('subscribe:*');
 
-                waitForSocketMessages(function () {
+                internals.waitForSocketMessages(function () {
 
                     server.inject('/?debug=123', function() {
 
-                        waitForSocketMessages(function() {
+                        internals.waitForSocketMessages(function() {
 
                             var singleRequestMessageCount = messageCount;
                             ws.send('subscribe:*');
 
-                            waitForSocketMessages(function() {
+                            internals.waitForSocketMessages(function() {
 
                                 server.inject('/?debug=123', function() {
 
-                                    waitForSocketMessages(function() {
+                                    internals.waitForSocketMessages(function() {
 
                                         expect(messageCount).to.equal(singleRequestMessageCount * 2);
 
@@ -236,7 +240,7 @@ it('handles reconnects gracefully', function (done) {
                 ws2.once('open', function () {
 
                     ws2.send('subscribe:*');
-                    waitForSocketMessages(function () {
+                    internals.waitForSocketMessages(function () {
 
                         server.inject('/?debug=123', function (res) {
 
