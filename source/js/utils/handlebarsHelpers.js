@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var Handlebars = require("hbsfy/runtime");
 var DateTimeFormatter = require('../utils/dateTimeFormatter');
 var JQuerySnippet = require('../jQuerySnippet');
@@ -24,5 +25,12 @@ Handlebars.registerHelper("isEq", function(a, b, options) {
         return options.fn();
     } else {
         return options.inverse();
+    }
+});
+
+VALID_COLORED_TAGS = ['error', 'debug']
+Handlebars.registerHelper("tagColor", function(tag) {
+    if(_.contains(VALID_COLORED_TAGS, tag)) {
+        return tag;
     }
 });

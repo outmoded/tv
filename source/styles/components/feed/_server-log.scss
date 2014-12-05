@@ -8,6 +8,22 @@
 
         .tags {
             padding-left: 40px;
+
+            &.internal {
+                font-style: italic;
+            }
+
+            & > span:not(:last-of-type):after {
+                content: ",";
+            }
+
+            .error {
+                color: $error;
+            }
+
+            .debug {
+                color: $debug;
+            }
         }
 
         .data {
