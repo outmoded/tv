@@ -13,21 +13,23 @@ var SettingsView = Backbone.View.extend({
     },
 
     initialize: function(options) {
-        this.model = new Backbone.Model();
         this.settingsModel = options.settingsModel;
-
+        this.model = new Backbone.Model();
+        
         this.listenTo(this.model, 'change:clientId', function(model, clientId) {
             this.$('.jquery-snippet').html(JQuerySnippet.generate(clientId));
+        });
+
+        this.listenTo(this.settingsModel, 'change', function(model) {
+            this.model.set({
+                clientId: model.get('clientId'),
+                channel: model.get('channel')
+            });
         });
     },
 
     render: function() {
-        var data = {
-            clientId: this.settingsModel.get('clientId'),
-            channel: this.settingsModel.get('channel')
-        };
-
-        this.$el.html(this.template(data));
+        this.$el.html(this.template(this.model.toJSON()));
         
         this.$modal = this.$('.modal');
         
@@ -53,11 +55,14 @@ var SettingsView = Backbone.View.extend({
     },
 
     submit: function(e) {
-        this.settingsModel.set('clientId', this.model.get('clientId'));
-        if (this.settingsModel.get('channel') && this.settingsModel.get('channel') !== '*') {
-            this.settingsModel.set('channel', this.model.get('clientId'));
-        }
+        var newClientId = this.model.get('clientId');
+        var oldClientId = this.settingsModel.get('clientId');
 
+        this.settingsModel.set('clientId', newClientId);
+        if (newClientId !== oldClientId) {      // we changed the client id, so subscribe to the one we entered.
+            this.settingsModel.set('channel', newClientId);
+        }
+        
         this.hide();
     }
 

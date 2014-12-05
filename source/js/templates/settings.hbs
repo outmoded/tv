@@ -1,19 +1,21 @@
 <div class="modal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Settings</h4>
+      <p>By default, Hapi's TV console displays all application traffic.</p>
+
+      <p>In order to filter by requests coming only from your machine, we've generated a unique client ID:</p>
+      <input name="client-id" class="client" type="text" value={{clientId}}>
+
+      <p>Add the following snippet to append your ID to each request:</p>
+
+      <textarea class="snippet jquery-snippet" rows="8">{{jQuerySnippet clientId}}</textarea>
+
+      <div class="button-group">
+        <button class="secondary cancel" data-dismiss="modal">Cancel</button>
+        <button class="primary submit">Thanks, all done</button>
       </div>
-      <div class="modal-body">
-        <textarea class="jquery-snippet json-markup expanded">{{jQuerySnippet clientId}}</textarea>
-        <p>Choose a new Client ID</p>
-        <input name="client-id" type="text" value={{clientId}}>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary submit">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
+
+      <div style="clear:both;"></div>
+    </div>
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
