@@ -15,6 +15,13 @@ var Request = Backbone.Model.extend({
         return this.get('statusCode') >= 400 && this.get('statusCode') < 500;
     },
 
+    toJSON: function() {
+        var data = Backbone.Model.prototype.toJSON.apply(this, arguments);
+        data.serverLogs = this.get('serverLogs').toJSON();
+
+        return data;
+    }
+
 });
 
 module.exports = Request;

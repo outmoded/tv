@@ -80,7 +80,11 @@ SearchCriterion.prototype.matches = function(request) {
 
 SearchCriterion.prototype._matchesScopedProperty = function(request) {
     return _.any(this.scopedPropertyValues, function(value) {
-        return request[this._requestProperty(this.property)].toString().toLowerCase().indexOf(value.toLowerCase()) !== -1;
+        if (internals.VALID_SCOPED_PROPERTY_FUNCTIONS[this.property]) {
+            return internals.VALID_SCOPED_PROPERTY_FUNCTIONS[this.property](request).toString().toLowerCase().indexOf(value.toLowerCase()) !== -1;
+        } else {
+            return request[this._requestProperty(this.property)].toString().toLowerCase().indexOf(value.toLowerCase()) !== -1;
+        }
     }.bind(this));
 }
 
@@ -99,7 +103,16 @@ SearchCriterion.create = function(fragment) {
     return new SearchCriterion(fragment);
 }
 
-SearchCriterion.VALID_SCOPED_PROPERTIES = internals.VALID_SCOPED_PROPERTIES = ['path', 'method', 'status'];
+SearchCriterion.VALID_SCOPED_PROPERTIES = internals.VALID_SCOPED_PROPERTIES = ['path', 'method', 'status', 'tags'];
+SearchCriterion.VALID_SCOPED_PROPERTY_FUNCTIONS = internals.VALID_SCOPED_PROPERTY_FUNCTIONS = {
+    tags: function(request) {
+        return _.chain(request.serverLogs)
+            .pluck('tags')
+            .flatten()
+            .uniq()
+            .value();
+    }
+}
 SearchCriterion.REQUEST_PROPERTY_MAP = internals.REQUEST_PROPERTY_MAP = {
     status: 'statusCode'
 };

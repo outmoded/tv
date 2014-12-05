@@ -5,7 +5,7 @@ var ToolbarView = require('./toolbar');
 var FeedView = require('./feed');
 var RequestView = require('./request');
 var SettingsView = require('./settings');
-var SearchQuery = require('../utils/searchQuery');
+var SearchQuery = require('../utils/searchCriteria').SearchCriteria;
 var Settings = require('../models/settings');
 
 var AppView = Backbone.View.extend({
@@ -118,51 +118,23 @@ var AppView = Backbone.View.extend({
     },
 
     _filterRequests: _.debounce(function(e) {
-        var query = SearchQuery.toObject($('input.search').val());
+        var queryString = $('input.search').val();
 
-        if(query) {
-            this._setSearchFilter(query);
+        if(queryString) {
+            this._setSearchFilter(SearchQuery.create(queryString));
         } else {
             this._clearSearchFilter();
         }
     }, 200),
 
-    _setSearchFilter: function(query) {
+    _setSearchFilter: function(searchCriteria) {
         this.searchFilter = function(requestView) {
-            // checks if each property has a match
-            var matchesOnProps = _.every(query.props, function(values, property) {
-                return this._hasMatch(requestView.model, property, values);
-            }.bind(this));
-
-            // checks if any properties have a match
-            var matchesOnAny = _.any(query.any, function(values, property) {
-                return this._hasMatch(requestView.model, property, values);
-            }.bind(this));
-
-            return matchesOnProps && matchesOnAny;
+            return searchCriteria.matches(requestView.model.toJSON());
         };
 
         _.each(this.requestViews, function(requestView) {
             requestView.$el.toggle(this.searchFilter(requestView));
         }.bind(this));
-    },
-
-    _hasMatch: function(request, property, values) {
-        var modelValue;
-
-        if (property === 'tags') {
-            modelValue = _.uniq(_.flatten(request.get('serverLogs').pluck('tags'))); // unique list of all tags across all server logs
-        } else {
-            modelValue = [request.get(property)];
-        }
-
-        var modelValues = _.flatten(modelValue);
-
-        return modelValues.length >= 1 && _.any(values, function(value) {
-            return _.any(modelValues, function(modelValue) {
-                return modelValue.toString().indexOf(value) !== -1;
-            });
-        });
     },
 
     _clearSearchFilter: function() {
