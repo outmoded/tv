@@ -4,6 +4,11 @@
         font-size: 1.2rem;
     }
 
+    .favorite {
+        font-size: 1.8rem;
+        float: right;
+    }
+
     .header > div, .request-details > div {
         padding-top: 8px;
         padding-bottom: 8px;
@@ -42,56 +47,21 @@
         }
 
         .favorite {
-            margin-right: -1px;
-
-            &.enabled {
-                color: $table-header-icon;
-                cursor: pointer;
-
-                &:hover {
-                    color: $favorite;
-                }
-            }
+            color: $table-header-icon-disabled;
 
             &.active {
                 cursor: pointer;
                 color: $favorite;
             }
+
+            &.enabled {
+                cursor: pointer;
+                color: $table-header-icon;
+
+                &:hover {
+                    color: $favorite;
+                }
+            }
         }
-    }
-}
-
-.favorite {
-    font-size: 1.8rem;
-    float: right;
-
-    .background {
-        font-size: 1.9rem;
-        margin-right: -22px;
-        top: 3px;
-    }
-
-    .foreground {
-        font-size: 1.5rem;
-    }
-
-    .background:hover {
-        color: grey;
-    }
-
-    &.empty {
-        color: $table-header-icon-disabled;
-        cursor: default;
-    }
-}
-
-
-.favorite:hover, .favorite.active {
-    .foreground {
-        color: $favorite;
-    }
-
-    .background {
-        color: grey;
     }
 }

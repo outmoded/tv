@@ -1,5 +1,5 @@
 <div class="col-xs-8 path">
-    <span class="expander glyphicon glyphicon-play"></span>
+    <span class="expander icon glyphicon glyphicon-play"></span>
     {{path}}
 </div>
 <div class="col-xs-1 method">{{method}}</div>
@@ -11,9 +11,6 @@
     {{/if}}
 </div>
 <div class="col-xs-2 timestamp">
-    <div class="favorite">
-        <span class="glyphicon glyphicon-star background"></span>
-        <span class="glyphicon glyphicon-star foreground"></span>
-    </div>
-    {{longTime timestamp}}
+    <span class="favorite icon glyphicon glyphicon-star"></span>
+    <div class="time">{{longTime timestamp}}</div>
 </div>
