@@ -59,22 +59,22 @@
                         color: $table-row-icon;
                     }
                 }
-            }
 
-            .method {
-                font-weight: bold;
-                text-transform: uppercase;
-            }
-
-            &.error {
-                .status, .data {
-                    color: $error;
+                .method {
+                    font-weight: bold;
+                    text-transform: uppercase;
                 }
-            }
 
-            &.warning {
-                .status, .data {
-                    color: $warning;
+                &.error {
+                    .status, .method {
+                        color: $error;
+                    }
+                }
+
+                &.warning {
+                    .status, .method {
+                        color: $warning;
+                    }
                 }
             }
         }
