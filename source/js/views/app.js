@@ -78,7 +78,10 @@ var AppView = Backbone.View.extend({
 
     _checkToDisableFilterFavoritesAction: function() {
         if(this.$('.request .favorite.active').length === 0) {
-            this.$('.header .favorite').removeClass('enabled');
+            this.$('.header .favorite')
+                .removeClass('enabled')
+                .removeClass('active')
+                .addClass('empty');
         }
     },
 
