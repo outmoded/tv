@@ -14,7 +14,7 @@ var SettingsView = Backbone.View.extend({
 
     initialize: function(options) {
         this.settingsModel = options.settingsModel;
-        this.model = new Backbone.Model();
+        this.model = this.settingsModel.clone();
         
         this.listenTo(this.model, 'change:clientId', function(model, clientId) {
             this.$('.jquery-snippet').html(JQuerySnippet.generate(clientId));
