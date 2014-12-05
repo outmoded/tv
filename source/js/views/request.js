@@ -27,10 +27,11 @@ var RequestView = Backbone.View.extend({
     },
 
     _toggleServerLogs: function() {
-        var active = !this.$el.hasClass('active');
-        this.$el.toggleClass('active', active);
+        this.active = !this.active;
 
-        if(active) {
+        this.$el.toggleClass('active', this.active);
+
+        if(this.active) {
             if(!this.serverLogsView) {
                 this.serverLogsView = new ServerLogsView({
                     el: this.$('.server-logs'),
@@ -50,12 +51,11 @@ var RequestView = Backbone.View.extend({
     _toggleFavorite: function(e) {
         e.stopPropagation();
 
-        var $favorite = this.$('.favorite');
-        var active = !$favorite.hasClass('active');
+        this.favorited = !this.favorited;
 
-        $favorite.toggleClass('active', active);
+        this.$('.favorite').toggleClass('active', this.favorited);
 
-        if(active) {
+        if(this.favorited) {
             this.trigger('favorited');
         } else {
             this.trigger('unfavorited');

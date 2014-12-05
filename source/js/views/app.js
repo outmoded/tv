@@ -5,7 +5,7 @@ var ToolbarView = require('./toolbar');
 var FeedView = require('./feed');
 var RequestView = require('./request');
 var SettingsView = require('./settings');
-var SearchQuery = require('../utils/searchCriteria').SearchCriteria;
+var SearchCriteria = require('../utils/searchCriteria').SearchCriteria;
 var Settings = require('../models/settings');
 
 var AppView = Backbone.View.extend({
@@ -85,12 +85,6 @@ var AppView = Backbone.View.extend({
         }
     },
 
-    _updateRequestVisibility: function(requestView) {
-        if(this.searchFilter) {
-            requestView.$el.toggle(this.searchFilter(requestView));
-        }
-    },
-
     _checkToScrollToBottom: function(fn) {
         var isScrolledToBottom = this._isScrolledToBottom();
 
@@ -133,24 +127,44 @@ var AppView = Backbone.View.extend({
         this.$el.find('.resume').addClass('hidden');
     },
 
+    _filterRequestsToFavorites: function(e) {
+        $(e.currentTarget).removeClass('enabled').addClass('active');
+        this.filterFavorites = true;
+        this._filterRequests();
+    },
+
+    _removeFavoritesFilter: function(e) {
+        $(e.currentTarget).removeClass('active').addClass('enabled');
+        this.filterFavorites = false;
+        this._filterRequests();
+    },
+
     _filterRequests: _.debounce(function(e) {
         var queryString = $('input.search').val();
 
-        if(queryString) {
-            this._setSearchFilter(SearchQuery.create(queryString));
+        if(queryString || this.filterFavorites) {
+            this._setSearchFilter(SearchCriteria.create(queryString));
+            _.each(this.requestViews, this._updateRequestVisibility.bind(this));
         } else {
             this._clearSearchFilter();
         }
     }, 200),
 
+    _updateRequestVisibility: function(requestView) {
+        var show = true;
+        if(this.searchFilter && !this.searchFilter(requestView)) {
+            show = false;
+        }
+        if(this.filterFavorites && !requestView.favorited) {
+            show = false;
+        }
+        requestView.$el.toggle(show);
+    },
+
     _setSearchFilter: function(searchCriteria) {
         this.searchFilter = function(requestView) {
             return searchCriteria.matches(requestView.model.toJSON());
         };
-
-        _.each(this.requestViews, function(requestView) {
-            requestView.$el.toggle(this.searchFilter(requestView));
-        }.bind(this));
     },
 
     _clearSearchFilter: function() {
@@ -159,16 +173,6 @@ var AppView = Backbone.View.extend({
         _.each(this.requestViews, function(requestView) {
             requestView.$el.toggle(true);
         });
-    },
-
-    _filterRequestsToFavorites: function(e) {
-        var $favorite = $(e.currentTarget);
-        $favorite.removeClass('enabled').addClass('active');
-    },
-
-    _removeFavoritesFilter: function(e) {
-        var $favorite = $(e.currentTarget);
-        $favorite.removeClass('active').addClass('enabled');
     },
 
     _isScrolledToBottom: function() {
