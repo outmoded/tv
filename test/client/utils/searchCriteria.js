@@ -5,8 +5,8 @@ var _ = require('lodash');
 var Code = require('code');
 var Lab = require('lab');
 
-var SearchCriteria = require('../../source/js/utils/searchCriteria').SearchCriteria;
-var SearchCriterion = require('../../source/js/utils/searchCriteria').SearchCriterion;
+var SearchCriteria = require('../../../source/js/utils/searchCriteria').SearchCriteria;
+var SearchCriterion = require('../../../source/js/utils/searchCriteria').SearchCriterion;
 
 // Declare internals
 
@@ -28,7 +28,7 @@ var spy = sinon.spy;
 describe('SearchCriteria', function() {
 
     describe('.create', function() {
-      
+
         it('returns a new instance of SearchCriteria', function(done) {
             expect(SearchCriteria.create('')).to.be.instanceOf(SearchCriteria);
 
@@ -42,7 +42,7 @@ describe('SearchCriteria', function() {
 
             done();
         });
-    
+
     });
 
     describe('#matches', function() {
@@ -51,12 +51,12 @@ describe('SearchCriteria', function() {
 
             it('returns true', function(done) {
                 var searchCriteria = SearchCriteria.create('foo bar');
-                
+
                 searchCriteria.criteria = [
                     { matches: function() { return true; }},
                     { matches: function() { return true; }},
                 ];
-                
+
                 var request = {};
 
                 expect(searchCriteria.matches(request)).to.equal(true);
@@ -69,7 +69,7 @@ describe('SearchCriteria', function() {
         context('with a ignored search criterion', function(){
             it('skips that criterion during evaluation', function(done) {
                 var searchCriteria = SearchCriteria.create('foo bar');
-                
+
                 searchCriteria.criteria = [
                     { matches: function() { return true; }},
                     { ignored: true },
@@ -87,7 +87,7 @@ describe('SearchCriteria', function() {
 
             it('returns false', function(done) {
                 var searchCriteria = SearchCriteria.create('foo bar');
-                
+
                 searchCriteria.criteria = [
                     { matches: function() { return true; }},
                     { matches: function() { return false; }},
@@ -101,7 +101,7 @@ describe('SearchCriteria', function() {
             });
 
         });
-    
+
     });
 
 });
@@ -109,7 +109,7 @@ describe('SearchCriteria', function() {
 describe('SearchCriterion', function() {
 
     describe('.create', function() {
-      
+
         it('returns a new instance of SearchCriterion', function(done) {
             expect(SearchCriterion.create('')).to.be.instanceOf(SearchCriterion);
 
@@ -131,8 +131,8 @@ describe('SearchCriterion', function() {
                 var fragment = 'path:bar';
                 var searchCriterion = SearchCriterion.create(fragment);
 
-                expect(searchCriterion.property).to.equal('path');
-                
+                expect(searchCriterion.scopedProperty).to.equal('path');
+
                 done();
             });
         });
@@ -161,9 +161,9 @@ describe('SearchCriterion', function() {
 
                 done();
             });
-            
+
             it('does not set a scoped property', function(done) {
-                expect(SearchCriterion.create("foo").property).to.equal(null);
+                expect(SearchCriterion.create("foo").scopedProperty).to.equal(null);
 
                 done();
             });
@@ -174,7 +174,7 @@ describe('SearchCriterion', function() {
                 done();
             });
         });
-    
+
     });
 
     describe('#matches', function(){
@@ -185,7 +185,10 @@ describe('SearchCriterion', function() {
                         var request = {
                             path: '/customers',
                             statusCode: 200,
-                            method: 'GET'
+                            method: 'GET',
+                            serverLogs: [{
+                                tags: ['received']
+                            }]
                         };
 
                         _.each([
@@ -195,7 +198,9 @@ describe('SearchCriterion', function() {
                             'status:200',
                             'status:20',
                             'method:get',
-                            'method:ge'
+                            'method:ge',
+                            'tags:received',
+                            'tags:rec',
                         ], function(fragment) {
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(true);
                         });
@@ -209,13 +214,17 @@ describe('SearchCriterion', function() {
                         var request = {
                             path: '/invoices',
                             statusCode: 200,
-                            method: 'GET'
+                            method: 'GET',
+                            serverLogs: [{
+                                tags: ['received']
+                            }]
                         };
 
                         _.each([
                             'path:customers',
                             'status:404',
-                            'method:POST'
+                            'method:POST',
+                            'tags:error'
                         ], function(fragment) {
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
                         });
@@ -231,14 +240,18 @@ describe('SearchCriterion', function() {
                         var request = {
                             path: '/customers',
                             statusCode: 200,
-                            method: 'GET'
+                            method: 'GET',
+                            serverLogs: [{
+                                tags: ['received']
+                            }]
                         };
 
                         _.each([
                             'path:customers,invoices',
                             'path:cust,invoices',
-                            'status:200,400',
-                            'method:get,post'
+                            'status:20,400',
+                            'method:ge,post',
+                            'tags:rec,foo'
                         ], function(fragment) {
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(true);
                         });
@@ -252,11 +265,15 @@ describe('SearchCriterion', function() {
                         var request = {
                             path: '/invoices',
                             statusCode: 200,
-                            method: 'GET'
+                            method: 'GET',
+                            serverLogs: [{
+                                tags: ['received']
+                            }]
                         };
 
                         _.each([
-                            'path:customers,orders'
+                            'path:customers,orders',
+                            'tags:error'
                         ], function(fragment) {
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
                         });
@@ -273,7 +290,10 @@ describe('SearchCriterion', function() {
                     var request = {
                         path: '/customers',
                         statusCode: 200,
-                        method: 'GET'
+                        method: 'GET',
+                        serverLogs: [{
+                            tags: ['received']
+                        }]
                     };
 
                     _.each([
@@ -283,7 +303,9 @@ describe('SearchCriterion', function() {
                         'get',
                         'GE',
                         '00',
-                        '200'
+                        '200',
+                        'received',
+                        'rec'
                     ], function(fragment) {
                         expect(SearchCriterion.create(fragment).matches(request)).to.equal(true);
                     });
@@ -297,13 +319,17 @@ describe('SearchCriterion', function() {
                     var request = {
                         path: '/customers',
                         statusCode: 200,
-                        method: 'GET'
+                        method: 'GET',
+                        serverLogs: [{
+                            tags: ['received']
+                        }]
                     };
 
                     _.each([
                         'customerss',
                         '500',
-                        'post'
+                        'post',
+                        'error'
                     ], function(fragment) {
                         expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
                     });

@@ -29,11 +29,11 @@ var SearchCriterion = exports.SearchCriterion = function(fragment) {
 
     if (this._isScoped()) {
         this.scoped = true;
-        this.property = this._parseScopedProperty();
+        this.scopedProperty = this._parseScopedProperty();
         this.scopedPropertyValues = this._parseScopedPropertyValues();
     } else if(this._isValidAny()) {
         this.scoped = false;
-        this.property = null;
+        this.scopedProperty = null;
     } else {
         this.ignored = true;
     }
@@ -58,10 +58,10 @@ SearchCriterion.prototype._parseScopedPropertyValues = function() {
 
 SearchCriterion.prototype._isScoped = function() {
     var pieces = this.fragment.split(':');
-    
+
     if(pieces.length > 1 && pieces[1].length) {
         return _.contains(internals.VALID_SCOPED_PROPERTIES, pieces[0]);
-    } 
+    }
 
     return false;
 }
@@ -80,19 +80,28 @@ SearchCriterion.prototype.matches = function(request) {
 
 SearchCriterion.prototype._matchesScopedProperty = function(request) {
     return _.any(this.scopedPropertyValues, function(value) {
-        if (internals.VALID_SCOPED_PROPERTY_FUNCTIONS[this.property]) {
-            return internals.VALID_SCOPED_PROPERTY_FUNCTIONS[this.property](request).toString().toLowerCase().indexOf(value.toLowerCase()) !== -1;
-        } else {
-            return request[this._requestProperty(this.property)].toString().toLowerCase().indexOf(value.toLowerCase()) !== -1;
-        }
+        return this._matchesValue(request, this.scopedProperty, value);
     }.bind(this));
 }
 
 SearchCriterion.prototype._matchesAny = function(request) {
     return _.any(SearchCriterion.VALID_SCOPED_PROPERTIES, function(property) {
-
-        return request[this._requestProperty(property)].toString().toLowerCase().indexOf(this.fragment.toLowerCase()) !== -1;
+        return this._matchesValue(request, property, this.fragment);
     }.bind(this));
+}
+
+SearchCriterion.prototype._matchesValue = function(request, property, expectedValue) {
+    var requestProperty = this._requestProperty(property);
+
+    var actualValue = null;
+    var customValueFunction = internals.CUSTOM_PROPERTY_FUNCTIONS[requestProperty];
+    if (customValueFunction) {
+        actualValue = customValueFunction(request);
+    } else {
+        actualValue = request[requestProperty]
+    }
+
+    return actualValue.toString().toLowerCase().indexOf(expectedValue.toLowerCase()) !== -1;
 }
 
 SearchCriterion.prototype._requestProperty = function(property) {
@@ -104,7 +113,12 @@ SearchCriterion.create = function(fragment) {
 }
 
 SearchCriterion.VALID_SCOPED_PROPERTIES = internals.VALID_SCOPED_PROPERTIES = ['path', 'method', 'status', 'tags'];
-SearchCriterion.VALID_SCOPED_PROPERTY_FUNCTIONS = internals.VALID_SCOPED_PROPERTY_FUNCTIONS = {
+
+SearchCriterion.REQUEST_PROPERTY_MAP = internals.REQUEST_PROPERTY_MAP = {
+    status: 'statusCode'
+};
+
+SearchCriterion.CUSTOM_PROPERTY_FUNCTIONS = internals.CUSTOM_PROPERTY_FUNCTIONS = {
     tags: function(request) {
         return _.chain(request.serverLogs)
             .pluck('tags')
@@ -113,7 +127,3 @@ SearchCriterion.VALID_SCOPED_PROPERTY_FUNCTIONS = internals.VALID_SCOPED_PROPERT
             .value();
     }
 }
-SearchCriterion.REQUEST_PROPERTY_MAP = internals.REQUEST_PROPERTY_MAP = {
-    status: 'statusCode'
-};
-
