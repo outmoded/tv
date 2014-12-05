@@ -1,0 +1,50 @@
+.feed {
+    .expander {
+        padding-right: 9px;
+        font-size: 1.2rem;
+    }
+
+    .header > div, .request-details > div {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        @extend .truncate;
+    }
+
+    .header {
+        color: $toolbar;
+
+        .expander {
+            color: $table-header-icon-disabled;
+            cursor: pointer;
+        }
+
+        .expander.expanded {
+            color: $table-header-icon;
+            @include rotate(90deg);
+            padding: 4px 3px 1px 6px;
+        }
+
+        .expander {
+            &:hover {
+                color: $table-header;
+            }
+
+            &:not(.expanded), &:not(.expanded):hover {
+                color: $table-header-icon-disabled;
+                cursor: default;
+                @include rotate(0deg);
+            }
+        }
+
+        .favorite {
+            .empty {
+                color: $table-header-icon;
+            }
+        }
+
+        div {
+            background-color: $table-header-bg;
+            color: $table-header;
+        }
+    }
+}

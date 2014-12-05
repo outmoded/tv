@@ -45,9 +45,8 @@ var AppView = Backbone.View.extend({
             var requestView = new RequestView({ model: request }).render();
             this.requestViews.push(requestView);
 
-            this.listenTo(requestView, 'serverLogsExpanded', function() {
-                this._showCollapseAll();
-            });
+            this.listenTo(requestView, 'serverLogsExpanded', this._showCollapseAllAction);
+            this.listenTo(requestView, 'serverLogsCollapsed', this._checkToHideCollapseAllAction);
 
             this._updateRequestVisibility(requestView);
 
@@ -59,8 +58,15 @@ var AppView = Backbone.View.extend({
         }.bind(this) );
     },
 
-    _showCollapseAll: function() {
+    _showCollapseAllAction: function() {
         this.$('.header .expander').addClass('expanded');
+    },
+
+    _checkToHideCollapseAllAction: function() {
+        debugger;
+        if(this.$('.request.active').length === 0) {
+            this.$('.header .expander').removeClass('expanded');
+        }
     },
 
     _updateRequestVisibility: function(requestView) {
@@ -143,7 +149,7 @@ var AppView = Backbone.View.extend({
 
     _hasMatch: function(request, property, values) {
         var modelValue;
-        
+
         if (property === 'tags') {
             modelValue = _.uniq(_.flatten(request.get('serverLogs').pluck('tags'))); // unique list of all tags across all server logs
         } else {
@@ -151,7 +157,7 @@ var AppView = Backbone.View.extend({
         }
 
         var modelValues = _.flatten(modelValue);
-        
+
         return modelValues.length >= 1 && _.any(values, function(value) {
             return _.any(modelValues, function(modelValue) {
                 return modelValue.toString().indexOf(value) !== -1;

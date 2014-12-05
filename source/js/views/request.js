@@ -41,6 +41,8 @@ var RequestView = Backbone.View.extend({
             this.trigger('serverLogsExpanded');
         } else if(this.serverLogsView) {
             this.serverLogsView.$el.hide();
+
+            this.trigger('serverLogsCollapsed');
         }
     }
 
