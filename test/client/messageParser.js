@@ -29,14 +29,16 @@ var RECEIVED = {
         method: 'get',
         url: '/'
     },
-    tags: ['hapi', 'received']
+    tags: ['received'],
+    internal: true
 };
 
 var HANDLER = {
     data: {
         msec: 0.1
     },
-    tags: ['hapi', 'handler']
+    tags: ['handler'],
+    internal: true
 };
 
 var RESPONSE = {
@@ -44,7 +46,7 @@ var RESPONSE = {
         statusCode: 201,
         error: 'error message'
     },
-    tags: ['hapi', 'response'],
+    response: true
 };
 
 var ERROR = {
@@ -52,14 +54,14 @@ var ERROR = {
         statusCode: 500,
         error: 'error message'
     },
-    tags: ['hapi', 'internal', 'error'],
+    tags: ['error'],
+    internal: true
 };
 
 var createMessage = function(message, id) {
     id = id || '123abc';
     message.request = id;
     message.timestamp = new Date().valueOf();
-    console.log('debug', message);
 
     return { data: JSON.stringify(message) };
 };
@@ -133,6 +135,14 @@ describe('MessageParser', function() {
                 done();
             });
 
+            context('with an empty response message', function() {
+                it('does not add the message to the response\'s server logs', function(done){
+                    throw('TODO');
+
+                    done();
+                });
+            });
+
             context('with a subsequent message for a request', function(done) {
 
                 beforeEach(function(done) {
@@ -190,6 +200,12 @@ describe('MessageParser', function() {
                     it('updates the request object with the error message', function(done) {
                         // expect(this.request.data).to.equal(this.messageData.data.error);
                         expect(this.request.data).to.equal('--');
+
+                        done();
+                    });
+
+                    it('adds a response tag to the server log message', function(done) {
+                        throw('TODO');
 
                         done();
                     });
