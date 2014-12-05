@@ -113,7 +113,7 @@ var AppView = Backbone.View.extend({
 
     _filterRequests: _.debounce(function(e) {
         var query = SearchQuery.toObject($('input.search').val());
-        
+
         if(query) {
             this._setSearchFilter(query);
         } else {
@@ -123,9 +123,17 @@ var AppView = Backbone.View.extend({
 
     _setSearchFilter: function(query) {
         this.searchFilter = function(requestView) {
-            return _.every(query, function(values, property) {
+            // checks if each property has a match
+            var matchesOnProps = _.every(query.props, function(values, property) {
                 return this._hasMatch(requestView.model, property, values);
             }.bind(this));
+
+            // checks if any properties have a match
+            var matchesOnAny = _.any(query.any, function(values, property) {
+                return this._hasMatch(requestView.model, property, values);
+            }.bind(this));
+
+            return matchesOnProps && matchesOnAny;
         };
 
         _.each(this.requestViews, function(requestView) {
@@ -146,7 +154,7 @@ var AppView = Backbone.View.extend({
         
         return modelValues.length >= 1 && _.any(values, function(value) {
             return _.any(modelValues, function(modelValue) {
-                return modelValue.indexOf(value) !== -1;
+                return modelValue.toString().indexOf(value) !== -1;
             });
         });
     },

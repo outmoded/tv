@@ -32,12 +32,12 @@
   },
   "devDependencies": {
     "browserify": "^6.3.2",
+    "code": "^1.2.1",
     "hapi": "8.0.0-rc8",
     "lab": "5.x.x",
     "node-sass": "1.2.2",
     "rewire": "^2.1.3",
     "sinon": "^1.12.1",
-    "code": "1.x.x",
     "watchify": "^2.1.1"
   },
   "scripts": {

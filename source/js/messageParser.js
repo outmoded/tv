@@ -19,7 +19,6 @@ MessageParser.create = function(opts) {
 // disregard these messages.
 MessageParser.prototype.addMessage = function(raw_message) {
   var message = JSON.parse(raw_message.data);
-  console.log('message', message);
 
   var request;
   if (this._isFirstMessageForNewRequest(message)) {
@@ -75,7 +74,6 @@ MessageParser.prototype._addRequest = function(message) {
     timestamp: message.timestamp,
     serverLogs: new Backbone.Collection()
   });
-  console.log('adding request', request);
   this.requests.add(request);
 
   return request;
@@ -102,8 +100,6 @@ MessageParser.prototype._addServerLog = function(message) {
     data: message.data,
     timestamp: message.timestamp
   }
-
-  console.log('adding server log', serverLog);
 
   this._findRequest(message).get('serverLogs').add(serverLog);
 };

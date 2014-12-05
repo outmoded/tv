@@ -2,9 +2,11 @@
 
 var sinon = require('sinon');
 var _ = require('lodash');
+var Code = require('code');
 var Lab = require('lab');
 
-var SearchQuery = require('../../source/js/utils/searchQuery');
+var SearchCriteria = require('../../source/js/utils/searchCriteria').SearchCriteria;
+var SearchCriterion = require('../../source/js/utils/searchCriteria').SearchCriterion;
 
 // Declare internals
 
@@ -17,67 +19,83 @@ var lab = exports.lab = Lab.script();
 var describe = lab.describe;
 var beforeEach = lab.beforeEach;
 var afterEach = lab.afterEach;
-var after = lab.after;
 var context = lab.describe;
 var it = lab.it;
-var expect = Lab.expect;
+var expect = Code.expect;
+var spy = sinon.spy;
 
 
-describe('SearchQuery', function() {
-  
-    describe('#toObject', function() {
+describe('SearchCriteria', function() {
+
+    describe('.create', function() {
       
-        context('with an empty string', function() {
+        it('returns a new instance of SearchCriteria', function(done) {
+            expect(SearchCriteria.create('')).to.be.instanceOf(SearchCriteria);
 
-            it('returns an empty object', function(done) {
-                expect(SearchQuery.toObject('')).to.be.undefined;
+            done();
+        });
+
+        it('creates an array of SearchCriterion objects', function(done) {
+            var criteria = SearchCriteria.create('foo:bar bar:baz').criteria;
+            expect(criteria.length).to.equal(2);
+            expect(criteria[0]).to.be.instanceOf(SearchCriterion);
+
+            done();
+        });
+    
+    });
+
+    describe('#matches', function() {
+
+        context('with all criterion that match the request', function() {
+
+            it('returns true', function(done) {
+                var searchCriteria = SearchCriteria.create('foo bar');
+                
+                searchCriteria.criteria = [
+                    { matches: function() { return true; }},
+                    { matches: function() { return true; }},
+                ];
+                
+                var request = {};
+
+                expect(searchCriteria.matches(request)).to.equal(true);
 
                 done();
             });
 
         });
-      
-        context('with undefined', function() {
 
-            it('returns an empty object', function(done) {
-                expect(SearchQuery.toObject('')).to.be.undefined;
+        context('with a ignored search criterion', function(){
+            it('skips that criterion during evaluation', function(done) {
+                var searchCriteria = SearchCriteria.create('foo bar');
+                
+                searchCriteria.criteria = [
+                    { matches: function() { return true; }},
+                    { ignored: true },
+                ];
+
+                var request = {};
+
+                expect(searchCriteria.matches(request)).to.equal(true);
 
                 done();
             });
-
         });
-      
-        context('with a string that doesnt have a colon (malformed)', function() {
 
-            it('returns an empty object', function(done) {
-                expect(SearchQuery.toObject('foo')).to.be.undefined;
+        context('with at least one criterion that doesn\'t match the request', function() {
 
-                done();
-            });
+            it('returns false', function(done) {
+                var searchCriteria = SearchCriteria.create('foo bar');
+                
+                searchCriteria.criteria = [
+                    { matches: function() { return true; }},
+                    { matches: function() { return false; }},
+                ];
 
-        });
-      
-        context('with a properly formed query', function() {
+                var request = {};
 
-            it('returns an object', function(done) {
-                expect(SearchQuery.toObject('foo:bar')).to.eql({
-                    foo: 'bar'
-                });
-
-                done();
-            });
-
-            it('handles multiple parameters', function(done) {
-                expect(SearchQuery.toObject('foo:bar bar:baz')).to.eql({
-                    foo: 'bar',
-                    bar: 'baz'
-                });
-
-                done();
-            });
-
-            it('returns an array for parameters with multiple values', function(done) {
-                expect(SearchQuery.toObject('foo:bar,baz').foo).to.eql(['bar', 'baz']);
+                expect(searchCriteria.matches(request)).to.equal(false);
 
                 done();
             });
@@ -88,26 +106,213 @@ describe('SearchQuery', function() {
 
 });
 
+describe('SearchCriterion', function() {
+
+    describe('.create', function() {
+      
+        it('returns a new instance of SearchCriterion', function(done) {
+            expect(SearchCriterion.create('')).to.be.instanceOf(SearchCriterion);
+
+            done();
+        });
+
+        context('with a scoped search criterion', function() {
+            it('marks the criterion as scoped', function(done) {
+                _.each(SearchCriterion.VALID_SCOPED_PROPERTIES, function(property) {
+                    var fragment = property + ':value';
+                    var searchCriterion = SearchCriterion.create(fragment);
+
+                    expect(searchCriterion.scoped).to.equal(true);
+                });
+                done();
+            });
+
+            it('specifies the scoped property', function(done) {
+                var fragment = 'path:bar';
+                var searchCriterion = SearchCriterion.create(fragment);
+
+                expect(searchCriterion.property).to.equal('path');
+                
+                done();
+            });
+        });
+
+        context('with a scoped search criterion that doesn\'t specify a value', function() {
+            it('marks the criterion as ignored', function(done){
+                expect(SearchCriterion.create("path:").ignored).to.equal(true);
+
+                done();
+            });
+        });
+
+        context('with a general search criterion that contains a colon', function() {
+            it('does not ignore search criterion or mark it as ignored', function(done){
+                var criterion = SearchCriterion.create("foo:test");
+                expect(criterion.ignored).to.not.equal(true);
+                expect(criterion.scoped).to.equal(false);
+
+                done();
+            });
+        });
+
+        context('with a general search criterion', function() {
+            it('marks the criterion as not scoped', function(done) {
+                expect(SearchCriterion.create("foo").scoped).to.equal(false);
+
+                done();
+            });
+            
+            it('does not set a scoped property', function(done) {
+                expect(SearchCriterion.create("foo").property).to.equal(null);
+
+                done();
+            });
+
+            it('marks the criterion as not ignored', function(done) {
+                expect(SearchCriterion.create("foo").ignored).to.not.equal(true);
+
+                done();
+            });
+        });
+    
+    });
+
+    describe('#matches', function(){
+        context('with a scoped criterion', function() {
+            context('with a single value', function() {
+                context('that matches the request', function() {
+                    it('returns true', function(done) {
+                        var request = {
+                            path: '/customers',
+                            statusCode: 200,
+                            method: 'GET'
+                        };
+
+                        _.each([
+                            'path:customers',
+                            'path:custom',
+                            'path:Customer',
+                            'status:200',
+                            'status:20',
+                            'method:get',
+                            'method:ge'
+                        ], function(fragment) {
+                            expect(SearchCriterion.create(fragment).matches(request)).to.equal(true);
+                        });
+
+                        done();
+                    });
+                });
+
+                context('that doesn\'t match the request', function() {
+                    it('returns false', function(done) {
+                        var request = {
+                            path: '/invoices',
+                            statusCode: 200,
+                            method: 'GET'
+                        };
+
+                        _.each([
+                            'path:customers',
+                            'status:404',
+                            'method:POST'
+                        ], function(fragment) {
+                            expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
+                        });
+
+                        done();
+                    });
+                });
+            });
+
+            context('with multiple values', function() {
+                context('with one that matches the request', function() {
+                    it('returns true', function(done) {
+                        var request = {
+                            path: '/customers',
+                            statusCode: 200,
+                            method: 'GET'
+                        };
+
+                        _.each([
+                            'path:customers,invoices',
+                            'path:cust,invoices',
+                            'status:200,400',
+                            'method:get,post'
+                        ], function(fragment) {
+                            expect(SearchCriterion.create(fragment).matches(request)).to.equal(true);
+                        });
+
+                        done();
+                    });
+                });
+
+                context('with none that match the request', function() {
+                    it('returns false', function(done) {
+                        var request = {
+                            path: '/invoices',
+                            statusCode: 200,
+                            method: 'GET'
+                        };
+
+                        _.each([
+                            'path:customers,orders'
+                        ], function(fragment) {
+                            expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
+                        });
+
+                        done();
+                    });
+                });
+            });
+        });
+
+        context('with a general criterion', function() {
+            context('that matches the request', function() {
+                it('returns true', function(done) {
+                    var request = {
+                        path: '/customers',
+                        statusCode: 200,
+                        method: 'GET'
+                    };
+
+                    _.each([
+                        'customers',
+                        'custo',
+                        'stomers',
+                        'get',
+                        'GE',
+                        '00',
+                        '200'
+                    ], function(fragment) {
+                        expect(SearchCriterion.create(fragment).matches(request)).to.equal(true);
+                    });
+
+                    done();
+                });
+            });
+
+            context('that doesn\'t match the request', function() {
+                it('returns false', function(done) {
+                    var request = {
+                        path: '/customers',
+                        statusCode: 200,
+                        method: 'GET'
+                    };
+
+                    _.each([
+                        'customerss',
+                        '500',
+                        'post'
+                    ], function(fragment) {
+                        expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
+                    });
+
+                    done();
+                });
+            });
+        });
+    });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
