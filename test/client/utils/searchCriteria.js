@@ -338,6 +338,22 @@ describe('SearchCriterion', function() {
                 });
             });
         });
+
+        context('without a status code', function() {
+            it('doesn\'t error', function(done) {
+                var request = {
+                    path: '/customers',
+                    method: 'GET',
+                    serverLogs: [{
+                        tags: ['received']
+                    }]
+                };
+
+                expect(function() {SearchCriterion.create('foo').matches(request)}).to.not.throw;
+
+                done();
+            });
+        });
     });
 
 

@@ -91,21 +91,15 @@ SearchCriterion.prototype._matchesAny = function(request) {
 }
 
 SearchCriterion.prototype._matchesValue = function(request, property, expectedValue) {
-    var requestProperty = this._requestProperty(property);
-
     var actualValue = null;
-    var customValueFunction = internals.CUSTOM_PROPERTY_FUNCTIONS[requestProperty];
+    var customValueFunction = internals.CUSTOM_PROPERTY_FUNCTIONS[property];
     if (customValueFunction) {
         actualValue = customValueFunction(request);
     } else {
-        actualValue = request[requestProperty]
+        actualValue = request[property]
     }
 
     return actualValue.toString().toLowerCase().indexOf(expectedValue.toLowerCase()) !== -1;
-}
-
-SearchCriterion.prototype._requestProperty = function(property) {
-    return internals.REQUEST_PROPERTY_MAP[property] ? internals.REQUEST_PROPERTY_MAP[property] : property;
 }
 
 SearchCriterion.create = function(fragment) {
@@ -114,10 +108,6 @@ SearchCriterion.create = function(fragment) {
 
 SearchCriterion.VALID_SCOPED_PROPERTIES = internals.VALID_SCOPED_PROPERTIES = ['path', 'method', 'status', 'tags'];
 
-SearchCriterion.REQUEST_PROPERTY_MAP = internals.REQUEST_PROPERTY_MAP = {
-    status: 'statusCode'
-};
-
 SearchCriterion.CUSTOM_PROPERTY_FUNCTIONS = internals.CUSTOM_PROPERTY_FUNCTIONS = {
     tags: function(request) {
         return _.chain(request.serverLogs)
@@ -125,5 +115,8 @@ SearchCriterion.CUSTOM_PROPERTY_FUNCTIONS = internals.CUSTOM_PROPERTY_FUNCTIONS 
             .flatten()
             .uniq()
             .value();
+    },
+    status: function(request) {
+        return request.statusCode || '';
     }
 }
