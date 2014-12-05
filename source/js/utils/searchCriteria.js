@@ -5,66 +5,6 @@ var internals = {};
 
 
 
-// exports.toObject = function(qs) {
-//     var result = {
-//         any: {},  // for matching across all properties
-//         props: {} // for matching on a single property
-//     };
-    
-//     if (qs.length === 0 || _.isUndefined(qs)) return undefined;
-    
-//     var groupings = qs.split(' ');
-//     var queryObject = _.object(_.map(groupings, function(s) { 
-//         return s.split(':');
-//     }));
-    
-//     _.each(queryObject, function(v, k) {
-        
-//         // means we dont have a semicolon, search across all properties
-//         if(_.isUndefined(v)) {
-        
-//             v = k;
-//             k = undefined;
-
-//             if (!v) return;
-
-//             _.each(internals.searchKeys, function(key) {
-        
-//                 var modelAttributeName = internals.attributeKeyMap[key] ? internals.attributeKeyMap[key] : key;
-//                 var searchValue = v.length > 0 ? v.split(',') : undefined;
-
-//                 if(_.isUndefined(result.props[modelAttributeName])) {
-                    
-//                     if (_.isUndefined(result.any[modelAttributeName]) && searchValue) {
-            
-//                         result.any[modelAttributeName] = searchValue;
-//                     } else {
-
-//                         result.any[modelAttributeName] = result.any[modelAttributeName].concat(searchValue);
-//                     }
-//                 }
-//             });
-//         } else {
-//             delete result.any[k];
-
-//             result.props[k] = v.length > 0 ? v.split(',') : undefined;
-//         }
-//     });
-
-//     console.log('result', result);
-    
-//     return result;
-// }
-
-// exports.getCriteria = function(qs) {
-//     var criteriaString = qs.split(' ');
-
-//     _.each(criteriaString, function(criterionString) {
-
-//     })
-// }
-
-
 var SearchCriteria = exports.SearchCriteria = function(qs) {
     var fragments  = qs.split(' ');
 
@@ -113,11 +53,7 @@ SearchCriterion.prototype._isValidAny = function() {
 SearchCriterion.prototype._parseScopedPropertyValues = function() {
     var pieces = this.fragment.split(':');
 
-    if(pieces.length > 1 && pieces[1].length) {
-        return pieces[1].split(',');
-    }
-
-    return [this.fragment];
+    return pieces[1].split(',');
 }
 
 SearchCriterion.prototype._isScoped = function() {
