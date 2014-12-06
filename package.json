@@ -47,9 +47,10 @@
     "watch-styles": "node-sass source/styles/style.scss public/css/style.css -w source/styles -r",
     "watch": "npm run build && npm run watch-js & npm run watch-styles",
     "copy-fonts": "cp -R source/fonts/vendor/bootstrap public/fonts",
+    "copy-assets": "cp -R vendor/ZeroClipboard.swf public/js",
     "build-js": "browserify -t hbsfy -e source/js/start.js source/js/**/*.js > public/js/main.js -d",
     "build-styles": "node-sass source/styles/style.scss public/css/style.css",
-    "build": "npm run build-js && npm run build-styles && npm run copy-fonts",
+    "build": "npm run build-js && npm run build-styles && npm run copy-fonts && npm run copy-assets",
     "boot": "node examples/simple.js",
     "start": "npm run build && npm run boot",
     "start-dev": "npm run watch & npm run boot"
