@@ -79,6 +79,7 @@ MessageParser.prototype._updateRequestWithResponse = function(message) {
     var request = this._findRequest(message);
 
     request.set('statusCode', message.data.statusCode);
+    request.set('isComplete', true);
 };
 
 MessageParser.prototype._findRequest = function(message) {
@@ -127,12 +128,14 @@ MessageParser.prototype._refreshResponseTimeout = function(message) {
 
     if(request.get('responseTimeout')) {
         request.set('responseTimeout', false);
+        request.set('isComplete', false);
     }
 
     if(!this._isResponse(message)) {
         request.timer = setTimeout(function(){
             request.set('statusCode', "timeout");
             request.set('responseTimeout', true);
+            request.set('isComplete', true);
 
             this.onResponseTimeout && this.onResponseTimeout();
         }.bind(this), this.responseTimeout);
