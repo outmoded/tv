@@ -341,6 +341,7 @@ describe('SearchCriterion', function() {
 
         context('without a status code', function() {
             it('doesn\'t error', function(done) {
+                console.log('here');
                 var request = {
                     path: '/customers',
                     method: 'GET',
@@ -349,7 +350,7 @@ describe('SearchCriterion', function() {
                     }]
                 };
 
-                expect(function() {SearchCriterion.create('foo').matches(request)}).to.not.throw;
+                expect(function() {SearchCriterion.create('foo').matches(request)}).to.not.throw();
 
                 done();
             });
