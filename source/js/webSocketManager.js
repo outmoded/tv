@@ -12,10 +12,14 @@ WebSocketManager.create = function(webSocket, clientId) {
 };
 
 WebSocketManager.prototype.applyFilter = function(clientId) {
-    this.clientId = clientId;
+    if (this.clientId) {
+        this.webSocket.send('unsubscribe:' + this.clientId);
+    }
 
     if (this.isOpen) {
-        this.webSocket.send(clientId);
+        this.clientId = clientId;
+        this.webSocket.send(this.clientId);                        // for the pre-unsubscribe version of Tv
+        this.webSocket.send('subscribe:' + this.clientId);
     }
 };
 

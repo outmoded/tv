@@ -25,7 +25,8 @@
     "lodash": "^2.4.1",
     "moment": "^2.8.4",
     "prettify": "^0.1.7",
-    "ws": "0.4.x"
+    "ws": "0.4.x",
+    "zeroclipboard": "^2.1.6"
   },
   "peerDependencies": {
     "hapi": ">=8.0.0-rc8"

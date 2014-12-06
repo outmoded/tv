@@ -1,5 +1,7 @@
 var Backbone = require('backbone');
 var _ = require('lodash');
+var Clipboard = require('../clipboard');
+var ZeroClipboard = require('zeroclipboard');
 
 var ServerLogsView = Backbone.View.extend({
 
@@ -18,6 +20,14 @@ var ServerLogsView = Backbone.View.extend({
         });
     },
 
+    _clipboard: function() {
+        ZeroClipboard.config({
+            swfPath: location.href + "/js/ZeroClipboard.swf"
+        });
+
+        return new ZeroClipboard(this.$('.copy').get(0));
+    },
+
     initialize: function() {
         this.listenTo(this.collection, 'add', function(model) {
             this.render();
@@ -25,13 +35,31 @@ var ServerLogsView = Backbone.View.extend({
     },
 
     events: {
-        'click .data': '_toggleServerLogData'
+        'click .data': '_toggleServerLogData',
+        'click .copy': '_copyToClipboard'
     },
 
     render: function() {
         this.$el.html(this.template(this.templateContext()));
 
+        if(!this.clipboard) {
+            this._initializeClipboard();
+        }
+
+        this.clipboard.setData({"text/plain": Clipboard.convertToText(this.model.toJSON())})
+
         return this;
+    },
+
+    _initializeClipboard: function() {
+        this.clipboard = this._clipboard();
+        
+        this.clipboard.on( "ready", function( readyEvent ) {
+        
+          this.clipboard.on( "aftercopy", function( event ) {
+            alert('copied');
+          });
+        }.bind(this));
     },
 
     _toggleServerLogData: function(e) {
@@ -39,6 +67,12 @@ var ServerLogsView = Backbone.View.extend({
 
         $data.find('.json-markup').toggleClass('expanded');
         $data.toggleClass('expanded');
+    },
+
+    _copyToClipboard: function(e) {
+        e.preventDefault();
+        
+        
     }
 
 });
