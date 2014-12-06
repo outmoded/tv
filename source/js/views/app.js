@@ -172,7 +172,8 @@ var AppView = Backbone.View.extend({
             }
 
             if(setStripe) {
-                requestView.$el.toggleClass('odd', this.nextVisibleRequestIndex % 2 === 0);
+                var odd = this.nextVisibleRequestIndex % 2 === 0;
+                requestView.$el.toggleClass('odd', odd).toggleClass('even', !odd);
                 this.nextVisibleRequestIndex = this.nextVisibleRequestIndex + 1;
             }
         }
