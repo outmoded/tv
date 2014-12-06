@@ -63,5 +63,14 @@
                 }
             }
         }
+
+        .timestamp {
+            text-align: right;
+                
+            .column-label {
+                margin-right: 63px;
+            }
+
+        }
     }
 }

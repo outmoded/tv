@@ -37,7 +37,8 @@
 
                 .time {
                     @extend .truncate;
-                    width: 80%;
+                    text-align: right;
+                    margin-right: 50px;
                 }
 
                 &:hover, &:hover > div {
