@@ -12,6 +12,8 @@ var AppView = Backbone.View.extend({
 
     template: require('../templates/app.hbs'),
 
+    nextVisibleRequestIndex: 0,
+
     initialize: function(opts) {
         this.model = new Settings({webSocketManager: opts.webSocketManager});
 
@@ -55,7 +57,7 @@ var AppView = Backbone.View.extend({
             this._updateRequestVisibility(requestView);
 
             this.listenTo(request, 'change:statusCode', function() {
-                this._updateRequestVisibility(requestView);
+                this._updateRequestVisibility(requestView, true);
             });
 
             this.$('.feed .body').append(requestView.el);
@@ -102,6 +104,7 @@ var AppView = Backbone.View.extend({
             requestView.remove();
         });
 
+        this.nextVisibleRequestIndex = 0;
         this.requestViews = [];
     },
 
@@ -142,37 +145,45 @@ var AppView = Backbone.View.extend({
     _filterRequests: _.debounce(function(e) {
         var queryString = $('input.search').val();
 
-        if(queryString || this.filterFavorites) {
-            this._setSearchFilter(SearchCriteria.create(queryString));
-            _.each(this.requestViews, this._updateRequestVisibility.bind(this));
-        } else {
-            this._clearSearchFilter();
-        }
+        this.nextVisibleRequestIndex = 0;
+        this._setSearchFilter(SearchCriteria.create(queryString));
+        _.each(this.requestViews, this._updateRequestVisibility.bind(this));
     }, 200),
 
-    _updateRequestVisibility: function(requestView) {
+    _updateRequestVisibility: function(requestView, isUpdate) {
         var show = true;
+
         if(this.searchFilter && !this.searchFilter(requestView)) {
             show = false;
         }
+
         if(this.filterFavorites && !requestView.favorited) {
             show = false;
         }
-        requestView.$el.toggle(show);
+
+        if(show) {
+            var setStripe = true;
+
+            if(isUpdate === true) {
+                var showingForTheFirstTime = requestView.$el.hasClass('hidden');
+                if(!showingForTheFirstTime) {
+                    setStripe = false;
+                }
+            }
+
+            if(setStripe) {
+                requestView.$el.toggleClass('odd', this.nextVisibleRequestIndex % 2 === 0);
+                this.nextVisibleRequestIndex = this.nextVisibleRequestIndex + 1;
+            }
+        }
+
+        requestView.$el.toggleClass('hidden', !show);
     },
 
     _setSearchFilter: function(searchCriteria) {
         this.searchFilter = function(requestView) {
             return searchCriteria.matches(requestView.model.toJSON());
         };
-    },
-
-    _clearSearchFilter: function() {
-        this.searchFilter = null;
-
-        _.each(this.requestViews, function(requestView) {
-            requestView.$el.toggle(true);
-        });
     },
 
     _isScrolledToBottom: function() {

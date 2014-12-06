@@ -5,7 +5,7 @@ var RequestDetailsView = require('./requestDetails');
 var RequestView = Backbone.View.extend({
     template: require('../templates/request.hbs'),
 
-    className: "request",
+    className: "request hidden",
 
     events: {
         'click .request-details': '_toggleServerLogs',
