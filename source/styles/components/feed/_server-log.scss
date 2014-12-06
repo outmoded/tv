@@ -100,12 +100,27 @@
             li:first-child:before {
                 content: '';
             }
-        }
-    }
 
-    .copy {
-        float: right;
-        cursor: pointer;
+            .time {
+                margin-left: 20px;
+                width: 100px;
+                float: right;
+
+                div.delta {
+                    width: 50px;
+                    float: left;
+                    text-align: right;
+                    
+                }
+
+                span.copy {
+                    float: right;
+                    cursor: pointer;
+
+                }
+
+            }
+        }
     }
 }
 
