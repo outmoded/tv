@@ -91,11 +91,14 @@ MessageParser.prototype._findRequest = function(message) {
 };
 
 MessageParser.prototype._addServerLog = function(message) {
+    var request = this._findRequest(message);
+
     var serverLog = {
         tags: message.tags || [],
         data: message.data,
-        timestamp: message.timestamp
-    }
+        timestamp: message.timestamp,
+        delta: message.timestamp - request.get('timestamp')
+    };
 
     if(!this._isEmptyRepsonseServerLog(message)) {
         if(message.response) {
@@ -106,7 +109,7 @@ MessageParser.prototype._addServerLog = function(message) {
             serverLog.tags.unshift('internal');
         }
 
-        this._findRequest(message).get('serverLogs').add(serverLog);
+        request.get('serverLogs').add(serverLog);
     }
 };
 
