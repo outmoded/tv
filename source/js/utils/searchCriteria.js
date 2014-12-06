@@ -106,7 +106,7 @@ SearchCriterion.create = function(fragment) {
     return new SearchCriterion(fragment);
 }
 
-SearchCriterion.VALID_SCOPED_PROPERTIES = internals.VALID_SCOPED_PROPERTIES = ['path', 'method', 'status', 'tags'];
+SearchCriterion.VALID_SCOPED_PROPERTIES = internals.VALID_SCOPED_PROPERTIES = ['path', 'method', 'status', 'tags', 'data'];
 
 SearchCriterion.CUSTOM_PROPERTY_FUNCTIONS = internals.CUSTOM_PROPERTY_FUNCTIONS = {
     tags: function(request) {
@@ -114,6 +114,13 @@ SearchCriterion.CUSTOM_PROPERTY_FUNCTIONS = internals.CUSTOM_PROPERTY_FUNCTIONS 
             .pluck('tags')
             .flatten()
             .uniq()
+            .value();
+    },
+    data: function(request) {
+        return _.chain(request.serverLogs)
+            .pluck('data')
+            .flatten()
+            .map(function(a) { return JSON.stringify(a); })
             .value();
     },
     status: function(request) {
