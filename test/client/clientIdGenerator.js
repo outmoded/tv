@@ -2,10 +2,9 @@
 
 var sinon = require('sinon');
 var _ = require('lodash');
-var Lab = require('lab');
+//var Lab = require('lab');
 
-var rewire = require('rewire');
-var ClientId = rewire('../../source/js/clientId');
+var ClientIdGenerator = require('../../source/js/clientIdGenerator');
 
 var settingsStoreGetSpy = sinon.spy();
 var settingsStoreSetSpy = sinon.spy();
@@ -19,19 +18,19 @@ internals.numbers = '0123456789';
 
 // Test shortcuts
 
-var lab = exports.lab = Lab.script();
-var describe = lab.describe;
-var beforeEach = lab.beforeEach;
-var afterEach = lab.afterEach;
-var after = lab.after;
-var context = lab.describe;
-var it = lab.it;
-var expect = Lab.expect;
+//var lab = exports.lab = Lab.script();
+//var describe = lab.describe;
+//var beforeEach = lab.beforeEach;
+//var afterEach = lab.afterEach;
+//var after = lab.after;
+//var context = lab.describe;
+//var it = lab.it;
+//var expect = Lab.expect;
 
 
 
 
-describe('ClientId', function() {
+describe('ClientIdGenerator', function() {
 
     beforeEach(function(done) {
         this.storeMock = {
@@ -42,7 +41,7 @@ describe('ClientId', function() {
                 return arguments[1];
             })
         }
-        ClientId._store = this.storeMock;
+        ClientIdGenerator._store = this.storeMock;
 
         done();
     });
@@ -50,15 +49,15 @@ describe('ClientId', function() {
     describe('#generate', function() {
 
         it('returns a code', function(done) {
-            var obj = ClientId._generateClientId();
-            expect(ClientId._generateClientId()).to.have.length(ClientId.defaults.length);
+            var obj = ClientIdGenerator._generateClientId();
+            expect(ClientIdGenerator._generateClientId()).to.have.length(ClientIdGenerator.defaults.length);
 
             done();
         });
 
         it('"always" returns a unique code', function(done) {
             var clientIds = _.times(30, function() {
-                return ClientId._generateClientId();
+                return ClientIdGenerator._generateClientId();
             });
 
             expect(_.unique(clientIds)).to.have.length(clientIds.length);
@@ -69,7 +68,7 @@ describe('ClientId', function() {
         context('with length specified', function() {
 
             it('returns a code of the specified length', function(done) {
-                expect(ClientId._generateClientId({length: 10})).to.have.length(10);
+                expect(ClientIdGenerator._generateClientId({length: 10})).to.have.length(10);
 
                 done();
             });
@@ -79,7 +78,7 @@ describe('ClientId', function() {
         context('with only letters specified', function() {
 
             it('returns a code with only letters', function(done) {
-                var clientId = ClientId._generateClientId({numbers: false});
+                var clientId = ClientIdGenerator._generateClientId({numbers: false});
                 
                 var intersection = _.intersection(clientId.split(''), internals.numbers.split(''))
                 expect(intersection).to.have.length(0);
@@ -92,7 +91,7 @@ describe('ClientId', function() {
         context('with only numbers specified', function() {
 
             it('returns a code with only numbers', function(done) {
-                var clientId = ClientId._generateClientId({letters: false});
+                var clientId = ClientIdGenerator._generateClientId({letters: false});
                 
                 var intersection = _.intersection(clientId.split(''), internals.letters.split(''))
                 expect(intersection).to.have.length(0);

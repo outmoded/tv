@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var Backbone = require('backbone');
 var Request = require('./models/request');
+var _ = require('lodash');
 
 var MessageParser = function(opts) {
     opts = opts || {};
@@ -132,13 +133,13 @@ MessageParser.prototype._refreshResponseTimeout = function(message) {
     }
 
     if(!this._isResponse(message)) {
-        request.timer = setTimeout(function(){
+        request.timer = setTimeout(_.bind(function(){
             request.set('statusCode', "timeout");
             request.set('responseTimeout', true);
             request.set('isComplete', true);
 
             this.onResponseTimeout && this.onResponseTimeout();
-        }.bind(this), this.responseTimeout);
+        }, this), this.responseTimeout);
     }
 };
 

@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var Backbone = require('backbone');
 var SettingsStore = require('../settingsStore');
-
+var _ = require('lodash');
 
 var Settings = Backbone.Model.extend({
 
@@ -22,9 +22,9 @@ var Settings = Backbone.Model.extend({
     },
 
     _updateSettingsStore: function(model) {
-        _.each(model.changed, function(value, key) {
+        _.each(model.changed, _.bind(function(value, key) {
             this._store.set(key, value);
-        }.bind(this));
+        }, this));
     }
 
 });

@@ -1,6 +1,7 @@
 var SettingsStore = require('./settingsStore');
 var AppView = require('./views/app');
 var ClientIdGenerator = require('./clientIdGenerator');
+var _ = require('lodash');
 
 require('bootstrap/js/modal');
 
@@ -14,7 +15,7 @@ var app = {
             collection: messageParser.requests,
             webSocketManager: webSocketManager
         }).render();
-        
+
         if(!this._store.exists('clientId')) {
             appView.model.set('clientId', ClientIdGenerator.generate());
             appView.settingsView.render();
@@ -25,9 +26,9 @@ var app = {
             appView.settingsView.show();
         }
 
-        webSocketManager.onSocketOpen = function() {
+        webSocketManager.onSocketOpen = _.bind(function() {
             webSocketManager.applyFilter(this._store.get('channel'));
-        }.bind(this);
+        }, this);
 
         webSocketManager.onMessage(function(message) {
             messageParser.addMessage(message);

@@ -2,8 +2,8 @@
 
 var sinon = require('sinon');
 var _ = require('lodash');
-var Code = require('code');
-var Lab = require('lab');
+//var Code = require('code');
+//var Lab = require('lab');
 
 var SearchCriteria = require('../../../source/js/utils/searchCriteria').SearchCriteria;
 var SearchCriterion = require('../../../source/js/utils/searchCriteria').SearchCriterion;
@@ -15,13 +15,13 @@ var internals = {};
 
 // Test shortcuts
 
-var lab = exports.lab = Lab.script();
-var describe = lab.describe;
-var beforeEach = lab.beforeEach;
-var afterEach = lab.afterEach;
-var context = lab.describe;
-var it = lab.it;
-var expect = Code.expect;
+//var lab = exports.lab = Lab.script();
+//var describe = lab.describe;
+//var beforeEach = lab.beforeEach;
+//var afterEach = lab.afterEach;
+//var context = lab.describe;
+//var it = lab.it;
+//var expect = Code.expect;
 var spy = sinon.spy;
 
 

@@ -18,3 +18,4 @@ lib-cov
 complexity.md
 .sass-cache
 public/
+test/bundle.js

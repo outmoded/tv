@@ -54,12 +54,12 @@ var ServerLogsView = Backbone.View.extend({
     _initializeClipboard: function() {
         this.clipboard = this._clipboard();
         
-        this.clipboard.on( "ready", function( readyEvent ) {
+        this.clipboard.on( "ready", _.bind(function( readyEvent ) {
         
           this.clipboard.on( "aftercopy", function( event ) {
             alert('copied');
           });
-        }.bind(this));
+        }, this));
     },
 
     _toggleServerLogData: function(e) {

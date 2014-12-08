@@ -1,10 +1,14 @@
+var _ = require('lodash');
+
 var WebSocketManager = function(webSocket, clientId) {
     this.webSocket = webSocket;
 
-    this.webSocket.onopen = function() {
+    this.webSocket.onopen = _.bind( function() {
         this.isOpen = true;
-        if (this.onSocketOpen) this.onSocketOpen();
-    }.bind(this);
+        if (this.onSocketOpen) {
+            this.onSocketOpen();
+        }
+    }, this);
 };
 
 WebSocketManager.create = function(webSocket, clientId) {

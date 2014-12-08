@@ -1,7 +1,6 @@
 // Load modules
 
-var React = require('react');
-var Lab = require('lab');
+//var Lab = require('lab');
 var sinon = require('sinon');
 var app = require('../../source/js/app');
 var WebSocketManager = require('../../source/js/webSocketManager');
@@ -15,13 +14,13 @@ var internals = {};
 
 // Test shortcuts
 
-var lab = exports.lab = Lab.script();
-var describe = lab.describe;
-var beforeEach = lab.beforeEach;
-var afterEach = lab.afterEach;
-var context = lab.describe;
-var it = lab.it;
-var expect = Lab.expect;
+//var lab = exports.lab = Lab.script();
+//var describe = lab.describe;
+//var beforeEach = lab.beforeEach;
+//var afterEach = lab.afterEach;
+//var context = lab.describe;
+//var it = lab.it;
+//var expect = Lab.expect;
 var spy = sinon.spy;
 var stub = sinon.stub;
 
@@ -41,9 +40,6 @@ describe('app', function() {
             this.appComponent = { render: spy(), setState: spy() };
 
             this.updateStateSpy = spy();
-            this.reactRenderSpy = sinon.stub(React, 'render', function() {
-                return { updateState: this.updateStateSpy }
-            }.bind(this));
 
             app.start(mockWebSocketManager, this.messageParser, this.appComponent);
 
@@ -51,7 +47,6 @@ describe('app', function() {
         });
 
         afterEach(function(done){
-            React.render.restore();
             this.messageParser.addMessage.restore();
 
             delete this.messageParser;

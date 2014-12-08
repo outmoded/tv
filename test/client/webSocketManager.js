@@ -1,8 +1,6 @@
 // Load modules
 
-var Hapi = require('hapi');
-var Lab = require('lab');
-var Tv = require('../');
+//var Lab = require('lab');
 var Sinon = require('sinon');
 var WebSocketManager = require('../../source/js/webSocketManager');
 
@@ -12,13 +10,13 @@ var internals = {};
 
 // Test shortcuts
 
-var lab = exports.lab = Lab.script();
-var describe = lab.describe;
-var beforeEach = lab.beforeEach;
-var afterEach = lab.afterEach;
-var context = lab.describe;
-var it = lab.it;
-var expect = Lab.expect;
+//var lab = exports.lab = Lab.script();
+//var describe = lab.describe;
+//var beforeEach = lab.beforeEach;
+//var afterEach = lab.afterEach;
+//var context = lab.describe;
+//var it = lab.it;
+//var expect = Lab.expect;
 var spy = Sinon.spy;
 
 describe('WebSocketManager', function() {

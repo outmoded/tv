@@ -1,10 +1,7 @@
 // Load modules
 
 var _ = require('lodash');
-var Hapi = require('hapi');
-var Lab = require('lab');
-var Ws = require('ws');
-var Tv = require('../');
+//var Lab = require('lab');
 var MessageParser = require('../../source/js/messageParser');
 var sinon = require('sinon');
 
@@ -15,13 +12,13 @@ var internals = {};
 
 // Test shortcuts
 
-var lab = exports.lab = Lab.script();
-var describe = lab.describe;
-var beforeEach = lab.beforeEach;
-var afterEach = lab.afterEach;
-var context = lab.describe;
-var it = lab.it;
-var expect = Lab.expect;
+//var lab = exports.lab = Lab.script();
+//var describe = lab.describe;
+//var beforeEach = lab.beforeEach;
+//var afterEach = lab.afterEach;
+//var context = lab.describe;
+//var it = lab.it;
+//var expect = Lab.expect;
 var spy = sinon.spy;
 
 var RECEIVED = {
@@ -246,33 +243,33 @@ describe('MessageParser', function() {
                 done();
             });
 
-            it('sets a timeout response error message on the request', function(done) {
+            it('sets a timeout response error message on the request', _.bind(function(done) {
                 setTimeout( function() {
                     expect(this.request.data).to.equal(MessageParser.RESPONSE_TIMEOUT_ERROR_MESSAGE);
 
                     done();
-                }.bind(this), 10);
-            });
+                }, 10);
+            }, this));
 
-            it('marks the request as having a response timeout', function(done) {
+            it('marks the request as having a response timeout', _.bind(function(done) {
                 expect(this.request.responseTimeout).to.not.be.true;
 
                 setTimeout( function() {
                     expect(this.request.responseTimeout).to.be.true;
 
                     done();
-                }.bind(this), 10);
-            });
+                }, 10);
+            }, this));
 
-            it('calls the onResponseTimeout callback', function(done) {
+            it('calls the onResponseTimeout callback', _.bind(function(done) {
                 this.messageParser.onResponseTimeout = spy();
 
                 setTimeout( function() {
                     expect(this.messageParser.onResponseTimeout.called).to.be.true;
 
                     done();
-                }.bind(this), 100);
-            });
+                }, 10);
+            }, this));
         });
 
         describe('when a server log for a requests comes in before the response timeout', function() {
@@ -293,7 +290,7 @@ describe('MessageParser', function() {
                     done();
                 }, 4);
             });
-        });
+        })
 
         var clearResponseTimeoutTest = function(responseMessage) {
             describe('when a response for a request comes in after the response timeout has occured', function() {

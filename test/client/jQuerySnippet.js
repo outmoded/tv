@@ -1,6 +1,6 @@
 // Load modules
 
-var Lab = require('lab');
+//var Lab = require('lab');
 var JQuerySnippet = require('../../source/js/jquerySnippet');
 var Sinon = require('sinon');
 
@@ -11,13 +11,13 @@ var internals = {};
 
 // Test shortcuts
 
-var lab = exports.lab = Lab.script();
-var describe = lab.describe;
-var beforeEach = lab.beforeEach;
-var afterEach = lab.afterEach;
-var context = lab.describe;
-var it = lab.it;
-var expect = Lab.expect;
+//var lab = exports.lab = Lab.script();
+//var describe = lab.describe;
+//var beforeEach = lab.beforeEach;
+//var afterEach = lab.afterEach;
+//var context = lab.describe;
+//var it = lab.it;
+//var expect = Lab.expect;
 var jQuery = {};
 var spy = Sinon.spy;
 

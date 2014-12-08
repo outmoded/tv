@@ -45,7 +45,7 @@ var AppView = Backbone.View.extend({
     },
 
     _addRequest: function(request) {
-        this._checkToScrollToBottom( function() {
+        this._checkToScrollToBottom( _.bind(function() {
             var requestView = new RequestView({ model: request }).render();
             this.requestViews.push(requestView);
 
@@ -61,7 +61,7 @@ var AppView = Backbone.View.extend({
             });
 
             this.$('.feed .body').append(requestView.el);
-        }.bind(this) );
+        }, this) );
     },
 
     _enableCollapseAllAction: function() {
@@ -147,7 +147,7 @@ var AppView = Backbone.View.extend({
 
         this.nextVisibleRequestIndex = 0;
         this._setSearchFilter(SearchCriteria.create(queryString));
-        _.each(this.requestViews, this._updateRequestVisibility.bind(this));
+        _.each(this.requestViews, _.bind(this._updateRequestVisibility, this));
     }, 200),
 
     _updateRequestVisibility: function(requestView, isUpdate) {
