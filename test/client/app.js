@@ -123,5 +123,3 @@ describe('app', function() {
     });
 
 });
-
-

@@ -1,36 +1,40 @@
 var _ = require('lodash');
-var Handlebars = require("hbsfy/runtime");
+var Handlebars = require('hbsfy/runtime');
 var DateTimeFormatter = require('../utils/dateTimeFormatter');
 var JQuerySnippet = require('../jQuerySnippet');
 var jsonMarkup = require('json-markup');
 
-Handlebars.registerHelper("longTime", function(dateTime) {
+Handlebars.registerHelper('longTime', function(dateTime) {
     return DateTimeFormatter.longTime(dateTime);
 });
 
-Handlebars.registerHelper("shortDate", function(dateTime) {
+Handlebars.registerHelper('shortDate', function(dateTime) {
     return DateTimeFormatter.shortDate(dateTime);
 });
 
-Handlebars.registerHelper("jsonMarkup", function(jsonData) {
+Handlebars.registerHelper('jsonMarkup', function(jsonData) {
     return jsonMarkup(jsonData);
 });
 
-Handlebars.registerHelper("jQuerySnippet", function(clientId) {
+Handlebars.registerHelper('jQuerySnippet', function(clientId) {
     return JQuerySnippet.generate(clientId);
 });
 
-Handlebars.registerHelper("isEq", function(a, b, options) {
+Handlebars.registerHelper('isEq', function(a, b, options) {
+    var result;
+
     if (a === b) {
-        return options.fn();
+        result = options.fn();
     } else {
-        return options.inverse();
+        result = options.inverse();
     }
+
+    return result;
 });
 
-VALID_COLORED_TAGS = ['error', 'debug']
-Handlebars.registerHelper("tagColor", function(tag) {
-    if(_.contains(VALID_COLORED_TAGS, tag)) {
+VALID_COLORED_TAGS = ['error', 'debug'];
+Handlebars.registerHelper('tagColor', function(tag) {
+    if (_.contains(VALID_COLORED_TAGS, tag)) {
         return tag;
     }
 });

@@ -13,8 +13,6 @@ internals.serverLogs.prefix = '  ';
 internals.serverLogs.separator = internals.serverLogs.prefix + '-------------';
 
 
-
-
 exports = module.exports = internals.Clipboard = function(request) {
     this.request = request;
 };
@@ -25,9 +23,7 @@ internals.Clipboard.create = function(request) {
 
 internals.Clipboard.convertToText = function(request) {
     return internals.Clipboard.create(request).convertToText();
-}
-
-
+};
 
 internals.Clipboard.prototype.convertToText = function() {
     return [this._buildRequestText(), this._buildServerLogsText()].join('\n\n');

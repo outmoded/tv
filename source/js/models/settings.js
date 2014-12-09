@@ -1,7 +1,6 @@
 var _ = require('lodash');
 var Backbone = require('backbone');
 var SettingsStore = require('../settingsStore');
-var _ = require('lodash');
 
 var Settings = Backbone.Model.extend({
 
@@ -11,7 +10,7 @@ var Settings = Backbone.Model.extend({
         return {
             clientId: this._store.get('clientId'),
             channel:  this._store.get('channel')
-        }
+        };
     },
 
     initialize: function(options) {

@@ -2,15 +2,15 @@
 
 var Clipboard = require('../../source/js/clipboard');
 
+
 // Declare internals
 
 var internals = {};
 
 
-
 describe('Clipboard', function() {
-  
-    beforeEach(function(done) {
+
+    beforeEach(function() {
         this.now = new Date().valueOf();
         this.request = {
             path: '/foo/bar',
@@ -20,7 +20,7 @@ describe('Clipboard', function() {
                 {
                     data: {
                         foo: 'bar',
-                        bar: 'baz',
+                        bar: 'baz'
                     },
                     timestamp: this.now,
                     tags: ['foo', 'bar']
@@ -28,27 +28,23 @@ describe('Clipboard', function() {
                 {
                     data: {
                         foo: 'bar',
-                        bar: 'baz',
+                        bar: 'baz'
                     },
                     timestamp: this.now,
                     tags: ['foo', 'bar']
                 }
             ]
         };
-
-        done();
     });
 
-    afterEach(function(done) {
+    afterEach(function() {
         delete this.now;
         delete this.request;
-
-        done();
     });
 
     describe('#convertToText', function() {
-      
-        it('converts the request to text', function(done) {
+
+        it('converts the request to text', function() {
             var expectedData = [
                 'Path: GET /foo/bar',
                 'Status: 200',
@@ -63,10 +59,8 @@ describe('Clipboard', function() {
             ].join('\n');
 
             expect(Clipboard.convertToText(this.request)).to.equal(expectedData);
-            
-            done();
         });
-    
+
     });
-    
+
 });

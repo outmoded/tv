@@ -40,7 +40,7 @@ describe('JQuerySnippet', function() {
 
     //         done();
     //     });
-    
+
     //     it('appends the query string to all ajax calls', function(done) {
 
     //     });
