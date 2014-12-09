@@ -1,31 +1,23 @@
 // Load modules
 
-var sinon = require('sinon');
 var _ = require('lodash');
-//var Lab = require('lab');
+var Sinon = require('sinon');
 
 var ClientIdGenerator = require('../../source/js/clientIdGenerator');
-
-var settingsStoreGetSpy = sinon.spy();
-var settingsStoreSetSpy = sinon.spy();
 
 // Declare internals
 
 var internals = {};
+
+
+// Test Shortcuts
+
+var Spy = Sinon.spy;
+
+
+
 internals.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 internals.numbers = '0123456789';
-
-
-// Test shortcuts
-
-//var lab = exports.lab = Lab.script();
-//var describe = lab.describe;
-//var beforeEach = lab.beforeEach;
-//var afterEach = lab.afterEach;
-//var after = lab.after;
-//var context = lab.describe;
-//var it = lab.it;
-//var expect = Lab.expect;
 
 
 
@@ -34,10 +26,10 @@ describe('ClientIdGenerator', function() {
 
     beforeEach(function(done) {
         this.storeMock = {
-            get: sinon.spy(function() {
+            get: Spy(function() {
                 return undefined;
             }),
-            set: sinon.spy(function() {
+            set: Spy(function() {
                 return arguments[1];
             })
         }

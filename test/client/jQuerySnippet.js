@@ -1,28 +1,30 @@
 // Load modules
 
 //var Lab = require('lab');
-var JQuerySnippet = require('../../source/js/jquerySnippet');
 var Sinon = require('sinon');
+
+var JQuerySnippet = require('../../source/js/jquerySnippet');
+
 
 // Declare internals
 
 var internals = {};
 
 
-// Test shortcuts
+// Test Shortcuts
 
-//var lab = exports.lab = Lab.script();
-//var describe = lab.describe;
-//var beforeEach = lab.beforeEach;
-//var afterEach = lab.afterEach;
-//var context = lab.describe;
-//var it = lab.it;
-//var expect = Lab.expect;
-var jQuery = {};
-var spy = Sinon.spy;
+var Spy = Sinon.spy;
 
 
-var executeSnippet = function(clientId) {
+
+
+
+
+
+
+
+
+internals.executeSnippet = function(clientId) {
     eval(JQuerySnippet.generate(clientId));
 };
 
@@ -31,13 +33,13 @@ describe('JQuerySnippet', function() {
     describe('#generate', function() {
       
         beforeEach(function(done) {
-            jQuery.ajaxSetup = spy();
+            jQuery.ajaxSetup = Spy();
             
             done();
         });
 
         it('evaluates to a valid function', function(done) {
-            expect(executeSnippet('foobar')).to.not.throw;
+            expect(internals.executeSnippet('foobar')).to.not.throw;
 
             done();
         });

@@ -1,7 +1,7 @@
 // Load modules
 
-//var Lab = require('lab');
-var sinon = require('sinon');
+var Sinon = require('sinon');
+
 var app = require('../../source/js/app');
 var WebSocketManager = require('../../source/js/webSocketManager');
 var MessageParser = require('../../source/js/messageParser');
@@ -12,34 +12,30 @@ var MessageParser = require('../../source/js/messageParser');
 var internals = {};
 
 
-// Test shortcuts
+// Test Shortcuts
 
-//var lab = exports.lab = Lab.script();
-//var describe = lab.describe;
-//var beforeEach = lab.beforeEach;
-//var afterEach = lab.afterEach;
-//var context = lab.describe;
-//var it = lab.it;
-//var expect = Lab.expect;
-var spy = sinon.spy;
-var stub = sinon.stub;
+var Spy = Sinon.spy;
+var Stub = Sinon.stub;
+
+
+
 
 describe('app', function() {
 
     describe('#start', function() {
 
         beforeEach(function(done){
-            global.$ = sinon.stub().returns({ get: function(){} });
+            global.$ = Stub().returns({ get: function(){} });
 
-            this.mockWebSocket = { send: spy() };
+            this.mockWebSocket = { send: Spy() };
             var mockWebSocketManager = WebSocketManager.create(this.mockWebSocket);
 
             this.messageParser = MessageParser.create();
-            this.messageParserAddMessageSpy = sinon.stub(this.messageParser, 'addMessage', function() {});
+            this.messageParserAddMessageSpy = Stub(this.messageParser, 'addMessage', function() {});
 
-            this.appComponent = { render: spy(), setState: spy() };
+            this.appComponent = { render: Spy(), setState: Spy() };
 
-            this.updateStateSpy = spy();
+            this.updateStateSpy = Spy();
 
             app.start(mockWebSocketManager, this.messageParser, this.appComponent);
 

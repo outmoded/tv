@@ -1,23 +1,18 @@
 // Load modules
 
-//var Lab = require('lab');
 var Sinon = require('sinon');
+
 var WebSocketManager = require('../../source/js/webSocketManager');
 
 // Declare internals
 
 var internals = {};
 
-// Test shortcuts
+// Test Shortcuts
 
-//var lab = exports.lab = Lab.script();
-//var describe = lab.describe;
-//var beforeEach = lab.beforeEach;
-//var afterEach = lab.afterEach;
-//var context = lab.describe;
-//var it = lab.it;
-//var expect = Lab.expect;
-var spy = Sinon.spy;
+var Spy = Sinon.spy;
+
+
 
 describe('WebSocketManager', function() {
 
@@ -38,7 +33,7 @@ describe('WebSocketManager', function() {
         context('without a client id', function() {
 
             it('receives all messages', function(done) {
-                var webSocketMock = { send: spy() };
+                var webSocketMock = { send: Spy() };
 
                 WebSocketManager.create(webSocketMock);
                 webSocketMock.onopen();
@@ -54,7 +49,7 @@ describe('WebSocketManager', function() {
         context('with a client id', function() {
 
             it('only receives messages for the given client id', function(done) {
-                var webSocketMock = { send: spy() };
+                var webSocketMock = { send: Spy() };
 
                 WebSocketManager.create(webSocketMock, '123');
                 webSocketMock.onopen();
@@ -72,7 +67,7 @@ describe('WebSocketManager', function() {
     describe('#applyFilter', function(){
 
         beforeEach(function(done){
-            this.webSocketMock = { send: spy() };
+            this.webSocketMock = { send: Spy() };
             this.webSocketManager = WebSocketManager.create(this.webSocketMock);
 
             done();
@@ -120,7 +115,7 @@ describe('WebSocketManager', function() {
     describe('#clearFilter', function() {
 
         it('clears any previously set filter so all messages are received', function(done) {
-            var webSocketMock = { send: spy() };
+            var webSocketMock = { send: Spy() };
 
             var webSocketManager = WebSocketManager.create(webSocketMock, '123');
 
@@ -139,7 +134,7 @@ describe('WebSocketManager', function() {
     describe('#onMessage', function(){
 
         it('registers a callback that\'s called whenever a message is received', function(done) {
-            var webSocketMock = { send: spy() };
+            var webSocketMock = { send: Spy() };
 
             var webSocketManager = WebSocketManager.create(webSocketMock, '123');
 
@@ -156,7 +151,7 @@ describe('WebSocketManager', function() {
     describe('#pause', function(){
 
         it('stops forwarding messages to the onMesssage callback', function(done) {
-            var onmessageSpy = spy();
+            var onmessageSpy = Spy();
 
             var webSocketMock = { onmessage: onmessageSpy };
 
@@ -177,7 +172,7 @@ describe('WebSocketManager', function() {
     describe('#resume', function(){
 
         it('resumes forwarding messages to the onMesssage callback', function(done) {
-            var onmessageSpy = spy();
+            var onmessageSpy = Spy();
 
             var webSocketMock = { onmessage: onmessageSpy };
 
@@ -198,16 +193,3 @@ describe('WebSocketManager', function() {
     });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-

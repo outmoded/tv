@@ -1,27 +1,23 @@
 // Load modules
 
 var _ = require('lodash');
-//var Lab = require('lab');
+var Sinon = require('sinon');
+
 var MessageParser = require('../../source/js/messageParser');
-var sinon = require('sinon');
+
 
 // Declare internals
 
 var internals = {};
 
 
-// Test shortcuts
+// Test Shortcuts
 
-//var lab = exports.lab = Lab.script();
-//var describe = lab.describe;
-//var beforeEach = lab.beforeEach;
-//var afterEach = lab.afterEach;
-//var context = lab.describe;
-//var it = lab.it;
-//var expect = Lab.expect;
-var spy = sinon.spy;
+var Spy = Sinon.spy;
 
-var RECEIVED = {
+
+
+internals.RECEIVED = {
     data: {
         method: 'get',
         url: '/'
@@ -30,7 +26,7 @@ var RECEIVED = {
     internal: true
 };
 
-var HANDLER = {
+internals.HANDLER = {
     data: {
         msec: 0.1
     },
@@ -38,7 +34,7 @@ var HANDLER = {
     internal: true
 };
 
-var RESPONSE = {
+internals.RESPONSE = {
     data: {
         statusCode: 201,
         error: 'error message'
@@ -46,7 +42,7 @@ var RESPONSE = {
     response: true
 };
 
-var ERROR = {
+internals.ERROR = {
     data: {
         statusCode: 500,
         error: 'error message'
@@ -100,7 +96,7 @@ describe('MessageParser', function() {
         context('with an initial message for a request', function() {
 
             beforeEach(function(done) {
-                var message = createMessage(RECEIVED);
+                var message = createMessage(internals.RECEIVED);
                 this.messageData = JSON.parse(message.data);
 
                 this.messageParser.addMessage(message);
@@ -143,7 +139,7 @@ describe('MessageParser', function() {
             context('with a subsequent message for a request', function(done) {
 
                 beforeEach(function(done) {
-                    var message = createMessage(HANDLER);
+                    var message = createMessage(internals.HANDLER);
                     this.secondMessageData = JSON.parse(message.data);
 
                     this.messageParser.addMessage(message);
@@ -209,15 +205,15 @@ describe('MessageParser', function() {
                 });
             };
 
-            testResponseMessageUpdates(RESPONSE);
-            testResponseMessageUpdates(ERROR);
+            testResponseMessageUpdates(internals.RESPONSE);
+            testResponseMessageUpdates(internals.ERROR);
 
         });
 
         context('with a non "received" message for a request that doesn\'t exist', function(done) {
 
             beforeEach(function(done) {
-                var message = createMessage(HANDLER, 'abc123');
+                var message = createMessage(internals.HANDLER, 'abc123');
                 this.messageData = JSON.parse(message.data);
 
                 this.messageParser.addMessage(message);
@@ -237,7 +233,7 @@ describe('MessageParser', function() {
             beforeEach( function(done) {
                 this.messageParser = MessageParser.create({responseTimeout: 5})
 
-                messageParser.addMessage(createMessage(RECEIVED));
+                messageParser.addMessage(createMessage(internals.RECEIVED));
                 this.request = messageParser.requests[0];
 
                 done();
@@ -262,7 +258,7 @@ describe('MessageParser', function() {
             }, this));
 
             it('calls the onResponseTimeout callback', _.bind(function(done) {
-                this.messageParser.onResponseTimeout = spy();
+                this.messageParser.onResponseTimeout = Spy();
 
                 setTimeout( function() {
                     expect(this.messageParser.onResponseTimeout.called).to.be.true;
@@ -277,10 +273,10 @@ describe('MessageParser', function() {
             it('resets the response timeout for that request', function(done) {
                 var messageParser = MessageParser.create({responseTimeout: 3})
 
-                messageParser.addMessage(createMessage(RECEIVED));
+                messageParser.addMessage(createMessage(internals.RECEIVED));
 
                 setTimeout( function() {
-                    messageParser.addMessage(createMessage(HANDLER));
+                    messageParser.addMessage(createMessage(internals.HANDLER));
                 }, 2);
 
                 setTimeout( function() {
@@ -297,7 +293,7 @@ describe('MessageParser', function() {
                 it('clears the response error timeout', function(done) {
                     var messageParser = MessageParser.create({responseTimeout: 1})
 
-                    messageParser.addMessage(createMessage(RECEIVED));
+                    messageParser.addMessage(createMessage(internals.RECEIVED));
 
                     var request = messageParser.requests[0];
 
@@ -317,8 +313,8 @@ describe('MessageParser', function() {
             });
         };
 
-        clearResponseTimeoutTest(RESPONSE);
-        clearResponseTimeoutTest(ERROR);
+        clearResponseTimeoutTest(internals.RESPONSE);
+        clearResponseTimeoutTest(internals.ERROR);
 
     });
 

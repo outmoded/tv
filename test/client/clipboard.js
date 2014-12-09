@@ -1,24 +1,12 @@
 // Load modules
 
 var _ = require('lodash');
-//var Lab = require('lab');
-//var Code = require('code');
+
 var Clipboard = require('../../source/js/clipboard');
 
 // Declare internals
 
 var internals = {};
-
-
-// Test shortcuts
-
-//var lab = exports.lab = Lab.script();
-//var describe = lab.describe;
-//var beforeEach = lab.beforeEach;
-//var afterEach = lab.afterEach;
-//var context = lab.describe;
-//var it = lab.it;
-//var expect = Code.expect;
 
 
 
