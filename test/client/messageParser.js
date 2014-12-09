@@ -49,10 +49,16 @@ internals.ERROR = {
         error: 'error message'
     },
     tags: ['error'],
+    response: true,
     internal: true
 };
 
-var createMessage = function(message, id) {
+internals.EMPTY_RESPONSE = {
+    data: null,
+    tags: ['response']
+};
+
+internals.createMessage = function(message, id) {
     id = id || '123abc';
     message.request = id;
     message.timestamp = new Date().valueOf();
@@ -63,94 +69,74 @@ var createMessage = function(message, id) {
 
 describe('MessageParser', function() {
     
-    describe('#create', function() {
-
-        it('creates a new instance of a MessageParser', function(done) {
-            expect(MessageParser.create()).to.be.instanceOf(MessageParser);
-            done();
-        });
-
+    beforeEach(function() {
+        this.messageParser = MessageParser.create();
     });
 
-    it('has a requests array', function(done) {
-        expect(this.messageParser.requests).to.be.instanceOf(Backbone.Collection).and.have.length(0);
-        done();
+    describe('#create', function() {
+
+        it('creates a new instance of a MessageParser', function() {
+            expect(this.messageParser).to.be.instanceOf(MessageParser);
+        });
+
     });
 
     describe('#addMessage', function() {
 
         context('with an initial message for a request', function() {
 
-            beforeEach(function(done) {
-                var message = createMessage(internals.RECEIVED);
+            beforeEach(function() {
+                var message = internals.createMessage(internals.RECEIVED);
                 this.messageData = JSON.parse(message.data);
-
+                
                 this.messageParser.addMessage(message);
-
-                done();
             });
 
-            it('creates a new request', function(done) {
+            it('creates a new request', function() {
                 expect(this.messageParser.requests).to.have.length(1);
 
-                var request = this.messageParser.requests[0];
+                var request = this.messageParser.requests.toJSON()[0];
                 expect(request).to.have.property('id', this.messageData.request);
                 expect(request).to.have.property('path', this.messageData.data.url);
                 expect(request).to.have.property('method', this.messageData.data.method);
                 expect(request).to.have.property('timestamp', this.messageData.timestamp);
-
-                done();
             });
 
-            it('creates a new server log', function(done) {
-                var request = this.messageParser.requests[0];
-                expect(request.serverLogs).to.have.length(1);
-                expect([request.serverLogs[0]]).to.deep.include.members([{
-                    tags: this.messageData.tags,
-                    data: this.messageData.data,
-                    timestamp: this.messageData.timestamp
-                }]);
-
-                done();
+            it('creates a new server log', function() {
+                var request = this.messageParser.requests.models[0];
+                expect(request.get('serverLogs').toJSON()).to.have.length(1);
             });
 
             context('with an empty response message', function() {
-                it('does not add the message to the response\'s server logs', function(done){
-                    throw('TODO');
-
-                    done();
-                });
-            });
-
-            context('with a subsequent message for a request', function(done) {
-
-                beforeEach(function(done) {
-                    var message = createMessage(internals.HANDLER);
-                    this.secondMessageData = JSON.parse(message.data);
+                it('does not add the message to the response\'s server logs', function(){
+                    var message = internals.createMessage(internals.EMPTY_RESPONSE);
+                    this.messageData = JSON.parse(message.data);
 
                     this.messageParser.addMessage(message);
 
-                    done();
+                    expect(this.messageParser.requests.first().get('serverLogs').last().toJSON().tags).to.not.include('response');
+                });
+            });
+
+            context('with a subsequent message for a request', function() {
+
+                beforeEach(function() {
+                    var message = internals.createMessage(internals.HANDLER);
+                    this.secondMessageData = JSON.parse(message.data);
+                    
+                    this.messageParser.addMessage(message);
                 });
 
-                it('creates a server log for the message', function(done) {
-                    var request = messageParser.requests[0];
-                    expect(request.serverLogs).to.have.length(2);
+                it('doesn\'t create a request', function() {
+                    expect(this.messageParser.requests).to.have.length(1);
+                });
 
-                    var serverLog = request.serverLogs[1];
+                it('creates a new server log', function() {
+                    var request = this.messageParser.requests.models[0];
+                    expect(request.get('serverLogs').toJSON()).to.have.length(2);
+
+                    var serverLog = request.get('serverLogs').toJSON()[1];
                     expect(serverLog.tags).to.have.length(2);
-                    expect(serverLog.tags).to.include(this.secondMessageData.tags[0]);
-                    expect(serverLog.tags).to.include(this.secondMessageData.tags[1]);
-                    expect(serverLog.data).to.have.property('msec', this.secondMessageData.data.msec);
-                    expect(serverLog).to.have.property('timestamp', this.secondMessageData.timestamp);
-
-                    done();
-                });
-
-                it('doesn\'t create a request', function(done) {
-                    expect(messageParser.requests).to.have.length(1);
-
-                    done();
                 });
 
             });
@@ -158,35 +144,23 @@ describe('MessageParser', function() {
             var testResponseMessageUpdates = function(responseMessage) {
                 context('with a response message for a request', function() {
 
-                    beforeEach(function(done) {
-                        var message = createMessage(responseMessage);
+                    beforeEach(function() {
+                        var message = internals.createMessage(responseMessage);
                         this.messageData = JSON.parse(message.data);
-
+                        
                         this.messageParser.addMessage(message);
 
-                        this.request = _.findWhere(this.messageParser.requests, {id: this.messageData.request});
-
-                        done();
+                        this.request = this.messageParser.requests.findWhere({id: this.messageData.request});
                     });
 
-                    it('updates the request object with the status code', function(done) {
-                        // expect(this.request.statusCode).to.equal(this.messageData.data.statusCode);
-                        expect(this.request.statusCode).to.equal('--');
-
-                        done();
+                    it('updates the request object with the status code', function() {
+                        expect(this.request.get('statusCode')).to.equal(this.messageData.data.statusCode);
                     });
 
-                    it('updates the request object with the error message', function(done) {
-                        // expect(this.request.data).to.equal(this.messageData.data.error);
-                        expect(this.request.data).to.equal('--');
+                    it('adds a response tag to the server log message', function() {
+                        var serverLog = this.request.get('serverLogs').last().toJSON();
 
-                        done();
-                    });
-
-                    it('adds a response tag to the server log message', function(done) {
-                        throw('TODO');
-
-                        done();
+                        expect(serverLog.tags).to.include('response');
                     });
                 });
             };
@@ -196,103 +170,92 @@ describe('MessageParser', function() {
 
         });
 
-        context('with a non "received" message for a request that doesn\'t exist', function(done) {
+        context('with a non "received" message for a request that doesn\'t exist', function() {
 
-            beforeEach(function(done) {
-                var message = createMessage(internals.HANDLER, 'abc123');
+            beforeEach(function() {
+                var message = internals.createMessage(internals.HANDLER, 'abc123');
                 this.messageData = JSON.parse(message.data);
 
                 this.messageParser.addMessage(message);
-
-                done();
             });
 
-            it('does not create a request', function(done) {
+            it('does not create a request', function() {
                 expect(this.messageParser.requests).to.have.length(0);
-
-                done();
             });
 
         });
 
         describe('when a response doesn\'t come in within a set timeout', function() {
-            beforeEach( function(done) {
-                this.messageParser = MessageParser.create({responseTimeout: 5})
+            beforeEach( function() {
+                this.messageParser = MessageParser.create({responseTimeout: 5});
 
-                messageParser.addMessage(createMessage(internals.RECEIVED));
-                this.request = messageParser.requests[0];
-
-                done();
+                this.messageParser.addMessage(internals.createMessage(internals.RECEIVED));
+                this.request = this.messageParser.requests.models[0];
             });
 
-            it('sets a timeout response error message on the request', _.bind(function(done) {
-                setTimeout( function() {
-                    expect(this.request.data).to.equal(MessageParser.RESPONSE_TIMEOUT_ERROR_MESSAGE);
-
-                    done();
-                }, 10);
-            }, this));
-
-            it('marks the request as having a response timeout', _.bind(function(done) {
+            it('marks the request as having a response timeout', function() {
                 expect(this.request.responseTimeout).to.not.be.true;
 
                 setTimeout( function() {
-                    expect(this.request.responseTimeout).to.be.true;
+                    expect(this.request.get('responseTimeout')).to.be.true;
+                }.bind(this), 10);
+            });
 
-                    done();
-                }, 10);
-            }, this));
-
-            it('calls the onResponseTimeout callback', _.bind(function(done) {
+            it('calls the onResponseTimeout callback', function() {
                 this.messageParser.onResponseTimeout = Spy();
 
                 setTimeout( function() {
                     expect(this.messageParser.onResponseTimeout.called).to.be.true;
+                }.bind(this), 10);
+            });
 
-                    done();
-                }, 10);
-            }, this));
+            it('overrides the timeout if a subsequent received message comes in after the timeout', function() {
+                expect(this.request.responseTimeout).to.not.be.true;
+
+                setTimeout( function() {
+                    expect(this.request.get('responseTimeout')).to.be.true;
+
+                    this.messageParser.addMessage(internals.createMessage(internals.RECEIVED));
+                    expect(this.request.get('responseTimeout')).to.be.false;
+                }.bind(this), 10);
+            });
         });
 
         describe('when a server log for a requests comes in before the response timeout', function() {
 
-            it('resets the response timeout for that request', function(done) {
+            it('resets the response timeout for that request', function() {
                 var messageParser = MessageParser.create({responseTimeout: 3})
 
-                messageParser.addMessage(createMessage(internals.RECEIVED));
+                messageParser.addMessage(internals.createMessage(internals.RECEIVED));
 
                 setTimeout( function() {
-                    messageParser.addMessage(createMessage(internals.HANDLER));
+                    messageParser.addMessage(internals.createMessage(internals.HANDLER));
                 }, 2);
 
                 setTimeout( function() {
                     var request = messageParser.requests[0];
                     expect(request.data).to.not.equal(MessageParser.RESPONSE_TIMEOUT_ERROR_MESSAGE);
-
-                    done();
                 }, 4);
             });
         })
 
         var clearResponseTimeoutTest = function(responseMessage) {
             describe('when a response for a request comes in after the response timeout has occured', function() {
-                it('clears the response error timeout', function(done) {
+                it('clears the response error timeout', function() {
                     var messageParser = MessageParser.create({responseTimeout: 1})
 
-                    messageParser.addMessage(createMessage(internals.RECEIVED));
+                    messageParser.addMessage(internals.createMessage(internals.RECEIVED));
 
                     var request = messageParser.requests[0];
 
                     setTimeout( function() {
                         expect(request.responseTimeout).to.be.true;
 
-                        messageParser.addMessage(createMessage(responseMessage));
+                        messageParser.addMessage(internals.createMessage(responseMessage));
                     }, 3);
 
                     setTimeout( function() {
                         expect(request.responseTimeout).to.be.false;
-
-                        done();
                     }, 6);
 
                 });

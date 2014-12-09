@@ -5,7 +5,7 @@ require('./app.js');
 require('./clientIdGenerator');
 require('./clipboard');
 require('./jQuerySnippet');
-//require('./messageParser');
+require('./messageParser');
 require('./webSocketManager');
 require('./settingsStore');
 

@@ -44,14 +44,6 @@ MessageParser.prototype._isResponse = function(message) {
     return !!message.response;
 };
 
-MessageParser.prototype._hasTags = function(message, tags) {
-    if(!(tags instanceof Array)){
-        tags = [tags];
-    }
-
-    return _.intersection(message.tags, tags).length === tags.length;
-};
-
 MessageParser.prototype._isForExistingRequest = function(message) {
     return this._findRequest(message);
 };
@@ -102,7 +94,7 @@ MessageParser.prototype._addServerLog = function(message) {
         delta: message.timestamp - request.get('timestamp')
     };
 
-    if(!this._isEmptyRepsonseServerLog(message)) {
+    if(!this._isEmptyResponseServerLog(message)) {
         if(message.response) {
             serverLog.tags.push('response');
         }
@@ -115,7 +107,7 @@ MessageParser.prototype._addServerLog = function(message) {
     }
 };
 
-MessageParser.prototype._isEmptyRepsonseServerLog= function(message) {
+MessageParser.prototype._isEmptyResponseServerLog= function(message) {
     return message.tags &&
         message.tags.length === 1 &&
         message.tags[0] === 'response' &&
