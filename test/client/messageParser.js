@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Sinon = require('sinon');
+var Backbone = require('backbone');
 
 var MessageParser = require('../../source/js/messageParser');
 
@@ -61,22 +62,7 @@ var createMessage = function(message, id) {
 
 
 describe('MessageParser', function() {
-    beforeEach(function(done) {
-        this.messageParser = MessageParser.create();
-
-        done();
-    });
-
-    afterEach(function(done) {
-        delete this.messageData;
-        delete this.secondMessageData;
-        delete this.messageParser;
-        delete this.request;
-        delete this.responseMessage;
-
-        done();
-    });
-
+    
     describe('#create', function() {
 
         it('creates a new instance of a MessageParser', function(done) {
@@ -87,7 +73,7 @@ describe('MessageParser', function() {
     });
 
     it('has a requests array', function(done) {
-        expect(this.messageParser.requests).to.be.instanceOf(Array).and.have.length(0);
+        expect(this.messageParser.requests).to.be.instanceOf(Backbone.Collection).and.have.length(0);
         done();
     });
 

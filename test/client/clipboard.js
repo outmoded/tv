@@ -1,7 +1,5 @@
 // Load modules
 
-var _ = require('lodash');
-
 var Clipboard = require('../../source/js/clipboard');
 
 // Declare internals
@@ -10,7 +8,7 @@ var internals = {};
 
 
 
-describe('foo bar', function() {
+describe('Clipboard', function() {
   
     beforeEach(function(done) {
         this.now = new Date().valueOf();
@@ -48,10 +46,27 @@ describe('foo bar', function() {
         done();
     });
 
-    it('converts the request to text', function(done) {
-        var expectedData = 'Path: GET /foo/bar\nStatus: 200\nServer Logs:\n\n  Tags: ["foo","bar"]\n  Timestamp: ' + this.now + '\n  Data: {"foo":"bar","bar":"baz"}\n  -------------\n  Tags: ["foo","bar"]\n  Timestamp: ' + this.now + '\n  Data: {"foo":"bar","bar":"baz"}';
-        expect(Clipboard.convertToText(this.request)).to.equal(expectedData);
-        done();
-    });
+    describe('#convertToText', function() {
+      
+        it('converts the request to text', function(done) {
+            var expectedData = [
+                'Path: GET /foo/bar',
+                'Status: 200',
+                'Server Logs:\n',
+                '  Tags: ["foo","bar"]',
+                '  Timestamp: ' + this.now,
+                '  Data: {"foo":"bar","bar":"baz"}',
+                '  -------------',
+                '  Tags: ["foo","bar"]',
+                '  Timestamp: ' + this.now,
+                '  Data: {"foo":"bar","bar":"baz"}'
+            ].join('\n');
 
+            expect(Clipboard.convertToText(this.request)).to.equal(expectedData);
+            
+            done();
+        });
+    
+    });
+    
 });

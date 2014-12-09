@@ -174,7 +174,8 @@ describe('SearchCriterion', function() {
                             statusCode: 200,
                             method: 'GET',
                             serverLogs: [{
-                                tags: ['received']
+                                tags: ['received'],
+                                data: '{foo: "bar"}'
                             }]
                         };
 
@@ -328,7 +329,6 @@ describe('SearchCriterion', function() {
 
         context('without a status code', function() {
             it('doesn\'t error', function(done) {
-                console.log('here');
                 var request = {
                     path: '/customers',
                     method: 'GET',

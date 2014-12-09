@@ -1,6 +1,5 @@
 // Load modules
 
-//var Lab = require('lab');
 var Sinon = require('sinon');
 
 var JQuerySnippet = require('../../source/js/jquerySnippet');
@@ -16,27 +15,15 @@ var internals = {};
 var Spy = Sinon.spy;
 
 
-
-
-
-
-
-
-
-
 internals.executeSnippet = function(clientId) {
     eval(JQuerySnippet.generate(clientId));
 };
 
+
+
 describe('JQuerySnippet', function() {
-  
+
     describe('#generate', function() {
-      
-        beforeEach(function(done) {
-            jQuery.ajaxSetup = Spy();
-            
-            done();
-        });
 
         it('evaluates to a valid function', function(done) {
             expect(internals.executeSnippet('foobar')).to.not.throw;
@@ -44,9 +31,20 @@ describe('JQuerySnippet', function() {
             done();
         });
 
-        // eventually add tests calling jQuery directly, 
-        // ensuring the url has the values as a query string
-
     });
+
+    // describe('code snippet', function() {
+
+    //     beforeEach(function(done) {
+    //         internals.executeSnippet('foobar');
+
+    //         done();
+    //     });
+    
+    //     it('appends the query string to all ajax calls', function(done) {
+
+    //     });
+
+    // });
 
 });

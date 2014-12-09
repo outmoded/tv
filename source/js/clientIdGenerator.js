@@ -19,11 +19,11 @@ internals.localStorageKey = 'clientId';
 
 
 
-exports = module.exports = internals.ClientId = {};
+exports = module.exports = internals.ClientIdGenerator = {};
 
-internals.ClientId._store = SettingsStore;
+internals.ClientIdGenerator._store = SettingsStore;
 
-internals.ClientId.generate = function(options) {
+internals.ClientIdGenerator.generate = function(options) {
     options = _.defaults(options || {}, internals.defaults);
 
     var possible = (options.letters ? internals.letters : '') + (options.numbers ? internals.numbers : '');
@@ -33,4 +33,4 @@ internals.ClientId.generate = function(options) {
     }).join('');
 };
 
-internals.ClientId.defaults = internals.defaults;
+internals.ClientIdGenerator.defaults = internals.defaults;

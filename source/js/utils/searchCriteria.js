@@ -78,17 +78,17 @@ SearchCriterion.prototype.matches = function(request) {
     }
 }
 
-SearchCriterion.prototype._matchesScopedProperty = _.bind(function(request) {
+SearchCriterion.prototype._matchesScopedProperty = function(request) {
     return _.any(this.scopedPropertyValues, function(value) {
         return this._matchesValue(request, this.scopedProperty, value);
-    });
-}, this);
+    }.bind(this));
+}
 
-SearchCriterion.prototype._matchesAny = _.bind(function(request) {
+SearchCriterion.prototype._matchesAny = function(request) {
     return _.any(SearchCriterion.VALID_SCOPED_PROPERTIES, function(property) {
         return this._matchesValue(request, property, this.fragment);
-    });
-}, this);
+    }.bind(this));
+}
 
 SearchCriterion.prototype._matchesValue = function(request, property, expectedValue) {
     var actualValue = null;
