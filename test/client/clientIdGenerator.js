@@ -4,9 +4,11 @@ var _ = require('lodash');
 
 var ClientIdGenerator = require('../../source/js/clientIdGenerator');
 
+
 // Declare internals
 
 var internals = {};
+
 
 internals.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 internals.numbers = '0123456789';

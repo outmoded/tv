@@ -4,37 +4,40 @@ var DateTimeFormatter = require('../utils/dateTimeFormatter');
 var JQuerySnippet = require('../jQuerySnippet');
 var jsonMarkup = require('json-markup');
 
-Handlebars.registerHelper('longTime', function(dateTime) {
-    return DateTimeFormatter.longTime(dateTime);
-});
+var SUPPORTED_COLORED_TAGS = ['error', 'debug'];
 
-Handlebars.registerHelper('shortDate', function(dateTime) {
-    return DateTimeFormatter.shortDate(dateTime);
-});
+var HandlebarsHelpers = {
+    jsonMarkup: function(jsonData) {
+        return jsonMarkup(jsonData);
+    },
 
-Handlebars.registerHelper('jsonMarkup', function(jsonData) {
-    return jsonMarkup(jsonData);
-});
+    jQuerySnippet: function(clientId) {
+        return JQuerySnippet.generate(clientId);
+    },
 
-Handlebars.registerHelper('jQuerySnippet', function(clientId) {
-    return JQuerySnippet.generate(clientId);
-});
+    isEq: function(a, b, options) {
+        var result;
 
-Handlebars.registerHelper('isEq', function(a, b, options) {
-    var result;
+        if (a === b) {
+            result = options.fn();
+        } else {
+            result = options.inverse();
+        }
 
-    if (a === b) {
-        result = options.fn();
-    } else {
-        result = options.inverse();
+        return result;
+    },
+
+    tagColor: function(tag) {
+        if (_.contains(SUPPORTED_COLORED_TAGS, tag)) {
+            return tag;
+        }
     }
+};
 
-    return result;
-});
+_.extend(HandlebarsHelpers, DateTimeFormatter);
 
-VALID_COLORED_TAGS = ['error', 'debug'];
-Handlebars.registerHelper('tagColor', function(tag) {
-    if (_.contains(VALID_COLORED_TAGS, tag)) {
-        return tag;
-    }
-});
+for(var property in HandlebarsHelpers) {
+    Handlebars.registerHelper(property, HandlebarsHelpers[property]);
+}
+
+module.exports = HandlebarsHelpers;
