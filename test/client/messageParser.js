@@ -1,7 +1,7 @@
 // Load modules
 
 var _ = require('lodash');
-var Sinon = require('sinon');
+var sinon = require('sinon');
 var Backbone = require('backbone');
 
 var MessageParser = require('../../source/js/messageParser');
@@ -10,12 +10,6 @@ var MessageParser = require('../../source/js/messageParser');
 // Declare internals
 
 var internals = {};
-
-
-// Test Shortcuts
-
-var Spy = Sinon.spy;
-
 
 
 internals.RECEIVED = {
@@ -244,7 +238,7 @@ describe('MessageParser', function() {
             }, this));
 
             it('calls the onResponseTimeout callback', _.bind(function(done) {
-                this.messageParser.onResponseTimeout = Spy();
+                this.messageParser.onResponseTimeout = sinon.spy();
 
                 setTimeout( function() {
                     expect(this.messageParser.onResponseTimeout.called).to.be.true;

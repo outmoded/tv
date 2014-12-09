@@ -1,7 +1,6 @@
 // Load modules
 
 var _ = require('lodash');
-var Sinon = require('sinon');
 
 var ClientIdGenerator = require('../../source/js/clientIdGenerator');
 
@@ -9,17 +8,8 @@ var ClientIdGenerator = require('../../source/js/clientIdGenerator');
 
 var internals = {};
 
-
-// Test Shortcuts
-
-var Spy = Sinon.spy;
-
-
-
 internals.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 internals.numbers = '0123456789';
-
-
 
 
 describe('ClientIdGenerator', function() {

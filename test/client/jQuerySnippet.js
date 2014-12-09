@@ -1,7 +1,5 @@
 // Load modules
 
-var Sinon = require('sinon');
-
 var JQuerySnippet = require('../../source/js/jquerySnippet');
 
 
@@ -10,15 +8,9 @@ var JQuerySnippet = require('../../source/js/jquerySnippet');
 var internals = {};
 
 
-// Test Shortcuts
-
-var Spy = Sinon.spy;
-
-
 internals.executeSnippet = function(clientId) {
     eval(JQuerySnippet.generate(clientId));
 };
-
 
 
 describe('JQuerySnippet', function() {

@@ -1,7 +1,6 @@
 // Load modules
 
 var _ = require('lodash');
-var Sinon = require('sinon');
 
 var SearchCriteria = require('../../../source/js/utils/searchCriteria').SearchCriteria;
 var SearchCriterion = require('../../../source/js/utils/searchCriteria').SearchCriterion;
@@ -9,7 +8,6 @@ var SearchCriterion = require('../../../source/js/utils/searchCriteria').SearchC
 // Declare internals
 
 var internals = {};
-
 
 
 describe('SearchCriteria', function() {

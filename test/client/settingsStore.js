@@ -1,19 +1,11 @@
 // Load modules
 
-var Sinon = require('sinon');
-
 var SettingsStore = require('../../source/js/settingsStore');
 
 
 // Declare internals
 
 var internals = {};
-
-
-// Test Shortcuts
-
-var Spy = Sinon.spy;
-
 
 
 describe('SettingsStore', function() {
