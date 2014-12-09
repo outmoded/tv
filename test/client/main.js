@@ -9,6 +9,8 @@ require('./messageParser');
 require('./webSocketManager');
 require('./settingsStore');
 
+require('./models/request');
+
 host = 'localhost';
 port = 8000;
 
