@@ -12,6 +12,9 @@ require('./settingsStore');
 host = 'localhost';
 port = 8000;
 
+var sinonChai = require("sinon-chai");
+chai.use(sinonChai);
+
 if (window.mochaPhantomJS) { 
   mochaPhantomJS.run(); 
 }
