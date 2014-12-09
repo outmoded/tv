@@ -11,9 +11,9 @@ var ServerLogsView = Backbone.View.extend({
         return _.map(this.collection.models, function(model) {
             var attributes = _.clone(model.attributes);
 
-            if(_.contains(attributes.tags, 'internal')) {
+            if (_.contains(attributes.tags, 'internal')) {
                 attributes.tags = _.without(attributes.tags, 'internal');
-                attributes.internal = "internal";
+                attributes.internal = 'internal';
             }
 
             return attributes;
@@ -22,7 +22,7 @@ var ServerLogsView = Backbone.View.extend({
 
     _clipboard: function() {
         ZeroClipboard.config({
-            swfPath: location.href + "/js/ZeroClipboard.swf"
+            swfPath: location.href + '/js/ZeroClipboard.swf'
         });
 
         return new ZeroClipboard(this.$('.copy').get(0));
@@ -35,29 +35,29 @@ var ServerLogsView = Backbone.View.extend({
     },
 
     events: {
-        'click .data': '_toggleServerLogData',
-        'click .copy': '_copyToClipboard'
+        'click .data': '_toggleServerLogData'
     },
 
     render: function() {
         this.$el.html(this.template(this.templateContext()));
 
-        if(!this.clipboard) {
+        if (!this.clipboard) {
             this._initializeClipboard();
         }
 
-        this.clipboard.setData({"text/plain": Clipboard.convertToText(this.model.toJSON())})
+        this.clipboard.setData({
+            'text/plain': Clipboard.convertToText(this.model.toJSON())
+        });
 
         return this;
     },
 
     _initializeClipboard: function() {
         this.clipboard = this._clipboard();
-        
-        this.clipboard.on( "ready", _.bind(function( readyEvent ) {
-        
-          this.clipboard.on( "aftercopy", function( event ) {
-            alert('copied');
+
+        this.clipboard.on( 'ready', _.bind(function( readyEvent ) {
+          this.clipboard.on( 'aftercopy', function( event ) {
+            alert('copied'); // TODO: use a tooltip instead
           });
         }, this));
     },
@@ -67,12 +67,6 @@ var ServerLogsView = Backbone.View.extend({
 
         $data.find('.json-markup').toggleClass('expanded');
         $data.toggleClass('expanded');
-    },
-
-    _copyToClipboard: function(e) {
-        e.preventDefault();
-        
-        
     }
 
 });

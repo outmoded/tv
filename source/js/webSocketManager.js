@@ -28,20 +28,20 @@ WebSocketManager.prototype.applyFilter = function(clientId) {
 };
 
 WebSocketManager.prototype.clearFilter = function() {
-    this.applyFilter("*");
-}
+    this.applyFilter('*');
+};
 
 WebSocketManager.prototype.resume = function() {
     this.webSocket.onmessage = this.onMessageCallback;
-}
+};
 
 WebSocketManager.prototype.pause = function() {
     this.webSocket.onmessage = null;
-}
+};
 
 WebSocketManager.prototype.onMessage = function(fn) {
     this.webSocket.onmessage = this.onMessageCallback = fn;
-}
+};
 
 WebSocketManager.prototype.onSocketOpen = function(){};
 

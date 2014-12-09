@@ -69,7 +69,7 @@ var AppView = Backbone.View.extend({
     },
 
     _checkToDisableCollapseAllAction: function() {
-        if(this.$('.request.active').length === 0) {
+        if (this.$('.request.active').length === 0) {
             this.$('.header .expander').removeClass('expanded');
         }
     },
@@ -79,7 +79,7 @@ var AppView = Backbone.View.extend({
     },
 
     _checkToDisableFilterFavoritesAction: function() {
-        if(this.$('.request .favorite.active').length === 0) {
+        if (this.$('.request .favorite.active').length === 0) {
             this.$('.header .favorite')
                 .removeClass('enabled')
                 .removeClass('active')
@@ -92,7 +92,7 @@ var AppView = Backbone.View.extend({
 
         fn();
 
-        if(isScrolledToBottom) {
+        if (isScrolledToBottom) {
             this._scrollToBottom();
         }
     },
@@ -111,7 +111,7 @@ var AppView = Backbone.View.extend({
     _pauseResumeRequests: function(e) {
         var paused = $(e.currentTarget).find('.resume:visible').length === 1;
 
-        if(paused) {
+        if (paused) {
             this._resumeRequests();
         } else {
             this._pauseRequests();
@@ -153,25 +153,25 @@ var AppView = Backbone.View.extend({
     _updateRequestVisibility: function(requestView, isUpdate) {
         var show = true;
 
-        if(this.searchFilter && !this.searchFilter(requestView)) {
+        if (this.searchFilter && !this.searchFilter(requestView)) {
             show = false;
         }
 
-        if(this.filterFavorites && !requestView.favorited) {
+        if (this.filterFavorites && !requestView.favorited) {
             show = false;
         }
 
-        if(show) {
+        if (show) {
             var setStripe = true;
 
-            if(isUpdate === true) {
+            if (isUpdate === true) {
                 var showingForTheFirstTime = requestView.$el.hasClass('hidden');
-                if(!showingForTheFirstTime) {
+                if (!showingForTheFirstTime) {
                     setStripe = false;
                 }
             }
 
-            if(setStripe) {
+            if (setStripe) {
                 var odd = this.nextVisibleRequestIndex % 2 === 0;
                 requestView.$el.toggleClass('odd', odd).toggleClass('even', !odd);
                 this.nextVisibleRequestIndex = this.nextVisibleRequestIndex + 1;

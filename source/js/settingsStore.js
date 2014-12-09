@@ -13,4 +13,4 @@ var SettingsStore = exports = module.exports = {
         return localStorage.setItem(key, value);
     }
 
-}
+};

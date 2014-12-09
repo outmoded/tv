@@ -12,12 +12,12 @@ var app = {
             webSocketManager: webSocketManager
         }).render();
 
-        if(!settingsStore.exists('clientId')) {
+        if (!settingsStore.exists('clientId')) {
             appView.model.set('clientId', clientIdGenerator.generate());
             appView.settingsView.render();
         }
 
-        if(this._firstVisit(settingsStore)) {
+        if (this._firstVisit(settingsStore)) {
             appView.model.set('channel', '*');
             appView.settingsView.show();
         }
@@ -34,6 +34,6 @@ var app = {
     _firstVisit: function(store){
         return !store.exists('channel');
     }
-}
+};
 
 module.exports = app;

@@ -1,7 +1,6 @@
 var _ = require('lodash');
 var Backbone = require('backbone');
 var Request = require('./models/request');
-var _ = require('lodash');
 
 var MessageParser = function(opts) {
     opts = opts || {};
@@ -14,12 +13,12 @@ MessageParser.create = function(opts) {
     return new MessageParser(opts);
 };
 
-// There is a possibility that the websocket will initialize in the 
-// middle of a request, returning a set of server logs that are 
-// incomplete to represent a full request. In such cases, we'll 
+// There is a possibility that the websocket will initialize in the
+// middle of a request, returning a set of server logs that are
+// incomplete to represent a full request. In such cases, we'll
 // disregard these messages.
-MessageParser.prototype.addMessage = function(raw_message) {
-    var message = JSON.parse(raw_message.data);
+MessageParser.prototype.addMessage = function(rawMessage) {
+    var message = JSON.parse(rawMessage.data);
 
     var request;
     if (this._isFirstMessageForNewRequest(message)) {
@@ -27,9 +26,9 @@ MessageParser.prototype.addMessage = function(raw_message) {
         this._addServerLog(message);
         this._refreshResponseTimeout(message);
     }
-    else if(this._isForExistingRequest(message)) { 
+    else if (this._isForExistingRequest(message)) {
         this._addServerLog(message);
-        if(this._isResponse(message)) {
+        if (this._isResponse(message)) {
             this._updateRequestWithResponse(message);
         }
         this._refreshResponseTimeout(message);
@@ -99,7 +98,7 @@ MessageParser.prototype._addServerLog = function(message) {
             serverLog.tags.push('response');
         }
 
-        if(message.internal || message.response) {
+        if (message.internal || message.response) {
             serverLog.tags.unshift('internal');
         }
 
@@ -119,14 +118,14 @@ MessageParser.prototype._refreshResponseTimeout = function(message) {
 
     clearTimeout(request.timer);
 
-    if(request.get('responseTimeout')) {
+    if (request.get('responseTimeout')) {
         request.set('responseTimeout', false);
         request.set('isComplete', false);
     }
 
-    if(!this._isResponse(message)) {
+    if (!this._isResponse(message)) {
         request.timer = setTimeout(_.bind(function(){
-            request.set('statusCode', "timeout");
+            request.set('statusCode', 'timeout');
             request.set('responseTimeout', true);
             request.set('isComplete', true);
 

@@ -5,7 +5,7 @@ var RequestDetailsView = require('./requestDetails');
 var RequestView = Backbone.View.extend({
     template: require('../templates/request.hbs'),
 
-    className: "request hidden",
+    className: 'request hidden',
 
     events: {
         'click .request-details': '_toggleServerLogs',
@@ -31,8 +31,8 @@ var RequestView = Backbone.View.extend({
 
         this.$el.toggleClass('active', this.active);
 
-        if(this.active) {
-            if(!this.serverLogsView) {
+        if (this.active) {
+            if (!this.serverLogsView) {
                 this.serverLogsView = new ServerLogsView({
                     el: this.$('.server-logs'),
                     model: this.model,
@@ -42,7 +42,7 @@ var RequestView = Backbone.View.extend({
             this.serverLogsView.$el.show();
 
             this.trigger('serverLogsExpanded');
-        } else if(this.serverLogsView) {
+        } else if (this.serverLogsView) {
             this.serverLogsView.$el.hide();
 
             this.trigger('serverLogsCollapsed');
@@ -56,7 +56,7 @@ var RequestView = Backbone.View.extend({
 
         this.$('.favorite').toggleClass('active', this.favorited);
 
-        if(this.favorited) {
+        if (this.favorited) {
             this.trigger('favorited');
         } else {
             this.trigger('unfavorited');

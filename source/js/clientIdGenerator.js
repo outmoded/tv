@@ -9,7 +9,7 @@ internals.defaults = {
     length: 6,
     letters: true,
     numbers: true
-}
+};
 
 internals.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 internals.numbers = '0123456789';

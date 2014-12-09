@@ -15,7 +15,7 @@ var SettingsView = Backbone.View.extend({
     initialize: function(options) {
         this.settingsModel = options.settingsModel;
         this.model = this.settingsModel.clone();
-        
+
         this.listenTo(this.model, 'change:clientId', function(model, clientId) {
             this.$('.jquery-snippet').html(JQuerySnippet.generate(clientId));
         });
@@ -30,9 +30,9 @@ var SettingsView = Backbone.View.extend({
 
     render: function() {
         this.$el.html(this.template(this.model.toJSON()));
-        
+
         this.$modal = this.$('.modal');
-        
+
         return this;
     },
 
@@ -62,7 +62,7 @@ var SettingsView = Backbone.View.extend({
         if (newClientId !== oldClientId) {      // we changed the client id, so subscribe to the one we entered.
             this.settingsModel.set('channel', newClientId);
         }
-        
+
         this.hide();
     }
 

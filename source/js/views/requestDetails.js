@@ -17,7 +17,7 @@ var RequestDetailsView = Backbone.View.extend({
         this.$el.toggleClass('error', this.model.hasError());
         this.$el.toggleClass('warning', this.model.hasWarning());
 
-        if(this.model.get('active')) {
+        if (this.model.get('active')) {
             this.$el.addClass('active');
         }
 
