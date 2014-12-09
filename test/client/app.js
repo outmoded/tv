@@ -51,6 +51,7 @@ describe('app', function() {
         });
 
         context('without an existing clientId', function() {
+
             beforeEach(function() {
                 sinon.stub(this.mockSettingsStore, 'exists').withArgs('clientId').returns(false);
             });
@@ -71,6 +72,7 @@ describe('app', function() {
         });
 
         describe('when visiting the app for the first time', function() {
+
             beforeEach(function() {
                 sinon.stub(this.mockSettingsStore, 'exists').withArgs('channel').returns(false);
 
@@ -84,9 +86,11 @@ describe('app', function() {
             it('shows the settings view', function() {
                 expect(this.settingsShowSpy).to.have.been.calledOnce;
             });
+
         });
 
         describe('when the socket is openned', function() {
+
             it('sets the channel as the web socket\'s filter', function() {
                 var applyFilterSpy = sinon.spy(this.mockWebSocketManager, 'applyFilter');
                 sinon.stub(this.mockSettingsStore, 'get').withArgs('channel').returns('foo');
@@ -96,9 +100,11 @@ describe('app', function() {
 
                 expect(applyFilterSpy).to.have.been.calledWith('foo');
             });
+
         });
 
         describe('when a message is received', function(){
+
             it('adds the message to the message parser', function() {
                 var onMessageSpy = sinon.spy(this.mockWebSocketManager, 'onMessage');
                 var addMessageSpy = sinon.spy(this.mockMessageParser, 'addMessage');
@@ -111,6 +117,7 @@ describe('app', function() {
 
                 expect(addMessageSpy).to.have.been.calledWith('foo');
             });
+
         });
 
     });
