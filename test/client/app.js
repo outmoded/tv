@@ -1,6 +1,9 @@
 // Load modules
 
-var Sinon = require('sinon');
+var Backbone = require('backbone');
+Backbone.$ = require('jquery');
+
+var sinon = require('sinon');
 
 var app = require('../../source/js/app');
 var WebSocketManager = require('../../source/js/webSocketManager');
@@ -12,96 +15,106 @@ var MessageParser = require('../../source/js/messageParser');
 var internals = {};
 
 
-// Test Shortcuts
-
-var Spy = Sinon.spy;
-var Stub = Sinon.stub;
-
-
-
-
 describe('app', function() {
 
     describe('#start', function() {
 
-        beforeEach(function(done){
-            global.$ = Stub().returns({ get: function(){} });
+        beforeEach(function(){
+            this.fakeAppModel = new Backbone.Model();
+            var fakeAppView = new Backbone.View({ model: this.fakeAppModel });
+            fakeAppView.settingsView = new Backbone.View();
+            this.mockAppViewClass = function() { return fakeAppView; };
 
-            this.mockWebSocket = { send: Spy() };
-            var mockWebSocketManager = WebSocketManager.create(this.mockWebSocket);
+            this.mockWebSocketManager   = { onMessage: function(){},
+                                            applyFilter: function() {} };
+            this.mockMessageParser      = { addMessage : function() {} };
+            this.mockClientIdGenerator  = { generate: function(){} };
+            this.mockSettingsStore      = { exists: function(){}, get: function() {} };
 
-            this.messageParser = MessageParser.create();
-            this.messageParserAddMessageSpy = Stub(this.messageParser, 'addMessage', function() {});
+            this.settingsRenderSpy = sinon.spy(fakeAppView.settingsView, 'render');
+            this.settingsShowSpy = sinon.spy();
+            fakeAppView.settingsView.show = this.settingsShowSpy;
+            this.appRenderSpy = sinon.spy(fakeAppView, 'render');
 
-            this.appComponent = { render: Spy(), setState: Spy() };
+            this.appStart = function() {
+                app.start(this.mockWebSocketManager, this.mockMessageParser,
+                          this.mockAppViewClass, this.mockSettingsStore,
+                          this.mockClientIdGenerator);
+            };
 
-            this.updateStateSpy = Spy();
-
-            app.start(mockWebSocketManager, this.messageParser, this.appComponent);
-
-            done();
         });
 
-        afterEach(function(done){
-            this.messageParser.addMessage.restore();
+        it('renders the app view', function() {
+            this.appStart();
 
-            delete this.messageParser;
-            delete this.mockWebSocket;
-            delete this.messageParserAddMessageSpy;
-            delete this.reactRenderSpy;
-            delete this.updateStateSpy;
-            delete this.appComponent;
-            delete global.$;
-
-            done();
+            expect(this.appRenderSpy).to.have.been.calledOnce;
         });
 
-        it('renders the appComponent', function(done) {
-            expect(this.reactRenderSpy.callCount).to.equal(1);
-
-            done();
-        });
-
-        describe('when a response timeout occurs', function() {
-
-            it('resets the state of the app component', function(done) {
-                this.messageParser.onResponseTimeout();
-
-                expect(this.updateStateSpy.called).to.be.true;
-
-                done();
+        context('without an existing clientId', function() {
+            beforeEach(function() {
+                sinon.stub(this.mockSettingsStore, 'exists').withArgs('clientId').returns(false);
             });
 
+            it('sets the app\'s client id to a random generated client id', function() {
+                sinon.stub(this.mockClientIdGenerator, 'generate').returns('random client id');
+
+                this.appStart();
+
+                expect(this.fakeAppModel.get('clientId')).to.eq('random client id');
+            });
+
+            it('renders the settings view', function(){
+                this.appStart();
+
+                expect(this.settingsRenderSpy).to.have.been.calledOnce;
+            });
+        });
+
+        describe('when visiting the app for the first time', function() {
+            beforeEach(function() {
+                sinon.stub(this.mockSettingsStore, 'exists').withArgs('channel').returns(false);
+
+                this.appStart();
+            });
+
+            it('defaults the channel to "all"', function() {
+                expect(this.fakeAppModel.get('channel')).to.eq('*');
+            });
+
+            it('shows the settings view', function() {
+                expect(this.settingsShowSpy).to.have.been.calledOnce;
+            });
+        });
+
+        describe('when the socket is openned', function() {
+            it('sets the channel as the web socket\'s filter', function() {
+                var applyFilterSpy = sinon.spy(this.mockWebSocketManager, 'applyFilter');
+                sinon.stub(this.mockSettingsStore, 'get').withArgs('channel').returns('foo');
+
+                this.appStart();
+                this.mockWebSocketManager.onSocketOpen();
+
+                expect(applyFilterSpy).to.have.been.calledWith('foo');
+            });
         });
 
         describe('when a message is received', function(){
+            it('adds the message to the message parser', function() {
+                var onMessageSpy = sinon.spy(this.mockWebSocketManager, 'onMessage');
+                var addMessageSpy = sinon.spy(this.mockMessageParser, 'addMessage');
 
-            it('adds the message to the message parser', function(done) {
-                var message = 'fake message';
+                this.appStart();
+                expect(onMessageSpy.callCount).to.eq(1);
+                var onMessageHandler = onMessageSpy.getCall(0).args[0];
 
-                this.mockWebSocket.onmessage(message);
+                onMessageHandler('foo');
 
-                expect(this.messageParserAddMessageSpy.callCount).to.equal(1);
-                expect(this.messageParserAddMessageSpy.args[0][0]).to.equal(message);
-
-                done();
+                expect(addMessageSpy).to.have.been.calledWith('foo');
             });
-
-            it('updates the app component\'s state to the message parser\'s results', function(done) {
-                var message = 'fake message';
-                var parsedRequests = 'fake parsed requests'
-                this.messageParser.requests = parsedRequests;
-
-                this.mockWebSocket.onmessage(message);
-
-                expect(this.updateStateSpy.callCount).to.equal(1);
-                expect(this.updateStateSpy.called).to.be.true;
-
-                done();
-            });
-
         });
 
     });
 
 });
+
+

@@ -1,11 +1,11 @@
 require('es5-shim');
 
 require('./utils/searchCriteria');
-// require('./app.js');
+require('./app.js');
 require('./clientIdGenerator');
 require('./clipboard');
 require('./jQuerySnippet');
-require('./messageParser');
+//require('./messageParser');
 // require('./webSocketManager');
 require('./settingsStore');
 

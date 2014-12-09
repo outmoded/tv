@@ -1,38 +1,38 @@
-var SettingsStore = require('./settingsStore');
-var AppView = require('./views/app');
-var ClientIdGenerator = require('./clientIdGenerator');
 var _ = require('lodash');
 
 require('bootstrap/js/modal');
 
 var app = {
 
-    _store: SettingsStore,
-
-    start: function (webSocketManager, messageParser) {
-        var appView = new AppView({
+    start: function (webSocketManager, messageParser, appViewClass,
+                     settingsStore, clientIdGenerator) {
+        var appView = new appViewClass({
             el: 'body',
             collection: messageParser.requests,
             webSocketManager: webSocketManager
         }).render();
 
-        if(!this._store.exists('clientId')) {
-            appView.model.set('clientId', ClientIdGenerator.generate());
+        if(!settingsStore.exists('clientId')) {
+            appView.model.set('clientId', clientIdGenerator.generate());
             appView.settingsView.render();
         }
 
-        if(!this._store.exists('channel')) {
+        if(this._firstVisit(settingsStore)) {
             appView.model.set('channel', '*');
             appView.settingsView.show();
         }
 
-        webSocketManager.onSocketOpen = _.bind(function() {
-            webSocketManager.applyFilter(this._store.get('channel'));
-        }, this);
+        webSocketManager.onSocketOpen = function() {
+            webSocketManager.applyFilter(settingsStore.get('channel'));
+        };
 
         webSocketManager.onMessage(function(message) {
             messageParser.addMessage(message);
         });
+    },
+
+    _firstVisit: function(store){
+        return !store.exists('channel');
     }
 }
 
