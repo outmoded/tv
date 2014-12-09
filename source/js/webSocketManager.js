@@ -1,6 +1,6 @@
 var _ = require('lodash');
 
-var WebSocketManager = function(webSocket, clientId) {
+var WebSocketManager = function(webSocket) {
     this.webSocket = webSocket;
 
     this.webSocket.onopen = _.bind( function() {
@@ -11,8 +11,8 @@ var WebSocketManager = function(webSocket, clientId) {
     }, this);
 };
 
-WebSocketManager.create = function(webSocket, clientId) {
-    return new WebSocketManager(webSocket, clientId);
+WebSocketManager.create = function(webSocket) {
+    return new WebSocketManager(webSocket);
 };
 
 WebSocketManager.prototype.applyFilter = function(clientId) {
@@ -42,5 +42,7 @@ WebSocketManager.prototype.pause = function() {
 WebSocketManager.prototype.onMessage = function(fn) {
     this.webSocket.onmessage = this.onMessageCallback = fn;
 }
+
+WebSocketManager.prototype.onSocketOpen = function(){};
 
 module.exports = WebSocketManager;

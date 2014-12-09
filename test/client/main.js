@@ -6,7 +6,7 @@ require('./clientIdGenerator');
 require('./clipboard');
 require('./jQuerySnippet');
 //require('./messageParser');
-// require('./webSocketManager');
+require('./webSocketManager');
 require('./settingsStore');
 
 host = 'localhost';

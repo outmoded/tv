@@ -1,17 +1,13 @@
 // Load modules
 
-var Sinon = require('sinon');
+var sinon = require('sinon');
 
 var WebSocketManager = require('../../source/js/webSocketManager');
+
 
 // Declare internals
 
 var internals = {};
-
-// Test Shortcuts
-
-var Spy = Sinon.spy;
-
 
 
 describe('WebSocketManager', function() {
@@ -19,47 +15,26 @@ describe('WebSocketManager', function() {
     describe('#create', function() {
 
         it('creates a new instance of a WebSocketManager', function(done) {
-            var webSocketMock = { send: function(){} };
+            var mockWebSocket = { send: function(){} };
 
-            expect(WebSocketManager.create(webSocketMock)).to.be.an.instanceOf(WebSocketManager);
+            expect(WebSocketManager.create(mockWebSocket)).to.be.an.instanceOf(WebSocketManager);
 
             done();
         });
 
     });
 
-    describe('initialization', function() {
+    describe('when a websocket is openned', function() {
 
-        context('without a client id', function() {
+        it('calls teh onSocketOpen callback', function() {
+            var mockWebSocket = { send: sinon.spy() };
+            var manager = WebSocketManager.create(mockWebSocket);
 
-            it('receives all messages', function(done) {
-                var webSocketMock = { send: Spy() };
+            var onSocketOpenSpy = sinon.spy(manager, 'onSocketOpen');
 
-                WebSocketManager.create(webSocketMock);
-                webSocketMock.onopen();
+            mockWebSocket.onopen();
 
-                expect(webSocketMock.send.callCount).to.equal(1);
-                expect(webSocketMock.send.args[0][0]).to.equal('*');
-
-                done();
-            });
-
-        });
-
-        context('with a client id', function() {
-
-            it('only receives messages for the given client id', function(done) {
-                var webSocketMock = { send: Spy() };
-
-                WebSocketManager.create(webSocketMock, '123');
-                webSocketMock.onopen();
-
-                expect(webSocketMock.send.callCount).to.equal(1);
-                expect(webSocketMock.send.args[0][0]).to.equal('123');
-
-                done();
-            });
-
+            expect(onSocketOpenSpy).to.have.been.calledOnce;
         });
 
     });
@@ -67,44 +42,27 @@ describe('WebSocketManager', function() {
     describe('#applyFilter', function(){
 
         beforeEach(function(done){
-            this.webSocketMock = { send: Spy() };
-            this.webSocketManager = WebSocketManager.create(this.webSocketMock);
+            this.mockWebSocket = { send: sinon.spy() };
+            this.webSocketManager = WebSocketManager.create(this.mockWebSocket);
 
             done();
         });
 
         afterEach(function(done){
-            delete this.webSocketMock;
+            delete this.mockWebSocket;
             delete this.webSocketManager;
 
             done();
         });
 
-        context('with a webSocket connection that\'s not open yet', function() {
-
-            it('filters the messages by the given client id when the connection is open', function(done) {
-                this.webSocketManager.applyFilter('456');
-
-                expect(this.webSocketMock.send.callCount).to.equal(0);
-
-                this.webSocketMock.onopen();
-
-                expect(this.webSocketMock.send.callCount).to.equal(1);
-                expect(this.webSocketMock.send.args[0][0]).to.equal('456');
-
-                done();
-            });
-
-        });
-
         context('with a webSocket connection that is open', function() {
             it('filters the messages by the given client id', function(done) {
-                this.webSocketMock.onopen();
+                this.mockWebSocket.onopen();
 
                 this.webSocketManager.applyFilter('456');
 
-                expect(this.webSocketMock.send.callCount).to.equal(2);
-                expect(this.webSocketMock.send.args[1][0]).to.equal('456');
+                expect(this.mockWebSocket.send.callCount).to.equal(2);
+                expect(this.mockWebSocket.send.args[1][0]).to.equal('subscribe:456');
 
                 done();
             });
@@ -115,16 +73,16 @@ describe('WebSocketManager', function() {
     describe('#clearFilter', function() {
 
         it('clears any previously set filter so all messages are received', function(done) {
-            var webSocketMock = { send: Spy() };
+            var mockWebSocket = { send: sinon.spy() };
 
-            var webSocketManager = WebSocketManager.create(webSocketMock, '123');
+            var webSocketManager = WebSocketManager.create(mockWebSocket, '123');
 
-            webSocketMock.onopen();
+            mockWebSocket.onopen();
 
             webSocketManager.clearFilter();
 
-            expect(webSocketMock.send.callCount).to.equal(2);
-            expect(webSocketMock.send.args[1][0]).to.equal('*');
+            expect(mockWebSocket.send.callCount).to.equal(2);
+            expect(mockWebSocket.send.args[1][0]).to.equal('subscribe:*');
 
             done();
         });
@@ -134,14 +92,14 @@ describe('WebSocketManager', function() {
     describe('#onMessage', function(){
 
         it('registers a callback that\'s called whenever a message is received', function(done) {
-            var webSocketMock = { send: Spy() };
+            var mockWebSocket = { send: sinon.spy() };
 
-            var webSocketManager = WebSocketManager.create(webSocketMock, '123');
+            var webSocketManager = WebSocketManager.create(mockWebSocket, '123');
 
             var onMessageFn = function() {};
             webSocketManager.onMessage(onMessageFn);
 
-            expect(webSocketMock.onmessage).to.equal(onMessageFn);
+            expect(mockWebSocket.onmessage).to.equal(onMessageFn);
 
             done();
         });
@@ -151,18 +109,18 @@ describe('WebSocketManager', function() {
     describe('#pause', function(){
 
         it('stops forwarding messages to the onMesssage callback', function(done) {
-            var onmessageSpy = Spy();
+            var onmessageSpy = sinon.spy();
 
-            var webSocketMock = { onmessage: onmessageSpy };
+            var mockWebSocket = { onmessage: onmessageSpy };
 
-            var webSocketManager = WebSocketManager.create(webSocketMock, '123');
+            var webSocketManager = WebSocketManager.create(mockWebSocket, '123');
 
             var onMessageFn = function() {};
             webSocketManager.onMessage(onMessageFn);
 
             webSocketManager.pause();
 
-            expect(webSocketMock.onmessage).to.equal(null);
+            expect(mockWebSocket.onmessage).to.equal(null);
 
             done();
         });
@@ -172,11 +130,11 @@ describe('WebSocketManager', function() {
     describe('#resume', function(){
 
         it('resumes forwarding messages to the onMesssage callback', function(done) {
-            var onmessageSpy = Spy();
+            var onmessageSpy = sinon.spy();
 
-            var webSocketMock = { onmessage: onmessageSpy };
+            var mockWebSocket = { onmessage: onmessageSpy };
 
-            var webSocketManager = WebSocketManager.create(webSocketMock, '123');
+            var webSocketManager = WebSocketManager.create(mockWebSocket, '123');
 
             var onMessageFn = function() {};
             webSocketManager.onMessage(onMessageFn);
@@ -185,7 +143,7 @@ describe('WebSocketManager', function() {
 
             webSocketManager.resume();
 
-            expect(webSocketMock.onmessage).to.equal(onMessageFn);
+            expect(mockWebSocket.onmessage).to.equal(onMessageFn);
 
             done();
         });
