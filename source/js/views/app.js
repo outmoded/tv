@@ -10,7 +10,7 @@ var AppView = Backbone.View.extend({
     template: require('../templates/app.hbs'),
 
     initialize: function(opts) {
-        this.model = new Settings({ webSocketManager: opts.webSocketManager });
+        this.model = new Settings(null, { webSocketManager: opts.webSocketManager });
         this.webSocketManager = opts.webSocketManager;
     },
 
