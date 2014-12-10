@@ -10,39 +10,28 @@ var Request = require('../../../source/js/models/request');
 var internals = {};
 
 
-// Test shortcuts
-
-var Spy = sinon.spy;
-
-
-
-
-
 internals.generateView = function(options) {
     options = options || {};
     options.model = options.model || new Request({ serverLogs: new Backbone.Collection() });
 
     return new RequestView(options);
-}
-
-
-
+};
 
 
 describe('RequestView', function() {
 
     describe('#template', function() {
-      
+
         it('returns html', function() {
             var view = internals.generateView();
 
             expect(view.template()).to.match(/<[a-z][\s\S]*>/); // html elements
         });
-    
+
     });
 
     describe('#events', function() {
-      
+
         context('with a click on .request-details', function() {
 
             beforeEach(function() {
@@ -63,7 +52,7 @@ describe('RequestView', function() {
 
             it('toggles the server logs pane', function() {
                 expect(this.view.$el.hasClass('active')).to.be.false;
-                
+
                 this.click();
 
                 expect(this.view.$el.hasClass('active')).to.be.true;
@@ -77,7 +66,7 @@ describe('RequestView', function() {
 
             it('builds the server logs view once and only once', function() {
                 expect(this.view.serverLogsView).to.be.undefined;
-                
+
                 this.click();
 
                 var serverLogsView = this.view.serverLogsView;
@@ -97,11 +86,11 @@ describe('RequestView', function() {
 
                 this.click();
 
-                expect(this.view.active).to.be.false;                
+                expect(this.view.active).to.be.false;
             });
 
             it('emits the "serverLogsToggle" event with "true" when shown', function() {
-                var spy = Spy();
+                var spy = sinon.spy();
                 this.view.on('serverLogsToggle', spy);
 
                 this.click();
@@ -110,7 +99,7 @@ describe('RequestView', function() {
             });
 
             it('emits the "serverLogsToggle" event with "false" when hidden', function() {
-                var spy = Spy();
+                var spy = sinon.spy();
                 this.view.on('serverLogsToggle', spy);
 
                 this.click();
@@ -151,7 +140,7 @@ describe('RequestView', function() {
 
                 this.click();
 
-                expect(this.view.favorited).to.be.false;                
+                expect(this.view.favorited).to.be.false;
             });
 
             it('toggles the .active class', function() {
@@ -167,7 +156,7 @@ describe('RequestView', function() {
             });
 
             it('emits the "favoriteToggle" event with "true" when favorited', function() {
-                var spy = Spy();
+                var spy = sinon.spy();
                 this.view.on('favoriteToggle', spy);
 
                 this.click();
@@ -176,7 +165,7 @@ describe('RequestView', function() {
             });
 
             it('emits the "favoriteToggle" event with "false" when unfavorited', function() {
-                var spy = Spy();
+                var spy = sinon.spy();
                 this.view.on('favoriteToggle', spy);
 
                 this.click();
@@ -189,26 +178,26 @@ describe('RequestView', function() {
             });
 
         });
-    
+
     });
 
     describe('#initialize', function() {
-      
+
         context('with a change to the settings model clientId', function() {
-          
+
             it('sets default boolean properties', function() {
                 this.view = internals.generateView();
-                
+
                 expect(this.view.active).to.be.false;
                 expect(this.view.favorited).to.be.false;
             });
 
         });
-        
+
     });
 
     describe('#render', function() {
-      
+
         it('has the expected markup', function() {
             this.view = internals.generateView();
             this.view.render();

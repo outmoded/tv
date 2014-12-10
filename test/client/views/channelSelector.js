@@ -8,17 +8,12 @@ var ChannelSelectorView = require('../../../source/js/views/channelSelector');
 var internals = {};
 
 
-
-
 internals.generateView = function(options) {
     options = options || {};
     options.model = options.model || new Backbone.Model();
 
     return new ChannelSelectorView(options);
-}
-
-
-
+};
 
 
 describe('ChannelSelectorView', function() {
