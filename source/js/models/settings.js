@@ -13,7 +13,7 @@ var Settings = Backbone.Model.extend({
         };
     },
 
-    initialize: function(options) {
+    initialize: function(attributes, options) {
         this.on('change', this._updateSettingsStore, this);
         this.on('change:channel', function(model, channel) {
             options.webSocketManager.applyFilter(channel);
@@ -21,9 +21,11 @@ var Settings = Backbone.Model.extend({
     },
 
     _updateSettingsStore: function(model) {
-        _.each(model.changed, _.bind(function(value, key) {
+        var updateSettingsStoreProp = function(value, key) {
             this._store.set(key, value);
-        }, this));
+        }.bind(this);
+
+        _.each(model.changed, updateSettingsStoreProp);
     }
 
 });

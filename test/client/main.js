@@ -9,7 +9,12 @@ require('./messageParser');
 require('./webSocketManager');
 require('./settingsStore');
 
-require('./models/request');
+describe('Backbone', function() {
+    describe('Models', function() {
+        require('./models/request');
+        require('./models/settings');
+    });
+});
 
 host = 'localhost';
 port = 8000;
