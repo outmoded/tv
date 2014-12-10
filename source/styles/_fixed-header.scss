@@ -1,0 +1,22 @@
+$row-height: 37px;
+
+.toolbar {
+    position: fixed;
+    width: 100%;
+    height: $row-height;
+    z-index: 1;
+
+}
+
+.feed {
+    .header {
+        position: fixed;
+        width: 100%;
+        top: $row-height;
+        z-index: 1;
+    }
+
+    .body {
+        margin-top: $row-height * 2;
+    }
+}
