@@ -21,11 +21,13 @@ describe('Backbone', function() {
         require('./models/request');
         require('./models/settings');
     });
+
     describe('Views', function() {
         require('./views/channelSelector');
         require('./views/request');
         require('./views/serverLogs');
         require('./views/settings');
+        require('./views/app');
     });
 });
 
