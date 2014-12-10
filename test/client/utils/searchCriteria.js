@@ -256,6 +256,25 @@ describe('SearchCriterion', function() {
 
                 });
 
+                context('and a trailing comma', function() {
+                    it('ignores the empty value', function() {
+                        var request = {
+                            path: '/invoices',
+                            statusCode: 200,
+                            method: 'GET',
+                            serverLogs: [{
+                                tags: ['received']
+                            }]
+                        };
+
+                        _.each([
+                            'path:customers,',
+                        ], function(fragment) {
+                            expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
+                        });
+                    });
+                });
+
             });
 
         });
