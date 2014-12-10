@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Handlebars = require('hbsfy/runtime');
+var DateTimeFormatter = require('../../../source/js/utils/dateTimeFormatter');
 var helpers = require('../../../source/js/utils/handlebarsHelpers');
 var sinon = require('sinon');
 
@@ -11,6 +12,12 @@ var internals = {};
 
 
 describe('HandlebarsHelpers', function() {
+
+    it('includes DateTimeFormatter functions as helpers', function() {
+        for(var property in DateTimeFormatter) {
+            expect(helpers[property]).to.eq(DateTimeFormatter[property]);
+        }
+    });
 
     it('registers helper functions with handlerbars', function(){
         for(var property in helpers) {

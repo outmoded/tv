@@ -8,6 +8,8 @@ require('./jQuerySnippet');
 require('./messageParser');
 require('./webSocketManager');
 require('./settingsStore');
+require('./utils/dateTimeFormatter');
+require('./utils/handlebarsHelpers');
 
 describe('Backbone', function() {
     describe('Models', function() {
