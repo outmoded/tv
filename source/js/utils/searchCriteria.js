@@ -13,15 +13,15 @@ var SearchCriteria = exports.SearchCriteria = function(qs) {
     });
 };
 
+SearchCriteria.create = function(qs) {
+    return new SearchCriteria(qs);
+};
+
 SearchCriteria.prototype.matches = function (request) {
     return _.chain(this.criteria)
         .reject(function(criterion) { return criterion.ignored; })
         .every(function(criterion) { return criterion.matches(request); })
         .value();
-};
-
-SearchCriteria.create = function(qs) {
-    return new SearchCriteria(qs);
 };
 
 var SearchCriterion = exports.SearchCriterion = function(fragment) {

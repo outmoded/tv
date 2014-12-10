@@ -40,13 +40,11 @@ var RequestView = Backbone.View.extend({
             }
 
             this.serverLogsView.$el.show();
-
-            this.trigger('serverLogsExpanded');
         } else if (this.serverLogsView) {
             this.serverLogsView.$el.hide();
-
-            this.trigger('serverLogsCollapsed');
         }
+
+        this.trigger('serverLogsToggle', this.active);
     },
 
     _toggleFavorite: function(e) {
@@ -56,11 +54,7 @@ var RequestView = Backbone.View.extend({
 
         this.$('.favorite').toggleClass('active', this.favorited);
 
-        if (this.favorited) {
-            this.trigger('favorited');
-        } else {
-            this.trigger('unfavorited');
-        }
+        this.trigger('favoriteToggle', this.favorited);
     }
 
 });

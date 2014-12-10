@@ -4,7 +4,9 @@ var DateTimeFormatter = require('../utils/dateTimeFormatter');
 var JQuerySnippet = require('../jQuerySnippet');
 var jsonMarkup = require('json-markup');
 
-var SUPPORTED_COLORED_TAGS = ['error', 'debug'];
+var internals = {
+    SUPPORTED_COLORED_TAGS: ['error', 'debug']
+};
 
 var HandlebarsHelpers = {
     jsonMarkup: function(jsonData) {
@@ -28,7 +30,7 @@ var HandlebarsHelpers = {
     },
 
     tagColor: function(tag) {
-        if (_.contains(SUPPORTED_COLORED_TAGS, tag)) {
+        if (_.contains(internals.SUPPORTED_COLORED_TAGS, tag)) {
             return tag;
         }
     }
