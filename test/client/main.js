@@ -32,8 +32,8 @@ describe('Backbone', function() {
 host = 'localhost';
 port = 8000;
 
-var sinonChai = require('sinon-chai');
-chai.use(sinonChai);
+chai.use(require('sinon-chai'));
+chai.use(require('chai-jquery'));
 
 var Backbone = require('backbone');
 Backbone.$ = require('jquery');
