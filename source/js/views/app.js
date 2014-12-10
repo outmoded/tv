@@ -81,7 +81,7 @@ var AppView = Backbone.View.extend({
     _handleRequestExpandToggle: function(expanded, feedHeaderView, feedBodyView) {
         if (!expanded && !feedBodyView.hasExpandedRequests()) {
             feedHeaderView.disableCollapseAll();
-        } else if(expanded) {
+        } else if (expanded) {
             feedHeaderView.enableCollapseAll();
         }
     },

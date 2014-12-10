@@ -41,7 +41,7 @@ var RequestView = Backbone.View.extend({
             this.serverLogsView = new ServerLogsView({
                 el: this.$('.server-logs'),
                 model: this.model,
-                collection: this.model.get('serverLogs') 
+                collection: this.model.get('serverLogs')
             }).render();
         }
 

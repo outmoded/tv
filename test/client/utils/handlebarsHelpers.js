@@ -14,13 +14,13 @@ var internals = {};
 describe('HandlebarsHelpers', function() {
 
     it('includes DateTimeFormatter functions as helpers', function() {
-        for(var property in DateTimeFormatter) {
+        for (var property in DateTimeFormatter) {
             expect(helpers[property]).to.eq(DateTimeFormatter[property]);
         }
     });
 
     it('registers helper functions with handlerbars', function(){
-        for(var property in helpers) {
+        for (var property in helpers) {
             expect(Handlebars.helpers[property]).to.eq(helpers[property]);
         }
     });

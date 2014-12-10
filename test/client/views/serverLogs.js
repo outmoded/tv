@@ -12,10 +12,6 @@ var Clipboard = require('../../../source/js/clipboard');
 var internals = {};
 
 
-// Test shortcuts
-
-var Spy = sinon.spy;
-
 
 
 
@@ -92,7 +88,7 @@ describe('ServerLogsView', function() {
     describe('#initialize', function() {
 
         it('rerenders when a new model is added to the collection', function() {
-            var spy = Spy(this.view, 'render');
+            var spy = sinon.spy(this.view, 'render');
 
             this.view.collection.add(internals.RESPONSE);
 

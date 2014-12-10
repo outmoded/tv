@@ -21,7 +21,7 @@ describe('AppView', function() {
         beforeEach( function() {
             var fakeModel = new Backbone.Model();
             var fakeCollection = new Backbone.Collection();
-            var mockWebSocketManager = {}
+            var mockWebSocketManager = {};
             this.appView = new AppView({model: fakeModel, collection: fakeCollection, webSocketManager: mockWebSocketManager});
         });
 

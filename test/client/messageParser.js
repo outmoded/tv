@@ -62,7 +62,7 @@ internals.createMessage = function(message, id) {
 
 
 describe('MessageParser', function() {
-    
+
     beforeEach(function() {
         this.messageParser = MessageParser.create();
     });
@@ -82,7 +82,7 @@ describe('MessageParser', function() {
             beforeEach(function() {
                 var message = internals.createMessage(internals.RECEIVED);
                 this.messageData = JSON.parse(message.data);
-                
+
                 this.messageParser.addMessage(message);
             });
 
@@ -117,7 +117,7 @@ describe('MessageParser', function() {
                 beforeEach(function() {
                     var message = internals.createMessage(internals.HANDLER);
                     this.secondMessageData = JSON.parse(message.data);
-                    
+
                     this.messageParser.addMessage(message);
                 });
 
@@ -141,7 +141,7 @@ describe('MessageParser', function() {
                     beforeEach(function() {
                         var message = internals.createMessage(responseMessage);
                         this.messageData = JSON.parse(message.data);
-                        
+
                         this.messageParser.addMessage(message);
 
                         this.request = this.messageParser.requests.findWhere({id: this.messageData.request});
@@ -224,7 +224,7 @@ describe('MessageParser', function() {
         describe('when a server log for a requests comes in before the response timeout', function() {
 
             it('resets the response timeout for that request', function(done) {
-                var messageParser = MessageParser.create({responseTimeout: 3})
+                var messageParser = MessageParser.create({responseTimeout: 3});
 
                 messageParser.addMessage(internals.createMessage(internals.RECEIVED));
 
@@ -244,7 +244,7 @@ describe('MessageParser', function() {
         var clearResponseTimeoutTest = function(responseMessage) {
             describe('when a response for a request comes in after the response timeout has occured', function() {
                 it('clears the response error timeout', function(done) {
-                    var messageParser = MessageParser.create({responseTimeout: 1})
+                    var messageParser = MessageParser.create({responseTimeout: 1});
 
                     messageParser.addMessage(internals.createMessage(internals.RECEIVED));
 

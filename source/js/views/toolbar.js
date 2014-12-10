@@ -11,7 +11,7 @@ var ToolbarView = Backbone.View.extend({
         'keyup .search': '_triggerSearchChanged',
         'click .settings': '_triggerShowSettings',
         'click .clear': '_triggerClearFeed',
-        'click .pause-resume': '_pauseResumeRequests',
+        'click .pause-resume': '_pauseResumeRequests'
     },
 
     initialize: function(options) {

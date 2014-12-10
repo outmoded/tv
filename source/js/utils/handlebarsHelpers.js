@@ -38,7 +38,7 @@ var HandlebarsHelpers = {
 
 _.extend(HandlebarsHelpers, DateTimeFormatter);
 
-for(var property in HandlebarsHelpers) {
+for (var property in HandlebarsHelpers) {
     Handlebars.registerHelper(property, HandlebarsHelpers[property]);
 }
 

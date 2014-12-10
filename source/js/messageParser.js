@@ -93,8 +93,8 @@ MessageParser.prototype._addServerLog = function(message) {
         delta: message.timestamp - request.get('timestamp')
     };
 
-    if(!this._isEmptyResponseServerLog(message)) {
-        if(message.response) {
+    if (!this._isEmptyResponseServerLog(message)) {
+        if (message.response) {
             serverLog.tags.push('response');
         }
 
@@ -106,7 +106,7 @@ MessageParser.prototype._addServerLog = function(message) {
     }
 };
 
-MessageParser.prototype._isEmptyResponseServerLog= function(message) {
+MessageParser.prototype._isEmptyResponseServerLog = function(message) {
     return message.tags &&
         message.tags.length === 1 &&
         message.tags[0] === 'response' &&

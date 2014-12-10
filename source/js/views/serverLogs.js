@@ -45,7 +45,7 @@ var ServerLogsView = Backbone.View.extend({
             }.bind(this));
 
             this.clipboard.on( 'aftercopy', function( event ) {
-                alert('copied'); // TODO: use a tooltip instead
+                // alert('copied'); // TODO: use a tooltip instead
             });
 
         }.bind(this));

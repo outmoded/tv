@@ -73,7 +73,7 @@ var FeedBodyView = Backbone.View.extend({
         this.listenTo(requestView, 'favoriteToggle', function(toggle) {
             this.trigger('requestFavoriteToggle', toggle);
 
-            if(!toggle) {
+            if (!toggle) {
                 this._updateRequestVisibility(requestView);
             }
         }.bind(this));
