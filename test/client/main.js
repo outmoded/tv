@@ -1,20 +1,28 @@
 require('es5-shim');
 
-require('./utils/searchCriteria');
-require('./app.js');
 require('./clientIdGenerator');
 require('./clipboard');
 require('./jQuerySnippet');
 require('./messageParser');
 require('./webSocketManager');
 require('./settingsStore');
-require('./utils/dateTimeFormatter');
-require('./utils/handlebarsHelpers');
+require('./app.js');
+        
+// describe blocks for test organization
+
+describe('Utilities', function() {
+    require('./utils/dateTimeFormatter');
+    require('./utils/handlebarsHelpers');
+    require('./utils/searchCriteria');    
+});
 
 describe('Backbone', function() {
     describe('Models', function() {
         require('./models/request');
         require('./models/settings');
+    });
+    describe('Views', function() {
+        require('./views/channelSelector');
     });
 });
 
