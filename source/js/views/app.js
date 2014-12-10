@@ -1,7 +1,8 @@
 var Backbone = require('backbone');
 
 var ToolbarView = require('./toolbar');
-var FeedView = require('./feed');
+var FeedHeaderView = require('./feedHeader');
+var FeedBodyView = require('./feedBody');
 var SettingsView = require('./settings');
 var Settings = require('../models/settings');
 
@@ -30,11 +31,14 @@ var AppView = Backbone.View.extend({
             settingsModel: this.model
         }).render();
 
-        var feedView = new FeedView({
-            el: $markup.siblings('.feed'),
-            model: this.model,
-            collection: this.collection,
+        var feedHeaderView = new FeedHeaderView({
+            el: $markup.find('.header'),
             webSocketManager: this.webSocketManager
+        }).render();
+
+        var feedBodyView = new FeedBodyView({
+            el: $markup.find('.body'),
+            collection: this.collection
         }).render();
 
         var toolbarView = new ToolbarView({
@@ -43,10 +47,32 @@ var AppView = Backbone.View.extend({
             webSocketManager: this.webSocketManager
         }).render();
 
-        this.listenTo(toolbarView, 'searchChanged', feedView.filterRequests.bind(feedView));
-        this.listenTo(toolbarView, 'showSettings',  settingsView.show);
-        this.listenTo(toolbarView, 'clearFeed',  feedView.clear.bind(feedView));
-    }
+        this.listenTo(toolbarView, 'searchChanged', feedBodyView.filterRequests.bind(feedBodyView));
+        this.listenTo(toolbarView, 'showSettings', settingsView.show);
+        this.listenTo(toolbarView, 'clearFeed', function() {
+            feedHeaderView.clear();
+            feedBodyView.clear();
+        });
+
+        this.listenTo(feedHeaderView, 'toggleFavorites', feedBodyView.toggleFavorites.bind(feedBodyView));
+        this.listenTo(feedHeaderView, 'collapseAll', feedBodyView.collapseAll.bind(feedBodyView));
+
+        this.listenTo(feedBodyView, 'requestExpandToggle', function(toggle) {
+            if (!toggle && !feedBodyView.hasExpandedRequests()) {
+                feedHeaderView.disableCollapseAll();
+            } else if(toggle) {
+                feedHeaderView.enableCollapseAll();
+            }
+        });
+
+        this.listenTo(feedBodyView, 'requestFavoriteToggle', function(toggle) {
+            if (!toggle && !feedBodyView.hasFavoritedRequests()) {
+                feedHeaderView.disableFavoritesFilter();
+            } else if (toggle) {
+                feedHeaderView.enableFavoritesFilter();
+            }
+        });
+    },
 
 });
 

@@ -4,33 +4,22 @@ var _ = require('lodash');
 var RequestView = require('./request');
 var SearchCriteria = require('../utils/searchCriteria').SearchCriteria;
 
-var FeedView = Backbone.View.extend({
-
-    template: require('../templates/feed.hbs'),
+var FeedBodyView = Backbone.View.extend({
 
     nextVisibleRequestIndex: 0,
 
     initialize: function(options) {
-        this.requestViews = [];
-
-        this.listenTo(this.model, 'change:channel', this.render);
         this.listenTo(this.collection, 'add', this._addRequest);
     },
 
-    events: {
-        'click .header .expander': '_collapseAllExpandedRequests',
-        'click .favorite.enabled': '_filterRequestsToFavorites',
-        'click .favorite.active': '_removeFavoritesFilter'
-    },
-
     render: function() {
-        this.$el.html(this.template());
+        this.clear();
 
         return this;
     },
 
     clear: function() {
-        this.$('.feed .body').html('');
+        this.$el.empty();
 
         _.each(this.requestViews, function(requestView) {
             requestView.remove();
@@ -38,6 +27,19 @@ var FeedView = Backbone.View.extend({
 
         this.nextVisibleRequestIndex = 0;
         this.requestViews = [];
+    },
+
+    hasFavoritedRequests: function() {
+        return this.$('.request .favorite.active').length > 0;
+    },
+
+    hasExpandedRequests: function() {
+        return this.$('.request.active').length > 0;
+    },
+
+    collapseAll: function() {
+        this.$('.request.active').removeClass('active');
+        this.$('.request .server-logs').hide();
     },
 
     filterRequests: function(queryString) {
@@ -55,21 +57,21 @@ var FeedView = Backbone.View.extend({
         _.each(this.requestViews, _.bind(this._updateRequestVisibility, this));
     },
 
-    _collapseAllExpandedRequests: function() {
-        this.$('.request.active').removeClass('active');
-        this.$('.request .server-logs').hide();
-        this.$('.header .expander').removeClass('expanded');
-    },
-
     _addRequest: function(request) {
         var requestView = new RequestView({ model: request }).render();
         this.requestViews.push(requestView);
 
-        this.listenTo(requestView, 'serverLogsExpanded',  this._enableCollapseAllAction);
-        this.listenTo(requestView, 'serverLogsCollapsed', this._checkToDisableCollapseAllAction);
+        this.listenTo(requestView, 'serverLogsToggle', function(toggle) {
+            this.trigger('requestExpandToggle', toggle);
+        }.bind(this));
 
-        this.listenTo(requestView, 'favorited',   this._enableFilterFavoritesAction);
-        this.listenTo(requestView, 'unfavorited', this._checkToDisableFilterFavoritesAction);
+        this.listenTo(requestView, 'favoriteToggle', function(toggle) {
+            this.trigger('requestFavoriteToggle', toggle);
+
+            if(!toggle) {
+                this._updateRequestVisibility(requestView);
+            }
+        }.bind(this));
 
         this._updateRequestVisibility(requestView);
 
@@ -78,35 +80,8 @@ var FeedView = Backbone.View.extend({
         });
 
         this._checkToScrollToBottom( _.bind(function() {
-            this.$('.body').append(requestView.el);
+            this.$el.append(requestView.$el);
         }, this) );
-    },
-
-    _enableCollapseAllAction: function() {
-        this.$('.header .expander').addClass('expanded');
-    },
-
-    _checkToDisableCollapseAllAction: function() {
-        if (this.$('.request.active').length === 0) {
-            this.$('.header .expander').removeClass('expanded');
-        }
-    },
-
-    _enableFilterFavoritesAction: function() {
-        this.$('.header .favorite').addClass('enabled');
-    },
-
-    _checkToDisableFilterFavoritesAction: function() {
-        if (this.$('.request .favorite.active').length === 0) {
-            this.$('.header .favorite')
-                .removeClass('enabled')
-                .removeClass('active')
-                .addClass('empty');
-
-            this.filterFavorites = false;
-        }
-
-        this._refreshRequestsVisibility();
     },
 
     _checkToScrollToBottom: function(domManipulationFn) {
@@ -119,17 +94,8 @@ var FeedView = Backbone.View.extend({
         }
     },
 
-    _filterRequestsToFavorites: function(e) {
-        $(e.currentTarget).removeClass('enabled').addClass('active');
-        this.filterFavorites = true;
-        this._refreshRequestsVisibility();
-    },
-
-    _removeFavoritesFilter: function(e) {
-        $(e.currentTarget)
-            .removeClass('active')
-            .addClass('enabled');
-        this.filterFavorites = false;
+    toggleFavorites: function(toggle) {
+        this.filterFavorites = toggle;
         this._refreshRequestsVisibility();
     },
 
@@ -174,4 +140,4 @@ var FeedView = Backbone.View.extend({
 
 });
 
-module.exports = FeedView;
+module.exports = FeedBodyView;
