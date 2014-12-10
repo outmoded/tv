@@ -57,18 +57,18 @@ var AppView = Backbone.View.extend({
         this.listenTo(feedHeaderView, 'toggleFavorites', feedBodyView.toggleFavorites.bind(feedBodyView));
         this.listenTo(feedHeaderView, 'collapseAll', feedBodyView.collapseAll.bind(feedBodyView));
 
-        this.listenTo(feedBodyView, 'requestExpandToggle', function(toggle) {
-            if (!toggle && !feedBodyView.hasExpandedRequests()) {
+        this.listenTo(feedBodyView, 'requestExpandToggle', function(expanded) {
+            if (!expanded && !feedBodyView.hasExpandedRequests()) {
                 feedHeaderView.disableCollapseAll();
-            } else if(toggle) {
+            } else if(expanded) {
                 feedHeaderView.enableCollapseAll();
             }
         });
 
-        this.listenTo(feedBodyView, 'requestFavoriteToggle', function(toggle) {
-            if (!toggle && !feedBodyView.hasFavoritedRequests()) {
+        this.listenTo(feedBodyView, 'requestFavoriteToggle', function(favorited) {
+            if (!favorited && !feedBodyView.hasFavoritedRequests()) {
                 feedHeaderView.disableFavoritesFilter();
-            } else if (toggle) {
+            } else if (favorited) {
                 feedHeaderView.enableFavoritesFilter();
             }
         });
