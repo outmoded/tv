@@ -8,17 +8,12 @@ var SettingsView = require('../../../source/js/views/settings');
 var internals = {};
 
 
-
-
 internals.generateView = function(options) {
     options = options || {};
     options.settingsModel = options.settingsModel || new Backbone.Model();
 
     return new SettingsView(options);
-}
-
-
-
+};
 
 
 describe('SettingsView', function() {

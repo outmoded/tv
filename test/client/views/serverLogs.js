@@ -71,8 +71,7 @@ internals.generateView = function(options) {
     }).get('serverLogs');
 
     return new ServerLogsView(options);
-}
-
+};
 
 
 describe('ServerLogsView', function() {
