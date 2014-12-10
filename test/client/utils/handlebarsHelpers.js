@@ -15,7 +15,6 @@ describe('HandlebarsHelpers', function() {
 
     it('includes DateTimeFormatter functions as helpers', function() {
         for(var property in DateTimeFormatter) {
-            console.log(property);
             expect(helpers[property]).to.eq(DateTimeFormatter[property]);
         }
     });
