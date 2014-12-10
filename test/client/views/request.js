@@ -17,10 +17,6 @@ var Spy = sinon.spy;
 
 
 
-require('../../../source/js/utils/handlebarsHelpers');
-Backbone.$ = require('jquery');
-
-
 
 internals.generateView = function(options) {
     options = options || {};

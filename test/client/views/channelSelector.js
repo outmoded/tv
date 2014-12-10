@@ -10,11 +10,6 @@ var internals = {};
 
 
 
-require('../../../source/js/utils/handlebarsHelpers');
-Backbone.$ = require('jquery');
-
-
-
 internals.generateView = function(options) {
     options = options || {};
     options.model = options.model || new Backbone.Model();
@@ -29,17 +24,17 @@ internals.generateView = function(options) {
 describe('ChannelSelectorView', function() {
 
     describe('#template', function() {
-      
+
         it('returns html', function() {
             var view = internals.generateView();
 
             expect(view.template()).to.match(/<[a-z][\s\S]*>/); // html string
         });
-    
+
     });
 
     describe('#events', function() {
-      
+
         context('with a click on a button', function() {
 
             it('sets the settings model channel property', function() {
@@ -52,13 +47,13 @@ describe('ChannelSelectorView', function() {
             });
 
         });
-    
+
     });
 
     describe('#initialize', function() {
-      
+
         context('with a change to the settings model clientId', function() {
-          
+
             it('updates the clientId button html', function() {
                 var $el = $('<div><button class="client-id" data-channel="foobar"><span>foobar</span></div>');
                 var view = internals.generateView({ el: $el });
@@ -68,9 +63,9 @@ describe('ChannelSelectorView', function() {
                 expect(view.$('button').attr('data-channel')).to.equal('barbaz');
                 expect(view.$('button span').html()).to.equal('barbaz');
             });
-            
+
         });
-        
+
         context('with a change to the settings model channel', function() {
 
             it('applies the active class to only the button for the new channel', function() {
@@ -91,9 +86,9 @@ describe('ChannelSelectorView', function() {
     });
 
     describe('#render', function() {
-      
+
         it('has the expected markup', function() {
-            var view = internals.generateView({ 
+            var view = internals.generateView({
                 model: new Backbone.Model({ clientId: 'foobar', channel: '*' })
             });
 

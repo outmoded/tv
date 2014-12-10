@@ -7,13 +7,13 @@ require('./messageParser');
 require('./webSocketManager');
 require('./settingsStore');
 require('./app.js');
-        
+
 // describe blocks for test organization
 
 describe('Utilities', function() {
     require('./utils/dateTimeFormatter');
     require('./utils/handlebarsHelpers');
-    require('./utils/searchCriteria');    
+    require('./utils/searchCriteria');
 });
 
 describe('Backbone', function() {
@@ -24,6 +24,7 @@ describe('Backbone', function() {
     describe('Views', function() {
         require('./views/channelSelector');
         require('./views/request');
+        require('./views/serverLogs');
     });
 });
 
@@ -32,6 +33,11 @@ port = 8000;
 
 var sinonChai = require('sinon-chai');
 chai.use(sinonChai);
+
+var Backbone = require('backbone');
+Backbone.$ = require('jquery');
+
+require('../../source/js/utils/handlebarsHelpers');
 
 if (window.mochaPhantomJS) {
   mochaPhantomJS.run();

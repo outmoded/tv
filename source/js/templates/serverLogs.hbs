@@ -1,6 +1,6 @@
 {{#each .}}
     <div class="server-log row">
-        <div class="col-xs-3 tags {{internal}}">
+        <div class="col-xs-3 tags {{#internal}}internal{{/internal}}">
             {{#each tags}}
                 <span class="{{tagColor .}}">{{.}}</span>
             {{/each}}
