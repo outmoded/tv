@@ -72,7 +72,7 @@ var AppView = Backbone.View.extend({
                 feedHeaderView.enableFavoritesFilter();
             }
         });
-    },
+    }
 
 });
 
