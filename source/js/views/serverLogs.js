@@ -45,21 +45,25 @@ var ServerLogsView = Backbone.View.extend({
             this._initializeClipboard();
         }
 
-        this.clipboard.setData({
-            'text/plain': Clipboard.convertToText(this.model.toJSON())
-        });
-
         return this;
     },
 
     _initializeClipboard: function() {
         this.clipboard = this._clipboard();
 
-        this.clipboard.on( 'ready', _.bind(function( readyEvent ) {
-          this.clipboard.on( 'aftercopy', function( event ) {
-            alert('copied'); // TODO: use a tooltip instead
-          });
-        }, this));
+        this.clipboard.on( 'ready', function( readyEvent ) {
+            
+            this.clipboard.on( 'beforecopy', function( event ) {
+                this.clipboard.setData({
+                    'text/plain': Clipboard.convertToText(this.model.toJSON())
+                });
+            }.bind(this));
+
+            this.clipboard.on( 'aftercopy', function( event ) {
+                alert('copied'); // TODO: use a tooltip instead
+            });
+            
+        }.bind(this));
     },
 
     _toggleServerLogData: function(e) {

@@ -23,6 +23,7 @@ describe('Backbone', function() {
     });
     describe('Views', function() {
         require('./views/channelSelector');
+        require('./views/request');
     });
 });
 

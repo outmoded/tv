@@ -1,17 +1,11 @@
 // Load modules
 
 var Backbone = require('backbone');
-var sinon = require('sinon');
 var ChannelSelectorView = require('../../../source/js/views/channelSelector');
 
 // Declare internals
 
 var internals = {};
-
-
-// Test shortcuts
-
-var Spy = sinon.spy;
 
 
 
