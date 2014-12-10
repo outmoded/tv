@@ -104,26 +104,26 @@ describe('RequestView', function() {
                 expect(this.view.active).to.be.false;                
             });
 
-            it('emits the "serverLogsExpanded" event when shown', function() {
+            it('emits the "serverLogsToggle" event with "true" when shown', function() {
                 var spy = Spy();
-                this.view.on('serverLogsExpanded', spy);
+                this.view.on('serverLogsToggle', spy);
 
                 this.click();
 
-                expect(spy).to.have.been.called;
+                expect(spy).to.have.been.calledWith(true);
             });
 
-            it('emits the "serverLogsCollapsed" event when hidden', function() {
+            it('emits the "serverLogsToggle" event with "false" when hidden', function() {
                 var spy = Spy();
-                this.view.on('serverLogsCollapsed', spy);
+                this.view.on('serverLogsToggle', spy);
 
                 this.click();
 
-                expect(spy).to.have.not.been.called;
+                expect(spy).to.have.been.calledWith(true);
 
                 this.click();
 
-                expect(spy).to.have.been.called;
+                expect(spy).to.have.been.calledWith(false);
             });
 
         });
@@ -170,26 +170,26 @@ describe('RequestView', function() {
                 expect(this.view.$('.favorite').hasClass('active')).to.be.false;
             });
 
-            it('emits the "favorited" event when favorited', function() {
+            it('emits the "favoriteToggle" event with "true" when favorited', function() {
                 var spy = Spy();
-                this.view.on('favorited', spy);
+                this.view.on('favoriteToggle', spy);
 
                 this.click();
 
-                expect(spy).to.have.been.called;
+                expect(spy).to.have.been.calledWith(true);
             });
 
-            it('emits the "unfavorited" event when unfavorited', function() {
+            it('emits the "favoriteToggle" event with "false" when unfavorited', function() {
                 var spy = Spy();
-                this.view.on('unfavorited', spy);
+                this.view.on('favoriteToggle', spy);
 
                 this.click();
 
-                expect(spy).to.have.not.been.called;
+                expect(spy).to.have.been.calledWith(true);
 
                 this.click();
 
-                expect(spy).to.have.been.called;
+                expect(spy).to.have.been.calledWith(false);
             });
 
         });
