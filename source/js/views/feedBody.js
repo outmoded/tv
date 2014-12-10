@@ -42,6 +42,11 @@ var FeedBodyView = Backbone.View.extend({
         this.$('.request .server-logs').hide();
     },
 
+    toggleFavorites: function(toggle) {
+        this.filterFavorites = toggle;
+        this._refreshRequestsVisibility();
+    },
+
     filterRequests: function(queryString) {
         var searchCriteria = SearchCriteria.create(queryString);
         this.searchFilter = function(requestView) {
@@ -92,11 +97,6 @@ var FeedBodyView = Backbone.View.extend({
         if (isScrolledToBottom) {
             this._scrollToBottom();
         }
-    },
-
-    toggleFavorites: function(toggle) {
-        this.filterFavorites = toggle;
-        this._refreshRequestsVisibility();
     },
 
     _updateRequestVisibility: function(requestView, isUpdate) {
