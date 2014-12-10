@@ -2,7 +2,6 @@ require('es5-shim');
 
 require('./clientIdGenerator');
 require('./clipboard');
-require('./jQuerySnippet');
 require('./messageParser');
 require('./webSocketManager');
 require('./settingsStore');
