@@ -52,8 +52,9 @@ SearchCriterion.prototype._isValidAny = function() {
 
 SearchCriterion.prototype._parseScopedPropertyValues = function() {
     var pieces = this.fragment.split(':');
+    var values = pieces[1].split(',');
 
-    return pieces[1].split(',');
+    return _.reject(values, function(value) { return value.length === 0 });
 };
 
 SearchCriterion.prototype._isScoped = function() {

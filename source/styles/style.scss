@@ -5,10 +5,10 @@
 @import "bootstrap-overrides";
 @import "./vendor/bootstrap";
 
-@import "spinner";
-
 // Base styles
 @import "elements";
+@import "fixed-header";
+@import "spinner";
 
 // Component Styles
 @import "components/toolbar";
