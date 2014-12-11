@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var Backbone = require('backbone');
 var SettingsStore = require('../settingsStore');
 var JQuerySnippet = require('../jQuerySnippet');
@@ -14,7 +15,7 @@ var SettingsView = Backbone.View.extend({
 
     initialize: function(options) {
         this.settingsModel = options.settingsModel;
-        this.model = this.settingsModel.clone();
+        this.model = new Backbone.Model(_.clone(this.settingsModel.attributes));
 
         this.listenTo(this.model, 'change:clientId', function(model, clientId) {
             this.$('.jquery-snippet').html(JQuerySnippet.generate(clientId));
