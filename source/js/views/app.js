@@ -32,7 +32,7 @@ var AppView = Backbone.View.extend({
         var feedBodyView =   this._renderFeedBody($markup);
 
         this.listenTo(toolbarView, 'searchChanged', feedBodyView.filterRequests.bind(feedBodyView));
-        this.listenTo(toolbarView, 'showSettings', settingsView.show);
+        this.listenTo(toolbarView, 'showSettings', settingsView.show.bind(settingsView));
         this.listenTo(toolbarView, 'clearFeed', function() {
             this._handleClearFeed(feedHeaderView, feedBodyView);
         });
