@@ -105,7 +105,7 @@ describe('ServerLogsView', function() {
 
                 this.$firstServerLogRow = this.view.$('.server-log').first();
 
-                this.$firstServerLogRow.find('.data').click();
+                this.$firstServerLogRow.find('.json-markup').click();
             });
 
             it('toggles the expanded class on the server log row', function() {

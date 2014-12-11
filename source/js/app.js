@@ -1,6 +1,7 @@
 var _ = require('lodash');
 
 require('bootstrap/js/modal');
+require('bootstrap/js/tooltip');
 
 var app = {
 
