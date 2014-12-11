@@ -19,16 +19,5 @@
 
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script type="text/javascript" src="{{ endpoint }}/js/main.js"></script>
-        <script type="text/javascript">
-            // for dev purposes so we can quickly generate request entries
-            $(document).keypress(function(e) {
-                if(e.keyCode === 114 && e.target.nodeName !== "INPUT") {
-                    $.get(location.origin);
-                }
-                if(e.keyCode === 101 && e.target.nodeName !== "INPUT") {
-                    $.post(location.origin + '/foo/bar', {foo: 'bar'});
-                }
-            });
-        </script>
     </body>
 </html>
