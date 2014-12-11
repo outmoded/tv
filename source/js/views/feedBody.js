@@ -8,6 +8,8 @@ var FeedBodyView = Backbone.View.extend({
 
     nextVisibleRequestIndex: 0,
 
+    requestViews: [],
+
     initialize: function(options) {
         this.listenTo(this.collection, 'add', this._addRequest);
     },
@@ -30,16 +32,24 @@ var FeedBodyView = Backbone.View.extend({
     },
 
     hasFavoritedRequests: function() {
-        return this.$('.request .favorite.active').length > 0;
+        return _.any(this.requestViews, function(requestView) {
+            return requestView.favorited;
+        });
     },
 
     hasExpandedRequests: function() {
-        return this.$('.request.active').length > 0;
+        return _.any(this.requestViews, function(requestView) {
+            return requestView.active;
+        });
     },
 
     collapseAll: function() {
         this.$('.request.active').removeClass('active');
         this.$('.request .server-logs').hide();
+
+        _.each(this.requestViews, function(requestView) {
+            requestView.active = false;
+        });
     },
 
     toggleFavorites: function(toggle) {
@@ -114,7 +124,7 @@ var FeedBodyView = Backbone.View.extend({
             var setStripe = true;
 
             if (isUpdate === true) {
-                var showingForTheFirstTime = requestView.$el.hasClass('hidden');
+                var showingForTheFirstTime = !requestView.visible;
                 if (!showingForTheFirstTime) {
                     setStripe = false;
                 }
@@ -127,7 +137,7 @@ var FeedBodyView = Backbone.View.extend({
             }
         }
 
-        requestView.$el.toggleClass('hidden', !show);
+        requestView.toggleVisibility(show);
     },
 
     _isScrolledToBottom: function() {
