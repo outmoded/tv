@@ -30,13 +30,13 @@
             cursor: pointer;
 
             &:hover .expander {
-                color: $background;
+                color: $background-accent;
             }
 
             .expander {
                 float: left;
                 margin: 5px auto auto 2px;
-                color: $background-accent;
+                color: $background;
                 font-size: 1rem;
             }
 

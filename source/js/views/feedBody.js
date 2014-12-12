@@ -6,8 +6,6 @@ var SearchCriteria = require('../utils/searchCriteria').SearchCriteria;
 
 var FeedBodyView = Backbone.View.extend({
 
-    nextVisibleRequestIndex: 0,
-
     requestViews: [],
 
     initialize: function(options) {
@@ -27,7 +25,6 @@ var FeedBodyView = Backbone.View.extend({
             requestView.remove();
         });
 
-        this.nextVisibleRequestIndex = 0;
         this.requestViews = [];
     },
 
@@ -67,8 +64,6 @@ var FeedBodyView = Backbone.View.extend({
     },
 
     _refreshRequestsVisibility: function() {
-        this.nextVisibleRequestIndex = 0;
-
         _.each(this.requestViews, _.bind(this._updateRequestVisibility, this));
     },
 
@@ -76,17 +71,17 @@ var FeedBodyView = Backbone.View.extend({
         var requestView = new RequestView({ model: request }).render();
         this.requestViews.push(requestView);
 
-        this.listenTo(requestView, 'serverLogsToggle', function(toggle) {
-            this.trigger('requestExpandToggle', toggle);
-        }.bind(this));
+        this.listenTo(requestView, 'serverLogsToggle', _.bind(function(expanded) {
+            this.trigger('requestExpandToggle', expanded);
+        }, this));
 
-        this.listenTo(requestView, 'favoriteToggle', function(toggle) {
-            this.trigger('requestFavoriteToggle', toggle);
+        this.listenTo(requestView, 'favoriteToggle', _.bind(function(favorited) {
+            this.trigger('requestFavoriteToggle', favorited);
 
-            if (!toggle) {
-                this._updateRequestVisibility(requestView);
+            if (!favorited && this.filterFavorites) {
+                requestView.toggleVisibility(false);
             }
-        }.bind(this));
+        }, this));
 
         this._updateRequestVisibility(requestView);
 
@@ -118,23 +113,6 @@ var FeedBodyView = Backbone.View.extend({
 
         if (this.filterFavorites && !requestView.favorited) {
             show = false;
-        }
-
-        if (show) {
-            var setStripe = true;
-
-            if (isUpdate === true) {
-                var showingForTheFirstTime = !requestView.visible;
-                if (!showingForTheFirstTime) {
-                    setStripe = false;
-                }
-            }
-
-            if (setStripe) {
-                var odd = this.nextVisibleRequestIndex % 2 === 0;
-                requestView.$el.toggleClass('odd', odd).toggleClass('even', !odd);
-                this.nextVisibleRequestIndex = this.nextVisibleRequestIndex + 1;
-            }
         }
 
         requestView.toggleVisibility(show);
