@@ -37,9 +37,12 @@ describe('app', function() {
             this.appRenderSpy = sinon.spy(fakeAppView, 'render');
 
             this.appStart = function() {
-                app.start(this.mockWebSocketManager, this.mockMessageParser,
-                          this.mockAppViewClass, this.mockSettingsStore,
-                          this.mockClientIdGenerator);
+                app.start(this.mockWebSocketManager, {
+                    messageParser: this.mockMessageParser,
+                    appViewClass: this.mockAppViewClass,
+                    settingsStore: this.mockSettingsStore,
+                    clientIdGenerator: this.mockClientIdGenerator 
+                });
             };
 
         });
