@@ -6,29 +6,17 @@
         }
 
         .request {
-            &.odd {
-                .request-details {
-                    background-color: $table-row-bg;
+            .request-details {
+                background-color: $table-row-bg;
+                border-top: solid 1px $background;
+                box-shadow: 0px 2px 3px $light-shadow;
 
-                    .icon {
-                        color: $table-row-bg;
-                    }
-                }
-            }
-
-            &.even {
-                .request-details {
-                    background-color: $table-row-bg;
-
-                    .icon {
-                        color: $table-row-bg;
-                    }
+                .icon {
+                    color: $table-row-bg;
                 }
             }
 
             &.active .request-details {
-                box-shadow: 0px 2px 3px $light-shadow;
-
                 .expander {
                     color: $table-row-icon;
                     padding: 4px 3px 0px 6px;
