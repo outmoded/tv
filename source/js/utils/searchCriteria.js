@@ -15,10 +15,12 @@ var SearchCriteria = exports.SearchCriteria = function (qs) {
     });
 };
 
+
 SearchCriteria.create = function (qs) {
 
     return new SearchCriteria(qs);
 };
+
 
 SearchCriteria.prototype.matches = function (request) {
 
@@ -33,6 +35,7 @@ SearchCriteria.prototype.matches = function (request) {
         })
         .value();
 };
+
 
 var SearchCriterion = exports.SearchCriterion = function (fragment) {
 
@@ -52,6 +55,7 @@ var SearchCriterion = exports.SearchCriterion = function (fragment) {
     }
 };
 
+
 SearchCriterion.prototype._isValidAny = function () {
 
     var pieces = this._fragment.split(':');
@@ -65,6 +69,7 @@ SearchCriterion.prototype._isValidAny = function () {
     return true;
 };
 
+
 SearchCriterion.prototype._parseScopedPropertyValues = function () {
 
     var pieces = this._fragment.split(':');
@@ -75,6 +80,7 @@ SearchCriterion.prototype._parseScopedPropertyValues = function () {
         return value.length === 0;
     });
 };
+
 
 SearchCriterion.prototype._isScoped = function () {
 
@@ -92,6 +98,7 @@ SearchCriterion.prototype._parseScopedProperty = function () {
     return this._fragment.split(':')[0];
 };
 
+
 SearchCriterion.prototype.matches = function (request) {
 
     var matches;
@@ -106,6 +113,7 @@ SearchCriterion.prototype.matches = function (request) {
     return matches;
 };
 
+
 SearchCriterion.prototype._matchesScopedProperty = function (request) {
 
     var self = this;
@@ -116,6 +124,7 @@ SearchCriterion.prototype._matchesScopedProperty = function (request) {
     });
 };
 
+
 SearchCriterion.prototype._matchesAny = function (request) {
 
     var self = this;
@@ -125,6 +134,7 @@ SearchCriterion.prototype._matchesAny = function (request) {
         return self._matchesValue(request, property, self._fragment);
     });
 };
+
 
 SearchCriterion.prototype._matchesValue = function (request, property, expectedValue) {
 
@@ -141,13 +151,16 @@ SearchCriterion.prototype._matchesValue = function (request, property, expectedV
     return actualValue.toString().toLowerCase().indexOf(expectedValue.toLowerCase()) !== -1;
 };
 
+
 SearchCriterion.create = function (fragment) {
 
     return new SearchCriterion(fragment);
 };
 
+
 SearchCriterion.VALID_SCOPED_PROPERTIES = internals.VALID_SCOPED_PROPERTIES =
     ['path', 'method', 'status', 'tags', 'data'];
+
 
 SearchCriterion.CUSTOM_PROPERTY_FUNCTIONS = internals.CUSTOM_PROPERTY_FUNCTIONS = {
 
