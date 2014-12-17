@@ -1,10 +1,10 @@
 var _ = require('lodash');
 
 var WebSocketManager = function(webSocket) {
-    this.webSocket = webSocket;
+    this._webSocket = webSocket;
 
     var self = this;
-    this.webSocket.onopen = function() {
+    this._webSocket.onopen = function() {
         self.isOpen = true;
         if (self.onSocketOpen) {
             self.onSocketOpen();
@@ -18,13 +18,13 @@ WebSocketManager.create = function(webSocket) {
 
 WebSocketManager.prototype.applyFilter = function(clientId) {
     if (this.clientId) {
-        this.webSocket.send('unsubscribe:' + this.clientId);
+        this._webSocket.send('unsubscribe:' + this.clientId);
     }
 
     if (this.isOpen) {
         this.clientId = clientId;
-        this.webSocket.send(this.clientId);                        // for the pre-unsubscribe version of Tv
-        this.webSocket.send('subscribe:' + this.clientId);
+        this._webSocket.send(this.clientId); // for the pre-unsubscribe version of Tv
+        this._webSocket.send('subscribe:' + this.clientId);
     }
 };
 
@@ -33,15 +33,15 @@ WebSocketManager.prototype.clearFilter = function() {
 };
 
 WebSocketManager.prototype.resume = function() {
-    this.webSocket.onmessage = this.onMessageCallback;
+    this._webSocket.onmessage = this.onMessageCallback;
 };
 
 WebSocketManager.prototype.pause = function() {
-    this.webSocket.onmessage = null;
+    this._webSocket.onmessage = null;
 };
 
 WebSocketManager.prototype.onMessage = function(fn) {
-    this.webSocket.onmessage = this.onMessageCallback = fn;
+    this._webSocket.onmessage = this.onMessageCallback = fn;
 };
 
 WebSocketManager.prototype.onSocketOpen = function(){};

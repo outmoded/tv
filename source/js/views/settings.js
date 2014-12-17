@@ -32,17 +32,17 @@ var SettingsView = Backbone.View.extend({
     render: function() {
         this.$el.html(this.template(this.model.toJSON()));
 
-        this.$modal = this.$('.modal');
+        this._$modal = this.$('.modal');
 
         return this;
     },
 
     show: function() {
-        this.$modal.modal('show');
+        this._$modal.modal('show');
     },
 
     hide: function() {
-        this.$modal.modal('hide');
+        this._$modal.modal('hide');
     },
 
     onClientIdInput: function(e) {

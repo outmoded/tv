@@ -6,7 +6,7 @@ var SearchCriteria = require('../utils/searchCriteria').SearchCriteria;
 
 var FeedBodyView = Backbone.View.extend({
 
-    requestViews: [],
+    _requestViews: [],
 
     initialize: function(options) {
         this.listenTo(this.collection, 'add', this._addRequest);
@@ -21,21 +21,21 @@ var FeedBodyView = Backbone.View.extend({
     clear: function() {
         this.$el.empty();
 
-        _.each(this.requestViews, function(requestView) {
+        _.each(this._requestViews, function(requestView) {
             requestView.remove();
         });
 
-        this.requestViews = [];
+        this._requestViews = [];
     },
 
     hasFavoritedRequests: function() {
-        return _.any(this.requestViews, function(requestView) {
+        return _.any(this._requestViews, function(requestView) {
             return requestView.favorited;
         });
     },
 
     hasExpandedRequests: function() {
-        return _.any(this.requestViews, function(requestView) {
+        return _.any(this._requestViews, function(requestView) {
             return requestView.active;
         });
     },
@@ -44,7 +44,7 @@ var FeedBodyView = Backbone.View.extend({
         this.$('.request.active').removeClass('active');
         this.$('.request .server-logs').hide();
 
-        _.each(this.requestViews, function(requestView) {
+        _.each(this._requestViews, function(requestView) {
             requestView.active = false;
         });
     },
@@ -64,12 +64,12 @@ var FeedBodyView = Backbone.View.extend({
     },
 
     _refreshRequestsVisibility: function() {
-        _.each(this.requestViews, this._updateRequestVisibility.bind(this));
+        _.each(this._requestViews, this._updateRequestVisibility.bind(this));
     },
 
     _addRequest: function(request) {
         var requestView = new RequestView({ model: request }).render();
-        this.requestViews.push(requestView);
+        this._requestViews.push(requestView);
 
         var self = this;
 

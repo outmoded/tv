@@ -51,16 +51,16 @@ describe('RequestView', function() {
 
 
             it('toggles the server logs pane', function() {
-                expect(this.view.$el.hasClass('active')).to.be.false;
+                expect(this.view.$el).to.not.have.class('active');
 
                 this.click();
 
-                expect(this.view.$el.hasClass('active')).to.be.true;
+                expect(this.view.$el).to.have.class('active');
                 expect(this.view.serverLogsView.$el.css('display')).to.equal('block');
 
                 this.click();
 
-                expect(this.view.$el.hasClass('active')).to.be.false;
+                expect(this.view.$el).to.not.have.class('active');
                 expect(this.view.serverLogsView.$el.css('display')).to.equal('none');
             });
 
@@ -78,15 +78,15 @@ describe('RequestView', function() {
             });
 
             it('toggles .active', function() {
-                expect(this.view.active).to.be.false;
+                expect(this.view.$el).to.not.have.class('active');
 
                 this.click();
 
-                expect(this.view.active).to.be.true;
+                expect(this.view.$el).to.have.class('active');
 
                 this.click();
 
-                expect(this.view.active).to.be.false;
+                expect(this.view.$el).to.not.have.class('active');
             });
 
             it('emits the "serverLogsToggle" event with "true" when shown', function() {
@@ -119,28 +119,30 @@ describe('RequestView', function() {
                 this.view = internals.generateView();
                 this.view.render();
 
+                this.$favorite = this.view.$('.favorite');
+
+                var self = this;
                 this.click = function() {
-                    this.view.$('.favorite').click();
-                }.bind(this);
+                    self.$favorite.click();
+                };
             });
 
             afterEach(function() {
                 delete this.view;
                 delete this.click;
+                delete this.$favorite;
             });
 
-
-
             it('toggles .favorited', function() {
-                expect(this.view.favorited).to.be.false;
+                expect(this.$favorite).to.not.have.class('active');
 
                 this.click();
 
-                expect(this.view.favorited).to.be.true;
+                expect(this.$favorite).to.have.class('active');
 
                 this.click();
 
-                expect(this.view.favorited).to.be.false;
+                expect(this.$favorite).to.not.have.class('active');
             });
 
             it('toggles the .active class', function() {
@@ -185,11 +187,12 @@ describe('RequestView', function() {
 
         context('with a change to the settings model clientId', function() {
 
-            it('sets default boolean properties', function() {
+            it('sets default state', function() {
                 this.view = internals.generateView();
 
-                expect(this.view.active).to.be.false;
-                expect(this.view.favorited).to.be.false;
+                expect(this.view.$el).to.not.have.class('active');
+                expect(this.view.$('.favorite')).to.not.have.class('active');
+                expect(this.view.$el).to.have.class('hidden');
             });
 
         });

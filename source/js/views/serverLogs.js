@@ -21,49 +21,47 @@ var ServerLogsView = Backbone.View.extend({
     render: function() {
         this.$el.html(this.template(this.collection.toJSON()));
 
-        if (!this.clipboard) {
-            this._initializeClipboard();
-        }
+        this._initializeClipboard();
 
         return this;
     },
 
-    _clipboard: function() {
-        this.$clipboard = this.$('.copy');
-
-        ZeroClipboard.config({
-            swfPath: location.href + '/js/ZeroClipboard.swf'
-        });
-
-        return new ZeroClipboard(this.$clipboard.get(0));
-    },
-
     _initializeClipboard: function() {
-        this.clipboard = this._clipboard();
+        clipboard = this._createZeroClipboard();
 
         var self = this;
-        this.clipboard.on('ready', function( readyEvent ) {
+        clipboard.on('ready', function( readyEvent ) {
 
-            self.clipboard.on( 'beforecopy', function( event ) {
-                self.clipboard.setData('text/plain', Clipboard.convertToText(self.model.toJSON()));
+            clipboard.on( 'beforecopy', function( event ) {
+                clipboard.setData('text/plain', Clipboard.convertToText(self.model.toJSON()));
 
-                self.$clipboard.tooltip({
+                self._$clipboard.tooltip({
                     delay: {hide: 2000},
                     placement: 'left',
                     animation: 'fade',
                     title: 'Copied to clipboard!'
                 });
 
-                self.$clipboard.tooltip('show');
+                self._$clipboard.tooltip('show');
             });
 
-            self.clipboard.on( 'aftercopy', function( event ) {
+            clipboard.on( 'aftercopy', function( event ) {
                 setTimeout(function() {
-                    self.$clipboard.tooltip('hide');
+                    self._$clipboard.tooltip('hide');
                 }, 3000);
             });
 
         });
+    },
+
+    _createZeroClipboard: function() {
+        this._$clipboard = this.$('.copy');
+
+        ZeroClipboard.config({
+            swfPath: location.href + '/js/ZeroClipboard.swf'
+        });
+
+        return new ZeroClipboard(this._$clipboard.get(0));
     },
 
     _toggleServerLogData: function(e) {

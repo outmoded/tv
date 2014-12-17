@@ -13,12 +13,9 @@ var RequestView = Backbone.View.extend({
         'click .favorite': '_toggleFavorite'
     },
 
-    initialize: function(options) {
-        this.active = false;
-        this.favorited = false;
-        this.visible = false;
-    },
-
+    favorited: false,
+    active:    false,
+    visible:   false,
 
     render: function() {
         var $markup = $(this.template());

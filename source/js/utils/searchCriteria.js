@@ -25,7 +25,7 @@ SearchCriteria.prototype.matches = function (request) {
 };
 
 var SearchCriterion = exports.SearchCriterion = function(fragment) {
-    this.fragment = fragment;
+    this._fragment = fragment;
 
     if (this._isScoped()) {
         this.scoped = true;
@@ -42,7 +42,7 @@ var SearchCriterion = exports.SearchCriterion = function(fragment) {
 };
 
 SearchCriterion.prototype._isValidAny = function() {
-    var pieces = this.fragment.split(':');
+    var pieces = this._fragment.split(':');
     if (pieces.length > 1) {
         if (_.contains(SearchCriterion.VALID_SCOPED_PROPERTIES, pieces[0])) {
             return false;
@@ -53,14 +53,14 @@ SearchCriterion.prototype._isValidAny = function() {
 };
 
 SearchCriterion.prototype._parseScopedPropertyValues = function() {
-    var pieces = this.fragment.split(':');
+    var pieces = this._fragment.split(':');
     var values = pieces[1].split(',');
 
     return _.reject(values, function(value) { return value.length === 0 });
 };
 
 SearchCriterion.prototype._isScoped = function() {
-    var pieces = this.fragment.split(':');
+    var pieces = this._fragment.split(':');
 
     if (pieces.length > 1 && pieces[1].length) {
         return _.contains(internals.VALID_SCOPED_PROPERTIES, pieces[0]);
@@ -70,7 +70,7 @@ SearchCriterion.prototype._isScoped = function() {
 };
 
 SearchCriterion.prototype._parseScopedProperty = function() {
-    return this.fragment.split(':')[0];
+    return this._fragment.split(':')[0];
 };
 
 SearchCriterion.prototype.matches = function(request) {
@@ -96,7 +96,7 @@ SearchCriterion.prototype._matchesScopedProperty = function(request) {
 SearchCriterion.prototype._matchesAny = function(request) {
     var self = this;
     return _.any(SearchCriterion.VALID_SCOPED_PROPERTIES, function(property) {
-        return self._matchesValue(request, property, self.fragment);
+        return self._matchesValue(request, property, self._fragment);
     });
 };
 

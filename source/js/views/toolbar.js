@@ -14,14 +14,10 @@ var ToolbarView = Backbone.View.extend({
         'click .pause-resume': '_pauseResumeRequests'
     },
 
-    initialize: function(options) {
-        this.webSocketManager = options.webSocketManager;
-    },
-
     render: function() {
         this.$el.html(this.template());
 
-        this.channelSelectorView = new ChannelSelectorView({ el: this.$('.channel-selector-container'), model: this.model }).render();
+        new ChannelSelectorView({ el: this.$('.channel-selector-container'), model: this.model }).render();
 
         return this;
     },
@@ -38,15 +34,15 @@ var ToolbarView = Backbone.View.extend({
     },
 
     _pauseRequests: function() {
-        this.webSocketManager.pause();
         this.$el.find('.pause').addClass('hidden');
         this.$el.find('.resume').removeClass('hidden');
+        this.trigger('pause');
     },
 
     _resumeRequests: function() {
-        this.webSocketManager.resume();
         this.$el.find('.pause').removeClass('hidden');
         this.$el.find('.resume').addClass('hidden');
+        this.trigger('resume');
     },
 
     _triggerSearchChanged: _.debounce(function(e) {

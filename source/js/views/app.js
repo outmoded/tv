@@ -12,7 +12,7 @@ var AppView = Backbone.View.extend({
 
     initialize: function(opts) {
         this.model = new Settings(null, { webSocketManager: opts.webSocketManager });
-        this.webSocketManager = opts.webSocketManager;
+        this._webSocketManager = opts.webSocketManager;
     },
 
     render: function() {
@@ -31,6 +31,8 @@ var AppView = Backbone.View.extend({
         var feedHeaderView = this._renderFeedHeader($markup);
         var feedBodyView =   this._renderFeedBody($markup);
 
+        this.listenTo(toolbarView, 'pause', this._webSocketManager.pause.bind(this._webSocketManager));
+        this.listenTo(toolbarView, 'resume', this._webSocketManager.resume.bind(this._webSocketManager));
         this.listenTo(toolbarView, 'searchChanged', feedBodyView.filterRequests.bind(feedBodyView));
         this.listenTo(toolbarView, 'showSettings', settingsView.show.bind(settingsView));
         this.listenTo(toolbarView, 'clearFeed', function() {
@@ -52,8 +54,7 @@ var AppView = Backbone.View.extend({
     _renderToolbar: function($markup) {
         return new ToolbarView({
             el: $markup.siblings('.toolbar'),
-            model: this.model,
-            webSocketManager: this.webSocketManager
+            model: this.model
         }).render();
     },
 
@@ -66,8 +67,7 @@ var AppView = Backbone.View.extend({
 
     _renderFeedHeader: function($markup) {
         return new FeedHeaderView({
-            el: $markup.find('.header'),
-            webSocketManager: this.webSocketManager
+            el: $markup.find('.header')
         }).render();
     },
 

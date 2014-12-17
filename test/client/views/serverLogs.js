@@ -4,16 +4,10 @@ var sinon = require('sinon');
 var Backbone = require('backbone');
 var ServerLogsView = require('../../../source/js/views/serverLogs');
 var Request = require('../../../source/js/models/request');
-var ZeroClipboard = require('zeroclipboard');
-var Clipboard = require('../../../source/js/clipboard');
 
 // Declare internals
 
 var internals = {};
-
-
-
-
 
 
 internals.RECEIVED = {

@@ -6,7 +6,7 @@ var MessageParser = function(opts) {
     opts = opts || {};
 
     this.requests = new Backbone.Collection();
-    this.responseTimeout = opts.responseTimeout || 2000;
+    this._responseTimeout = opts.responseTimeout || 2000;
 };
 
 MessageParser.create = function(opts) {
@@ -132,7 +132,7 @@ MessageParser.prototype._refreshResponseTimeout = function(message) {
             request.set('isComplete', true);
 
             self.onResponseTimeout && self.onResponseTimeout();
-        }, this.responseTimeout);
+        }, this._responseTimeout);
     }
 };
 
