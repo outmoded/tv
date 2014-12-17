@@ -22,7 +22,8 @@ var HandlebarsHelpers = {
 
         if (a === b) {
             result = options.fn();
-        } else {
+        }
+        else {
             result = options.inverse();
         }
 

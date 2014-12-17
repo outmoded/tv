@@ -43,6 +43,7 @@ require('../../source/js/utils/handlebarsHelpers');
 
 if (window.mochaPhantomJS) {
   mochaPhantomJS.run();
-} else {
+}
+else {
   mocha.run();
 }

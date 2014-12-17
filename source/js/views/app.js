@@ -81,7 +81,8 @@ var AppView = Backbone.View.extend({
     _handleRequestExpandToggle: function(expanded, feedHeaderView, feedBodyView) {
         if (!expanded && !feedBodyView.hasExpandedRequests()) {
             feedHeaderView.disableCollapseAll();
-        } else if (expanded) {
+        }
+        else if (expanded) {
             feedHeaderView.enableCollapseAll();
         }
     },
@@ -89,7 +90,8 @@ var AppView = Backbone.View.extend({
     _handleRequestFavoriteToggle: function(favorited, feedHeaderView, feedBodyView) {
         if (!favorited && !feedBodyView.hasFavoritedRequests()) {
             feedHeaderView.disableFavoritesFilter();
-        } else if (favorited) {
+        }
+        else if (favorited) {
             feedHeaderView.enableFavoritesFilter();
         }
     },

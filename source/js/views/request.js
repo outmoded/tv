@@ -19,6 +19,7 @@ var RequestView = Backbone.View.extend({
         this.visible = false;
     },
 
+
     render: function() {
         var $markup = $(this.template());
 
@@ -53,7 +54,8 @@ var RequestView = Backbone.View.extend({
 
         if (this.active) {
             this.serverLogsView.$el.show();
-        } else if (this.serverLogsView) {
+        }
+        else if (this.serverLogsView) {
             this.serverLogsView.$el.hide();
         }
 

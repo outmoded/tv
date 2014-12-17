@@ -32,7 +32,8 @@ MessageParser.prototype.addMessage = function(rawMessage) {
             this._updateRequestWithResponse(message);
         }
         this._refreshResponseTimeout(message);
-    } else {
+    }
+    else {
         // disregard message
     }
 

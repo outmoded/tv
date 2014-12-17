@@ -31,10 +31,12 @@ var SearchCriterion = exports.SearchCriterion = function(fragment) {
         this.scoped = true;
         this.scopedProperty = this._parseScopedProperty();
         this.scopedPropertyValues = this._parseScopedPropertyValues();
-    } else if (this._isValidAny()) {
+    }
+    else if (this._isValidAny()) {
         this.scoped = false;
         this.scopedProperty = null;
-    } else {
+    }
+    else {
         this.ignored = true;
     }
 };
@@ -76,7 +78,8 @@ SearchCriterion.prototype.matches = function(request) {
 
     if (this.scoped) {
         matches = this._matchesScopedProperty(request);
-    } else {
+    }
+    else {
         matches = this._matchesAny(request);
     }
 
@@ -100,7 +103,8 @@ SearchCriterion.prototype._matchesValue = function(request, property, expectedVa
     var customValueFunction = internals.CUSTOM_PROPERTY_FUNCTIONS[property];
     if (customValueFunction) {
         actualValue = customValueFunction(request);
-    } else {
+    }
+    else {
         actualValue = request[property];
     }
 

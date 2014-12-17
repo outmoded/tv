@@ -31,7 +31,8 @@ var ToolbarView = Backbone.View.extend({
 
         if (paused) {
             this._resumeRequests();
-        } else {
+        }
+        else {
             this._pauseRequests();
         }
     },
