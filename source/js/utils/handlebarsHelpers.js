@@ -11,17 +11,17 @@ var internals = {
 
 var HandlebarsHelpers = {
 
-    jsonMarkup: function(jsonData) {
+    jsonMarkup: function (jsonData) {
 
         return jsonMarkup(jsonData);
     },
 
-    jQuerySnippet: function(clientId) {
+    jQuerySnippet: function (clientId) {
 
         return JQuerySnippet.generate(clientId);
     },
 
-    isEq: function(a, b, options) {
+    isEq: function (a, b, options) {
 
         var result;
 
@@ -35,7 +35,7 @@ var HandlebarsHelpers = {
         return result;
     },
 
-    tagColor: function(tag) {
+    tagColor: function (tag) {
 
         if (_.contains(internals.SUPPORTED_COLORED_TAGS, tag)) {
             return tag;

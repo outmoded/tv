@@ -6,7 +6,7 @@ var Settings = Backbone.Model.extend({
 
     _store: SettingsStore,
 
-    defaults: function() {
+    defaults: function () {
 
         return {
             clientId: this._store.get('clientId'),
@@ -14,19 +14,19 @@ var Settings = Backbone.Model.extend({
         };
     },
 
-    initialize: function(attributes, options) {
+    initialize: function (attributes, options) {
 
         this.on('change', this._updateSettingsStore, this);
-        this.on('change:channel', function(model, channel) {
+        this.on('change:channel', function (model, channel) {
             options.webSocketManager.applyFilter(channel);
         });
     },
 
-    _updateSettingsStore: function(model) {
+    _updateSettingsStore: function (model) {
 
         var self = this;
 
-        var updateSettingsStoreProp = function(value, key) {
+        var updateSettingsStoreProp = function (value, key) {
             self._store.set(key, value);
         };
 

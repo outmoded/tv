@@ -14,7 +14,7 @@ var ToolbarView = Backbone.View.extend({
         'click .pause-resume': '_pauseResumeRequests'
     },
 
-    render: function() {
+    render: function () {
 
         this.$el.html(this.template());
 
@@ -23,7 +23,7 @@ var ToolbarView = Backbone.View.extend({
         return this;
     },
 
-    _pauseResumeRequests: function(e) {
+    _pauseResumeRequests: function (e) {
 
         var paused = $(e.currentTarget).find('.resume:visible').length === 1;
 
@@ -35,32 +35,32 @@ var ToolbarView = Backbone.View.extend({
         }
     },
 
-    _pauseRequests: function() {
+    _pauseRequests: function () {
 
         this.$el.find('.pause').addClass('hidden');
         this.$el.find('.resume').removeClass('hidden');
         this.trigger('pause');
     },
 
-    _resumeRequests: function() {
+    _resumeRequests: function () {
 
         this.$el.find('.pause').removeClass('hidden');
         this.$el.find('.resume').addClass('hidden');
         this.trigger('resume');
     },
 
-    _triggerSearchChanged: _.debounce(function(e) {
+    _triggerSearchChanged: _.debounce(function (e) {
 
         var queryString = $(e.currentTarget).val();
         this.trigger('searchChanged', queryString);
     }, 200),
 
-    _triggerShowSettings: function() {
+    _triggerShowSettings: function () {
 
         this.trigger('showSettings');
     },
 
-    _triggerClearFeed: function() {
+    _triggerClearFeed: function () {
 
         this.trigger('clearFeed');
     }

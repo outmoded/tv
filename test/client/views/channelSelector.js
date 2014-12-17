@@ -8,7 +8,7 @@ var ChannelSelectorView = require('../../../source/js/views/channelSelector');
 var internals = {};
 
 
-internals.generateView = function(options) {
+internals.generateView = function (options) {
     options = options || {};
     options.model = options.model || new Backbone.Model();
 
@@ -16,11 +16,12 @@ internals.generateView = function(options) {
 };
 
 
-describe('ChannelSelectorView', function() {
+describe('ChannelSelectorView', function () {
 
-    describe('#template', function() {
+    describe('#template', function () {
 
-        it('returns html', function() {
+        it('returns html', function () {
+
             var view = internals.generateView();
 
             expect(view.template()).to.match(/<[a-z][\s\S]*>/); // html string
@@ -28,11 +29,12 @@ describe('ChannelSelectorView', function() {
 
     });
 
-    describe('#events', function() {
+    describe('#events', function () {
 
-        context('with a click on a button', function() {
+        context('with a click on a button', function () {
 
-            it('sets the settings model channel property', function() {
+            it('sets the settings model channel property', function () {
+
                 var $el = $('<div><button data-channel="foobar"></div>');
                 var view = internals.generateView({ el: $el });
 
@@ -45,11 +47,12 @@ describe('ChannelSelectorView', function() {
 
     });
 
-    describe('#initialize', function() {
+    describe('#initialize', function () {
 
-        context('with a change to the settings model clientId', function() {
+        context('with a change to the settings model clientId', function () {
 
-            it('updates the clientId button html', function() {
+            it('updates the clientId button html', function () {
+
                 var $el = $('<div><button class="client-id" data-channel="foobar"><span>foobar</span></div>');
                 var view = internals.generateView({ el: $el });
 
@@ -61,9 +64,10 @@ describe('ChannelSelectorView', function() {
 
         });
 
-        context('with a change to the settings model channel', function() {
+        context('with a change to the settings model channel', function () {
 
-            it('applies the active class to only the button for the new channel', function() {
+            it('applies the active class to only the button for the new channel', function () {
+
                 var $el = $([
                     '<div><button class="client-id active" data-channel="foobar"><span>foobar</span></div>',
                     '<div><button class="all" data-channel="*"></div>'
@@ -80,9 +84,10 @@ describe('ChannelSelectorView', function() {
 
     });
 
-    describe('#render', function() {
+    describe('#render', function () {
 
-        it('has the expected markup', function() {
+        it('has the expected markup', function () {
+
             var view = internals.generateView({
                 model: new Backbone.Model({ clientId: 'foobar', channel: '*' })
             });

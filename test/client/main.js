@@ -9,19 +9,23 @@ require('./app.js');
 
 // describe blocks for test organization
 
-describe('Utilities', function() {
+describe('Utilities', function () {
+
     require('./utils/dateTimeFormatter');
     require('./utils/handlebarsHelpers');
     require('./utils/searchCriteria');
 });
 
-describe('Backbone', function() {
-    describe('Models', function() {
+describe('Backbone', function () {
+
+    describe('Models', function () {
+
         require('./models/request');
         require('./models/settings');
     });
 
-    describe('Views', function() {
+    describe('Views', function () {
+
         require('./views/channelSelector');
         require('./views/request');
         require('./views/serverLogs');

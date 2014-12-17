@@ -11,15 +11,20 @@ var internals = {};
 
 
 
-describe('Settings', function() {
+describe('Settings', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
+
         this.settingsStore = Settings.prototype._store = {
             _store: {},
-            get: sinon.spy(function(key) {
+
+            get: sinon.spy(function (key) {
+
                 return this._store[key];
             }),
-            set: sinon.spy(function(key, value) {
+
+            set: sinon.spy(function (key, value) {
+
                 this._store[key] = value;
                 return value;
             })
@@ -32,9 +37,10 @@ describe('Settings', function() {
         };
     });
 
-    describe('#defaults', function() {
+    describe('#defaults', function () {
 
-        it('sets the expected defaults from settings', function() {
+        it('sets the expected defaults from settings', function () {
+
             var clientId = 'foobar';
             var channel = '*';
 
@@ -49,9 +55,10 @@ describe('Settings', function() {
 
     });
 
-    describe('#initialize', function() {
+    describe('#initialize', function () {
 
-        it('applies the filter to the websocket when channel is changed', function() {
+        it('applies the filter to the websocket when channel is changed', function () {
+
             var settings = new Settings(null, this.options);
 
             expect(this.options.webSocketManager.applyFilter).to.have.not.been.called;
@@ -62,7 +69,8 @@ describe('Settings', function() {
             expect(this.options.webSocketManager.applyFilter).to.have.been.calledWith('*');
         });
 
-        it('updates the store when properties change with the properties that changed', function() {
+        it('updates the store when properties change with the properties that changed', function () {
+
             var settings = new Settings(null, this.options);
 
             settings.set('channel', '*');

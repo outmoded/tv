@@ -10,13 +10,13 @@ var AppView = Backbone.View.extend({
 
     template: require('../templates/app.hbs'),
 
-    initialize: function(opts) {
+    initialize: function (opts) {
 
         this.model = new Settings(null, { webSocketManager: opts.webSocketManager });
         this._webSocketManager = opts.webSocketManager;
     },
 
-    render: function() {
+    render: function () {
 
         var $markup = $(this.template());
 
@@ -27,7 +27,7 @@ var AppView = Backbone.View.extend({
         return this;
     },
 
-    _renderChildViews: function($markup) {
+    _renderChildViews: function ($markup) {
 
         var toolbarView =    this._renderToolbar($markup);
         var settingsView =   this._renderSettings($markup);
@@ -38,7 +38,7 @@ var AppView = Backbone.View.extend({
         this.listenTo(toolbarView, 'resume', this._webSocketManager.resume.bind(this._webSocketManager));
         this.listenTo(toolbarView, 'searchChanged', feedBodyView.filterRequests.bind(feedBodyView));
         this.listenTo(toolbarView, 'showSettings', settingsView.show.bind(settingsView));
-        this.listenTo(toolbarView, 'clearFeed', function() {
+        this.listenTo(toolbarView, 'clearFeed', function () {
 
             this._handleClearFeed(feedHeaderView, feedBodyView);
         });
@@ -46,18 +46,18 @@ var AppView = Backbone.View.extend({
         this.listenTo(feedHeaderView, 'toggleFavorites', feedBodyView.toggleFavorites.bind(feedBodyView));
         this.listenTo(feedHeaderView, 'collapseAll', feedBodyView.collapseAll.bind(feedBodyView));
 
-        this.listenTo(feedBodyView, 'requestExpandToggle', function(expanded) {
+        this.listenTo(feedBodyView, 'requestExpandToggle', function (expanded) {
 
             this._handleRequestExpandToggle(expanded, feedHeaderView, feedBodyView);
         });
 
-        this.listenTo(feedBodyView, 'requestFavoriteToggle', function(favorited) {
+        this.listenTo(feedBodyView, 'requestFavoriteToggle', function (favorited) {
 
             this._handleRequestFavoriteToggle(favorited, feedHeaderView, feedBodyView);
         });
     },
 
-    _renderToolbar: function($markup) {
+    _renderToolbar: function ($markup) {
 
         return new ToolbarView({
             el: $markup.siblings('.toolbar'),
@@ -65,7 +65,7 @@ var AppView = Backbone.View.extend({
         }).render();
     },
 
-    _renderSettings: function($markup) {
+    _renderSettings: function ($markup) {
 
         return new SettingsView({
             el: $markup.siblings('.settings-modal-container'),
@@ -73,14 +73,14 @@ var AppView = Backbone.View.extend({
         }).render();
     },
 
-    _renderFeedHeader: function($markup) {
+    _renderFeedHeader: function ($markup) {
 
         return new FeedHeaderView({
             el: $markup.find('.header')
         }).render();
     },
 
-    _renderFeedBody: function($markup) {
+    _renderFeedBody: function ($markup) {
 
         return new FeedBodyView({
             el: $markup.find('.body'),
@@ -89,7 +89,7 @@ var AppView = Backbone.View.extend({
     },
 
 
-    _handleRequestExpandToggle: function(expanded, feedHeaderView, feedBodyView) {
+    _handleRequestExpandToggle: function (expanded, feedHeaderView, feedBodyView) {
 
         if (!expanded && !feedBodyView.hasExpandedRequests()) {
             feedHeaderView.disableCollapseAll();
@@ -99,7 +99,7 @@ var AppView = Backbone.View.extend({
         }
     },
 
-    _handleRequestFavoriteToggle: function(favorited, feedHeaderView, feedBodyView) {
+    _handleRequestFavoriteToggle: function (favorited, feedHeaderView, feedBodyView) {
 
         if (!favorited && !feedBodyView.hasFavoritedRequests()) {
             feedHeaderView.disableFavoritesFilter();
@@ -109,7 +109,7 @@ var AppView = Backbone.View.extend({
         }
     },
 
-    _handleClearFeed: function(feedHeaderView, feedBodyView) {
+    _handleClearFeed: function (feedHeaderView, feedBodyView) {
 
         feedHeaderView.clear();
         feedBodyView.clear();

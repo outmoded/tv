@@ -8,9 +8,10 @@ var Clipboard = require('../../source/js/clipboard');
 var internals = {};
 
 
-describe('Clipboard', function() {
+describe('Clipboard', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
+
         this.now = new Date().valueOf();
         this.request = {
             path: '/foo/bar',
@@ -37,14 +38,16 @@ describe('Clipboard', function() {
         };
     });
 
-    afterEach(function() {
+    afterEach(function () {
+
         delete this.now;
         delete this.request;
     });
 
-    describe('#convertToText', function() {
+    describe('#convertToText', function () {
 
-        it('converts the request to text', function() {
+        it('converts the request to text', function () {
+
             var expectedData = [
                 'Path: GET /foo/bar',
                 'Status: 200',

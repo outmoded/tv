@@ -10,15 +10,17 @@ var SearchCriterion = require('../../../source/js/utils/searchCriteria').SearchC
 var internals = {};
 
 
-describe('SearchCriteria', function() {
+describe('SearchCriteria', function () {
 
-    describe('.create', function() {
+    describe('.create', function () {
 
-        it('returns a new instance of SearchCriteria', function() {
+        it('returns a new instance of SearchCriteria', function () {
+
             expect(SearchCriteria.create('')).to.be.instanceOf(SearchCriteria);
         });
 
-        it('creates an array of SearchCriterion objects', function() {
+        it('creates an array of SearchCriterion objects', function () {
+
             var criteria = SearchCriteria.create('foo:bar bar:baz').criteria;
             expect(criteria.length).to.equal(2);
             expect(criteria[0]).to.be.instanceOf(SearchCriterion);
@@ -26,16 +28,17 @@ describe('SearchCriteria', function() {
 
     });
 
-    describe('#matches', function() {
+    describe('#matches', function () {
 
-        context('with all criterion that match the request', function() {
+        context('with all criterion that match the request', function () {
 
-            it('returns true', function() {
+            it('returns true', function () {
+
                 var searchCriteria = SearchCriteria.create('foo bar');
 
                 searchCriteria.criteria = [
-                    { matches: function() { return true; }},
-                    { matches: function() { return true; }}
+                    { matches: function () { return true; }},
+                    { matches: function () { return true; }}
                 ];
 
                 var request = {};
@@ -45,12 +48,14 @@ describe('SearchCriteria', function() {
 
         });
 
-        context('with a ignored search criterion', function(){
-            it('skips that criterion during evaluation', function() {
+        context('with a ignored search criterion', function (){
+
+            it('skips that criterion during evaluation', function () {
+
                 var searchCriteria = SearchCriteria.create('foo bar');
 
                 searchCriteria.criteria = [
-                    { matches: function() { return true; }},
+                    { matches: function () { return true; }},
                     { ignored: true }
                 ];
 
@@ -60,14 +65,15 @@ describe('SearchCriteria', function() {
             });
         });
 
-        context('with at least one criterion that doesn\'t match the request', function() {
+        context('with at least one criterion that doesn\'t match the request', function () {
 
-            it('returns false', function() {
+            it('returns false', function () {
+
                 var searchCriteria = SearchCriteria.create('foo bar');
 
                 searchCriteria.criteria = [
-                    { matches: function() { return true; }},
-                    { matches: function() { return false; }}
+                    { matches: function () { return true; }},
+                    { matches: function () { return false; }}
                 ];
 
                 var request = {};
@@ -81,18 +87,20 @@ describe('SearchCriteria', function() {
 
 });
 
-describe('SearchCriterion', function() {
+describe('SearchCriterion', function () {
 
-    describe('.create', function() {
+    describe('.create', function () {
 
-        it('returns a new instance of SearchCriterion', function() {
+        it('returns a new instance of SearchCriterion', function () {
+
             expect(SearchCriterion.create('')).to.be.instanceOf(SearchCriterion);
         });
 
-        context('with a scoped search criterion', function() {
+        context('with a scoped search criterion', function () {
 
-            it('marks the criterion as scoped', function() {
-                _.each(SearchCriterion.VALID_SCOPED_PROPERTIES, function(property) {
+            it('marks the criterion as scoped', function () {
+
+                _.each(SearchCriterion.VALID_SCOPED_PROPERTIES, function (property) {
                     var fragment = property + ':value';
                     var searchCriterion = SearchCriterion.create(fragment);
 
@@ -100,7 +108,8 @@ describe('SearchCriterion', function() {
                 });
             });
 
-            it('specifies the scoped property', function() {
+            it('specifies the scoped property', function () {
+
                 var fragment = 'path:bar';
                 var searchCriterion = SearchCriterion.create(fragment);
 
@@ -109,17 +118,19 @@ describe('SearchCriterion', function() {
 
         });
 
-        context('with a scoped search criterion that doesn\'t specify a value', function() {
+        context('with a scoped search criterion that doesn\'t specify a value', function () {
 
-            it('marks the criterion as ignored', function(){
+            it('marks the criterion as ignored', function (){
+
                 expect(SearchCriterion.create('path:').ignored).to.equal(true);
             });
 
         });
 
-        context('with a general search criterion that contains a colon', function() {
+        context('with a general search criterion that contains a colon', function () {
 
-            it('does not ignore search criterion or mark it as ignored', function(){
+            it('does not ignore search criterion or mark it as ignored', function (){
+
                 var criterion = SearchCriterion.create('foo:test');
                 expect(criterion.ignored).to.not.equal(true);
                 expect(criterion.scoped).to.equal(false);
@@ -127,17 +138,20 @@ describe('SearchCriterion', function() {
 
         });
 
-        context('with a general search criterion', function() {
+        context('with a general search criterion', function () {
 
-            it('marks the criterion as not scoped', function() {
+            it('marks the criterion as not scoped', function () {
+
                 expect(SearchCriterion.create('foo').scoped).to.equal(false);
             });
 
-            it('does not set a scoped property', function() {
+            it('does not set a scoped property', function () {
+
                 expect(SearchCriterion.create('foo').scopedProperty).to.equal(null);
             });
 
-            it('marks the criterion as not ignored', function() {
+            it('marks the criterion as not ignored', function () {
+
                 expect(SearchCriterion.create('foo').ignored).to.not.equal(true);
             });
 
@@ -145,15 +159,16 @@ describe('SearchCriterion', function() {
 
     });
 
-    describe('#matches', function(){
+    describe('#matches', function (){
 
-        context('with a scoped criterion', function() {
+        context('with a scoped criterion', function () {
 
-            context('with a single value', function() {
+            context('with a single value', function () {
 
-                context('that matches the request', function() {
+                context('that matches the request', function () {
 
-                    it('returns true', function() {
+                    it('returns true', function () {
+
                         var request = {
                             path: '/customers',
                             statusCode: 200,
@@ -174,16 +189,18 @@ describe('SearchCriterion', function() {
                             'method:ge',
                             'tags:received',
                             'tags:rec'
-                        ], function(fragment) {
+                        ], function (fragment) {
+
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(true);
                         });
                     });
 
                 });
 
-                context('that doesn\'t match the request', function() {
+                context('that doesn\'t match the request', function () {
 
-                    it('returns false', function() {
+                    it('returns false', function () {
+
                         var request = {
                             path: '/invoices',
                             statusCode: 200,
@@ -198,7 +215,8 @@ describe('SearchCriterion', function() {
                             'status:404',
                             'method:POST',
                             'tags:error'
-                        ], function(fragment) {
+                        ], function (fragment) {
+
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
                         });
                     });
@@ -207,11 +225,12 @@ describe('SearchCriterion', function() {
 
             });
 
-            context('with multiple values', function() {
+            context('with multiple values', function () {
 
-                context('with one that matches the request', function() {
+                context('with one that matches the request', function () {
 
-                    it('returns true', function() {
+                    it('returns true', function () {
+
                         var request = {
                             path: '/customers',
                             statusCode: 200,
@@ -227,16 +246,18 @@ describe('SearchCriterion', function() {
                             'status:20,400',
                             'method:ge,post',
                             'tags:rec,foo'
-                        ], function(fragment) {
+                        ], function (fragment) {
+
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(true);
                         });
                     });
 
                 });
 
-                context('with none that match the request', function() {
+                context('with none that match the request', function () {
 
-                    it('returns false', function() {
+                    it('returns false', function () {
+
                         var request = {
                             path: '/invoices',
                             statusCode: 200,
@@ -249,15 +270,18 @@ describe('SearchCriterion', function() {
                         _.each([
                             'path:customers,orders',
                             'tags:error'
-                        ], function(fragment) {
+                        ], function (fragment) {
+
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
                         });
                     });
 
                 });
 
-                context('and a trailing comma', function() {
-                    it('ignores the empty value', function() {
+                context('and a trailing comma', function () {
+
+                    it('ignores the empty value', function () {
+
                         var request = {
                             path: '/invoices',
                             statusCode: 200,
@@ -269,7 +293,8 @@ describe('SearchCriterion', function() {
 
                         _.each([
                             'path:customers,',
-                        ], function(fragment) {
+                        ], function (fragment) {
+
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
                         });
                     });
@@ -279,11 +304,12 @@ describe('SearchCriterion', function() {
 
         });
 
-        context('with a general criterion', function() {
+        context('with a general criterion', function () {
 
-            context('that matches the request', function() {
+            context('that matches the request', function () {
 
-                it('returns true', function() {
+                it('returns true', function () {
+
                     var request = {
                         path: '/customers',
                         statusCode: 200,
@@ -303,16 +329,18 @@ describe('SearchCriterion', function() {
                         '200',
                         'received',
                         'rec'
-                    ], function(fragment) {
+                    ], function (fragment) {
+
                         expect(SearchCriterion.create(fragment).matches(request)).to.equal(true);
                     });
                 });
 
             });
 
-            context('that doesn\'t match the request', function() {
+            context('that doesn\'t match the request', function () {
 
-                it('returns false', function() {
+                it('returns false', function () {
+
                     var request = {
                         path: '/customers',
                         statusCode: 200,
@@ -327,7 +355,8 @@ describe('SearchCriterion', function() {
                         '500',
                         'post',
                         'error'
-                    ], function(fragment) {
+                    ], function (fragment) {
+
                         expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
                     });
                 });
@@ -336,9 +365,10 @@ describe('SearchCriterion', function() {
 
         });
 
-        context('without a status code', function() {
+        context('without a status code', function () {
 
-            it('doesn\'t error', function() {
+            it('doesn\'t error', function () {
+
                 var request = {
                     path: '/customers',
                     method: 'GET',
@@ -347,7 +377,8 @@ describe('SearchCriterion', function() {
                     }]
                 };
 
-                expect(function() {
+                expect(function () {
+
                     SearchCriterion.create('foo').matches(request);
                 }).to.not.throw();
             });

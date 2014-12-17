@@ -22,13 +22,13 @@ exports = module.exports = internals.ClientIdGenerator = {};
 internals.ClientIdGenerator._store = SettingsStore;
 
 
-internals.ClientIdGenerator.generate = function(options) {
+internals.ClientIdGenerator.generate = function (options) {
 
     options = _.defaults(options || {}, internals.defaults);
 
     var possible = (options.letters ? internals.letters : '') + (options.numbers ? internals.numbers : '');
 
-    return _.times(options.length, function() {
+    return _.times(options.length, function () {
 
         return possible.charAt(Math.floor(Math.random() * possible.length));
     }).join('');

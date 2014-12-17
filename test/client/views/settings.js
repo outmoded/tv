@@ -8,7 +8,8 @@ var SettingsView = require('../../../source/js/views/settings');
 var internals = {};
 
 
-internals.generateView = function(options) {
+internals.generateView = function (options) {
+
     options = options || {};
     options.settingsModel = options.settingsModel || new Backbone.Model();
 
@@ -16,11 +17,12 @@ internals.generateView = function(options) {
 };
 
 
-describe('SettingsView', function() {
+describe('SettingsView', function () {
 
-    describe('#template', function() {
+    describe('#template', function () {
 
-        it('returns html', function() {
+        it('returns html', function () {
+
             var view = internals.generateView();
 
             expect(view.template()).to.match(/<[a-z][\s\S]*>/); // html string
@@ -28,11 +30,9 @@ describe('SettingsView', function() {
 
     });
 
-    describe('.events', function() {
+    describe('.events', function () {
 
-        context('with a click on .submit', function() {
-
-
+        context('with a click on .submit', function () {
 
         });
 

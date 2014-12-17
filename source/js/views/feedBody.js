@@ -8,63 +8,63 @@ var FeedBodyView = Backbone.View.extend({
 
     _requestViews: [],
 
-    initialize: function(options) {
+    initialize: function (options) {
 
         this.listenTo(this.collection, 'add', this._addRequest);
     },
 
-    render: function() {
+    render: function () {
 
         this.clear();
 
         return this;
     },
 
-    clear: function() {
+    clear: function () {
 
         this.$el.empty();
 
-        _.each(this._requestViews, function(requestView) {
+        _.each(this._requestViews, function (requestView) {
             requestView.remove();
         });
 
         this._requestViews = [];
     },
 
-    hasFavoritedRequests: function() {
+    hasFavoritedRequests: function () {
 
-        return _.any(this._requestViews, function(requestView) {
+        return _.any(this._requestViews, function (requestView) {
             return requestView.favorited;
         });
     },
 
-    hasExpandedRequests: function() {
+    hasExpandedRequests: function () {
 
-        return _.any(this._requestViews, function(requestView) {
+        return _.any(this._requestViews, function (requestView) {
             return requestView.active;
         });
     },
 
-    collapseAll: function() {
+    collapseAll: function () {
 
         this.$('.request.active').removeClass('active');
         this.$('.request .server-logs').hide();
 
-        _.each(this._requestViews, function(requestView) {
+        _.each(this._requestViews, function (requestView) {
             requestView.active = false;
         });
     },
 
-    toggleFavorites: function(toggle) {
+    toggleFavorites: function (toggle) {
 
         this.filterFavorites = toggle;
         this._refreshRequestsVisibility();
     },
 
-    filterRequests: function(queryString) {
+    filterRequests: function (queryString) {
 
         var searchCriteria = SearchCriteria.create(queryString);
-        this.searchFilter = function(requestView) {
+        this.searchFilter = function (requestView) {
 
             return searchCriteria.matches(requestView.model.toJSON());
         };
@@ -72,24 +72,24 @@ var FeedBodyView = Backbone.View.extend({
         this._refreshRequestsVisibility();
     },
 
-    _refreshRequestsVisibility: function() {
+    _refreshRequestsVisibility: function () {
 
         _.each(this._requestViews, this._updateRequestVisibility.bind(this));
     },
 
-    _addRequest: function(request) {
+    _addRequest: function (request) {
 
         var requestView = new RequestView({ model: request }).render();
         this._requestViews.push(requestView);
 
         var self = this;
 
-        this.listenTo(requestView, 'serverLogsToggle', function(expanded) {
+        this.listenTo(requestView, 'serverLogsToggle', function (expanded) {
 
             self.trigger('requestExpandToggle', expanded);
         });
 
-        this.listenTo(requestView, 'favoriteToggle', function(favorited) {
+        this.listenTo(requestView, 'favoriteToggle', function (favorited) {
 
             self.trigger('requestFavoriteToggle', favorited);
 
@@ -100,18 +100,18 @@ var FeedBodyView = Backbone.View.extend({
 
         this._updateRequestVisibility(requestView);
 
-        this.listenTo(request, 'change:statusCode', function() {
+        this.listenTo(request, 'change:statusCode', function () {
 
             self._updateRequestVisibility(requestView, true);
         });
 
-        this._checkToScrollToBottom(function() {
+        this._checkToScrollToBottom(function () {
 
             self.$el.append(requestView.$el);
         });
     },
 
-    _checkToScrollToBottom: function(domManipulationFn) {
+    _checkToScrollToBottom: function (domManipulationFn) {
 
         var isScrolledToBottom = this._isScrolledToBottom();
 
@@ -122,7 +122,7 @@ var FeedBodyView = Backbone.View.extend({
         }
     },
 
-    _updateRequestVisibility: function(requestView, isUpdate) {
+    _updateRequestVisibility: function (requestView, isUpdate) {
 
         var show = true;
 
@@ -137,12 +137,12 @@ var FeedBodyView = Backbone.View.extend({
         requestView.toggleVisibility(show);
     },
 
-    _isScrolledToBottom: function() {
+    _isScrolledToBottom: function () {
 
         return ((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
     },
 
-    _scrollToBottom: function() {
+    _scrollToBottom: function () {
 
         window.scrollTo(0,document.body.scrollHeight);
     }

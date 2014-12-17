@@ -1,8 +1,8 @@
-exports.generate = function(clientId) {
+exports.generate = function (clientId) {
 
     return [
         'jQuery.ajaxSetup({',
-        '    beforeSend: function(xhr, settings) {',
+        '    beforeSend: function (xhr, settings) {',
         '        var clientId = \'' + clientId + '\';',
         '        settings.url += ((settings.url.indexOf(\'?\') !== -1) ? \'&\' : \'?\') + \'debug=\' + clientId;',
         '    }',

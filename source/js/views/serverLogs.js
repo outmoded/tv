@@ -11,16 +11,16 @@ var ServerLogsView = Backbone.View.extend({
         'click .json-markup': '_toggleServerLogData'
     },
 
-    initialize: function() {
+    initialize: function () {
 
         var self = this;
-        this.listenTo(this.collection, 'add', function(model) {
+        this.listenTo(this.collection, 'add', function (model) {
 
             this.render();
         });
     },
 
-    render: function() {
+    render: function () {
 
         this.$el.html(this.template(this.collection.toJSON()));
 
@@ -29,14 +29,14 @@ var ServerLogsView = Backbone.View.extend({
         return this;
     },
 
-    _initializeClipboard: function() {
+    _initializeClipboard: function () {
 
         clipboard = this._createZeroClipboard();
 
         var self = this;
-        clipboard.on('ready', function( readyEvent ) {
+        clipboard.on('ready', function ( readyEvent ) {
 
-            clipboard.on( 'beforecopy', function( event ) {
+            clipboard.on( 'beforecopy', function ( event ) {
 
                 clipboard.setData('text/plain', Clipboard.convertToText(self.model.toJSON()));
 
@@ -50,9 +50,9 @@ var ServerLogsView = Backbone.View.extend({
                 self._$clipboard.tooltip('show');
             });
 
-            clipboard.on( 'aftercopy', function( event ) {
+            clipboard.on( 'aftercopy', function ( event ) {
 
-                setTimeout(function() {
+                setTimeout(function () {
 
                     self._$clipboard.tooltip('hide');
                 }, 3000);
@@ -61,7 +61,7 @@ var ServerLogsView = Backbone.View.extend({
         });
     },
 
-    _createZeroClipboard: function() {
+    _createZeroClipboard: function () {
 
         this._$clipboard = this.$('.copy');
 
@@ -72,7 +72,7 @@ var ServerLogsView = Backbone.View.extend({
         return new ZeroClipboard(this._$clipboard.get(0));
     },
 
-    _toggleServerLogData: function(e) {
+    _toggleServerLogData: function (e) {
 
         var $data = $(e.currentTarget);
 

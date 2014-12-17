@@ -15,28 +15,30 @@ var MessageParser = require('../../source/js/messageParser');
 var internals = {};
 
 
-describe('app', function() {
+describe('app', function () {
 
-    describe('#start', function() {
+    describe('#start', function () {
 
-        beforeEach(function(){
+        beforeEach(function (){
+
             this.fakeAppModel = new Backbone.Model();
             var fakeAppView = new Backbone.View({ model: this.fakeAppModel });
             fakeAppView.settingsView = new Backbone.View();
-            this.mockAppViewClass = function() { return fakeAppView; };
+            this.mockAppViewClass = function () { return fakeAppView; };
 
-            this.mockWebSocketManager   = { onMessage: function(){},
-                                            applyFilter: function() {} };
-            this.mockMessageParser      = { addMessage : function() {} };
-            this.mockClientIdGenerator  = { generate: function(){} };
-            this.mockSettingsStore      = { exists: function(){}, get: function() {} };
+            this.mockWebSocketManager   = { onMessage: function (){},
+                                            applyFilter: function () {} };
+            this.mockMessageParser      = { addMessage : function () {} };
+            this.mockClientIdGenerator  = { generate: function (){} };
+            this.mockSettingsStore      = { exists: function (){}, get: function () {} };
 
             this.settingsRenderSpy = sinon.spy(fakeAppView.settingsView, 'render');
             this.settingsShowSpy = sinon.spy();
             fakeAppView.settingsView.show = this.settingsShowSpy;
             this.appRenderSpy = sinon.spy(fakeAppView, 'render');
 
-            this.appStart = function() {
+            this.appStart = function () {
+
                 app.start(this.mockWebSocketManager, this.mockMessageParser,
                           this.mockAppViewClass, this.mockSettingsStore,
                           this.mockClientIdGenerator);
@@ -44,19 +46,22 @@ describe('app', function() {
 
         });
 
-        it('renders the app view', function() {
+        it('renders the app view', function () {
+
             this.appStart();
 
             expect(this.appRenderSpy).to.have.been.calledOnce;
         });
 
-        context('without an existing clientId', function() {
+        context('without an existing clientId', function () {
 
-            beforeEach(function() {
+            beforeEach(function () {
+
                 sinon.stub(this.mockSettingsStore, 'exists').withArgs('clientId').returns(false);
             });
 
-            it('sets the app\'s client id to a random generated client id', function() {
+            it('sets the app\'s client id to a random generated client id', function () {
+
                 sinon.stub(this.mockClientIdGenerator, 'generate').returns('random client id');
 
                 this.appStart();
@@ -64,34 +69,39 @@ describe('app', function() {
                 expect(this.fakeAppModel.get('clientId')).to.eq('random client id');
             });
 
-            it('renders the settings view', function(){
+            it('renders the settings view', function (){
+
                 this.appStart();
 
                 expect(this.settingsRenderSpy).to.have.been.calledOnce;
             });
         });
 
-        describe('when visiting the app for the first time', function() {
+        describe('when visiting the app for the first time', function () {
 
-            beforeEach(function() {
+            beforeEach(function () {
+
                 sinon.stub(this.mockSettingsStore, 'exists').withArgs('channel').returns(false);
 
                 this.appStart();
             });
 
-            it('defaults the channel to "all"', function() {
+            it('defaults the channel to "all"', function () {
+
                 expect(this.fakeAppModel.get('channel')).to.eq('*');
             });
 
-            it('shows the settings view', function() {
+            it('shows the settings view', function () {
+
                 expect(this.settingsShowSpy).to.have.been.calledOnce;
             });
 
         });
 
-        describe('when the socket is openned', function() {
+        describe('when the socket is openned', function () {
 
-            it('sets the channel as the web socket\'s filter', function() {
+            it('sets the channel as the web socket\'s filter', function () {
+
                 var applyFilterSpy = sinon.spy(this.mockWebSocketManager, 'applyFilter');
                 sinon.stub(this.mockSettingsStore, 'get').withArgs('channel').returns('foo');
 
@@ -103,9 +113,10 @@ describe('app', function() {
 
         });
 
-        describe('when a message is received', function(){
+        describe('when a message is received', function (){
 
-            it('adds the message to the message parser', function() {
+            it('adds the message to the message parser', function () {
+
                 var onMessageSpy = sinon.spy(this.mockWebSocketManager, 'onMessage');
                 var addMessageSpy = sinon.spy(this.mockMessageParser, 'addMessage');
 
