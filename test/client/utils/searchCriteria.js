@@ -292,7 +292,7 @@ describe('SearchCriterion', function () {
                         };
 
                         _.each([
-                            'path:customers,',
+                            'path:customers,'
                         ], function (fragment) {
 
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);

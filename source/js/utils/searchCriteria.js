@@ -29,7 +29,7 @@ SearchCriteria.prototype.matches = function (request) {
         })
         .every(function (criterion) {
 
-            return criterion.matches(request); 
+            return criterion.matches(request);
         })
         .value();
 };

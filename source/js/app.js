@@ -15,7 +15,6 @@ var MessageParser = require('./messageParser');
 var AppView = require('./views/app');
 var SettingsStore = require('./settingsStore');
 var ClientIdGenerator = require('./clientIdGenerator');
-var WebSocketManager = require('./webSocketManager');
 
 var app = {
 
