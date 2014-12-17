@@ -1,36 +1,17 @@
 var _ = require('lodash');
-var SettingsStore = require('./settingsStore');
-
-
+var Chance = require('chance');
 
 var internals = {};
 
-internals.defaults = {
-    length: 6,
-    letters: true,
-    numbers: true
-};
-
-internals.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-internals.numbers = '0123456789';
-
 internals.localStorageKey = 'clientId';
-
-
-
 
 exports = module.exports = internals.ClientIdGenerator = {};
 
-internals.ClientIdGenerator._store = SettingsStore;
+internals.ClientIdGenerator.generate = function() {
+    var chance = new Chance();
 
-internals.ClientIdGenerator.generate = function(options) {
-    options = _.defaults(options || {}, internals.defaults);
+    var word = chance.word({ length: 3  });
+    var numbers = chance.string({length: 3, pool: '1234567890'});
 
-    var possible = (options.letters ? internals.letters : '') + (options.numbers ? internals.numbers : '');
-
-    return _.times(options.length, function() {
-        return possible.charAt(Math.floor(Math.random() * possible.length));
-    }).join('');
+    return word + numbers;
 };
-
-internals.ClientIdGenerator.defaults = internals.defaults;
