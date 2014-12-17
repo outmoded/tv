@@ -1,4 +1,4 @@
-window.$ = window.jQuery = require('jquery');
+$ = window.$ = window.jQuery = require('jquery');
 
 var Backbone = require('backbone');
 Backbone.$ = window.$;
@@ -15,6 +15,7 @@ var MessageParser = require('./messageParser');
 var AppView = require('./views/app');
 var SettingsStore = require('./settingsStore');
 var ClientIdGenerator = require('./clientIdGenerator');
+var WebSocketManager = require('./webSocketManager');
 
 var app = {
 
@@ -22,11 +23,15 @@ var app = {
         clientIdGenerator: ClientIdGenerator,
         settingsStore: SettingsStore,
         messageParser: MessageParser.create(),
-        appViewClass: AppView
+        appViewClass: AppView,
+        webSocketManagerClass: WebSocketManager
     },
 
-    start: function (webSocketManager, opts) {
+    start: function (host, port, opts) {
         opts = _.extend(this.defaults, opts);
+
+        var ws = new WebSocket('ws://' + host + ':' + port);
+        var webSocketManager = opts.webSocketManagerClass.create(ws);
 
         var appView = new opts.appViewClass({
             el: 'body',
@@ -58,4 +63,4 @@ var app = {
     }
 };
 
-module.exports = app;
+module.exports = window.app = app;
