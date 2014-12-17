@@ -4,16 +4,10 @@ var sinon = require('sinon');
 var Backbone = require('backbone');
 var ServerLogsView = require('../../../source/js/views/serverLogs');
 var Request = require('../../../source/js/models/request');
-var ZeroClipboard = require('zeroclipboard');
-var Clipboard = require('../../../source/js/clipboard');
 
 // Declare internals
 
 var internals = {};
-
-
-
-
 
 
 internals.RECEIVED = {
@@ -56,7 +50,8 @@ internals.EMPTY_RESPONSE = {
     tags: ['response']
 };
 
-internals.generateView = function(options) {
+internals.generateView = function (options) {
+
     options = options || {};
     options.collection = options.collection || new Request({
         serverLogs: new Backbone.Collection([
@@ -70,23 +65,26 @@ internals.generateView = function(options) {
 };
 
 
-describe('ServerLogsView', function() {
+describe('ServerLogsView', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
+
         this.view = internals.generateView();
     });
 
-    describe('.template', function() {
+    describe('.template', function () {
 
-        it('returns html', function() {
+        it('returns html', function () {
+
             expect(this.view.template()).to.match(/^/);
         });
 
     });
 
-    describe('#initialize', function() {
+    describe('#initialize', function () {
 
-        it('rerenders when a new model is added to the collection', function() {
+        it('rerenders when a new model is added to the collection', function () {
+
             var spy = sinon.spy(this.view, 'render');
 
             this.view.collection.add(internals.RESPONSE);
@@ -96,11 +94,12 @@ describe('ServerLogsView', function() {
 
     });
 
-    describe('.events', function() {
+    describe('.events', function () {
 
-        context('with a click on .data', function() {
+        context('with a click on .data', function () {
 
-            beforeEach(function() {
+            beforeEach(function () {
+
                 this.view.render();
 
                 this.$firstServerLogRow = this.view.$('.server-log').first();
@@ -108,7 +107,8 @@ describe('ServerLogsView', function() {
                 this.$firstServerLogRow.find('.json-markup').click();
             });
 
-            it('toggles the expanded class on the server log row', function() {
+            it('toggles the expanded class on the server log row', function () {
+
                 expect(this.$firstServerLogRow.find('.data').hasClass('expanded')).to.be.true;
             });
 
@@ -116,18 +116,21 @@ describe('ServerLogsView', function() {
 
     });
 
-    describe('#render', function() {
+    describe('#render', function () {
 
-        it('returns the expected number of server log rows', function() {
+        it('returns the expected number of server log rows', function () {
+
             this.view.render();
 
             expect(this.view.$('.server-log')).to.have.length(3);
         });
 
-        it('returns the expected tags', function() {
+        it('returns the expected tags', function () {
+
             this.view.render();
 
-            this.view.collection.each(function(serverLog, index) {
+            this.view.collection.each(function (serverLog, index) {
+
                 var $row = this.view.$('.server-log').eq(index);
 
                 expect($row.find('.tags span')).to.have.length(serverLog.get('tags') ? serverLog.get('tags').length : 0);

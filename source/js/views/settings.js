@@ -14,14 +14,17 @@ var SettingsView = Backbone.View.extend({
     },
 
     initialize: function(options) {
+
         this.settingsModel = options.settingsModel;
         this.model = new Backbone.Model(_.clone(this.settingsModel.attributes));
 
         this.listenTo(this.model, 'change:clientId', function(model, clientId) {
+
             this.$('.jquery-snippet').html(JQuerySnippet.generate(clientId));
         });
 
         this.listenTo(this.settingsModel, 'change', function(model) {
+
             this.model.set({
                 clientId: model.get('clientId'),
                 channel: model.get('channel')
@@ -30,32 +33,38 @@ var SettingsView = Backbone.View.extend({
     },
 
     render: function() {
+
         this.$el.html(this.template(this.model.toJSON()));
 
-        this.$modal = this.$('.modal');
+        this._$modal = this.$('.modal');
 
         return this;
     },
 
     show: function() {
-        this.$modal.modal('show');
+
+        this._$modal.modal('show');
     },
 
     hide: function() {
-        this.$modal.modal('hide');
+
+        this._$modal.modal('hide');
     },
 
     onClientIdInput: function(e) {
+
         this.model.set('clientId', $(e.currentTarget).val());
     },
 
     cancel: function(e) {
+
         this.model.set('clientId', this.settingsModel.get('clientId'));
         this.hide();
         this.render();
     },
 
     submit: function(e) {
+
         var newClientId = this.model.get('clientId');
         var oldClientId = this.settingsModel.get('clientId');
 

@@ -12,19 +12,23 @@ require('./settingsStore');
 
 // describe blocks for test organization
 
-describe('Utilities', function() {
+describe('Utilities', function () {
+
     require('./utils/dateTimeFormatter');
     require('./utils/handlebarsHelpers');
     require('./utils/searchCriteria');
 });
 
-describe('Backbone', function() {
-    describe('Models', function() {
+describe('Backbone', function () {
+
+    describe('Models', function () {
+
         require('./models/request');
         require('./models/settings');
     });
 
-    describe('Views', function() {
+    describe('Views', function () {
+
         require('./views/channelSelector');
         require('./views/request');
         require('./views/serverLogs');
@@ -43,6 +47,7 @@ require('../../source/js/utils/handlebarsHelpers');
 
 if (window.mochaPhantomJS) {
   mochaPhantomJS.run();
-} else {
+}
+else {
   mocha.run();
 }

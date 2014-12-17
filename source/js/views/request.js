@@ -13,13 +13,12 @@ var RequestView = Backbone.View.extend({
         'click .favorite': '_toggleFavorite'
     },
 
-    initialize: function(options) {
-        this.active = false;
-        this.favorited = false;
-        this.visible = false;
-    },
+    favorited: false,
+    active:    false,
+    visible:   false,
 
-    render: function() {
+    render: function () {
+
         var $markup = $(this.template());
 
         new RequestDetailsView({
@@ -33,12 +32,14 @@ var RequestView = Backbone.View.extend({
         return this;
     },
 
-    toggleVisibility: function(visible) {
+    toggleVisibility: function (visible) {
+
         this.visible = visible;
         this.$el.toggleClass('hidden', !visible);
     },
 
-    _toggleServerLogs: function() {
+    _toggleServerLogs: function () {
+
         this.active = !this.active;
 
         this.$el.toggleClass('active', this.active);
@@ -53,14 +54,16 @@ var RequestView = Backbone.View.extend({
 
         if (this.active) {
             this.serverLogsView.$el.show();
-        } else if (this.serverLogsView) {
+        }
+        else if (this.serverLogsView) {
             this.serverLogsView.$el.hide();
         }
 
         this.trigger('serverLogsToggle', this.active);
     },
 
-    _toggleFavorite: function(e) {
+    _toggleFavorite: function (e) {
+
         e.stopPropagation();
 
         this.favorited = !this.favorited;

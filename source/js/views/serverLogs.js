@@ -11,60 +11,69 @@ var ServerLogsView = Backbone.View.extend({
         'click .json-markup': '_toggleServerLogData'
     },
 
-    initialize: function() {
-        this.listenTo(this.collection, 'add', function(model) {
+    initialize: function () {
+
+        var self = this;
+        this.listenTo(this.collection, 'add', function (model) {
+
             this.render();
-        }.bind(this));
+        });
     },
 
-    render: function() {
+    render: function () {
+
         this.$el.html(this.template(this.collection.toJSON()));
 
-        if (!this.clipboard) {
-            this._initializeClipboard();
-        }
+        this._initializeClipboard();
 
         return this;
     },
 
-    _clipboard: function() {
-        this.$clipboard = this.$('.copy');
+    _initializeClipboard: function () {
 
-        ZeroClipboard.config({
-            swfPath: location.href + '/js/ZeroClipboard.swf'
-        });
+        clipboard = this._createZeroClipboard();
 
-        return new ZeroClipboard(this.$clipboard.get(0));
-    },
+        var self = this;
+        clipboard.on('ready', function (readyEvent) {
 
-    _initializeClipboard: function() {
-        this.clipboard = this._clipboard();
+            clipboard.on('beforecopy', function (event) {
 
-        this.clipboard.on('ready', function( readyEvent ) {
+                clipboard.setData('text/plain', Clipboard.convertToText(self.model.toJSON()));
 
-            this.clipboard.on( 'beforecopy', function( event ) {
-                this.clipboard.setData('text/plain', Clipboard.convertToText(this.model.toJSON()));
-
-                this.$clipboard.tooltip({
+                self._$clipboard.tooltip({
                     delay: {hide: 2000},
                     placement: 'left',
                     animation: 'fade',
                     title: 'Copied to clipboard!'
                 });
 
-                this.$clipboard.tooltip('show');
-            }.bind(this));
+                self._$clipboard.tooltip('show');
+            });
 
-            this.clipboard.on( 'aftercopy', function( event ) {
-                setTimeout(function() {
-                    this.$clipboard.tooltip('hide');
-                }.bind(this), 3000);
-            }.bind(this));
+            clipboard.on('aftercopy', function (event) {
 
-        }.bind(this));
+                setTimeout(function () {
+
+                    self._$clipboard.tooltip('hide');
+                }, 3000);
+            });
+
+        });
     },
 
-    _toggleServerLogData: function(e) {
+    _createZeroClipboard: function () {
+
+        this._$clipboard = this.$('.copy');
+
+        ZeroClipboard.config({
+            swfPath: location.href + '/js/ZeroClipboard.swf'
+        });
+
+        return new ZeroClipboard(this._$clipboard.get(0));
+    },
+
+    _toggleServerLogData: function (e) {
+
         var $data = $(e.currentTarget);
 
         $data.closest('.data').toggleClass('expanded');

@@ -6,95 +6,113 @@ var SearchCriteria = require('../utils/searchCriteria').SearchCriteria;
 
 var FeedBodyView = Backbone.View.extend({
 
-    requestViews: [],
+    _requestViews: [],
 
-    initialize: function(options) {
+    initialize: function (options) {
+
         this.listenTo(this.collection, 'add', this._addRequest);
     },
 
-    render: function() {
+    render: function () {
+
         this.clear();
 
         return this;
     },
 
-    clear: function() {
+    clear: function () {
+
         this.$el.empty();
 
-        _.each(this.requestViews, function(requestView) {
+        _.each(this._requestViews, function (requestView) {
             requestView.remove();
         });
 
-        this.requestViews = [];
+        this._requestViews = [];
     },
 
-    hasFavoritedRequests: function() {
-        return _.any(this.requestViews, function(requestView) {
+    hasFavoritedRequests: function () {
+
+        return _.any(this._requestViews, function (requestView) {
             return requestView.favorited;
         });
     },
 
-    hasExpandedRequests: function() {
-        return _.any(this.requestViews, function(requestView) {
+    hasExpandedRequests: function () {
+
+        return _.any(this._requestViews, function (requestView) {
             return requestView.active;
         });
     },
 
-    collapseAll: function() {
+    collapseAll: function () {
+
         this.$('.request.active').removeClass('active');
         this.$('.request .server-logs').hide();
 
-        _.each(this.requestViews, function(requestView) {
+        _.each(this._requestViews, function (requestView) {
             requestView.active = false;
         });
     },
 
-    toggleFavorites: function(toggle) {
+    toggleFavorites: function (toggle) {
+
         this.filterFavorites = toggle;
         this._refreshRequestsVisibility();
     },
 
-    filterRequests: function(queryString) {
+    filterRequests: function (queryString) {
+
         var searchCriteria = SearchCriteria.create(queryString);
-        this.searchFilter = function(requestView) {
+        this.searchFilter = function (requestView) {
+
             return searchCriteria.matches(requestView.model.toJSON());
         };
 
         this._refreshRequestsVisibility();
     },
 
-    _refreshRequestsVisibility: function() {
-        _.each(this.requestViews, _.bind(this._updateRequestVisibility, this));
+    _refreshRequestsVisibility: function () {
+
+        _.each(this._requestViews, this._updateRequestVisibility.bind(this));
     },
 
-    _addRequest: function(request) {
+    _addRequest: function (request) {
+
         var requestView = new RequestView({ model: request }).render();
-        this.requestViews.push(requestView);
+        this._requestViews.push(requestView);
 
-        this.listenTo(requestView, 'serverLogsToggle', _.bind(function(expanded) {
-            this.trigger('requestExpandToggle', expanded);
-        }, this));
+        var self = this;
 
-        this.listenTo(requestView, 'favoriteToggle', _.bind(function(favorited) {
-            this.trigger('requestFavoriteToggle', favorited);
+        this.listenTo(requestView, 'serverLogsToggle', function (expanded) {
 
-            if (!favorited && this.filterFavorites) {
+            self.trigger('requestExpandToggle', expanded);
+        });
+
+        this.listenTo(requestView, 'favoriteToggle', function (favorited) {
+
+            self.trigger('requestFavoriteToggle', favorited);
+
+            if (!favorited && self.filterFavorites) {
                 requestView.toggleVisibility(false);
             }
-        }, this));
+        });
 
         this._updateRequestVisibility(requestView);
 
-        this.listenTo(request, 'change:statusCode', function() {
-            this._updateRequestVisibility(requestView, true);
+        this.listenTo(request, 'change:statusCode', function () {
+
+            self._updateRequestVisibility(requestView, true);
         });
 
-        this._checkToScrollToBottom( _.bind(function() {
-            this.$el.append(requestView.$el);
-        }, this) );
+        this._checkToScrollToBottom(function () {
+
+            self.$el.append(requestView.$el);
+        });
     },
 
-    _checkToScrollToBottom: function(domManipulationFn) {
+    _checkToScrollToBottom: function (domManipulationFn) {
+
         var isScrolledToBottom = this._isScrolledToBottom();
 
         domManipulationFn();
@@ -104,7 +122,8 @@ var FeedBodyView = Backbone.View.extend({
         }
     },
 
-    _updateRequestVisibility: function(requestView, isUpdate) {
+    _updateRequestVisibility: function (requestView, isUpdate) {
+
         var show = true;
 
         if (this.searchFilter && !this.searchFilter(requestView)) {
@@ -118,11 +137,13 @@ var FeedBodyView = Backbone.View.extend({
         requestView.toggleVisibility(show);
     },
 
-    _isScrolledToBottom: function() {
+    _isScrolledToBottom: function () {
+
         return ((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
     },
 
-    _scrollToBottom: function() {
+    _scrollToBottom: function () {
+
         window.scrollTo(0,document.body.scrollHeight);
     }
 

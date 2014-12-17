@@ -50,17 +50,21 @@ var app = {
         }
 
         webSocketManager.onSocketOpen = function() {
+
             webSocketManager.applyFilter(opts.settingsStore.get('channel'));
         };
 
         webSocketManager.onMessage(function(message) {
+
             opts.messageParser.addMessage(message);
         });
     },
 
     _firstVisit: function(store){
+
         return !store.exists('channel');
     }
 };
+
 
 module.exports = window.app = app;

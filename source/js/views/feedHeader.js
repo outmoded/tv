@@ -13,29 +13,35 @@ var FeedHeaderView = Backbone.View.extend({
     },
 
     render: function() {
+
         this.$el.html(this.template());
 
         return this;
     },
 
     clear: function() {
+
         this.disableCollapseAll();
         this.disableFavoritesFilter();
     },
 
     enableCollapseAll: function() {
+
         this.$('.expander').addClass('expanded');
     },
 
     disableCollapseAll: function() {
+
         this.$('.expander').removeClass('expanded');
     },
 
     enableFavoritesFilter: function() {
+
         this.$('.favorite').addClass('enabled');
     },
 
     disableFavoritesFilter: function() {
+
         this.$('.favorite')
             .removeClass('enabled')
             .removeClass('active')
@@ -45,12 +51,14 @@ var FeedHeaderView = Backbone.View.extend({
     },
 
     _collapseAll: function() {
+
         this.$('.expander').removeClass('expanded');
 
         this.trigger('collapseAll');
     },
 
     _applyFavoritesFilter: function(e) {
+
         $(e.currentTarget)
             .removeClass('enabled')
             .addClass('active');
@@ -59,6 +67,7 @@ var FeedHeaderView = Backbone.View.extend({
     },
 
     _removeFavoritesFilter: function(e) {
+
         $(e.currentTarget)
             .removeClass('active')
             .addClass('enabled');

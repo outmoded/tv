@@ -10,7 +10,8 @@ var Request = require('../../../source/js/models/request');
 var internals = {};
 
 
-internals.generateView = function(options) {
+internals.generateView = function (options) {
+
     options = options || {};
     options.model = options.model || new Request({ serverLogs: new Backbone.Collection() });
 
@@ -18,11 +19,12 @@ internals.generateView = function(options) {
 };
 
 
-describe('RequestView', function() {
+describe('RequestView', function () {
 
-    describe('#template', function() {
+    describe('#template', function () {
 
-        it('returns html', function() {
+        it('returns html', function () {
+
             var view = internals.generateView();
 
             expect(view.template()).to.match(/<[a-z][\s\S]*>/); // html elements
@@ -30,41 +32,43 @@ describe('RequestView', function() {
 
     });
 
-    describe('#events', function() {
+    describe('#events', function () {
 
-        context('with a click on .request-details', function() {
+        context('with a click on .request-details', function () {
 
-            beforeEach(function() {
+            beforeEach(function () {
+
                 this.view = internals.generateView();
                 this.view.render();
 
-                this.click = function() {
+                this.click = function () {
                     this.view.$('.request-details').click();
                 }.bind(this);
             });
 
-            afterEach(function() {
+            afterEach(function () {
+
                 delete this.view;
                 delete this.click;
             });
 
+            it('toggles the server logs pane', function () {
 
-
-            it('toggles the server logs pane', function() {
-                expect(this.view.$el.hasClass('active')).to.be.false;
+                expect(this.view.$el).to.not.have.class('active');
 
                 this.click();
 
-                expect(this.view.$el.hasClass('active')).to.be.true;
+                expect(this.view.$el).to.have.class('active');
                 expect(this.view.serverLogsView.$el.css('display')).to.equal('block');
 
                 this.click();
 
-                expect(this.view.$el.hasClass('active')).to.be.false;
+                expect(this.view.$el).to.not.have.class('active');
                 expect(this.view.serverLogsView.$el.css('display')).to.equal('none');
             });
 
-            it('builds the server logs view once and only once', function() {
+            it('builds the server logs view once and only once', function () {
+
                 expect(this.view.serverLogsView).to.be.undefined;
 
                 this.click();
@@ -77,19 +81,21 @@ describe('RequestView', function() {
                 expect(this.view.serverLogsView).to.equal(serverLogsView);
             });
 
-            it('toggles .active', function() {
-                expect(this.view.active).to.be.false;
+            it('toggles .active', function () {
+
+                expect(this.view.$el).to.not.have.class('active');
 
                 this.click();
 
-                expect(this.view.active).to.be.true;
+                expect(this.view.$el).to.have.class('active');
 
                 this.click();
 
-                expect(this.view.active).to.be.false;
+                expect(this.view.$el).to.not.have.class('active');
             });
 
-            it('emits the "serverLogsToggle" event with "true" when shown', function() {
+            it('emits the "serverLogsToggle" event with "true" when shown', function () {
+
                 var spy = sinon.spy();
                 this.view.on('serverLogsToggle', spy);
 
@@ -98,7 +104,8 @@ describe('RequestView', function() {
                 expect(spy).to.have.been.calledWith(true);
             });
 
-            it('emits the "serverLogsToggle" event with "false" when hidden', function() {
+            it('emits the "serverLogsToggle" event with "false" when hidden', function () {
+
                 var spy = sinon.spy();
                 this.view.on('serverLogsToggle', spy);
 
@@ -113,37 +120,44 @@ describe('RequestView', function() {
 
         });
 
-        context('with a click on .favorite', function() {
+        context('with a click on .favorite', function () {
 
-            beforeEach(function() {
+            beforeEach(function () {
+
                 this.view = internals.generateView();
                 this.view.render();
 
-                this.click = function() {
-                    this.view.$('.favorite').click();
-                }.bind(this);
+                this.$favorite = this.view.$('.favorite');
+
+                var self = this;
+                this.click = function () {
+
+                    self.$favorite.click();
+                };
             });
 
-            afterEach(function() {
+            afterEach(function () {
+
                 delete this.view;
                 delete this.click;
+                delete this.$favorite;
             });
 
+            it('toggles .favorited', function () {
 
-
-            it('toggles .favorited', function() {
-                expect(this.view.favorited).to.be.false;
+                expect(this.$favorite).to.not.have.class('active');
 
                 this.click();
 
-                expect(this.view.favorited).to.be.true;
+                expect(this.$favorite).to.have.class('active');
 
                 this.click();
 
-                expect(this.view.favorited).to.be.false;
+                expect(this.$favorite).to.not.have.class('active');
             });
 
-            it('toggles the .active class', function() {
+            it('toggles the .active class', function () {
+
                 expect(this.view.$('.favorite').hasClass('active')).to.be.false;
 
                 this.click();
@@ -155,7 +169,8 @@ describe('RequestView', function() {
                 expect(this.view.$('.favorite').hasClass('active')).to.be.false;
             });
 
-            it('emits the "favoriteToggle" event with "true" when favorited', function() {
+            it('emits the "favoriteToggle" event with "true" when favorited', function () {
+
                 var spy = sinon.spy();
                 this.view.on('favoriteToggle', spy);
 
@@ -164,7 +179,8 @@ describe('RequestView', function() {
                 expect(spy).to.have.been.calledWith(true);
             });
 
-            it('emits the "favoriteToggle" event with "false" when unfavorited', function() {
+            it('emits the "favoriteToggle" event with "false" when unfavorited', function () {
+
                 var spy = sinon.spy();
                 this.view.on('favoriteToggle', spy);
 
@@ -181,24 +197,27 @@ describe('RequestView', function() {
 
     });
 
-    describe('#initialize', function() {
+    describe('#initialize', function () {
 
-        context('with a change to the settings model clientId', function() {
+        context('with a change to the settings model clientId', function () {
 
-            it('sets default boolean properties', function() {
+            it('sets default state', function () {
+
                 this.view = internals.generateView();
 
-                expect(this.view.active).to.be.false;
-                expect(this.view.favorited).to.be.false;
+                expect(this.view.$el).to.not.have.class('active');
+                expect(this.view.$('.favorite')).to.not.have.class('active');
+                expect(this.view.$el).to.have.class('hidden');
             });
 
         });
 
     });
 
-    describe('#render', function() {
+    describe('#render', function () {
 
-        it('has the expected markup', function() {
+        it('has the expected markup', function () {
+
             this.view = internals.generateView();
             this.view.render();
 

@@ -14,50 +14,54 @@ var ToolbarView = Backbone.View.extend({
         'click .pause-resume': '_pauseResumeRequests'
     },
 
-    initialize: function(options) {
-        this.webSocketManager = options.webSocketManager;
-    },
+    render: function () {
 
-    render: function() {
         this.$el.html(this.template());
 
-        this.channelSelectorView = new ChannelSelectorView({ el: this.$('.channel-selector-container'), model: this.model }).render();
+        new ChannelSelectorView({ el: this.$('.channel-selector-container'), model: this.model }).render();
 
         return this;
     },
 
-    _pauseResumeRequests: function(e) {
+    _pauseResumeRequests: function (e) {
+
         var paused = $(e.currentTarget).find('.resume:visible').length === 1;
 
         if (paused) {
             this._resumeRequests();
-        } else {
+        }
+        else {
             this._pauseRequests();
         }
     },
 
-    _pauseRequests: function() {
-        this.webSocketManager.pause();
+    _pauseRequests: function () {
+
         this.$el.find('.pause').addClass('hidden');
         this.$el.find('.resume').removeClass('hidden');
+        this.trigger('pause');
     },
 
-    _resumeRequests: function() {
-        this.webSocketManager.resume();
+    _resumeRequests: function () {
+
         this.$el.find('.pause').removeClass('hidden');
         this.$el.find('.resume').addClass('hidden');
+        this.trigger('resume');
     },
 
-    _triggerSearchChanged: _.debounce(function(e) {
+    _triggerSearchChanged: _.debounce(function (e) {
+
         var queryString = $(e.currentTarget).val();
         this.trigger('searchChanged', queryString);
     }, 200),
 
-    _triggerShowSettings: function() {
+    _triggerShowSettings: function () {
+
         this.trigger('showSettings');
     },
 
-    _triggerClearFeed: function() {
+    _triggerClearFeed: function () {
+
         this.trigger('clearFeed');
     }
 

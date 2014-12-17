@@ -2,22 +2,28 @@ var _ = require('lodash');
 var Backbone = require('backbone');
 var Request = require('./models/request');
 
+
 var MessageParser = function(opts) {
+
     opts = opts || {};
 
     this.requests = new Backbone.Collection();
-    this.responseTimeout = opts.responseTimeout || 2000;
+    this._responseTimeout = opts.responseTimeout || 2000;
 };
 
+
 MessageParser.create = function(opts) {
+
     return new MessageParser(opts);
 };
+
 
 // There is a possibility that the websocket will initialize in the
 // middle of a request, returning a set of server logs that are
 // incomplete to represent a full request. In such cases, we'll
 // disregard these messages.
 MessageParser.prototype.addMessage = function(rawMessage) {
+
     var message = JSON.parse(rawMessage.data);
 
     var request;
@@ -32,29 +38,38 @@ MessageParser.prototype.addMessage = function(rawMessage) {
             this._updateRequestWithResponse(message);
         }
         this._refreshResponseTimeout(message);
-    } else {
+    }
+    else {
         // disregard message
     }
 
     return request;
 };
 
+
 MessageParser.prototype._isResponse = function(message) {
+
     return !!message.response;
 };
 
+
 MessageParser.prototype._isForExistingRequest = function(message) {
+
     return this._findRequest(message);
 };
 
+
 MessageParser.prototype._isFirstMessageForNewRequest = function(message) {
+
     var found = this._findRequest(message);
     var hasReceivedTag = message.tags && message.tags.indexOf('received') !== -1;
 
     return !found && hasReceivedTag;
 };
 
+
 MessageParser.prototype._addRequest = function(message) {
+
     var request = new Request({
         id: message.request,
         path: message.data.url,
@@ -67,23 +82,30 @@ MessageParser.prototype._addRequest = function(message) {
     return request;
 };
 
+
 MessageParser.prototype._updateRequestWithResponse = function(message) {
+
     var request = this._findRequest(message);
 
     request.set('statusCode', message.data.statusCode);
     request.set('isComplete', true);
 };
 
+
 MessageParser.prototype._findRequest = function(message) {
+
     var requestId = message.request;
 
     // findLast looks in reverse order since the request is most likely to be last
     return _.findLast(this.requests.models, function(request) {
+
         return request.id === requestId;
     });
 };
 
+
 MessageParser.prototype._addServerLog = function(message) {
+
     var request = this._findRequest(message);
 
     var serverLog = {
@@ -106,14 +128,18 @@ MessageParser.prototype._addServerLog = function(message) {
     }
 };
 
+
 MessageParser.prototype._isEmptyResponseServerLog = function(message) {
+
     return message.tags &&
         message.tags.length === 1 &&
         message.tags[0] === 'response' &&
         !message.data;
 };
 
+
 MessageParser.prototype._refreshResponseTimeout = function(message) {
+
     var request = this._findRequest(message);
 
     clearTimeout(request.timer);
@@ -124,14 +150,17 @@ MessageParser.prototype._refreshResponseTimeout = function(message) {
     }
 
     if (!this._isResponse(message)) {
-        request.timer = setTimeout(_.bind(function(){
+        var self = this;
+        request.timer = setTimeout(function(){
+
             request.set('statusCode', 'timeout');
             request.set('responseTimeout', true);
             request.set('isComplete', true);
 
-            this.onResponseTimeout && this.onResponseTimeout();
-        }, this), this.responseTimeout);
+            self.onResponseTimeout && self.onResponseTimeout();
+        }, this._responseTimeout);
     }
 };
+
 
 module.exports = MessageParser;
