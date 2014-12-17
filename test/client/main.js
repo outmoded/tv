@@ -1,41 +1,33 @@
-require('es5-shim');
-
 host = 'localhost';
 port = 8000;
+
+require('es5-shim');
+
+// Test files
+
+require('./utils/search/searchCriteria');
+require('./utils/search/searchCriterion');
+
+require('./utils/dateTimeFormatter');
+require('./utils/handlebarsHelpers');
+
+require('./models/request');
+require('./models/settings');
+
+require('./views/channelSelector');
+require('./views/request');
+require('./views/serverLogs');
+require('./views/settings');
+require('./views/app');
 
 require('./app.js');
 require('./clientIdGenerator');
 require('./clipboard');
 require('./messageParser');
-require('./webSocketManager');
 require('./settingsStore');
+require('./webSocketManager');
 
-// describe blocks for test organization
-
-describe('Utilities', function () {
-
-    require('./utils/dateTimeFormatter');
-    require('./utils/handlebarsHelpers');
-    require('./utils/searchCriteria');
-});
-
-describe('Backbone', function () {
-
-    describe('Models', function () {
-
-        require('./models/request');
-        require('./models/settings');
-    });
-
-    describe('Views', function () {
-
-        require('./views/channelSelector');
-        require('./views/request');
-        require('./views/serverLogs');
-        require('./views/settings');
-        require('./views/app');
-    });
-});
+// Test setup
 
 chai.use(require('sinon-chai'));
 chai.use(require('chai-jquery'));

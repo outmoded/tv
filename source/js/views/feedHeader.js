@@ -1,6 +1,5 @@
 var Backbone = require('backbone');
 
-var SearchCriteria = require('../utils/searchCriteria').SearchCriteria;
 
 var FeedHeaderView = Backbone.View.extend({
 

@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 var _ = require('lodash');
 
 var RequestView = require('./request');
-var SearchCriteria = require('../utils/searchCriteria').SearchCriteria;
+var SearchCriteria = require('../utils/search/searchCriteria');
 
 var FeedBodyView = Backbone.View.extend({
 
