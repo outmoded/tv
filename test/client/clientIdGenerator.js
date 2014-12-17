@@ -20,51 +20,18 @@ describe('ClientIdGenerator', function() {
 
         it('returns a code', function() {
             var obj = ClientIdGenerator.generate();
-            expect(ClientIdGenerator.generate()).to.have.length(ClientIdGenerator.defaults.length);
+            expect(ClientIdGenerator.generate()).to.match(/[a-zA-Z]{3}\d{3}/);
         });
 
         it('always returns a \'unique\' code', function() {
-            var clientIds = _.times(30, function() {
+            var clientIds = _.times(30, setTimeout(function() {
                 return ClientIdGenerator.generate();
-            });
+            }, 1)); // chance uses time as a seed
 
+            console.log(clientIds);
             expect(_.unique(clientIds)).to.have.length(clientIds.length);
         });
 
-        context('with length specified', function() {
-
-            it('returns a code of the specified length', function() {
-                expect(ClientIdGenerator.generate({length: 10})).to.have.length(10);
-            });
-
-        });
-
-        context('with only letters specified', function() {
-
-            it('returns a code with only letters', function() {
-                var clientId = ClientIdGenerator.generate({numbers: false});
-
-                var intersection = _.intersection(clientId.split(''), internals.numbers.split(''));
-                expect(intersection).to.have.length(0);
-            });
-
-        });
-
-        context('with only numbers specified', function() {
-
-            it('returns a code with only numbers', function() {
-                var clientId = ClientIdGenerator.generate({letters: false});
-
-                var intersection = _.intersection(clientId.split(''), internals.letters.split(''));
-                expect(intersection).to.have.length(0);
-            });
-
-        });
-
-    });
-
-    afterEach(function() {
-        delete this.storeMock;
     });
 
 });
