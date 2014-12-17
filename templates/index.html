@@ -12,7 +12,9 @@
         <div class="main"></div>
         <script type="text/javascript" src="{{ endpoint }}/js/main.js"></script>
         <script language="javascript">
-            window.app.start('{{ host }}', {{port}});
+            var host = '{{ host }}';
+            var port = {{ port }};
+            window.app.start(host, port);
         </script>
     </body>
 </html>
