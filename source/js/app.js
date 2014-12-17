@@ -3,6 +3,7 @@ var _ = require('lodash');
 require('bootstrap/js/modal');
 require('bootstrap/js/tooltip');
 
+
 var app = {
 
     start: function (webSocketManager, messageParser, appViewClass,
@@ -24,17 +25,21 @@ var app = {
         }
 
         webSocketManager.onSocketOpen = function() {
+
             webSocketManager.applyFilter(settingsStore.get('channel'));
         };
 
         webSocketManager.onMessage(function(message) {
+
             messageParser.addMessage(message);
         });
     },
 
     _firstVisit: function(store){
+
         return !store.exists('channel');
     }
 };
+
 
 module.exports = app;

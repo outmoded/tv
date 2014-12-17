@@ -11,17 +11,21 @@ var ChannelSelectorView = Backbone.View.extend({
     },
 
     initialize: function() {
+
         this.listenTo(this.model, 'change:clientId', function(model, clientId) {
+
             this.$('.client-id').attr('data-channel', clientId).find('span').html(clientId);
         });
 
         this.listenTo(this.model, 'change:channel', function(model, channel) {
+
             this.$('.active').removeClass('active');
             this.$('[data-channel="' + channel + '"]').addClass('active');
         });
     },
 
     render: function() {
+
         var data = {
             clientId: this.model.get('clientId'),
             channel: this.model.get('channel')
@@ -33,6 +37,7 @@ var ChannelSelectorView = Backbone.View.extend({
     },
 
     _updateChannel: function(e) {
+
         this.model.set('channel', $(e.currentTarget).attr('data-channel'));
     }
 

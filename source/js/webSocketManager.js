@@ -1,10 +1,13 @@
 var _ = require('lodash');
 
+
 var WebSocketManager = function(webSocket) {
+
     this._webSocket = webSocket;
 
     var self = this;
     this._webSocket.onopen = function() {
+
         self.isOpen = true;
         if (self.onSocketOpen) {
             self.onSocketOpen();
@@ -12,11 +15,15 @@ var WebSocketManager = function(webSocket) {
     };
 };
 
+
 WebSocketManager.create = function(webSocket) {
+
     return new WebSocketManager(webSocket);
 };
 
+
 WebSocketManager.prototype.applyFilter = function(clientId) {
+
     if (this.clientId) {
         this._webSocket.send('unsubscribe:' + this.clientId);
     }
@@ -28,22 +35,32 @@ WebSocketManager.prototype.applyFilter = function(clientId) {
     }
 };
 
+
 WebSocketManager.prototype.clearFilter = function() {
+
     this.applyFilter('*');
 };
 
+
 WebSocketManager.prototype.resume = function() {
+
     this._webSocket.onmessage = this.onMessageCallback;
 };
 
+
 WebSocketManager.prototype.pause = function() {
+
     this._webSocket.onmessage = null;
 };
 
+
 WebSocketManager.prototype.onMessage = function(fn) {
+
     this._webSocket.onmessage = this.onMessageCallback = fn;
 };
 
+
 WebSocketManager.prototype.onSocketOpen = function(){};
+
 
 module.exports = WebSocketManager;

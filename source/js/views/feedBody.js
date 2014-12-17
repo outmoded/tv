@@ -9,16 +9,19 @@ var FeedBodyView = Backbone.View.extend({
     _requestViews: [],
 
     initialize: function(options) {
+
         this.listenTo(this.collection, 'add', this._addRequest);
     },
 
     render: function() {
+
         this.clear();
 
         return this;
     },
 
     clear: function() {
+
         this.$el.empty();
 
         _.each(this._requestViews, function(requestView) {
@@ -29,18 +32,21 @@ var FeedBodyView = Backbone.View.extend({
     },
 
     hasFavoritedRequests: function() {
+
         return _.any(this._requestViews, function(requestView) {
             return requestView.favorited;
         });
     },
 
     hasExpandedRequests: function() {
+
         return _.any(this._requestViews, function(requestView) {
             return requestView.active;
         });
     },
 
     collapseAll: function() {
+
         this.$('.request.active').removeClass('active');
         this.$('.request .server-logs').hide();
 
@@ -50,13 +56,16 @@ var FeedBodyView = Backbone.View.extend({
     },
 
     toggleFavorites: function(toggle) {
+
         this.filterFavorites = toggle;
         this._refreshRequestsVisibility();
     },
 
     filterRequests: function(queryString) {
+
         var searchCriteria = SearchCriteria.create(queryString);
         this.searchFilter = function(requestView) {
+
             return searchCriteria.matches(requestView.model.toJSON());
         };
 
@@ -64,20 +73,24 @@ var FeedBodyView = Backbone.View.extend({
     },
 
     _refreshRequestsVisibility: function() {
+
         _.each(this._requestViews, this._updateRequestVisibility.bind(this));
     },
 
     _addRequest: function(request) {
+
         var requestView = new RequestView({ model: request }).render();
         this._requestViews.push(requestView);
 
         var self = this;
 
         this.listenTo(requestView, 'serverLogsToggle', function(expanded) {
+
             self.trigger('requestExpandToggle', expanded);
         });
 
         this.listenTo(requestView, 'favoriteToggle', function(favorited) {
+
             self.trigger('requestFavoriteToggle', favorited);
 
             if (!favorited && self.filterFavorites) {
@@ -88,15 +101,18 @@ var FeedBodyView = Backbone.View.extend({
         this._updateRequestVisibility(requestView);
 
         this.listenTo(request, 'change:statusCode', function() {
+
             self._updateRequestVisibility(requestView, true);
         });
 
         this._checkToScrollToBottom(function() {
+
             self.$el.append(requestView.$el);
         });
     },
 
     _checkToScrollToBottom: function(domManipulationFn) {
+
         var isScrolledToBottom = this._isScrolledToBottom();
 
         domManipulationFn();
@@ -107,6 +123,7 @@ var FeedBodyView = Backbone.View.extend({
     },
 
     _updateRequestVisibility: function(requestView, isUpdate) {
+
         var show = true;
 
         if (this.searchFilter && !this.searchFilter(requestView)) {
@@ -121,10 +138,12 @@ var FeedBodyView = Backbone.View.extend({
     },
 
     _isScrolledToBottom: function() {
+
         return ((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
     },
 
     _scrollToBottom: function() {
+
         window.scrollTo(0,document.body.scrollHeight);
     }
 

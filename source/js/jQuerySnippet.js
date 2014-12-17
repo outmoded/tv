@@ -1,4 +1,5 @@
 exports.generate = function(clientId) {
+
     return [
         'jQuery.ajaxSetup({',
         '    beforeSend: function(xhr, settings) {',

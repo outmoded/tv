@@ -18,6 +18,7 @@ var RequestView = Backbone.View.extend({
     visible:   false,
 
     render: function() {
+
         var $markup = $(this.template());
 
         new RequestDetailsView({
@@ -32,11 +33,13 @@ var RequestView = Backbone.View.extend({
     },
 
     toggleVisibility: function(visible) {
+
         this.visible = visible;
         this.$el.toggleClass('hidden', !visible);
     },
 
     _toggleServerLogs: function() {
+
         this.active = !this.active;
 
         this.$el.toggleClass('active', this.active);
@@ -60,6 +63,7 @@ var RequestView = Backbone.View.extend({
     },
 
     _toggleFavorite: function(e) {
+
         e.stopPropagation();
 
         this.favorited = !this.favorited;
