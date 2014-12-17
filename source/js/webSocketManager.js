@@ -3,12 +3,13 @@ var _ = require('lodash');
 var WebSocketManager = function(webSocket) {
     this.webSocket = webSocket;
 
-    this.webSocket.onopen = _.bind( function() {
-        this.isOpen = true;
-        if (this.onSocketOpen) {
-            this.onSocketOpen();
+    var self = this;
+    this.webSocket.onopen = function() {
+        self.isOpen = true;
+        if (self.onSocketOpen) {
+            self.onSocketOpen();
         }
-    }, this);
+    };
 };
 
 WebSocketManager.create = function(webSocket) {

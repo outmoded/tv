@@ -21,9 +21,11 @@ var Settings = Backbone.Model.extend({
     },
 
     _updateSettingsStore: function(model) {
+        var self = this;
+
         var updateSettingsStoreProp = function(value, key) {
-            this._store.set(key, value);
-        }.bind(this);
+            self._store.set(key, value);
+        };
 
         _.each(model.changed, updateSettingsStoreProp);
     }

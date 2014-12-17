@@ -125,13 +125,14 @@ MessageParser.prototype._refreshResponseTimeout = function(message) {
     }
 
     if (!this._isResponse(message)) {
-        request.timer = setTimeout(_.bind(function(){
+        var self = this;
+        request.timer = setTimeout(function(){
             request.set('statusCode', 'timeout');
             request.set('responseTimeout', true);
             request.set('isComplete', true);
 
-            this.onResponseTimeout && this.onResponseTimeout();
-        }, this), this.responseTimeout);
+            self.onResponseTimeout && self.onResponseTimeout();
+        }, this.responseTimeout);
     }
 };
 

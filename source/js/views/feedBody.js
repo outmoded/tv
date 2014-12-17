@@ -64,34 +64,36 @@ var FeedBodyView = Backbone.View.extend({
     },
 
     _refreshRequestsVisibility: function() {
-        _.each(this.requestViews, _.bind(this._updateRequestVisibility, this));
+        _.each(this.requestViews, this._updateRequestVisibility.bind(this));
     },
 
     _addRequest: function(request) {
         var requestView = new RequestView({ model: request }).render();
         this.requestViews.push(requestView);
 
-        this.listenTo(requestView, 'serverLogsToggle', _.bind(function(expanded) {
-            this.trigger('requestExpandToggle', expanded);
-        }, this));
+        var self = this;
 
-        this.listenTo(requestView, 'favoriteToggle', _.bind(function(favorited) {
-            this.trigger('requestFavoriteToggle', favorited);
+        this.listenTo(requestView, 'serverLogsToggle', function(expanded) {
+            self.trigger('requestExpandToggle', expanded);
+        });
 
-            if (!favorited && this.filterFavorites) {
+        this.listenTo(requestView, 'favoriteToggle', function(favorited) {
+            self.trigger('requestFavoriteToggle', favorited);
+
+            if (!favorited && self.filterFavorites) {
                 requestView.toggleVisibility(false);
             }
-        }, this));
+        });
 
         this._updateRequestVisibility(requestView);
 
         this.listenTo(request, 'change:statusCode', function() {
-            this._updateRequestVisibility(requestView, true);
+            self._updateRequestVisibility(requestView, true);
         });
 
-        this._checkToScrollToBottom( _.bind(function() {
-            this.$el.append(requestView.$el);
-        }, this) );
+        this._checkToScrollToBottom(function() {
+            self.$el.append(requestView.$el);
+        });
     },
 
     _checkToScrollToBottom: function(domManipulationFn) {

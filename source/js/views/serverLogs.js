@@ -12,9 +12,10 @@ var ServerLogsView = Backbone.View.extend({
     },
 
     initialize: function() {
+        var self = this;
         this.listenTo(this.collection, 'add', function(model) {
             this.render();
-        }.bind(this));
+        });
     },
 
     render: function() {
@@ -40,28 +41,29 @@ var ServerLogsView = Backbone.View.extend({
     _initializeClipboard: function() {
         this.clipboard = this._clipboard();
 
+        var self = this;
         this.clipboard.on('ready', function( readyEvent ) {
 
-            this.clipboard.on( 'beforecopy', function( event ) {
-                this.clipboard.setData('text/plain', Clipboard.convertToText(this.model.toJSON()));
+            self.clipboard.on( 'beforecopy', function( event ) {
+                self.clipboard.setData('text/plain', Clipboard.convertToText(self.model.toJSON()));
 
-                this.$clipboard.tooltip({
+                self.$clipboard.tooltip({
                     delay: {hide: 2000},
                     placement: 'left',
                     animation: 'fade',
                     title: 'Copied to clipboard!'
                 });
 
-                this.$clipboard.tooltip('show');
-            }.bind(this));
+                self.$clipboard.tooltip('show');
+            });
 
-            this.clipboard.on( 'aftercopy', function( event ) {
+            self.clipboard.on( 'aftercopy', function( event ) {
                 setTimeout(function() {
-                    this.$clipboard.tooltip('hide');
-                }.bind(this), 3000);
-            }.bind(this));
+                    self.$clipboard.tooltip('hide');
+                }, 3000);
+            });
 
-        }.bind(this));
+        });
     },
 
     _toggleServerLogData: function(e) {
