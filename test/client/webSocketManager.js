@@ -78,7 +78,7 @@ describe('WebSocketManager', function () {
 
         it('registers a callback that\'s called whenever a message is received', function () {
 
-            var onMessageFn = function () {};
+            var onMessageFn = function () { };
             this.manager.onMessage(onMessageFn);
 
             expect(this.mockWebSocket.onmessage).to.equal(onMessageFn);
@@ -90,7 +90,7 @@ describe('WebSocketManager', function () {
 
         it('stops forwarding messages to the onMesssage callback', function () {
 
-            var onMessageFn = function () {};
+            var onMessageFn = function () { };
             this.manager.onMessage(onMessageFn);
 
             this.manager.pause();
@@ -104,7 +104,7 @@ describe('WebSocketManager', function () {
 
         it('resumes forwarding messages to the onMesssage callback', function () {
 
-            var onMessageFn = function () {};
+            var onMessageFn = function () { };
             this.manager.onMessage(onMessageFn);
 
             this.manager.pause();

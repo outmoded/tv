@@ -26,11 +26,11 @@ describe('app', function () {
             fakeAppView.settingsView = new Backbone.View();
             this.mockAppViewClass = function () { return fakeAppView; };
 
-            this.mockWebSocketManager   = { onMessage: function (){},
-                                            applyFilter: function () {} };
-            this.mockMessageParser      = { addMessage : function () {} };
-            this.mockClientIdGenerator  = { generate: function (){} };
-            this.mockSettingsStore      = { exists: function (){}, get: function () {} };
+            this.mockWebSocketManager   = { onMessage: function () { },
+                                            applyFilter: function () { } };
+            this.mockMessageParser      = { addMessage : function () { } };
+            this.mockClientIdGenerator  = { generate: function () { } };
+            this.mockSettingsStore      = { exists: function (){ }, get: function () { } };
 
             this.settingsRenderSpy = sinon.spy(fakeAppView.settingsView, 'render');
             this.settingsShowSpy = sinon.spy();

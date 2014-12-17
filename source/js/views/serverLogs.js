@@ -34,9 +34,9 @@ var ServerLogsView = Backbone.View.extend({
         clipboard = this._createZeroClipboard();
 
         var self = this;
-        clipboard.on('ready', function ( readyEvent ) {
+        clipboard.on('ready', function (readyEvent) {
 
-            clipboard.on( 'beforecopy', function ( event ) {
+            clipboard.on('beforecopy', function (event) {
 
                 clipboard.setData('text/plain', Clipboard.convertToText(self.model.toJSON()));
 
@@ -50,7 +50,7 @@ var ServerLogsView = Backbone.View.extend({
                 self._$clipboard.tooltip('show');
             });
 
-            clipboard.on( 'aftercopy', function ( event ) {
+            clipboard.on('aftercopy', function (event) {
 
                 setTimeout(function () {
 

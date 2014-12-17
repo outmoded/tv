@@ -19,7 +19,7 @@ describe('AppView', function () {
 
     describe('#render', function () {
 
-        beforeEach( function () {
+        beforeEach(function () {
 
             var fakeModel = new Backbone.Model();
             var fakeCollection = new Backbone.Collection();

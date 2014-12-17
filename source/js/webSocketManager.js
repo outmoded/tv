@@ -60,7 +60,7 @@ WebSocketManager.prototype.onMessage = function (fn) {
 };
 
 
-WebSocketManager.prototype.onSocketOpen = function (){};
+WebSocketManager.prototype.onSocketOpen = function () { };
 
 
 module.exports = WebSocketManager;
