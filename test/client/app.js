@@ -20,16 +20,27 @@ describe('app', function() {
     describe('#start', function() {
 
         beforeEach(function(){
+            var self = this;
+
             this.fakeAppModel = new Backbone.Model();
             var fakeAppView = new Backbone.View({ model: this.fakeAppModel });
             fakeAppView.settingsView = new Backbone.View();
             this.mockAppViewClass = function() { return fakeAppView; };
 
-            this.mockWebSocketManager   = { onMessage: function(){},
-                                            applyFilter: function() {} };
-            this.mockMessageParser      = { addMessage : function() {} };
-            this.mockClientIdGenerator  = { generate: function(){} };
-            this.mockSettingsStore      = { exists: function(){}, get: function() {} };
+            this.mockWebSocketManager = {
+                onMessage: function() {},
+                applyFilter: function() {}
+            };
+
+            var mockWebSocketManagerClass = {
+                create: function() {
+                    return self.mockWebSocketManager;
+                }
+            };
+
+            this.mockMessageParser = { addMessage : function() {} };
+            this.mockClientIdGenerator = { generate: function(){} };
+            this.mockSettingsStore = { exists: function(){}, get: function() {} };
 
             this.settingsRenderSpy = sinon.spy(fakeAppView.settingsView, 'render');
             this.settingsShowSpy = sinon.spy();
@@ -37,9 +48,13 @@ describe('app', function() {
             this.appRenderSpy = sinon.spy(fakeAppView, 'render');
 
             this.appStart = function() {
-                app.start(this.mockWebSocketManager, this.mockMessageParser,
-                          this.mockAppViewClass, this.mockSettingsStore,
-                          this.mockClientIdGenerator);
+                app.start('localhost', 8000, {
+                    messageParser: this.mockMessageParser,
+                    appViewClass: this.mockAppViewClass,
+                    settingsStore: this.mockSettingsStore,
+                    clientIdGenerator: this.mockClientIdGenerator,
+                    webSocketManagerClass: mockWebSocketManagerClass
+                });
             };
 
         });

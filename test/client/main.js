@@ -1,11 +1,14 @@
 require('es5-shim');
 
+host = 'localhost';
+port = 8000;
+
+require('./app.js');
 require('./clientIdGenerator');
 require('./clipboard');
 require('./messageParser');
 require('./webSocketManager');
 require('./settingsStore');
-require('./app.js');
 
 // describe blocks for test organization
 
@@ -29,9 +32,6 @@ describe('Backbone', function() {
         require('./views/app');
     });
 });
-
-host = 'localhost';
-port = 8000;
 
 chai.use(require('sinon-chai'));
 chai.use(require('chai-jquery'));
