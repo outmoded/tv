@@ -27,6 +27,7 @@ var app = {
     },
 
     start: function (host, port, opts) {
+
         opts = _.extend(this.defaults, opts);
 
         var ws = new WebSocket('ws://' + host + ':' + port);
