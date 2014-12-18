@@ -1,17 +1,17 @@
 ![tv Logo](https://raw.github.com/spumko/tv/master/images/tv.png)
 
-Interactive debug console plugin for [**hapi**](https://github.com/hapijs/hapi)
+TV is an interactive debug console plugin for [**hapi**](https://github.com/hapijs/hapi)
 
 [![Build Status](https://secure.travis-ci.org/hapijs/tv.png)](http://travis-ci.org/hapijs/tv)
 
 Lead Maintainer: [Wyatt Preul](https://github.com/wpreul)
 
-TV, a debug console, is a simple web page in which developers can view server logs for their requests. Optionally, they can also filter the server logs to just their requests by attaching a unique client id to each request. The server will use WebSocket to stream the subscribed request logs to the web page in real-time. 
+TV is a simple web page in which developers can view server logs for their requests. Optionally, they can also filter the server logs to just their requests by attaching a unique client id to each request. The server will use WebSocket to stream the logs to the web application in real-time. 
 
 
 ### Using TV in Your Application
 
-To enable TV in a **hapi** application, install **tv** and register it.  Below is an example of registering **tv**:
+To enable TV in a **hapi** application, install **tv** and register it.  Below is an example of registering the **tv** plugin:
 
 ```javascript
 var Hapi = require('hapi');
@@ -27,10 +27,12 @@ server.register(Tv, function (err) {
 });
 ```
 
+In applications using multiple server instances, only one server can enable the debug interface using the default port.
+
 
 ### Options
 
-In applications using multiple server instances, only one server can enable the debug interface using the default port. Below are the options available to be passed into the **tv** plugin:
+Below are the options available to be passed into the **tv** plugin:
 
 - `host` - the hostname, IP address, or path to UNIX domain socket the WebSocket connection is bound to. Defaults to _undefined_ and therefore `0.0.0.0`
    which means any available network interface(see hapi `new Server()`).
