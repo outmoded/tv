@@ -1,8 +1,12 @@
+// Load modules
+
 var _ = require('lodash');
 var Chance = require('chance');
 
 var SettingsStore = require('./settingsStore');
 
+
+// Declare internals
 
 var internals = {};
 

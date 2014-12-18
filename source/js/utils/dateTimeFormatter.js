@@ -1,4 +1,12 @@
+// Load modules
+
 var moment = require('moment');
+
+
+// Declare internals
+
+var internals = {};
+
 
 var DateTimeFormatter = {
 

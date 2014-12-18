@@ -1,6 +1,14 @@
+// Load modules
+
 var _ = require('lodash');
 var Backbone = require('backbone');
+
 var Request = require('./models/request');
+
+
+// Declare internals
+
+var internals = {};
 
 
 var MessageParser = function(opts) {

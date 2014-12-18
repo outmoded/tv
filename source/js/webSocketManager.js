@@ -1,4 +1,11 @@
+// Load modules
+
 var _ = require('lodash');
+
+
+// Declare internals
+
+var internals = {};
 
 
 var WebSocketManager = function (webSocket) {

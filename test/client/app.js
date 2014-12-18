@@ -1,8 +1,6 @@
 // Load modules
 
 var Backbone = require('backbone');
-Backbone.$ = require('jquery');
-
 var sinon = require('sinon');
 
 var app = require('../../source/js/app');

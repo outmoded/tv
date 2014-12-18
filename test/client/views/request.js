@@ -5,6 +5,7 @@ var Backbone = require('backbone');
 var RequestView = require('../../../source/js/views/request');
 var Request = require('../../../source/js/models/request');
 
+
 // Declare internals
 
 var internals = {};

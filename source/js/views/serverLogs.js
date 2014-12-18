@@ -1,7 +1,16 @@
+// Load modules
+
 var Backbone = require('backbone');
 var _ = require('lodash');
+
 var Clipboard = require('../clipboard');
 var ZeroClipboard = require('zeroclipboard');
+
+
+// Declare internals
+
+var internals = {};
+
 
 var ServerLogsView = Backbone.View.extend({
 

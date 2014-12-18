@@ -1,3 +1,5 @@
+// Load modules
+
 var Backbone = require('backbone');
 
 var ToolbarView = require('./toolbar');
@@ -5,6 +7,12 @@ var FeedHeaderView = require('./feedHeader');
 var FeedBodyView = require('./feedBody');
 var SettingsView = require('./settings');
 var Settings = require('../models/settings');
+
+
+// Declare internals
+
+var internals = {};
+
 
 var AppView = Backbone.View.extend({
 

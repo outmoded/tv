@@ -1,3 +1,5 @@
+// Load modules
+
 // Hooks to integrate mocha-phantomjs with istanbul coverage
 module.exports = {
   afterEnd: function (runner) {

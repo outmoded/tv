@@ -1,5 +1,13 @@
+// Load modules
+
 var Backbone = require('backbone');
 var moment = require('moment');
+
+
+// Declare internals
+
+var internals = {};
+
 
 var RequestDetailsView = Backbone.View.extend({
 

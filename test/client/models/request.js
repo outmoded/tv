@@ -1,5 +1,14 @@
+// Load modules
+
 var Backbone = require('backbone');
+
 var Request = require('../../../source/js/models/request');
+
+
+// Declare internals
+
+var internals = {};
+
 
 describe('Request', function () {
 

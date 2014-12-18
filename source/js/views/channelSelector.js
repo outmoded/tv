@@ -1,5 +1,13 @@
+// Load modules
+
 var Backbone = require('backbone');
+
 var SettingsStore = require('../settingsStore');
+
+
+// Declare internals
+
+var internals = {};
 
 
 var ChannelSelectorView = Backbone.View.extend({

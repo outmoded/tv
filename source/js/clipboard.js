@@ -1,15 +1,21 @@
+// Load modules
+
 var _ = require('lodash');
 
 
-var internals = {};
+// Declare internals
 
-internals.requests = {};
-internals.requests.prefix = '';
-internals.requests.separator = '=============';
+var internals = {
+    requests: {
+        prefix: '',
+        separator: '============='
+    },
+    serverLogs: {
+        prefix: '  ',
+        separator: '  -------------'
+    }
+};
 
-internals.serverLogs = {};
-internals.serverLogs.prefix = '  ';
-internals.serverLogs.separator = internals.serverLogs.prefix + '-------------';
 
 
 exports = module.exports = internals.Clipboard = function(request) {

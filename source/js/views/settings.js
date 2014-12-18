@@ -1,7 +1,16 @@
+// Load modules
+
 var _ = require('lodash');
 var Backbone = require('backbone');
+
 var SettingsStore = require('../settingsStore');
-var JQuerySnippet = require('../jQuerySnippet');
+var JQuerySnippetGenerator = require('../jQuerySnippetGenerator');
+
+
+// Declare internals
+
+var internals = {};
+
 
 var SettingsView = Backbone.View.extend({
 
@@ -20,7 +29,7 @@ var SettingsView = Backbone.View.extend({
 
         this.listenTo(this.model, 'change:clientId', function(model, clientId) {
 
-            this.$('.jquery-snippet').html(JQuerySnippet.generate(clientId));
+            this.$('.jquery-snippet').html(JQuerySnippetGenerator.generate(clientId));
         });
 
         this.listenTo(this.settingsModel, 'change', function(model) {

@@ -1,7 +1,15 @@
+// Load modules
+
 var Backbone = require('backbone');
 var _ = require('lodash');
 
 var ChannelSelectorView = require('./channelSelector');
+
+
+// Declare internals
+
+var internals = {};
+
 
 var ToolbarView = Backbone.View.extend({
 

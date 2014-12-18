@@ -1,12 +1,13 @@
 // Load modules
 
 var Backbone = require('backbone');
+
 var SettingsView = require('../../../source/js/views/settings');
+
 
 // Declare internals
 
 var internals = {};
-
 
 internals.generateView = function (options) {
 

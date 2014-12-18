@@ -3,6 +3,7 @@
 var Backbone = require('backbone');
 var ChannelSelectorView = require('../../../source/js/views/channelSelector');
 
+
 // Declare internals
 
 var internals = {};

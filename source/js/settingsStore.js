@@ -1,3 +1,11 @@
+// Load modules
+
+
+// Declare internals
+
+var internals = {};
+
+
 var SettingsStore = exports = module.exports = {
 
     exists: function (key) {

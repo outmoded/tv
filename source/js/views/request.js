@@ -1,6 +1,15 @@
+// Load modules
+
 var Backbone = require('backbone');
+
 var ServerLogsView = require('./serverLogs');
 var RequestDetailsView = require('./requestDetails');
+
+
+// Declare internals
+
+var internals = {};
+
 
 var RequestView = Backbone.View.extend({
 

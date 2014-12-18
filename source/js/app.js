@@ -1,20 +1,28 @@
-$ = window.$ = window.jQuery = require('jquery');
+// Load modules
+
+window.$ = window.jQuery = require('jquery');
 
 var Backbone = require('backbone');
 Backbone.$ = window.$;
+
+var _ = require('lodash');
 
 require('bootstrap/js/modal');
 require('bootstrap/js/tooltip');
 
 require('./utils/handlebarsHelpers');
 
-var _ = require('lodash');
-
 var WebSocketManager = require('./webSocketManager');
 var MessageParser = require('./messageParser');
 var AppView = require('./views/app');
 var SettingsStore = require('./settingsStore');
 var ClientIdGenerator = require('./clientIdGenerator');
+
+
+// Declare internals
+
+var internals = {};
+
 
 var app = {
 

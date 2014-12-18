@@ -1,6 +1,15 @@
+// Load modules
+
 var _ = require('lodash');
 var Backbone = require('backbone');
+
 var SettingsStore = require('../settingsStore');
+
+
+// Declare internals
+
+var internals = {};
+
 
 var Settings = Backbone.Model.extend({
 

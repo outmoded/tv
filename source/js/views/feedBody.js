@@ -1,8 +1,16 @@
+// Load modules
+
 var Backbone = require('backbone');
 var _ = require('lodash');
 
 var RequestView = require('./request');
 var SearchCriteria = require('../utils/search/searchCriteria');
+
+
+// Declare internals
+
+var internals = {};
+
 
 var FeedBodyView = Backbone.View.extend({
 

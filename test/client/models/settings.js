@@ -1,14 +1,14 @@
 // Load modules
 
 var Backbone = require('backbone');
-var Settings = require('../../../source/js/models/settings');
 var sinon = require('sinon');
+
+var Settings = require('../../../source/js/models/settings');
+
 
 // Declare internals
 
 var internals = {};
-
-
 
 
 describe('Settings', function () {

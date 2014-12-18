@@ -2,9 +2,11 @@
 
 var _ = require('lodash');
 var Handlebars = require('hbsfy/runtime');
+var sinon = require('sinon');
+
 var DateTimeFormatter = require('../../../source/js/utils/dateTimeFormatter');
 var helpers = require('../../../source/js/utils/handlebarsHelpers');
-var sinon = require('sinon');
+
 
 // Declare internals
 

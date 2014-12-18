@@ -11,9 +11,11 @@ var FeedHeaderView = require('../../../source/js/views/feedHeader');
 var FeedBodyView = require('../../../source/js/views/feedBody');
 var SettingsView = require('../../../source/js/views/settings');
 
+
 // Declare internals
 
 var internals = {};
+
 
 describe('AppView', function () {
 

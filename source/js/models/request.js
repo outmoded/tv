@@ -1,5 +1,14 @@
+// Load modules
+
 var Backbone = require('backbone');
+
 var DateTimeFormatter = require('../utils/dateTimeFormatter');
+
+
+// Declare internals
+
+var internals = {};
+
 
 var Request = Backbone.Model.extend({
 
