@@ -13,15 +13,15 @@ exports = module.exports = internals.RequestDetailsView = Backbone.View.extend({
 
     template: require('../templates/requestDetails.hbs'),
 
-    initialize: function() {
+    initialize: function () {
 
-        this.listenTo(this.model, 'change', function(){
+        this.listenTo(this.model, 'change', function (){
 
             this.render();
         });
     },
 
-    render: function() {
+    render: function () {
 
         var $markup = $(this.template(this.model.attributes));
 

@@ -26,12 +26,12 @@ describe('app', function () {
             this.mockAppViewClass = function () { return fakeAppView; };
 
             this.mockWebSocketManager = {
-                onMessage: function() {},
-                applyFilter: function() {}
+                onMessage: function () { },
+                applyFilter: function () { }
             };
 
             var mockWebSocketManagerClass = {
-                create: function() {
+                create: function () {
                     return self.mockWebSocketManager;
                 }
             };
@@ -43,7 +43,7 @@ describe('app', function () {
             fakeAppView.settingsView.show = this.settingsShowSpy;
             this.appRenderSpy = sinon.spy(fakeAppView, 'render');
 
-            this.appStart = function() {
+            this.appStart = function () {
                 app.start('localhost', 8000, {
                     messageParser: this.mockMessageParser,
                     appViewClass: this.mockAppViewClass,

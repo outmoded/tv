@@ -13,35 +13,35 @@ exports = module.exports = internals.FeedHeaderView = Backbone.View.extend({
         'click .favorite.active': '_removeFavoritesFilter'
     },
 
-    render: function() {
+    render: function () {
 
         this.$el.html(this.template());
 
         return this;
     },
 
-    clear: function() {
+    clear: function () {
 
         this.disableCollapseAll();
         this.disableFavoritesFilter();
     },
 
-    enableCollapseAll: function() {
+    enableCollapseAll: function () {
 
         this.$('.expander').addClass('expanded');
     },
 
-    disableCollapseAll: function() {
+    disableCollapseAll: function () {
 
         this.$('.expander').removeClass('expanded');
     },
 
-    enableFavoritesFilter: function() {
+    enableFavoritesFilter: function () {
 
         this.$('.favorite').addClass('enabled');
     },
 
-    disableFavoritesFilter: function() {
+    disableFavoritesFilter: function () {
 
         this.$('.favorite')
             .removeClass('enabled')
@@ -51,14 +51,14 @@ exports = module.exports = internals.FeedHeaderView = Backbone.View.extend({
         this.trigger('toggleFavorites', false);
     },
 
-    _collapseAll: function() {
+    _collapseAll: function () {
 
         this.$('.expander').removeClass('expanded');
 
         this.trigger('collapseAll');
     },
 
-    _applyFavoritesFilter: function(e) {
+    _applyFavoritesFilter: function (e) {
 
         $(e.currentTarget)
             .removeClass('enabled')
@@ -67,7 +67,7 @@ exports = module.exports = internals.FeedHeaderView = Backbone.View.extend({
         this.trigger('toggleFavorites', true);
     },
 
-    _removeFavoritesFilter: function(e) {
+    _removeFavoritesFilter: function (e) {
 
         $(e.currentTarget)
             .removeClass('active')

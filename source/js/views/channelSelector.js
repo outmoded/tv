@@ -18,21 +18,21 @@ exports = module.exports = internals.ChannelSelectorView = Backbone.View.extend(
         'click button': '_updateChannel'
     },
 
-    initialize: function() {
+    initialize: function () {
 
-        this.listenTo(this.model, 'change:clientId', function(model, clientId) {
+        this.listenTo(this.model, 'change:clientId', function (model, clientId) {
 
             this.$('.client-id').attr('data-channel', clientId).find('span').html(clientId);
         });
 
-        this.listenTo(this.model, 'change:channel', function(model, channel) {
+        this.listenTo(this.model, 'change:channel', function (model, channel) {
 
             this.$('.active').removeClass('active');
             this.$('[data-channel="' + channel + '"]').addClass('active');
         });
     },
 
-    render: function() {
+    render: function () {
 
         var data = {
             clientId: this.model.get('clientId'),
@@ -44,7 +44,7 @@ exports = module.exports = internals.ChannelSelectorView = Backbone.View.extend(
         return this;
     },
 
-    _updateChannel: function(e) {
+    _updateChannel: function (e) {
 
         this.model.set('channel', $(e.currentTarget).attr('data-channel'));
     }

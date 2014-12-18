@@ -14,7 +14,7 @@ var internals = {
 exports = module.exports = internals.ClientIdGenerator = {};
 
 
-internals.ClientIdGenerator.generate = function() {
+internals.ClientIdGenerator.generate = function () {
 
     var chance = new Chance();
 

@@ -17,31 +17,31 @@ var internals = {
 };
 
 
-exports = module.exports = internals.RequestToTextConverter = function(request) {
+exports = module.exports = internals.RequestToTextConverter = function (request) {
 
     this._request = request;
 };
 
 
-internals.RequestToTextConverter.create = function(request) {
+internals.RequestToTextConverter.create = function (request) {
 
     return new internals.RequestToTextConverter(request);
 };
 
 
-internals.RequestToTextConverter.convertToText = function(request) {
+internals.RequestToTextConverter.convertToText = function (request) {
 
     return internals.RequestToTextConverter.create(request).convertToText();
 };
 
 
-internals.RequestToTextConverter.prototype.convertToText = function() {
+internals.RequestToTextConverter.prototype.convertToText = function () {
 
     return [this._buildRequestText(), this._buildServerLogsText()].join('\n\n');
 };
 
 
-internals.RequestToTextConverter.prototype._buildRequestText = function() {
+internals.RequestToTextConverter.prototype._buildRequestText = function () {
 
     return [
         ['Path:', this._request.method.toUpperCase(), this._request.path].join(' '),
@@ -51,13 +51,13 @@ internals.RequestToTextConverter.prototype._buildRequestText = function() {
 };
 
 
-internals.RequestToTextConverter.prototype._buildServerLogsText = function() {
+internals.RequestToTextConverter.prototype._buildServerLogsText = function () {
 
     return _.map(this._request.serverLogs, this._buildServerLogText, this).join('\n' + internals.serverLogs.separator + '\n');
 };
 
 
-internals.RequestToTextConverter.prototype._buildServerLogText = function(serverLog) {
+internals.RequestToTextConverter.prototype._buildServerLogText = function (serverLog) {
 
     return [
         internals.serverLogs.prefix + ['Tags:', JSON.stringify(serverLog.tags)].join(' '),

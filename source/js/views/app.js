@@ -40,7 +40,7 @@ exports = module.exports = internals.AppView = Backbone.View.extend({
         return this;
     },
 
-    _firstVisit: function(store){
+    _firstVisit: function (store){
 
         return !store.exists('channel');
     },
@@ -102,7 +102,7 @@ exports = module.exports = internals.AppView = Backbone.View.extend({
         return settingsView;
     },
 
-    _firstVisit: function(){
+    _firstVisit: function (){
 
         return !SettingsStore.exists('channel');
     },

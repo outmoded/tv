@@ -22,17 +22,17 @@ exports = module.exports = internals.SettingsView = Backbone.View.extend({
         'keyup [name=client-id]': '_onClientIdInput'
     },
 
-    initialize: function(options) {
+    initialize: function (options) {
 
         this.settingsModel = options.settingsModel;
         this.model = new Backbone.Model(_.clone(this.settingsModel.attributes));
 
-        this.listenTo(this.model, 'change:clientId', function(model, clientId) {
+        this.listenTo(this.model, 'change:clientId', function (model, clientId) {
 
             this.$('.jquery-snippet').html(JQuerySnippetGenerator.generate(clientId));
         });
 
-        this.listenTo(this.settingsModel, 'change', function(model) {
+        this.listenTo(this.settingsModel, 'change', function (model) {
 
             this.model.set({
                 clientId: model.get('clientId'),
@@ -41,7 +41,7 @@ exports = module.exports = internals.SettingsView = Backbone.View.extend({
         });
     },
 
-    render: function() {
+    render: function () {
 
         this.$el.html(this.template(this.model.toJSON()));
 
@@ -50,22 +50,22 @@ exports = module.exports = internals.SettingsView = Backbone.View.extend({
         return this;
     },
 
-    show: function() {
+    show: function () {
 
         this._$modal.modal('show');
     },
 
-    hide: function() {
+    hide: function () {
 
         this._$modal.modal('hide');
     },
 
-    _onClientIdInput: function(e) {
+    _onClientIdInput: function (e) {
 
         this.model.set('clientId', $(e.currentTarget).val());
     },
 
-    _cancel: function(e) {
+    _cancel: function (e) {
 
         this.model.set('clientId', this.settingsModel.get('clientId'));
 
@@ -74,7 +74,7 @@ exports = module.exports = internals.SettingsView = Backbone.View.extend({
         this.render();
     },
 
-    _submit: function(e) {
+    _submit: function (e) {
 
         var newClientId = this.model.get('clientId');
         var oldClientId = this.settingsModel.get('clientId');

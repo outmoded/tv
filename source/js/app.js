@@ -48,12 +48,12 @@ exports = module.exports = window.app = internals.App = {
             webSocketManager: webSocketManager
         }).render();
 
-        webSocketManager.onSocketOpen = function() {
+        webSocketManager.onSocketOpen = function () {
 
             webSocketManager.applyFilter(settingsStore.get('channel'));
         };
 
-        webSocketManager.onMessage(function(message) {
+        webSocketManager.onMessage(function (message) {
 
             opts.messageParser.addMessage(message);
         });

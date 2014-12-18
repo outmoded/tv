@@ -18,13 +18,13 @@ describe('RequestDetailsView', function () {
 
     describe('#render', function () {
 
-        context('with a request that has an error', function() {
+        context('with a request that has an error', function () {
 
             it('displays that the request has an error');
 
         });
 
-        context('with a request that has a warning', function() {
+        context('with a request that has a warning', function () {
 
             it('displays that the request has a warning');
 
