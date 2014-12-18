@@ -20,12 +20,10 @@
     "handlebars": "2.0.x",
     "hbsfy": "^2.2.0",
     "hoek": "2.x.x",
-    "interact": "taye/interact.js",
     "jquery": "^2.1.1",
     "json-markup": "^0.1.6",
     "lodash": "^2.4.1",
     "moment": "^2.8.4",
-    "prettify": "^0.1.7",
     "ws": "0.4.x",
     "zeroclipboard": "^2.1.6"
   },
