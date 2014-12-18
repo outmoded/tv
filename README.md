@@ -9,7 +9,7 @@ Lead Maintainer: [Wyatt Preul](https://github.com/wpreul)
 TV, a debug console, is a simple web page in which developers can view server logs for their requests. Optionally, they can also filter the server logs to just their requests by attaching a unique client id to each request. The server will use WebSocket to stream the subscribed request logs to the web page in real-time. 
 
 
-### Registering TV
+### Using TV in Your Application
 
 To enable TV in a **hapi** application, install **tv** and register it.  Below is an example of registering **tv**:
 
