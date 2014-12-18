@@ -56,7 +56,7 @@
     "watch-test": "watchify -t hbsfy -e test/client/main.js test/client/**/*.js -o test/bundle.js -d -v",
     "watch-styles": "node-sass source/styles/style.scss public/css/style.css -w source/styles -r",
     "watch": "npm run build && npm run watch-js & npm run watch-test & npm run watch-styles & npm run post-js",
-    "copy-fonts": "cp -R source/fonts/vendor/bootstrap public/fonts",
+    "copy-fonts": "cp -R source/fonts/vendor/bootstrap/** public/fonts",
     "copy-assets": "cp -R vendor/ZeroClipboard.swf public/js",
     "build-js": "browserify -t hbsfy -e source/js/app.js source/js/**/*.js > public/js/main.js -d",
     "build-test": "browserify -t hbsfy -t [ browserify-istanbul --ignore **/*.hbs ] test/client/main.js -o test/bundle.js",
