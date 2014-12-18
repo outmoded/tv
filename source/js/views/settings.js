@@ -12,7 +12,7 @@ var JQuerySnippetGenerator = require('../utils/jQuerySnippetGenerator');
 var internals = {};
 
 
-var SettingsView = Backbone.View.extend({
+exports = module.exports = internals.SettingsView = Backbone.View.extend({
 
     template: require('../templates/settings.hbs'),
 
@@ -86,5 +86,3 @@ var SettingsView = Backbone.View.extend({
     }
 
 });
-
-module.exports = SettingsView;

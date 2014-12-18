@@ -24,7 +24,7 @@ var ClientIdGenerator = require('./utils/clientIdGenerator');
 var internals = {};
 
 
-var app = {
+exports = module.exports = window.app = internals.App = {
 
     defaults: {
         clientIdGenerator: ClientIdGenerator,
@@ -73,6 +73,3 @@ var app = {
         return !store.exists('channel');
     }
 };
-
-
-module.exports = window.app = app;

@@ -10,7 +10,7 @@ var SettingsStore = require('../settingsStore');
 var internals = {};
 
 
-var ChannelSelectorView = Backbone.View.extend({
+exports = module.exports = internals.ChannelSelectorView = Backbone.View.extend({
 
     template: require('../templates/channelSelector.hbs'),
 
@@ -50,5 +50,3 @@ var ChannelSelectorView = Backbone.View.extend({
     }
 
 });
-
-module.exports = ChannelSelectorView;

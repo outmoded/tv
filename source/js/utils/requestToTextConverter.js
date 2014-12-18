@@ -17,7 +17,6 @@ var internals = {
 };
 
 
-
 exports = module.exports = internals.RequestToTextConverter = function(request) {
 
     this._request = request;

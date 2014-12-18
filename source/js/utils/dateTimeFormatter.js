@@ -8,7 +8,7 @@ var moment = require('moment');
 var internals = {};
 
 
-var DateTimeFormatter = {
+exports = module.exports = internals.DateTimeFormatter = {
 
     longTime: function (timestamp) {
 
@@ -21,5 +21,3 @@ var DateTimeFormatter = {
     }
 
 };
-
-module.exports = DateTimeFormatter;

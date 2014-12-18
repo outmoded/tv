@@ -154,4 +154,3 @@ internals.SearchCriterion.prototype._matchesValue = function (request, property,
 
     return actualValue.toString().toLowerCase().indexOf(expectedValue.toLowerCase()) !== -1;
 };
-

@@ -11,7 +11,7 @@ var Request = require('./models/request');
 var internals = {};
 
 
-var MessageParser = function(opts) {
+exports = module.exports = internals.MessageParser = function(opts) {
 
     opts = opts || {};
 
@@ -20,9 +20,9 @@ var MessageParser = function(opts) {
 };
 
 
-MessageParser.create = function(opts) {
+internals.MessageParser.create = function(opts) {
 
-    return new MessageParser(opts);
+    return new internals.MessageParser(opts);
 };
 
 
@@ -30,7 +30,7 @@ MessageParser.create = function(opts) {
 // middle of a request, returning a set of server logs that are
 // incomplete to represent a full request. In such cases, we'll
 // disregard these messages.
-MessageParser.prototype.addMessage = function(rawMessage) {
+internals.MessageParser.prototype.addMessage = function(rawMessage) {
 
     var message = JSON.parse(rawMessage.data);
 
@@ -55,19 +55,19 @@ MessageParser.prototype.addMessage = function(rawMessage) {
 };
 
 
-MessageParser.prototype._isResponse = function(message) {
+internals.MessageParser.prototype._isResponse = function(message) {
 
     return !!message.response;
 };
 
 
-MessageParser.prototype._isForExistingRequest = function(message) {
+internals.MessageParser.prototype._isForExistingRequest = function(message) {
 
     return this._findRequest(message);
 };
 
 
-MessageParser.prototype._isFirstMessageForNewRequest = function(message) {
+internals.MessageParser.prototype._isFirstMessageForNewRequest = function(message) {
 
     var found = this._findRequest(message);
     var hasReceivedTag = message.tags && message.tags.indexOf('received') !== -1;
@@ -76,7 +76,7 @@ MessageParser.prototype._isFirstMessageForNewRequest = function(message) {
 };
 
 
-MessageParser.prototype._addRequest = function(message) {
+internals.MessageParser.prototype._addRequest = function(message) {
 
     var request = new Request({
         id: message.request,
@@ -91,7 +91,7 @@ MessageParser.prototype._addRequest = function(message) {
 };
 
 
-MessageParser.prototype._updateRequestWithResponse = function(message) {
+internals.MessageParser.prototype._updateRequestWithResponse = function(message) {
 
     var request = this._findRequest(message);
 
@@ -100,7 +100,7 @@ MessageParser.prototype._updateRequestWithResponse = function(message) {
 };
 
 
-MessageParser.prototype._findRequest = function(message) {
+internals.MessageParser.prototype._findRequest = function(message) {
 
     var requestId = message.request;
 
@@ -112,7 +112,7 @@ MessageParser.prototype._findRequest = function(message) {
 };
 
 
-MessageParser.prototype._addServerLog = function(message) {
+internals.MessageParser.prototype._addServerLog = function(message) {
 
     var request = this._findRequest(message);
 
@@ -137,7 +137,7 @@ MessageParser.prototype._addServerLog = function(message) {
 };
 
 
-MessageParser.prototype._isEmptyResponseServerLog = function(message) {
+internals.MessageParser.prototype._isEmptyResponseServerLog = function(message) {
 
     return message.tags &&
         message.tags.length === 1 &&
@@ -146,7 +146,7 @@ MessageParser.prototype._isEmptyResponseServerLog = function(message) {
 };
 
 
-MessageParser.prototype._refreshResponseTimeout = function(message) {
+internals.MessageParser.prototype._refreshResponseTimeout = function(message) {
 
     var request = this._findRequest(message);
 
@@ -169,6 +169,3 @@ MessageParser.prototype._refreshResponseTimeout = function(message) {
         }, this._responseTimeout);
     }
 };
-
-
-module.exports = MessageParser;

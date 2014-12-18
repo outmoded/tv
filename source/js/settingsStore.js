@@ -6,7 +6,7 @@
 var internals = {};
 
 
-var SettingsStore = exports = module.exports = {
+exports = module.exports = internals.SettingsStore = {
 
     exists: function (key) {
 

@@ -12,7 +12,7 @@ var RequestToTextConverter = require('../utils/requestToTextConverter');
 var internals = {};
 
 
-var ServerLogsView = Backbone.View.extend({
+exports = module.exports = internals.ServerLogsView = Backbone.View.extend({
 
     template: require('../templates/serverLogs.hbs'),
 
@@ -89,5 +89,3 @@ var ServerLogsView = Backbone.View.extend({
     }
 
 });
-
-module.exports = ServerLogsView;

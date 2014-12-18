@@ -11,7 +11,7 @@ var ChannelSelectorView = require('./channelSelector');
 var internals = {};
 
 
-var ToolbarView = Backbone.View.extend({
+exports = module.exports = internals.ToolbarView = Backbone.View.extend({
 
     template: require('../templates/toolbar.hbs'),
 
@@ -74,5 +74,3 @@ var ToolbarView = Backbone.View.extend({
     }
 
 });
-
-module.exports = ToolbarView;

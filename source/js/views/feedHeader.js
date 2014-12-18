@@ -3,7 +3,7 @@
 var Backbone = require('backbone');
 
 
-var FeedHeaderView = Backbone.View.extend({
+exports = module.exports = internals.FeedHeaderView = Backbone.View.extend({
 
     template: require('../templates/feedHeader.hbs'),
 
@@ -77,5 +77,3 @@ var FeedHeaderView = Backbone.View.extend({
     }
 
 });
-
-module.exports = FeedHeaderView;

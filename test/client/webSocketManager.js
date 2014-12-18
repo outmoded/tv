@@ -34,7 +34,8 @@ describe('WebSocketManager', function () {
 
         it('calls teh onSocketOpen callback', function () {
 
-            var onSocketOpenSpy = sinon.spy(this.manager, 'onSocketOpen');
+            var onSocketOpenSpy = sinon.spy();
+            this.manager.onSocketOpen = onSocketOpenSpy;
 
             this.mockWebSocket.onopen();
 

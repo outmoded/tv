@@ -14,7 +14,7 @@ var Settings = require('../models/settings');
 var internals = {};
 
 
-var AppView = Backbone.View.extend({
+exports = module.exports = internals.AppView = Backbone.View.extend({
 
     template: require('../templates/app.hbs'),
 
@@ -124,5 +124,3 @@ var AppView = Backbone.View.extend({
     }
 
 });
-
-module.exports = AppView;

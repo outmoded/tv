@@ -12,7 +12,7 @@ var SearchCriteria = require('../utils/search/searchCriteria');
 var internals = {};
 
 
-var FeedBodyView = Backbone.View.extend({
+exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     _requestViews: [],
 
@@ -156,5 +156,3 @@ var FeedBodyView = Backbone.View.extend({
     }
 
 });
-
-module.exports = FeedBodyView;

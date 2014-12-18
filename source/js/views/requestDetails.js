@@ -9,7 +9,7 @@ var moment = require('moment');
 var internals = {};
 
 
-var RequestDetailsView = Backbone.View.extend({
+exports = module.exports = internals.RequestDetailsView = Backbone.View.extend({
 
     template: require('../templates/requestDetails.hbs'),
 
@@ -38,5 +38,3 @@ var RequestDetailsView = Backbone.View.extend({
     }
 
 });
-
-module.exports = RequestDetailsView;

@@ -8,6 +8,7 @@ internals = {}
 
 exports = module.exports = internals.jQuerySnippetGenerator = function () {}
 
+
 internals.jQuerySnippetGenerator.generate = function (clientId) {
     return [
         'jQuery.ajaxSetup({',

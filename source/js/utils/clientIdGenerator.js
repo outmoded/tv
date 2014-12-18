@@ -6,9 +6,9 @@ var Chance = require('chance');
 
 // Declare internals
 
-var internals = {};
-
-internals.localStorageKey = 'clientId';
+var internals = {
+    localStorageKey: 'clientId'
+};
 
 
 exports = module.exports = internals.ClientIdGenerator = {};

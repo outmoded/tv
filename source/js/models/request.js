@@ -10,7 +10,7 @@ var DateTimeFormatter = require('../utils/dateTimeFormatter');
 var internals = {};
 
 
-var Request = Backbone.Model.extend({
+exports = module.exports = internals.Request = Backbone.Model.extend({
 
     defaults: {
         visible: true
@@ -35,5 +35,3 @@ var Request = Backbone.Model.extend({
     }
 
 });
-
-module.exports = Request;

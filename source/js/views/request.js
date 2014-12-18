@@ -11,7 +11,7 @@ var RequestDetailsView = require('./requestDetails');
 var internals = {};
 
 
-var RequestView = Backbone.View.extend({
+exports = module.exports = internals.RequestView = Backbone.View.extend({
 
     template: require('../templates/request.hbs'),
 
@@ -83,5 +83,3 @@ var RequestView = Backbone.View.extend({
     }
 
 });
-
-module.exports = RequestView;

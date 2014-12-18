@@ -8,7 +8,7 @@ var _ = require('lodash');
 var internals = {};
 
 
-var WebSocketManager = function (webSocket) {
+exports = module.exports = internals.WebSocketManager = function (webSocket) {
 
     this._webSocket = webSocket;
 
@@ -23,13 +23,13 @@ var WebSocketManager = function (webSocket) {
 };
 
 
-WebSocketManager.create = function (webSocket) {
+internals.WebSocketManager.create = function (webSocket) {
 
-    return new WebSocketManager(webSocket);
+    return new internals.WebSocketManager(webSocket);
 };
 
 
-WebSocketManager.prototype.applyFilter = function (clientId) {
+internals.WebSocketManager.prototype.applyFilter = function (clientId) {
 
     if (this.clientId) {
         this._webSocket.send('unsubscribe:' + this.clientId);
@@ -43,31 +43,25 @@ WebSocketManager.prototype.applyFilter = function (clientId) {
 };
 
 
-WebSocketManager.prototype.clearFilter = function () {
+internals.WebSocketManager.prototype.clearFilter = function () {
 
     this.applyFilter('*');
 };
 
 
-WebSocketManager.prototype.resume = function () {
+internals.WebSocketManager.prototype.resume = function () {
 
     this._webSocket.onmessage = this.onMessageCallback;
 };
 
 
-WebSocketManager.prototype.pause = function () {
+internals.WebSocketManager.prototype.pause = function () {
 
     this._webSocket.onmessage = null;
 };
 
 
-WebSocketManager.prototype.onMessage = function (fn) {
+internals.WebSocketManager.prototype.onMessage = function (fn) {
 
     this._webSocket.onmessage = this.onMessageCallback = fn;
 };
-
-
-WebSocketManager.prototype.onSocketOpen = function () { };
-
-
-module.exports = WebSocketManager;

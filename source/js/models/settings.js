@@ -11,7 +11,7 @@ var SettingsStore = require('../settingsStore');
 var internals = {};
 
 
-var Settings = Backbone.Model.extend({
+exports = module.exports = internals.Settings = Backbone.Model.extend({
 
     _store: SettingsStore,
 
@@ -43,5 +43,3 @@ var Settings = Backbone.Model.extend({
     }
 
 });
-
-module.exports = Settings;
