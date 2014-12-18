@@ -7,6 +7,8 @@ var FeedHeaderView = require('./feedHeader');
 var FeedBodyView = require('./feedBody');
 var SettingsView = require('./settings');
 var Settings = require('../models/settings');
+var SettingsStore = require('../settingsStore');
+var ClientIdGenerator = require('../utils/clientIdGenerator');
 
 
 // Declare internals
@@ -20,8 +22,11 @@ exports = module.exports = internals.AppView = Backbone.View.extend({
 
     initialize: function (opts) {
 
-        this.model = new Settings(null, { webSocketManager: opts.webSocketManager });
         this._webSocketManager = opts.webSocketManager;
+
+        this.model = new Settings(null, {
+            webSocketManager: opts.webSocketManager
+        });
     },
 
     render: function () {
@@ -35,10 +40,15 @@ exports = module.exports = internals.AppView = Backbone.View.extend({
         return this;
     },
 
+    _firstVisit: function(store){
+
+        return !store.exists('channel');
+    },
+
     _renderChildViews: function ($markup) {
 
+        var settingsView = this._renderSettings($markup);
         var toolbarView =    this._renderToolbar($markup);
-        var settingsView =   this._renderSettings($markup);
         var feedHeaderView = this._renderFeedHeader($markup);
         var feedBodyView =   this._renderFeedBody($markup);
 
@@ -75,10 +85,26 @@ exports = module.exports = internals.AppView = Backbone.View.extend({
 
     _renderSettings: function ($markup) {
 
-        return new SettingsView({
+        var settingsView = new SettingsView({
             el: $markup.siblings('.settings-modal-container'),
             settingsModel: this.model
-        }).render();
+        });
+
+        if (this._firstVisit()) {
+            this.model.set('clientId', ClientIdGenerator.generate());
+            this.model.set('channel', '*');
+            settingsView.render().show();
+        }
+        else {
+            settingsView.render();
+        }
+
+        return settingsView;
+    },
+
+    _firstVisit: function(){
+
+        return !SettingsStore.exists('channel');
     },
 
     _renderFeedHeader: function ($markup) {

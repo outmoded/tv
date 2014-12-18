@@ -11,16 +11,21 @@ require('./utils/search/searchCriterion');
 require('./utils/clientIdGenerator');
 require('./utils/dateTimeFormatter');
 require('./utils/handlebarsHelpers');
+require('./utils/jQuerySnippetGenerator');
 require('./utils/requestToTextConverter');
 
 require('./models/request');
 require('./models/settings');
 
+require('./views/app');
 require('./views/channelSelector');
+require('./views/feedBody');
+require('./views/feedHeader');
 require('./views/request');
+require('./views/requestDetails');
 require('./views/serverLogs');
 require('./views/settings');
-require('./views/app');
+require('./views/toolbar');
 
 require('./app.js');
 require('./messageParser');

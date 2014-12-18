@@ -16,7 +16,6 @@ var WebSocketManager = require('./webSocketManager');
 var MessageParser = require('./messageParser');
 var AppView = require('./views/app');
 var SettingsStore = require('./settingsStore');
-var ClientIdGenerator = require('./utils/clientIdGenerator');
 
 
 // Declare internals
@@ -27,49 +26,36 @@ var internals = {};
 exports = module.exports = window.app = internals.App = {
 
     defaults: {
-        clientIdGenerator: ClientIdGenerator,
-        settingsStore: SettingsStore,
         messageParser: MessageParser.create(),
         appViewClass: AppView,
-        webSocketManagerClass: WebSocketManager
+        webSocketManagerClass: WebSocketManager,
+        settingsStore: SettingsStore
     },
 
     start: function (host, port, opts) {
 
         opts = _.extend(this.defaults, opts);
 
+        var messageParser = opts.messageParser;
+        var settingsStore = opts.settingsStore;
+
         var ws = new WebSocket('ws://' + host + ':' + port);
         var webSocketManager = opts.webSocketManagerClass.create(ws);
 
         var appView = new opts.appViewClass({
             el: 'body',
-            collection: opts.messageParser.requests,
+            collection: messageParser.requests,
             webSocketManager: webSocketManager
         }).render();
 
-        if (!opts.settingsStore.exists('clientId')) {
-            appView.model.set('clientId', opts.clientIdGenerator.generate());
-            appView.settingsView.render();
-        }
-
-        if (this._firstVisit(opts.settingsStore)) {
-            appView.model.set('channel', '*');
-            appView.settingsView.show();
-        }
-
         webSocketManager.onSocketOpen = function() {
 
-            webSocketManager.applyFilter(opts.settingsStore.get('channel'));
+            webSocketManager.applyFilter(settingsStore.get('channel'));
         };
 
         webSocketManager.onMessage(function(message) {
 
             opts.messageParser.addMessage(message);
         });
-    },
-
-    _firstVisit: function(store){
-
-        return !store.exists('channel');
     }
 };

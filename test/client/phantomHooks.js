@@ -1,7 +1,14 @@
 // Load modules
 
+
+// Declare internals
+
+var internals = {};
+
+
 // Hooks to integrate mocha-phantomjs with istanbul coverage
-module.exports = {
+exports = module.exports = internals.PhantomHooks = {
+
   afterEnd: function (runner) {
 
     var fs = require('fs');
@@ -19,4 +26,5 @@ module.exports = {
       console.log('No coverage data generated');
     }
   }
+
 };

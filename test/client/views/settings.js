@@ -1,7 +1,5 @@
 // Load modules
 
-var Backbone = require('backbone');
-
 var SettingsView = require('../../../source/js/views/settings');
 
 
@@ -9,33 +7,54 @@ var SettingsView = require('../../../source/js/views/settings');
 
 var internals = {};
 
-internals.generateView = function (options) {
-
-    options = options || {};
-    options.settingsModel = options.settingsModel || new Backbone.Model();
-
-    return new SettingsView(options);
-};
-
 
 describe('SettingsView', function () {
 
-    describe('#template', function () {
+    describe('when the client id changes', function () {
 
-        it('returns html', function () {
-
-            var view = internals.generateView();
-
-            expect(view.template()).to.match(/<[a-z][\s\S]*>/); // html string
-        });
+        it('updates the jquery snippet');
 
     });
 
-    describe('.events', function () {
+    describe('when submit is clicked', function () {
 
-        context('with a click on .submit', function () {
+        it('sets the client id on the model');
+
+        context('with a changed client id', function () {
+
+            it('sets the client id as the channel on the model');
 
         });
+
+        it('hides itself');
+
+    });
+
+    describe('when cancel is clicked', function () {
+
+        it('resets the views client id back to original client id');
+
+        it('hides itself');
+
+        it('re-renders itself to reset it\'s display for the next time it\'s shown');
+
+    });
+
+    describe('when the original settings model is changed', function () {
+
+        it('changes the view\'s model');
+
+    });
+
+    describe('#show', function () {
+
+        it('shows the view');
+
+    });
+
+    describe('#hide', function () {
+
+        it('hides the view');
 
     });
 

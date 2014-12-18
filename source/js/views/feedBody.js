@@ -15,6 +15,7 @@ var internals = {};
 exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     _requestViews: [],
+    _filterFavorites: false,
 
     initialize: function (options) {
 
@@ -65,7 +66,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     toggleFavorites: function (toggle) {
 
-        this.filterFavorites = toggle;
+        this._filterFavorites = toggle;
         this._refreshRequestsVisibility();
     },
 
@@ -101,7 +102,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
             self.trigger('requestFavoriteToggle', favorited);
 
-            if (!favorited && self.filterFavorites) {
+            if (!favorited && self._filterFavorites) {
                 requestView.toggleVisibility(false);
             }
         });
@@ -138,7 +139,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
             show = false;
         }
 
-        if (this.filterFavorites && !requestView.favorited) {
+        if (this._filterFavorites && !requestView.favorited) {
             show = false;
         }
 

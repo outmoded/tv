@@ -36,7 +36,6 @@ describe('app', function () {
                 }
             };
             this.mockMessageParser      = { addMessage : function () { } };
-            this.mockClientIdGenerator  = { generate: function () { } };
             this.mockSettingsStore      = { exists: function (){ }, get: function () { } };
 
             this.settingsRenderSpy = sinon.spy(fakeAppView.settingsView, 'render');
@@ -49,7 +48,6 @@ describe('app', function () {
                     messageParser: this.mockMessageParser,
                     appViewClass: this.mockAppViewClass,
                     settingsStore: this.mockSettingsStore,
-                    clientIdGenerator: this.mockClientIdGenerator,
                     webSocketManagerClass: mockWebSocketManagerClass
                 });
             };
@@ -61,51 +59,6 @@ describe('app', function () {
             this.appStart();
 
             expect(this.appRenderSpy).to.have.been.calledOnce;
-        });
-
-        context('without an existing clientId', function () {
-
-            beforeEach(function () {
-
-                sinon.stub(this.mockSettingsStore, 'exists').withArgs('clientId').returns(false);
-            });
-
-            it('sets the app\'s client id to a random generated client id', function () {
-
-                sinon.stub(this.mockClientIdGenerator, 'generate').returns('random client id');
-
-                this.appStart();
-
-                expect(this.fakeAppModel.get('clientId')).to.eq('random client id');
-            });
-
-            it('renders the settings view', function (){
-
-                this.appStart();
-
-                expect(this.settingsRenderSpy).to.have.been.calledOnce;
-            });
-        });
-
-        describe('when visiting the app for the first time', function () {
-
-            beforeEach(function () {
-
-                sinon.stub(this.mockSettingsStore, 'exists').withArgs('channel').returns(false);
-
-                this.appStart();
-            });
-
-            it('defaults the channel to "all"', function () {
-
-                expect(this.fakeAppModel.get('channel')).to.eq('*');
-            });
-
-            it('shows the settings view', function () {
-
-                expect(this.settingsShowSpy).to.have.been.calledOnce;
-            });
-
         });
 
         describe('when the socket is openned', function () {

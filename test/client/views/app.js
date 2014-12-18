@@ -59,6 +59,16 @@ describe('AppView', function () {
             expect(this.appView.$('.feed .body').html()).to.not.be.empty;
         });
 
+        describe('when visiting the app for the first time', function () {
+
+            it('defaults the channel to "all"');
+
+            it('defaults the client id to a random generated value');
+
+            it('shows the settings view');
+
+        });
+
         describe('when the toolbar triggers', function () {
 
             describe('"search criteria changed"', function () {

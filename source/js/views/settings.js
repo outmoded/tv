@@ -17,9 +17,9 @@ exports = module.exports = internals.SettingsView = Backbone.View.extend({
     template: require('../templates/settings.hbs'),
 
     events: {
-        'click .submit': 'submit',
-        'click .cancel': 'cancel',
-        'keyup [name=client-id]': 'onClientIdInput'
+        'click .submit': '_submit',
+        'click .cancel': '_cancel',
+        'keyup [name=client-id]': '_onClientIdInput'
     },
 
     initialize: function(options) {
@@ -60,25 +60,27 @@ exports = module.exports = internals.SettingsView = Backbone.View.extend({
         this._$modal.modal('hide');
     },
 
-    onClientIdInput: function(e) {
+    _onClientIdInput: function(e) {
 
         this.model.set('clientId', $(e.currentTarget).val());
     },
 
-    cancel: function(e) {
+    _cancel: function(e) {
 
         this.model.set('clientId', this.settingsModel.get('clientId'));
+
         this.hide();
+
         this.render();
     },
 
-    submit: function(e) {
+    _submit: function(e) {
 
         var newClientId = this.model.get('clientId');
         var oldClientId = this.settingsModel.get('clientId');
 
         this.settingsModel.set('clientId', newClientId);
-        if (newClientId !== oldClientId) {      // we changed the client id, so subscribe to the one we entered.
+        if (newClientId !== oldClientId) { // we changed the client id, so subscribe to the one we entered.
             this.settingsModel.set('channel', newClientId);
         }
 
