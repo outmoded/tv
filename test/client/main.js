@@ -8,8 +8,10 @@ require('es5-shim');
 require('./utils/search/searchCriteria');
 require('./utils/search/searchCriterion');
 
+require('./utils/clientIdGenerator');
 require('./utils/dateTimeFormatter');
 require('./utils/handlebarsHelpers');
+require('./utils/requestToTextConverter');
 
 require('./models/request');
 require('./models/settings');
@@ -21,8 +23,6 @@ require('./views/settings');
 require('./views/app');
 
 require('./app.js');
-require('./clientIdGenerator');
-require('./clipboard');
 require('./messageParser');
 require('./settingsStore');
 require('./webSocketManager');

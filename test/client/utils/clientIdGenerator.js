@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 
-var ClientIdGenerator = require('../../source/js/clientIdGenerator');
+var ClientIdGenerator = require('../../../source/js/utils/clientIdGenerator');
 
 
 // Declare internals

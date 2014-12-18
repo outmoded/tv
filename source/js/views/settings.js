@@ -4,7 +4,7 @@ var _ = require('lodash');
 var Backbone = require('backbone');
 
 var SettingsStore = require('../settingsStore');
-var JQuerySnippetGenerator = require('../jQuerySnippetGenerator');
+var JQuerySnippetGenerator = require('../utils/jQuerySnippetGenerator');
 
 
 // Declare internals

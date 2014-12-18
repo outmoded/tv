@@ -4,7 +4,7 @@ var _ = require('lodash');
 var Handlebars = require('hbsfy/runtime');
 
 var DateTimeFormatter = require('../utils/dateTimeFormatter');
-var JQuerySnippetGenerator = require('../jQuerySnippetGenerator');
+var JQuerySnippetGenerator = require('../utils/jQuerySnippetGenerator');
 var jsonMarkup = require('json-markup');
 
 

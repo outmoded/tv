@@ -1,6 +1,6 @@
 // Load modules
 
-var Clipboard = require('../../source/js/clipboard');
+var RequestToTextConverter = require('../../../source/js/utils/requestToTextConverter');
 
 
 // Declare internals
@@ -8,7 +8,7 @@ var Clipboard = require('../../source/js/clipboard');
 var internals = {};
 
 
-describe('Clipboard', function () {
+describe('RequestToTextConverter', function () {
 
     beforeEach(function () {
 
@@ -61,7 +61,7 @@ describe('Clipboard', function () {
                 '  Data: {"foo":"bar","bar":"baz"}'
             ].join('\n');
 
-            expect(Clipboard.convertToText(this.request)).to.equal(expectedData);
+            expect(RequestToTextConverter.convertToText(this.request)).to.equal(expectedData);
         });
 
     });

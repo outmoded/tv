@@ -1,10 +1,10 @@
 // Load modules
 
 var Backbone = require('backbone');
+var ZeroClipboard = require('zeroclipboard');
 var _ = require('lodash');
 
-var Clipboard = require('../clipboard');
-var ZeroClipboard = require('zeroclipboard');
+var RequestToTextConverter = require('../utils/requestToTextConverter');
 
 
 // Declare internals
@@ -47,7 +47,7 @@ var ServerLogsView = Backbone.View.extend({
 
             clipboard.on('beforecopy', function (event) {
 
-                clipboard.setData('text/plain', Clipboard.convertToText(self.model.toJSON()));
+                clipboard.setData('text/plain', RequestToTextConverter.convertToText(self.model.toJSON()));
 
                 self._$clipboard.tooltip({
                     delay: {hide: 2000},
