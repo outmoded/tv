@@ -40,11 +40,6 @@ exports = module.exports = internals.AppView = Backbone.View.extend({
         return this;
     },
 
-    _firstVisit: function (store){
-
-        return !store.exists('channel');
-    },
-
     _renderChildViews: function ($markup) {
 
         var settingsView = this._renderSettings($markup);

@@ -3,10 +3,10 @@
 
 // Declare internals
 
-internals = {}
+internals = {};
 
 
-exports = module.exports = internals.jQuerySnippetGenerator = function () { }
+exports = module.exports = internals.jQuerySnippetGenerator = function () { };
 
 
 internals.jQuerySnippetGenerator.generate = function (clientId) {
