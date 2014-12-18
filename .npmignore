@@ -1,0 +1,17 @@
+.idea
+*.iml
+dump.rdb
+results.tap
+results.xml
+npm-shrinkwrap.json
+config.json
+*/.DS_Store
+*/*/.DS_Store
+*/._*
+*/*/._*
+coverage.*
+lib-cov
+complexity.md
+.sass-cache
+test/bundle.js
+coverage/

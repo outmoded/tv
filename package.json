@@ -65,7 +65,8 @@
     "boot": "node examples/simple.js",
     "start": "npm run build && npm run boot",
     "start-dev": "npm run watch & npm run boot",
-    "post-js": "onchange test/bundle.js -- npm run test-client"
+    "post-js": "onchange test/bundle.js -- npm run test-client",
+    "prepublish": "npm run copy-fonts && npm run copy-assets && npm run build-js && npm run build-styles"
   },
   "licenses": [
     {
