@@ -1,0 +1,21 @@
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <p>By default, Hapi's TV console displays all application traffic.</p>
+
+      <p>In order to filter by requests coming only from your machine, we've generated a unique client ID:</p>
+      <input name="client-id" class="client" type="text" value={{clientId}}>
+
+      <p>Add the following snippet to append your ID to each request:</p>
+
+      <textarea class="snippet jquery-snippet" rows="8">{{jQuerySnippet clientId}}</textarea>
+
+      <div class="button-group">
+        <button class="secondary cancel" data-dismiss="modal">Cancel</button>
+        <button class="primary submit">Thanks, all done</button>
+      </div>
+
+      <div style="clear:both;"></div>
+    </div>
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

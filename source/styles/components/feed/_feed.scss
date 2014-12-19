@@ -1,0 +1,77 @@
+.feed {
+
+    .expander {
+        padding-right: 9px;
+        font-size: 1.2rem;
+    }
+
+    .favorite {
+        font-size: 1.8rem;
+        float: right;
+    }
+
+    .header > div, .request-details > div {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        @extend .truncate;
+    }
+
+    .header {
+        color: $toolbar;
+
+        .expander {
+            color: $table-header-icon-disabled;
+            cursor: pointer;
+        }
+
+        .expander.expanded {
+            color: $table-header-icon;
+            @include rotate(90deg);
+            padding: 4px 3px 1px 6px;
+        }
+
+        .expander {
+            &:hover {
+                color: $table-header;
+            }
+
+            &:not(.expanded), &:not(.expanded):hover {
+                color: $table-header-icon-disabled;
+                cursor: default;
+                @include rotate(0deg);
+            }
+        }
+
+        div {
+            background-color: $table-header-bg;
+            color: $table-header;
+        }
+
+        .favorite {
+            color: $table-header-icon-disabled;
+
+            &.active {
+                cursor: pointer;
+                color: $favorite;
+            }
+
+            &.enabled {
+                cursor: pointer;
+                color: $table-header-icon;
+
+                &:hover {
+                    color: $table-header;
+                }
+            }
+        }
+
+        .timestamp {
+            text-align: right;
+
+            .column-label {
+                margin-right: 63px;
+            }
+
+        }
+    }
+}

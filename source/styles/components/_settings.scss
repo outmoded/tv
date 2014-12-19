@@ -1,0 +1,81 @@
+.modal-dialog {
+    font-family:'Open Sans';
+    font-weight:400;
+    font-size:14px;
+    color:#333;
+    margin:auto;
+    top:150px;
+}
+
+.modal-content {
+    border: none;
+    border-radius: 0;
+    padding: 8px 24px;
+    line-height:1.5em;
+
+    p {
+        margin: 14px 0;
+    }
+    
+    .client {
+        font-weight: 600;
+        border:1px solid #eee;
+        background:#f1f1f1;
+        padding:8px;
+        font-size:14px;
+        outline:none;
+    }
+
+    .client:focus {
+        border:1px solid turquoise;
+    }   
+
+    .snippet {
+        width:548px;
+        font-family: monospace;
+        border:1px solid #eee;
+        background:#f1f1f1;
+        outline:none;
+        resize:none;
+        margin-bottom:8px;
+        font-size: 12px;
+    }
+
+    .snippet:focus {
+        border:1px solid turquoise;
+    }
+
+    .button-group {
+        float:right;
+        margin-bottom:1em;
+        clear: both;
+
+        button {
+            color:#333;
+            box-shadow: none;
+            font-family:'Open Sans';
+            font-weight:400;
+            font-size: 12px;
+            padding: 4px 12px 4px 12px;
+            text-decoration: none;
+
+            &.primary {
+                background: paleturquoise;
+            }
+
+            &.secondary {
+                background: $light-grey;
+                
+            }
+
+            &:hover {
+                background:#444;
+                color:white;
+
+            }
+
+        }
+
+    }
+
+}

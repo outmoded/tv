@@ -1,0 +1,153 @@
+.server-logs {
+    font-size: 1.4rem;
+    color: $secondary-font-color;
+    padding: 12px 0;
+
+    .server-log {
+        padding: 3px 0;
+
+        .tags {
+            padding-left: 40px;
+
+            &.internal {
+                font-style: italic;
+            }
+
+            & > span:not(:last-of-type):after {
+                content: ",";
+            }
+
+            .error {
+                color: $error;
+            }
+
+            .debug {
+                color: $debug;
+            }
+        }
+
+        .data {
+            cursor: pointer;
+
+            &:hover .expander {
+                color: $background-accent;
+            }
+
+            .expander {
+                float: left;
+                margin: 5px auto auto 2px;
+                color: $background;
+                font-size: 1rem;
+            }
+
+            &.expanded {
+                .expander {
+                    padding: 0;
+                    color: $secondary-font-color;
+                    @include rotate(90deg);
+                }
+
+                .json-markup {
+                    white-space: pre-wrap;
+                    padding-left: 21px;
+                }
+            }
+
+            &:not(.expanded) .json-markup {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            ul {
+                position: relative;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                height: 16px;
+                margin: 0;
+                padding: 0 10px 0 32px;
+
+                font-family: monospace, serif;
+                list-style: none;
+                white-space: nowrap;
+            }
+
+            ul:before {
+                content: '';
+                position: absolute;
+                top: 5px;
+                left: 16px;
+
+                display: block;
+                border: 4px solid transparent;
+                border-left: 6px solid #666;
+            }
+
+            li {
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                display: inline;
+                vertical-align: top;
+                white-space: nowrap;
+            }
+
+            li:before {
+                content: ', ';
+            }
+
+            li:first-child:before {
+                content: '';
+            }
+
+            .time {
+                margin-left: 20px;
+                width: 100px;
+                float: right;
+
+                div.delta {
+                    width: 50px;
+                    float: left;
+                    text-align: right;
+
+                }
+
+                span.copy {
+                    float: right;
+                    cursor: pointer;
+                    padding: 2px;
+                    z-index: 9999;
+                }
+
+            }
+        }
+    }
+}
+
+.json-markup {
+    line-height: 21px;
+    font-size: 13px;
+    font-family: monospace;
+    width: auto !important;
+}
+
+.json-markup-key {
+    font-weight: bold;
+}
+
+.json-markup-bool {
+    color: $json-markup-boolean;
+}
+
+.json-markup-string {
+    color: $json-markup-string;
+}
+
+.json-markup-null {
+    color: $json-markup-null;
+}
+
+.json-markup-number {
+    color: $json-markup-number;
+}

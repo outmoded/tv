@@ -1,0 +1,55 @@
+html {
+    box-sizing: border-box;
+
+    body {
+        font-family: 'Open Sans';
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.5em;
+        -webkit-font-smoothing: antialiased;
+        background-color: $background;
+        min-width: 745px;
+    }
+}
+
+button {
+    border-radius: 24px;
+    font-weight: 400;
+    border: none;
+    box-shadow: 1px 1px 0px $dark-shadow;
+    font-size: 12px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.button-group {
+
+    button:not(:first-child):not(:last-child) {
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
+        margin-left: -3px;
+    }
+
+    button:first-child {
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+
+    button:last-child {
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
+        margin-left: -3px;
+    }
+
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

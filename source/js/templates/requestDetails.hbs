@@ -1,0 +1,16 @@
+<div class="col-xs-8 path">
+    <span class="expander icon glyphicon glyphicon-play"></span>
+    {{path}}
+</div>
+<div class="col-xs-1 method">{{method}}</div>
+<div class="col-xs-1 status">
+    {{#if statusCode}}
+        {{statusCode}}
+    {{else}}
+        <div class="spinner"></div>
+    {{/if}}
+</div>
+<div class="col-xs-2 timestamp">
+    <span class="favorite icon glyphicon glyphicon-star"></span>
+    <div class="time">{{longTime timestamp}}</div>
+</div>
