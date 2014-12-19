@@ -41,7 +41,7 @@
     "lab": "5.x.x",
     "mocha": "^2.0.1",
     "mocha-phantomjs": "^3.5.2",
-    "node-sass": "1.2.2",
+    "node-sass": "^1.2.3",
     "onchange": "0.0.2",
     "phantomjs": "^1.9.12",
     "sinon": "^1.12.1",
