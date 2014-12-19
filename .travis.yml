@@ -1,8 +1,3 @@
-language: node_js
-
-node_js:
-  - 0.10
-
 language: cpp
 before_install:
   # We need this line to have g++4.8 available in apt
@@ -12,3 +7,8 @@ install:
   - sudo apt-get install -qq gcc-4.8 g++-4.8 
   # We want to compile with g++ 4.8 when rather than the default g++
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
+
+language: node_js
+
+node_js:
+  - 0.10
