@@ -1,0 +1,38 @@
+.spinner {
+    @extend .spinner;
+
+    width:  18px;
+    height: 18px;
+
+    border-radius:     9px;
+    border:            solid 2px transparent;
+    border-top-color:  $table-cell-spinner;
+    border-left-color: $table-cell-spinner;
+
+    -webkit-animation: nprogress-spinner 600ms linear infinite;
+    -moz-animation:    nprogress-spinner 600ms linear infinite;
+    -ms-animation:     nprogress-spinner 600ms linear infinite;
+    -o-animation:      nprogress-spinner 600ms linear infinite;
+    animation:         nprogress-spinner 600ms linear infinite;
+}
+
+@-webkit-keyframes nprogress-spinner {
+    0%   { -webkit-transform: rotate(0deg);   transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-moz-keyframes nprogress-spinner {
+    0%   { -moz-transform: rotate(0deg);   transform: rotate(0deg); }
+    100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-o-keyframes nprogress-spinner {
+    0%   { -o-transform: rotate(0deg);   transform: rotate(0deg); }
+    100% { -o-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-ms-keyframes nprogress-spinner {
+    0%   { -ms-transform: rotate(0deg);   transform: rotate(0deg); }
+    100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@keyframes nprogress-spinner {
+    0%   { transform: rotate(0deg);   transform: rotate(0deg); }
+    100% { transform: rotate(360deg); transform: rotate(360deg); }
+}

@@ -1,0 +1,22 @@
+{{#each .}}
+    <div class="server-log row">
+        <div class="col-xs-3 tags {{#internal}}internal{{/internal}}">
+            {{#each tags}}
+                <span class="{{tagColor .}}">{{.}}</span>
+            {{/each}}
+        </div>
+        <div class="col-xs-9 data">
+            <div class="time">
+                <div class="delta"><span class="delta">{{delta}} ms</span></div>
+                {{#isEq @index 0}}
+                    <span class="copy glyphicon glyphicon-paperclip"></span>
+                {{/isEq}}
+            </div>
+
+            {{#if data}}
+                <span class="expander icon glyphicon glyphicon-play"></span>
+                {{{jsonMarkup data}}}
+            {{/if}}
+        </div>
+    </div>
+{{/each}}

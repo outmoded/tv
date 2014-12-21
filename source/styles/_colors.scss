@@ -1,0 +1,78 @@
+// Palette
+
+// -- greys
+
+$black:         #000000;
+$darkest-grey:  #1C1C1C;
+$darker-grey:   #333333;
+$dark-grey:     #444444;
+$grey:          #888888;
+$light-grey:    #DFDFDF;
+$lighter-grey:  #EEEEEE;
+$lightest-grey: #F6F6F6;
+$white:         #FFFFFF;
+
+// -- colors
+
+$yellow:         #FFF794;
+
+$orange:         #F4A726;
+$red:            #F37B65;
+$purple:         darkviolet;
+
+$light-green:    darkturquoise;
+$lightest-green: paleturquoise;
+
+// -- syntax highlighting
+
+$dark-red:       firebrick;
+$blue:           blue;
+$green:          green;
+
+// Components
+// Notes: Only palette color references below.
+// All other scss files should only reference 
+// the component color variables below (not css colors 
+// directly or the color variables above)
+
+$warning:                     $orange;
+$error:                       $red;
+$debug:                       $purple;
+
+$favorite:                    $yellow;
+
+$background:                  $lighter-grey;
+$background-accent:           $white;
+$dark-shadow:                 $darkest-grey;
+$light-shadow:                $light-grey;
+
+$primary-font-color:          $black;
+$secondary-font-color:        $grey;
+
+$toolbar:                     $white;
+$toolbar-bg:                  $darker-grey;
+$toolbar-accent:              $darkest-grey;
+$toolbar-highlight:           $light-green;
+$toolbar-button-bg:           $dark-grey;
+
+$table-header-bg:             $darker-grey;
+$table-header:                $white;
+$table-header-icon:           $grey;
+$table-header-icon-disabled:  $dark-grey;
+$table-row-icon:              $grey;
+$table-row-icon-hover:        $dark-grey;
+$table-row-icon-active:       $black;
+$table-row-bg:                $white;
+$table-row:                   $black;
+$table-row-secondary:         $grey;
+$table-row-hr:                $lightest-grey;
+$table-row-hr-alt:            $grey;
+$table-cell-spinner:          $darker-grey;
+$table-row-hover:             $lightest-green;
+
+$json-markup-boolean:         $dark-red;
+$json-markup-string:          $green;
+$json-markup-null:            $grey;
+$json-markup-number:          $blue;
+
+$expander:                    $darker-grey;

@@ -1,0 +1,76 @@
+.feed {
+    .body {
+
+        .request-hidden {
+            display: none;
+        }
+
+        .request {
+            .request-details {
+                background-color: $table-row-bg;
+                border-top: solid 1px $background;
+                box-shadow: 0px 2px 3px $light-shadow;
+
+                .icon {
+                    color: $table-row-bg;
+                }
+            }
+
+            &.active .request-details {
+                .expander {
+                    color: $table-row-icon;
+                    padding: 4px 3px 0px 6px;
+                    @include rotate(90deg);
+                }
+            }
+
+            .request-details {
+                cursor: pointer;
+                font-size: 1.6rem;
+
+                .time {
+                    @extend .truncate;
+                    text-align: right;
+                    margin-right: 50px;
+                }
+
+                &:hover, &:hover > div {
+                    background-color: $table-row-hover;
+                }
+            }
+
+            .request-details, &, .server-logs {
+                .icon {
+                    &.active {
+                        color: $table-row-icon;
+                    }
+
+                    &:hover {
+                        color: $table-row-icon-hover;
+                    }
+
+                    &:active {
+                        color: $table-row-icon;
+                    }
+                }
+
+                .method {
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+
+                &.error {
+                    .status, .method {
+                        color: $error;
+                    }
+                }
+
+                &.warning {
+                    .status, .method {
+                        color: $warning;
+                    }
+                }
+            }
+        }
+    }
+}
