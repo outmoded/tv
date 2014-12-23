@@ -1,4 +1,4 @@
-![tv Logo](https://raw.github.com/spumko/tv/master/images/tv.png)
+![tv Logo](https://raw.github.com/hapijs/tv/master/images/tv.png)
 
 TV is an interactive debug console plugin for [**hapi**](https://github.com/hapijs/hapi)
 
@@ -8,6 +8,9 @@ Lead Maintainer: [Wyatt Preul](https://github.com/wpreul)
 
 TV is a simple web page in which developers can view server logs for their requests. Optionally, they can also filter the server logs to just their requests by attaching a unique client id to each request. The server will use WebSocket to stream the logs to the web application in real-time. 
 
+Here's what it looks like in action:
+
+![TV interactive debug console](https://raw.github.com/hapijs/tv/master/images/tv-screenshot.png)
 
 ### Using TV in Your Application
 
