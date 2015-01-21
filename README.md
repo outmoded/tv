@@ -43,6 +43,7 @@ Below are the options available to be passed into the **tv** plugin:
 - `endpoint` - the debug console request path added to the server routes. Defaults to _'/debug/console'_.
 - `queryKey` - the name or the request query parameter used to mark requests being debugged. Defaults to _debug_.
 - `template` - the name of the template to use for the debug console.  Defaults to _index_.
+- `authenticateEndpoint` - set this to true to use auth schmes for TVs main- and file delivering routes (defaults to false)
 
 Below is an example of registering the tv plugin with some options:
 
