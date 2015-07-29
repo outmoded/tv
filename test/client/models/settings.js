@@ -1,7 +1,7 @@
 // Load modules
 
 var Backbone = require('backbone');
-var sinon = require('sinon');
+var Sinon = require('sinon');
 
 var Settings = require('../../../source/js/models/settings');
 
@@ -18,12 +18,12 @@ describe('Settings', function () {
         this.settingsStore = Settings.prototype._store = {
             _store: {},
 
-            get: sinon.spy(function (key) {
+            get: Sinon.spy(function (key) {
 
                 return this._store[key];
             }),
 
-            set: sinon.spy(function (key, value) {
+            set: Sinon.spy(function (key, value) {
 
                 this._store[key] = value;
                 return value;
@@ -32,7 +32,7 @@ describe('Settings', function () {
 
         this.options = {
             webSocketManager: {
-                applyFilter: sinon.spy()
+                applyFilter: Sinon.spy()
             }
         };
     });

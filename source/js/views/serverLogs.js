@@ -50,7 +50,7 @@ exports = module.exports = internals.ServerLogsView = Backbone.View.extend({
                 clipboard.setData('text/plain', RequestToTextConverter.convertToText(self.model.toJSON()));
 
                 self._$clipboard.tooltip({
-                    delay: {hide: 2000},
+                    delay: { hide: 2000 },
                     placement: 'left',
                     animation: 'fade',
                     title: 'Copied to clipboard!'

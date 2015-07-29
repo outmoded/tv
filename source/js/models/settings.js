@@ -19,7 +19,7 @@ exports = module.exports = internals.Settings = Backbone.Model.extend({
 
         return {
             clientId: this._store.get('clientId'),
-            channel:  this._store.get('channel')
+            channel: this._store.get('channel')
         };
     },
 
@@ -27,6 +27,7 @@ exports = module.exports = internals.Settings = Backbone.Model.extend({
 
         this.on('change', this._updateSettingsStore, this);
         this.on('change:channel', function (model, channel) {
+
             options.webSocketManager.applyFilter(channel);
         });
     },
@@ -36,6 +37,7 @@ exports = module.exports = internals.Settings = Backbone.Model.extend({
         var self = this;
 
         var updateSettingsStoreProp = function (value, key) {
+
             self._store.set(key, value);
         };
 

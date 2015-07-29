@@ -1,8 +1,6 @@
 // Load modules
 
 var Backbone = require('backbone');
-var moment = require('moment');
-
 
 // Declare internals
 

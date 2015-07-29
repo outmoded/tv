@@ -5,7 +5,7 @@ var Handlebars = require('hbsfy/runtime');
 
 var DateTimeFormatter = require('../utils/dateTimeFormatter');
 var JQuerySnippetGenerator = require('../utils/jQuerySnippetGenerator');
-var jsonMarkup = require('json-markup');
+var JsonMarkup = require('json-markup');
 
 
 // Declare internals
@@ -19,7 +19,7 @@ exports = module.exports = internals.HandlebarsHelpers = {
 
     jsonMarkup: function (jsonData) {
 
-        return jsonMarkup(jsonData);
+        return JsonMarkup(jsonData);
     },
 
     jQuerySnippet: function (clientId) {

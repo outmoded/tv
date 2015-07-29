@@ -2,10 +2,10 @@
 
 var _ = require('lodash');
 var Handlebars = require('hbsfy/runtime');
-var sinon = require('sinon');
+var Sinon = require('sinon');
 
 var DateTimeFormatter = require('../../../source/js/utils/dateTimeFormatter');
-var helpers = require('../../../source/js/utils/handlebarsHelpers');
+var Helpers = require('../../../source/js/utils/handlebarsHelpers');
 
 
 // Declare internals
@@ -15,17 +15,17 @@ var internals = {};
 
 describe('HandlebarsHelpers', function () {
 
-    it('includes DateTimeFormatter functions as helpers', function () {
+    it('includes DateTimeFormatter functions as Helpers', function () {
 
         for (var property in DateTimeFormatter) {
-            expect(helpers[property]).to.eq(DateTimeFormatter[property]);
+            expect(Helpers[property]).to.eq(DateTimeFormatter[property]);
         }
     });
 
     it('registers helper functions with handlerbars', function (){
 
-        for (var property in helpers) {
-            expect(Handlebars.helpers[property]).to.eq(helpers[property]);
+        for (var property in Helpers) {
+            expect(Handlebars.helpers[property]).to.eq(Helpers[property]);
         }
     });
 
@@ -33,7 +33,7 @@ describe('HandlebarsHelpers', function () {
 
         it('transforms json to an html representation', function () {
 
-            var result = helpers.jsonMarkup({foo: 'bar'});
+            var result = Helpers.jsonMarkup({ foo: 'bar' });
 
             expect(result).to.contain('foo:</span>');
             expect(result).to.contain('"bar"</span>');
@@ -45,7 +45,7 @@ describe('HandlebarsHelpers', function () {
 
         it('generates a jquery snippet', function () {
 
-            var result = helpers.jQuerySnippet('foo');
+            var result = Helpers.jQuerySnippet('foo');
 
             expect(result).to.contain('.ajaxSetup');
             expect(result).to.contain('foo');
@@ -60,11 +60,11 @@ describe('HandlebarsHelpers', function () {
             it('calls the main function', function () {
 
                 var opts = {
-                    fn: sinon.spy(),
-                    inverse: sinon.spy()
+                    fn: Sinon.spy(),
+                    inverse: Sinon.spy()
                 };
 
-                helpers.isEq(1, 1, opts);
+                Helpers.isEq(1, 1, opts);
 
                 expect(opts.fn).to.have.been.calledOnce;
                 expect(opts.inverse).to.not.have.been.called;
@@ -77,11 +77,11 @@ describe('HandlebarsHelpers', function () {
             it('calls the inverse function', function () {
 
                 var opts = {
-                    fn: sinon.spy(),
-                    inverse: sinon.spy()
+                    fn: Sinon.spy(),
+                    inverse: Sinon.spy()
                 };
 
-                helpers.isEq(1, 0, opts);
+                Helpers.isEq(1, 0, opts);
 
                 expect(opts.fn).to.not.have.been.calledOnce;
                 expect(opts.inverse).to.have.been.called;
@@ -99,7 +99,7 @@ describe('HandlebarsHelpers', function () {
 
                 _.each(['error', 'debug'], function (supportedTag) {
 
-                    expect(helpers.tagColor(supportedTag)).to.eq(supportedTag);
+                    expect(Helpers.tagColor(supportedTag)).to.eq(supportedTag);
                 });
             });
 
@@ -109,7 +109,7 @@ describe('HandlebarsHelpers', function () {
 
             it('doesn\'t return anything', function () {
 
-                expect(helpers.tagColor('non-supported-tag')).to.eq(undefined);
+                expect(Helpers.tagColor('non-supported-tag')).to.eq(undefined);
             });
 
         });

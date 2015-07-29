@@ -20,7 +20,8 @@ var describe = lab.describe;
 var it = lab.it;
 var expect = Code.expect;
 
-internals.waitForSocketMessages = function(fn) {
+internals.waitForSocketMessages = function (fn) {
+
     setTimeout(fn, 50);
 };
 
@@ -58,9 +59,9 @@ it('reports a request event', function (done) {
 
                 internals.waitForSocketMessages(function () {
 
-                    server.inject('/?debug=123', function (res) {
+                    server.inject('/?debug=123', function (response) {
 
-                        expect(res.result).to.equal('1');
+                        expect(response.result).to.equal('1');
                     });
                 });
             });
@@ -74,7 +75,7 @@ it('reports a request event', function (done) {
     });
 });
 
-it('handles subscribe and unsubscribe', function(done) {
+it('handles subscribe and unsubscribe', function (done) {
 
     var server = new Hapi.Server();
     server.connection();
@@ -108,18 +109,18 @@ it('handles subscribe and unsubscribe', function(done) {
 
                 internals.waitForSocketMessages(function () {
 
-                    server.inject('/?debug=123', function() {
+                    server.inject('/?debug=123', function () {
 
-                        internals.waitForSocketMessages(function() {
+                        internals.waitForSocketMessages(function () {
 
                             var singleRequestMessageCount = messageCount;
                             ws.send('unsubscribe:*');
 
-                            internals.waitForSocketMessages(function() {
+                            internals.waitForSocketMessages(function () {
 
-                                server.inject('/?debug=123', function() {
+                                server.inject('/?debug=123', function () {
 
-                                    internals.waitForSocketMessages(function() {
+                                    internals.waitForSocketMessages(function () {
 
                                         expect(messageCount).to.equal(singleRequestMessageCount);
 
@@ -133,13 +134,14 @@ it('handles subscribe and unsubscribe', function(done) {
             });
 
             ws.on('message', function (data, flags) {
+
                 ++messageCount;
             });
         });
     });
 });
 
-it('does not resubscribe for the same socket', function(done) {
+it('does not resubscribe for the same socket', function (done) {
 
     var server = new Hapi.Server();
     server.connection();
@@ -173,18 +175,18 @@ it('does not resubscribe for the same socket', function(done) {
 
                 internals.waitForSocketMessages(function () {
 
-                    server.inject('/?debug=123', function() {
+                    server.inject('/?debug=123', function () {
 
-                        internals.waitForSocketMessages(function() {
+                        internals.waitForSocketMessages(function () {
 
                             var singleRequestMessageCount = messageCount;
                             ws.send('subscribe:*');
 
-                            internals.waitForSocketMessages(function() {
+                            internals.waitForSocketMessages(function () {
 
-                                server.inject('/?debug=123', function() {
+                                server.inject('/?debug=123', function () {
 
-                                    internals.waitForSocketMessages(function() {
+                                    internals.waitForSocketMessages(function () {
 
                                         expect(messageCount).to.equal(singleRequestMessageCount * 2);
 
@@ -198,6 +200,7 @@ it('does not resubscribe for the same socket', function(done) {
             });
 
             ws.on('message', function (data, flags) {
+
                 ++messageCount;
             });
         });
@@ -218,7 +221,7 @@ it('handles reconnects gracefully', function (done) {
         }
     });
 
-    server.register({ register: Tv, options: { port: 0, host: 'localhost' }}, function (err) {
+    server.register({ register: Tv, options: { port: 0, host: 'localhost' } }, function (err) {
 
         expect(err).to.not.exist();
 
@@ -242,9 +245,9 @@ it('handles reconnects gracefully', function (done) {
                     ws2.send('subscribe:*');
                     internals.waitForSocketMessages(function () {
 
-                        server.inject('/?debug=123', function (res) {
+                        server.inject('/?debug=123', function (response) {
 
-                            expect(res.result).to.equal('1');
+                            expect(response.result).to.equal('1');
                         });
                     });
                 });
@@ -274,7 +277,7 @@ it('uses specified hostname', function (done) {
         }
     });
 
-    server.register({register: Tv, options: { host: '127.0.0.1', port: 0 } }, function (err) {
+    server.register({ register: Tv, options: { host: '127.0.0.1', port: 0 } }, function (err) {
 
         expect(err).to.not.exist();
 
@@ -305,7 +308,7 @@ it('uses specified public hostname', function (done) {
         }
     });
 
-    server.register({ register: Tv, options: { port: 0, host: 'localhost', publicHost: '127.0.0.1' }}, function (err) {
+    server.register({ register: Tv, options: { port: 0, host: 'localhost', publicHost: '127.0.0.1' } }, function (err) {
 
         expect(err).to.not.exist();
 
@@ -336,7 +339,7 @@ it('defaults to os hostname if unspecified', function (done) {
         }
     });
 
-    server.register({ register: Tv, options: { port: 0, host: 'localhost', publicHost: '0.0.0.0' }}, function (err) {
+    server.register({ register: Tv, options: { port: 0, host: 'localhost', publicHost: '0.0.0.0' } }, function (err) {
 
         expect(err).to.not.exist();
 

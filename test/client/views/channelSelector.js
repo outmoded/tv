@@ -10,6 +10,7 @@ var internals = {};
 
 
 internals.generateView = function (options) {
+
     options = options || {};
     options.model = options.model || new Backbone.Model();
 

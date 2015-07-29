@@ -38,8 +38,14 @@ describe('SearchCriteria', function () {
                 var searchCriteria = SearchCriteria.create('foo bar');
 
                 searchCriteria.criteria = [
-                    { matches: function () { return true; }},
-                    { matches: function () { return true; }}
+                    { matches: function () {
+
+                        return true;
+                    } },
+                    { matches: function () {
+
+                        return true;
+                    } }
                 ];
 
                 var request = {};
@@ -56,7 +62,10 @@ describe('SearchCriteria', function () {
                 var searchCriteria = SearchCriteria.create('foo bar');
 
                 searchCriteria.criteria = [
-                    { matches: function () { return true; }},
+                    { matches: function () {
+
+                        return true;
+                    } },
                     { ignored: true }
                 ];
 
@@ -73,8 +82,14 @@ describe('SearchCriteria', function () {
                 var searchCriteria = SearchCriteria.create('foo bar');
 
                 searchCriteria.criteria = [
-                    { matches: function () { return true; }},
-                    { matches: function () { return false; }}
+                    { matches: function () {
+
+                        return true;
+                    } },
+                    { matches: function () {
+
+                        return false;
+                    } }
                 ];
 
                 var request = {};

@@ -32,9 +32,9 @@ describe('SettingsStore', function () {
 
         it('returns the value if found', function () {
 
-          localStorage.setItem('foo', 'bar');
+            localStorage.setItem('foo', 'bar');
 
-          expect(SettingsStore.get('foo')).to.equal('bar');
+            expect(SettingsStore.get('foo')).to.equal('bar');
         });
 
     });
@@ -43,9 +43,9 @@ describe('SettingsStore', function () {
 
         it('sets the value in localStorage', function () {
 
-          SettingsStore.set('foo', 'baz');
+            SettingsStore.set('foo', 'baz');
 
-          expect(localStorage.getItem('foo')).to.equal('baz');
+            expect(localStorage.getItem('foo')).to.equal('baz');
         });
 
     });
