@@ -23,8 +23,8 @@ exports = module.exports = internals.RequestView = Backbone.View.extend({
     },
 
     favorited: false,
-    active:    false,
-    visible:   false,
+    active: false,
+    visible: false,
 
     render: function () {
 
@@ -32,7 +32,7 @@ exports = module.exports = internals.RequestView = Backbone.View.extend({
 
         new RequestDetailsView({
             el: $markup.siblings('.request-details'),
-            model: this.model}).render();
+            model: this.model }).render();
 
         $markup.siblings('.server-logs').hide();
 

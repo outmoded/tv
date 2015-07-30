@@ -2,7 +2,7 @@
 
 var Backbone = require('backbone');
 var _ = require('lodash');
-var sinon = require('sinon');
+var Sinon = require('sinon');
 
 var AppView = require('../../../source/js/views/app');
 var Request = require('../../../source/js/models/request');

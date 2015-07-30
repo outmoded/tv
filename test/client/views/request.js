@@ -1,6 +1,6 @@
 // Load modules
 
-var sinon = require('sinon');
+var Sinon = require('sinon');
 var Backbone = require('backbone');
 var RequestView = require('../../../source/js/views/request');
 var Request = require('../../../source/js/models/request');
@@ -43,6 +43,7 @@ describe('RequestView', function () {
                 this.view.render();
 
                 this.click = function () {
+
                     this.view.$('.request-details').click();
                 }.bind(this);
             });
@@ -97,7 +98,7 @@ describe('RequestView', function () {
 
             it('emits the "serverLogsToggle" event with "true" when shown', function () {
 
-                var spy = sinon.spy();
+                var spy = Sinon.spy();
                 this.view.on('serverLogsToggle', spy);
 
                 this.click();
@@ -107,7 +108,7 @@ describe('RequestView', function () {
 
             it('emits the "serverLogsToggle" event with "false" when hidden', function () {
 
-                var spy = sinon.spy();
+                var spy = Sinon.spy();
                 this.view.on('serverLogsToggle', spy);
 
                 this.click();
@@ -172,7 +173,7 @@ describe('RequestView', function () {
 
             it('emits the "favoriteToggle" event with "true" when favorited', function () {
 
-                var spy = sinon.spy();
+                var spy = Sinon.spy();
                 this.view.on('favoriteToggle', spy);
 
                 this.click();
@@ -182,7 +183,7 @@ describe('RequestView', function () {
 
             it('emits the "favoriteToggle" event with "false" when unfavorited', function () {
 
-                var spy = sinon.spy();
+                var spy = Sinon.spy();
                 this.view.on('favoriteToggle', spy);
 
                 this.click();

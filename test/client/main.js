@@ -43,8 +43,8 @@ Backbone.$ = require('jquery');
 require('../../source/js/utils/handlebarsHelpers');
 
 if (window.mochaPhantomJS) {
-  mochaPhantomJS.run();
+    mochaPhantomJS.run();
 }
 else {
-  mocha.run();
+    mocha.run();
 }

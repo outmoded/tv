@@ -12,7 +12,7 @@ var internals = {};
 
 exports = module.exports = internals.SearchCriteria = function (queryString) {
 
-    var fragments  = queryString.split(' ');
+    var fragments = queryString.split(' ');
 
     this.criteria = _.map(fragments, function (fragment) {
 

@@ -24,6 +24,7 @@ describe('SearchCriterion', function () {
             it('marks the criterion as scoped', function () {
 
                 _.each(SearchCriterion.VALID_SCOPED_PROPERTIES, function (property) {
+
                     var fragment = property + ':value';
                     var searchCriterion = SearchCriterion.create(fragment);
 

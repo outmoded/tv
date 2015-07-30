@@ -1,6 +1,6 @@
 // Load modules
 
-var moment = require('moment');
+var Moment = require('moment');
 
 
 // Declare internals
@@ -12,12 +12,12 @@ exports = module.exports = internals.DateTimeFormatter = {
 
     longTime: function (timestamp) {
 
-        return moment(timestamp).format('HH:mm:ss SS[ms]');
+        return Moment(timestamp).format('HH:mm:ss SS[ms]');
     },
 
     shortDate: function (timestamp) {
 
-        return moment(timestamp).format('MM-DD-YYYY');
+        return Moment(timestamp).format('MM-DD-YYYY');
     }
 
 };

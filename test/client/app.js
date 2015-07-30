@@ -1,9 +1,9 @@
 // Load modules
 
 var Backbone = require('backbone');
-var sinon = require('sinon');
+var Sinon = require('sinon');
 
-var app = require('../../source/js/app');
+var App = require('../../source/js/app');
 var WebSocketManager = require('../../source/js/webSocketManager');
 var MessageParser = require('../../source/js/messageParser');
 
@@ -13,7 +13,7 @@ var MessageParser = require('../../source/js/messageParser');
 var internals = {};
 
 
-describe('app', function () {
+describe('App', function () {
 
     describe('#start', function () {
 
@@ -23,7 +23,10 @@ describe('app', function () {
             this.fakeAppModel = new Backbone.Model();
             var fakeAppView = new Backbone.View({ model: this.fakeAppModel });
             fakeAppView.settingsView = new Backbone.View();
-            this.mockAppViewClass = function () { return fakeAppView; };
+            this.mockAppViewClass = function () {
+
+                return fakeAppView;
+            };
 
             this.mockWebSocketManager = {
                 onMessage: function () { },
@@ -32,19 +35,21 @@ describe('app', function () {
 
             var mockWebSocketManagerClass = {
                 create: function () {
+
                     return self.mockWebSocketManager;
                 }
             };
-            this.mockMessageParser      = { addMessage : function () { } };
-            this.mockSettingsStore      = { exists: function (){ }, get: function () { } };
+            this.mockMessageParser = { addMessage: function () { } };
+            this.mockSettingsStore = { exists: function (){ }, get: function () { } };
 
-            this.settingsRenderSpy = sinon.spy(fakeAppView.settingsView, 'render');
-            this.settingsShowSpy = sinon.spy();
+            this.settingsRenderSpy = Sinon.spy(fakeAppView.settingsView, 'render');
+            this.settingsShowSpy = Sinon.spy();
             fakeAppView.settingsView.show = this.settingsShowSpy;
-            this.appRenderSpy = sinon.spy(fakeAppView, 'render');
+            this.appRenderSpy = Sinon.spy(fakeAppView, 'render');
 
             this.appStart = function () {
-                app.start('localhost', 8000, {
+
+                App.start('localhost', 8000, {
                     messageParser: this.mockMessageParser,
                     appViewClass: this.mockAppViewClass,
                     settingsStore: this.mockSettingsStore,
@@ -54,7 +59,7 @@ describe('app', function () {
 
         });
 
-        it('renders the app view', function () {
+        it('renders the App view', function () {
 
             this.appStart();
 
@@ -65,8 +70,8 @@ describe('app', function () {
 
             it('sets the channel as the web socket\'s filter', function () {
 
-                var applyFilterSpy = sinon.spy(this.mockWebSocketManager, 'applyFilter');
-                sinon.stub(this.mockSettingsStore, 'get').withArgs('channel').returns('foo');
+                var applyFilterSpy = Sinon.spy(this.mockWebSocketManager, 'applyFilter');
+                Sinon.stub(this.mockSettingsStore, 'get').withArgs('channel').returns('foo');
 
                 this.appStart();
                 this.mockWebSocketManager.onSocketOpen();
@@ -80,8 +85,8 @@ describe('app', function () {
 
             it('adds the message to the message parser', function () {
 
-                var onMessageSpy = sinon.spy(this.mockWebSocketManager, 'onMessage');
-                var addMessageSpy = sinon.spy(this.mockMessageParser, 'addMessage');
+                var onMessageSpy = Sinon.spy(this.mockWebSocketManager, 'onMessage');
+                var addMessageSpy = Sinon.spy(this.mockMessageParser, 'addMessage');
 
                 this.appStart();
                 expect(onMessageSpy.callCount).to.eq(1);
