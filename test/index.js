@@ -371,18 +371,18 @@ it('uses specified route prefix for assets', function (done) {
         }
     });
 
-    server.register({ register: Tv, options: { port: 0 }}, { routes: { prefix: '/test'} }, function (err) {
+    server.register({ register: Tv, options: { port: 0 } }, { routes: { prefix: '/test' } }, function (err) {
 
         expect(err).to.not.exist();
 
         server.inject('/test/debug/console', function (res) {
-            var cssPath = 'href="' + res.request.path + '/css/style.css';
-            var jsPath = 'src="' + res.request.path + '/js/main.js';
 
             expect(res.statusCode).to.equal(200);
+
+            var cssPath = 'href="' + res.request.path + '/css/style.css';
+            var jsPath = 'src="' + res.request.path + '/js/main.js';
             expect(res.result).to.contain(cssPath);
             expect(res.result).to.contain(jsPath);
-
             done();
 
         });
