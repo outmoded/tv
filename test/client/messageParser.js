@@ -1,7 +1,7 @@
 // Load modules
 
 var _ = require('lodash');
-var sinon = require('sinon');
+var Sinon = require('sinon');
 var Backbone = require('backbone');
 
 var MessageParser = require('../../source/js/messageParser');
@@ -157,7 +157,7 @@ describe('MessageParser', function () {
 
                         this.messageParser.addMessage(message);
 
-                        this.request = this.messageParser.requests.findWhere({id: this.messageData.request});
+                        this.request = this.messageParser.requests.findWhere({ id: this.messageData.request });
                     });
 
                     it('updates the request object with the status code', function () {
@@ -200,7 +200,7 @@ describe('MessageParser', function () {
 
             beforeEach(function () {
 
-                this.messageParser = MessageParser.create({responseTimeout: 5});
+                this.messageParser = MessageParser.create({ responseTimeout: 5 });
 
                 this.messageParser.addMessage(internals.createMessage(internals.RECEIVED));
                 this.request = this.messageParser.requests.models[0];
@@ -220,7 +220,7 @@ describe('MessageParser', function () {
 
             it('calls the onResponseTimeout callback', function (done) {
 
-                this.messageParser.onResponseTimeout = sinon.spy();
+                this.messageParser.onResponseTimeout = Sinon.spy();
 
                 setTimeout(function () {
 
@@ -250,7 +250,7 @@ describe('MessageParser', function () {
 
             it('resets the response timeout for that request', function (done) {
 
-                var messageParser = MessageParser.create({responseTimeout: 3});
+                var messageParser = MessageParser.create({ responseTimeout: 3 });
 
                 messageParser.addMessage(internals.createMessage(internals.RECEIVED));
 
@@ -275,7 +275,7 @@ describe('MessageParser', function () {
 
                 it('clears the response error timeout', function (done) {
 
-                    var messageParser = MessageParser.create({responseTimeout: 1});
+                    var messageParser = MessageParser.create({ responseTimeout: 1 });
 
                     messageParser.addMessage(internals.createMessage(internals.RECEIVED));
 

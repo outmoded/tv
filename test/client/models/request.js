@@ -60,7 +60,7 @@ describe('Request', function () {
         it('parses all subcomponents', function () {
 
             var request = new Request({ statusCode: 200 });
-            request.set('serverLogs', new Backbone.Collection([{foo: 'bar', bar: 'baz'}]));
+            request.set('serverLogs', new Backbone.Collection([{ foo: 'bar', bar: 'baz' }]));
 
             expect(request.toJSON().serverLogs).to.be.an.instanceOf(Array);
         });

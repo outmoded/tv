@@ -1,7 +1,7 @@
 {
   "name": "tv",
   "description": "Interactive debug console plugin for hapi",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "repository": "git://github.com/hapijs/tv",
   "main": "index",
   "keywords": [
@@ -14,40 +14,40 @@
     "node": ">=0.10.32"
   },
   "dependencies": {
-    "backbone": "^1.1.2",
-    "bootstrap": "^3.3.1",
-    "chance": "^0.7.0",
-    "handlebars": "2.0.x",
-    "hbsfy": "^2.2.0",
-    "hoek": "2.x.x",
-    "jquery": "^2.1.1",
+    "backbone": "1.X.X",
+    "bootstrap": "3.X.X",
+    "chance": "0.7.X",
+    "handlebars": "3.X.X",
+    "hbsfy": "2.X.X",
+    "hoek": "2.X.X",
+    "jquery": "2.X.X",
     "json-markup": "^0.1.6",
-    "lodash": "^2.4.1",
-    "moment": "^2.8.4",
-    "ws": "0.4.x",
-    "zeroclipboard": "^2.1.6"
+    "lodash": "3.X.X",
+    "moment": "2.X.X",
+    "ws": "0.7.X",
+    "zeroclipboard": "2.X.X"
   },
   "peerDependencies": {
     "hapi": ">=8.x.x"
   },
   "devDependencies": {
-    "browserify": "^6.3.2",
-    "browserify-istanbul": "^0.1.2",
-    "chai": "^1.10.0",
-    "chai-jquery": "^2.0.0",
-    "code": "^1.2.1",
-    "es5-shim": "^4.0.5",
-    "istanbul": "^0.3.5",
-    "lab": "5.x.x",
-    "mocha": "^2.0.1",
-    "mocha-phantomjs": "^3.5.2",
-    "node-sass": "^1.2.3",
-    "onchange": "0.0.2",
-    "phantomjs": "^1.9.12",
-    "sinon": "^1.12.1",
-    "sinon-chai": "^2.6.0",
-    "watchify": "^2.1.1",
-    "hapi": ">=8.x.x"
+    "browserify": "11.X.X",
+    "browserify-istanbul": "0.2.X",
+    "chai": "3.X.X",
+    "chai-jquery": "2.X.X",
+    "code": "1.X.X",
+    "es5-shim": "4.X.X",
+    "istanbul": "0.3.X",
+    "lab": "5.X.X",
+    "mocha": "2.X.X",
+    "mocha-phantomjs": "3.X.X",
+    "node-sass": "3.X.X",
+    "onchange": "1.X.X",
+    "phantomjs": "1.9.7-15",
+    "sinon": "1.X.X",
+    "sinon-chai": "2.X.X",
+    "watchify": "3.X.X",
+    "hapi": ">=8.X.X"
   },
   "scripts": {
     "test": "make test-client && make test-cov",
@@ -68,10 +68,5 @@
     "post-js": "onchange test/bundle.js -- npm run test",
     "prepublish": "npm run build"
   },
-  "licenses": [
-    {
-      "type": "BSD",
-      "url": "http://github.com/hapijs/tv/raw/master/LICENSE"
-    }
-  ]
+  "license": "BSD-3-Clause"
 }

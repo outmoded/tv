@@ -9,22 +9,22 @@ var internals = {};
 // Hooks to integrate mocha-phantomjs with istanbul coverage
 exports = module.exports = internals.PhantomHooks = {
 
-  afterEnd: function (runner) {
+    afterEnd: function (runner) {
 
-    var fs = require('fs');
+        var fs = require('fs');
 
-    var coverage = runner.page.evaluate(function () {
+        var coverage = runner.page.evaluate(function () {
 
-      return window.__coverage__;
-    });
+            return window.__coverage__;
+        });
 
-    if (coverage) {
-      console.log('Writing coverage to coverage/coverage.json');
-      fs.write('coverage/coverage.json', JSON.stringify(coverage), 'w');
+        if (coverage) {
+            console.log('Writing coverage to coverage/coverage.json');
+            fs.write('coverage/coverage.json', JSON.stringify(coverage), 'w');
+        }
+        else {
+            console.log('No coverage data generated');
+        }
     }
-    else {
-      console.log('No coverage data generated');
-    }
-  }
 
 };

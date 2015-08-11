@@ -34,6 +34,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
         this.$el.empty();
 
         _.each(this._requestViews, function (requestView) {
+
             requestView.remove();
         });
 
@@ -43,6 +44,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
     hasFavoritedRequests: function () {
 
         return _.any(this._requestViews, function (requestView) {
+
             return requestView.favorited;
         });
     },
@@ -50,6 +52,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
     hasExpandedRequests: function () {
 
         return _.any(this._requestViews, function (requestView) {
+
             return requestView.active;
         });
     },
@@ -60,6 +63,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
         this.$('.request .server-logs').hide();
 
         _.each(this._requestViews, function (requestView) {
+
             requestView.active = false;
         });
     },
@@ -153,7 +157,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     _scrollToBottom: function () {
 
-        window.scrollTo(0,document.body.scrollHeight);
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
 });

@@ -1,6 +1,6 @@
 // Load modules
 
-var sinon = require('sinon');
+var Sinon = require('sinon');
 
 var WebSocketManager = require('../../source/js/webSocketManager');
 
@@ -14,8 +14,8 @@ describe('WebSocketManager', function () {
 
     beforeEach(function () {
 
-        this.webSocketSendSpy = sinon.spy();
-        this.onmessageSpy = sinon.spy();
+        this.webSocketSendSpy = Sinon.spy();
+        this.onmessageSpy = Sinon.spy();
         this.mockWebSocket = { send: this.webSocketSendSpy, onmessage: this.onmessageSpy };
 
         this.manager = WebSocketManager.create(this.mockWebSocket);
@@ -34,7 +34,7 @@ describe('WebSocketManager', function () {
 
         it('calls teh onSocketOpen callback', function () {
 
-            var onSocketOpenSpy = sinon.spy();
+            var onSocketOpenSpy = Sinon.spy();
             this.manager.onSocketOpen = onSocketOpenSpy;
 
             this.mockWebSocket.onopen();

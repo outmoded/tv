@@ -1,6 +1,6 @@
 // Load modules
 
-var sinon = require('sinon');
+var Sinon = require('sinon');
 var Backbone = require('backbone');
 
 var ServerLogsView = require('../../../source/js/views/serverLogs');
@@ -87,7 +87,7 @@ describe('ServerLogsView', function () {
 
         it('rerenders when a new model is added to the collection', function () {
 
-            var spy = sinon.spy(this.view, 'render');
+            var spy = Sinon.spy(this.view, 'render');
 
             this.view.collection.add(internals.RESPONSE);
 

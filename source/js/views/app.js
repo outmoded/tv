@@ -43,9 +43,9 @@ exports = module.exports = internals.AppView = Backbone.View.extend({
     _renderChildViews: function ($markup) {
 
         var settingsView = this._renderSettings($markup);
-        var toolbarView =    this._renderToolbar($markup);
+        var toolbarView = this._renderToolbar($markup);
         var feedHeaderView = this._renderFeedHeader($markup);
-        var feedBodyView =   this._renderFeedBody($markup);
+        var feedBodyView = this._renderFeedBody($markup);
 
         this.listenTo(toolbarView, 'pause', this._webSocketManager.pause.bind(this._webSocketManager));
         this.listenTo(toolbarView, 'resume', this._webSocketManager.resume.bind(this._webSocketManager));
