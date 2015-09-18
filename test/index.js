@@ -2,10 +2,12 @@
 
 var Code = require('code');
 var Hapi = require('hapi');
+var Inert = require('inert');
 var Lab = require('lab');
-var Ws = require('ws');
-var Tv = require('../');
 var Os = require('os');
+var Tv = require('../');
+var Vision = require('vision');
+var Ws = require('ws');
 
 
 // Declare internals
@@ -40,7 +42,7 @@ it('reports a request event', function (done) {
         }
     });
 
-    server.register({ register: Tv, options: { port: 0 } }, function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0 } }], function (err) {
 
         expect(err).to.not.exist();
 
@@ -89,7 +91,7 @@ it('handles subscribe and unsubscribe', function (done) {
         }
     });
 
-    server.register({ register: Tv, options: { port: 0 } }, function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0 } }], function (err) {
 
         expect(err).to.not.exist();
 
@@ -155,7 +157,7 @@ it('does not resubscribe for the same socket', function (done) {
         }
     });
 
-    server.register({ register: Tv, options: { port: 0 } }, function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0 } }], function (err) {
 
         expect(err).to.not.exist();
 
@@ -221,7 +223,7 @@ it('handles reconnects gracefully', function (done) {
         }
     });
 
-    server.register({ register: Tv, options: { port: 0, host: 'localhost' } }, function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0, host: 'localhost' } }], function (err) {
 
         expect(err).to.not.exist();
 
@@ -277,7 +279,7 @@ it('uses specified hostname', function (done) {
         }
     });
 
-    server.register({ register: Tv, options: { host: '127.0.0.1', port: 0 } }, function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { host: '127.0.0.1', port: 0 } }], function (err) {
 
         expect(err).to.not.exist();
 
@@ -308,7 +310,7 @@ it('uses specified public hostname', function (done) {
         }
     });
 
-    server.register({ register: Tv, options: { port: 0, host: 'localhost', publicHost: '127.0.0.1' } }, function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0, host: 'localhost', publicHost: '127.0.0.1' } }], function (err) {
 
         expect(err).to.not.exist();
 
@@ -339,7 +341,7 @@ it('defaults to os hostname if unspecified', function (done) {
         }
     });
 
-    server.register({ register: Tv, options: { port: 0, host: 'localhost', publicHost: '0.0.0.0' } }, function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0, host: 'localhost', publicHost: '0.0.0.0' } }], function (err) {
 
         expect(err).to.not.exist();
 
@@ -371,7 +373,7 @@ it('uses specified route prefix for assets', function (done) {
         }
     });
 
-    server.register({ register: Tv, options: { port: 0 } }, { routes: { prefix: '/test' } }, function (err) {
+    server.register([Inert, Vision, { register: Tv, options: { port: 0 } }], { routes: { prefix: '/test' } }, function (err) {
 
         expect(err).to.not.exist();
 
