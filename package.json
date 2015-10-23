@@ -1,7 +1,7 @@
 {
   "name": "tv",
   "description": "Interactive debug console plugin for hapi",
-  "version": "4.1.2",
+  "version": "5.0.0",
   "repository": "git://github.com/hapijs/tv",
   "main": "lib/index.js",
   "keywords": [
