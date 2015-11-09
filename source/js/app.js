@@ -38,8 +38,9 @@ exports = module.exports = window.app = internals.App = {
 
         var messageParser = opts.messageParser;
         var settingsStore = opts.settingsStore;
+        var protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
 
-        var ws = new WebSocket('ws://' + host + ':' + port);
+        var ws = new WebSocket(protocol + host + ':' + port);
         var webSocketManager = opts.webSocketManagerClass.create(ws);
 
         var appView = new opts.appViewClass({
