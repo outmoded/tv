@@ -37,8 +37,9 @@ In applications using multiple server instances, only one server can enable the 
 
 Below are the options available to be passed into the **tv** plugin:
 
-- `host` - the hostname, IP address, or path to UNIX domain socket the WebSocket connection is bound to. Defaults to _undefined_ and therefore `0.0.0.0`
-   which means any available network interface(see hapi `new Server()`).
+- `host` - the public hostname or IP address. Used only to set `server.info.host` and `server.info.uri`.
+   Deaults to hostname and if not available to `localhost`(see hapi `new Server()`).
+- `address` - the hostname of IP address the WebSocket connection will bind to. Defaults to `host` if present otherwise `0.0.0.0`(see hapi `new Server()`).
 - `port` - the port used by the WebSocket connection. Defaults to _0_ and therefore an ephemeral port (see hapi `new Server()`).
 - `endpoint` - the debug console request path added to the server routes. Defaults to _'/debug/console'_.
 - `queryKey` - the name or the request query parameter used to mark requests being debugged. Defaults to _debug_.
