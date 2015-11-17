@@ -327,6 +327,37 @@ it('uses specified public hostname', function (done) {
     });
 });
 
+it('binds to address and uses host as public hostname', function (done) {
+
+    var server = new Hapi.Server();
+    server.connection();
+
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: function (request, reply) {
+
+            return reply('1');
+        }
+    });
+
+    server.register([Vision, Inert, { register: Tv, options: { port: 0, host: 'aaaaa', address: '127.0.0.1' } }], function (err) {
+
+        expect(err).to.not.exist();
+
+        server.inject('/debug/console', function (res) {
+
+            expect(res.statusCode).to.equal(200);
+            expect(res.result).to.contain('Debug Console');
+
+            var host = res.result.match(/var host = '([^']+)'/)[1];
+            expect(host).to.equal('aaaaa');
+            done();
+
+        });
+    });
+});
+
 it('defaults to os hostname if unspecified', function (done) {
 
     var server = new Hapi.Server();
