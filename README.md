@@ -6,7 +6,7 @@ TV is an interactive debug console plugin for [**hapi**](https://github.com/hapi
 
 Lead Maintainer: [Oscar A. Funes Martinez](https://github.com/osukaa)
 
-TV is a simple web page in which developers can view server logs for their requests. Optionally, they can also filter the server logs to just their requests by attaching a unique client id to each request. The server will use WebSocket to stream the logs to the web application in real-time. 
+TV is a simple web page in which developers can view server logs for their requests. Optionally, they can also filter the server logs to just their requests by attaching a unique client id to each request. The server will use WebSocket to stream the logs to the web application in real-time.
 
 Here's what it looks like in action:
 
@@ -17,16 +17,17 @@ Here's what it looks like in action:
 To enable TV in a **hapi** application, install **tv** and register it.  Below is an example of registering the **tv** plugin:
 
 ```javascript
-var Hapi = require('hapi');
-var Tv = require('tv');
+const Hapi = require('hapi');
+const Tv = require('tv');
 
-var server = new Hapi.Server();
+const server = new Hapi.Server();
 
-server.register(Tv, function (err) {
+server.register(Tv, (err) => {
 
-    if (!err) {
-        server.start();
+    if (err) {
+        throw err;
     }
+    server.start();
 });
 ```
 
@@ -49,9 +50,13 @@ Below are the options available to be passed into the **tv** plugin:
 Below is an example of registering the tv plugin with some options:
 
 ```javascript
-var options = {endpoint: '/awesome'};
+const Hapi = require('hapi');
+const Tv = require('tv');
+const options = { endpoint: '/awesome' };
 
-server.register({register: Tv, options: options}, function (err) {
+const server = new Hapi.Server();
+
+server.register({ register: Tv, options: options }, function (err) {
     ...
 });
 ```

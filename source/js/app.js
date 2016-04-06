@@ -1,3 +1,4 @@
+'use strict';
 // Load modules
 
 window.$ = window.jQuery = require('jquery');
