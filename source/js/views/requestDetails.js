@@ -1,10 +1,11 @@
+'use strict';
 // Load modules
 
-var Backbone = require('backbone');
+const Backbone = require('backbone');
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.RequestDetailsView = Backbone.View.extend({
@@ -21,7 +22,7 @@ exports = module.exports = internals.RequestDetailsView = Backbone.View.extend({
 
     render: function () {
 
-        var $markup = $(this.template(this.model.attributes));
+        const $markup = $(this.template(this.model.attributes));
 
         this.$el.toggleClass('error', this.model.hasError());
         this.$el.toggleClass('warning', this.model.hasWarning());

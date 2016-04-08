@@ -1,13 +1,14 @@
+'use strict';
 // Load modules
 
-var Backbone = require('backbone');
+const Backbone = require('backbone');
 
-var SettingsStore = require('../settingsStore');
+// const SettingsStore = require('../settingsStore');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.ChannelSelectorView = Backbone.View.extend({
@@ -34,7 +35,7 @@ exports = module.exports = internals.ChannelSelectorView = Backbone.View.extend(
 
     render: function () {
 
-        var data = {
+        const data = {
             clientId: this.model.get('clientId'),
             channel: this.model.get('channel')
         };

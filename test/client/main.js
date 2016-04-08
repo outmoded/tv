@@ -1,3 +1,4 @@
+'use strict';
 host = 'localhost';
 port = 8000;
 
@@ -37,7 +38,7 @@ require('./webSocketManager');
 chai.use(require('sinon-chai'));
 chai.use(require('chai-jquery'));
 
-var Backbone = require('backbone');
+const Backbone = require('backbone');
 Backbone.$ = require('jquery');
 
 require('../../source/js/utils/handlebarsHelpers');

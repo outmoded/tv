@@ -1,11 +1,12 @@
+'use strict';
 // Load modules
 
-var Moment = require('moment');
+const Moment = require('moment');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.DateTimeFormatter = {

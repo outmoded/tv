@@ -1,11 +1,12 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
+const _ = require('lodash');
 
 
 // Declare internals
 
-var internals = {
+const internals = {
     VALID_SCOPED_PROPERTIES: ['path', 'method', 'status', 'tags', 'data'],
     CUSTOM_PROPERTY_FUNCTIONS: {
         tags: function (request) {
@@ -21,7 +22,7 @@ var internals = {
             return _.chain(request.serverLogs)
                 .pluck('data')
                 .flatten()
-                .map(function (a) {
+                .map((a) => {
 
                     return JSON.stringify(a);
                 })
@@ -62,7 +63,7 @@ internals.SearchCriterion.create = function (fragment) {
 
 internals.SearchCriterion.prototype.matches = function (request) {
 
-    var matches;
+    let matches;
 
     if (this.scoped) {
         matches = this._matchesScopedProperty(request);
@@ -77,7 +78,7 @@ internals.SearchCriterion.prototype.matches = function (request) {
 
 internals.SearchCriterion.prototype._isValidAny = function () {
 
-    var pieces = this._fragment.split(':');
+    const pieces = this._fragment.split(':');
 
     if (pieces.length > 1) {
         if (_.contains(internals.VALID_SCOPED_PROPERTIES, pieces[0])) {
@@ -91,10 +92,10 @@ internals.SearchCriterion.prototype._isValidAny = function () {
 
 internals.SearchCriterion.prototype._parseScopedPropertyValues = function () {
 
-    var pieces = this._fragment.split(':');
-    var values = pieces[1].split(',');
+    const pieces = this._fragment.split(':');
+    const values = pieces[1].split(',');
 
-    return _.reject(values, function (value) {
+    return _.reject(values, (value) => {
 
         return value.length === 0;
     });
@@ -103,7 +104,7 @@ internals.SearchCriterion.prototype._parseScopedPropertyValues = function () {
 
 internals.SearchCriterion.prototype._isScoped = function () {
 
-    var pieces = this._fragment.split(':');
+    const pieces = this._fragment.split(':');
 
     if (pieces.length > 1 && pieces[1].length) {
         return _.contains(internals.VALID_SCOPED_PROPERTIES, pieces[0]);
@@ -120,9 +121,9 @@ internals.SearchCriterion.prototype._parseScopedProperty = function () {
 
 internals.SearchCriterion.prototype._matchesScopedProperty = function (request) {
 
-    var self = this;
+    const self = this;
 
-    return _.any(this.scopedPropertyValues, function (value) {
+    return _.any(this.scopedPropertyValues, (value) => {
 
         return self._matchesValue(request, self.scopedProperty, value);
     });
@@ -131,9 +132,9 @@ internals.SearchCriterion.prototype._matchesScopedProperty = function (request) 
 
 internals.SearchCriterion.prototype._matchesAny = function (request) {
 
-    var self = this;
+    const self = this;
 
-    return _.any(internals.VALID_SCOPED_PROPERTIES, function (property) {
+    return _.any(internals.VALID_SCOPED_PROPERTIES, (property) => {
 
         return self._matchesValue(request, property, self._fragment);
     });
@@ -142,8 +143,8 @@ internals.SearchCriterion.prototype._matchesAny = function (request) {
 
 internals.SearchCriterion.prototype._matchesValue = function (request, property, expectedValue) {
 
-    var actualValue;
-    var customValueFunction = internals.CUSTOM_PROPERTY_FUNCTIONS[property];
+    let actualValue;
+    const customValueFunction = internals.CUSTOM_PROPERTY_FUNCTIONS[property];
 
     if (customValueFunction) {
         actualValue = customValueFunction(request);

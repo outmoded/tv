@@ -1,18 +1,19 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
+// const _ = require('lodash');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.WebSocketManager = function (webSocket) {
 
     this._webSocket = webSocket;
 
-    var self = this;
+    const self = this;
     this._webSocket.onopen = function () {
 
         self.isOpen = true;

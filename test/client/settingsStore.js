@@ -1,11 +1,12 @@
+'use strict';
 // Load modules
 
-var SettingsStore = require('../../source/js/settingsStore');
+const SettingsStore = require('../../source/js/settingsStore');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('SettingsStore', function () {

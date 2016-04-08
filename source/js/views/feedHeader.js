@@ -1,6 +1,7 @@
+'use strict';
 // Load modules
 
-var Backbone = require('backbone');
+const Backbone = require('backbone');
 
 
 exports = module.exports = internals.FeedHeaderView = Backbone.View.extend({

@@ -1,14 +1,15 @@
+'use strict';
 // Load modules
 
-var Backbone = require('backbone');
+const Backbone = require('backbone');
 
-var ServerLogsView = require('./serverLogs');
-var RequestDetailsView = require('./requestDetails');
+const ServerLogsView = require('./serverLogs');
+const RequestDetailsView = require('./requestDetails');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.RequestView = Backbone.View.extend({
@@ -28,7 +29,7 @@ exports = module.exports = internals.RequestView = Backbone.View.extend({
 
     render: function () {
 
-        var $markup = $(this.template());
+        const $markup = $(this.template());
 
         new RequestDetailsView({
             el: $markup.siblings('.request-details'),

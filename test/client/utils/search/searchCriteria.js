@@ -1,14 +1,15 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
+const _ = require('lodash');
 
-var SearchCriteria = require('../../../../source/js/utils/search/searchCriteria');
-var SearchCriterion = require('../../../../source/js/utils/search/searchCriterion');
+const SearchCriteria = require('../../../../source/js/utils/search/searchCriteria');
+const SearchCriterion = require('../../../../source/js/utils/search/searchCriterion');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('SearchCriteria', function () {
@@ -22,7 +23,7 @@ describe('SearchCriteria', function () {
 
         it('creates an array of SearchCriterion objects', function () {
 
-            var criteria = SearchCriteria.create('foo:bar bar:baz').criteria;
+            const criteria = SearchCriteria.create('foo:bar bar:baz').criteria;
             expect(criteria.length).to.equal(2);
             expect(criteria[0]).to.be.instanceOf(SearchCriterion);
         });
@@ -35,7 +36,7 @@ describe('SearchCriteria', function () {
 
             it('returns true', function () {
 
-                var searchCriteria = SearchCriteria.create('foo bar');
+                const searchCriteria = SearchCriteria.create('foo bar');
 
                 searchCriteria.criteria = [
                     { matches: function () {
@@ -48,7 +49,7 @@ describe('SearchCriteria', function () {
                     } }
                 ];
 
-                var request = {};
+                const request = {};
 
                 expect(searchCriteria.matches(request)).to.equal(true);
             });
@@ -59,7 +60,7 @@ describe('SearchCriteria', function () {
 
             it('skips that criterion during evaluation', function () {
 
-                var searchCriteria = SearchCriteria.create('foo bar');
+                const searchCriteria = SearchCriteria.create('foo bar');
 
                 searchCriteria.criteria = [
                     { matches: function () {
@@ -69,7 +70,7 @@ describe('SearchCriteria', function () {
                     { ignored: true }
                 ];
 
-                var request = {};
+                const request = {};
 
                 expect(searchCriteria.matches(request)).to.equal(true);
             });
@@ -79,7 +80,7 @@ describe('SearchCriteria', function () {
 
             it('returns false', function () {
 
-                var searchCriteria = SearchCriteria.create('foo bar');
+                const searchCriteria = SearchCriteria.create('foo bar');
 
                 searchCriteria.criteria = [
                     { matches: function () {
@@ -92,7 +93,7 @@ describe('SearchCriteria', function () {
                     } }
                 ];
 
-                var request = {};
+                const request = {};
 
                 expect(searchCriteria.matches(request)).to.equal(false);
             });

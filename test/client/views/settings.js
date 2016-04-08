@@ -1,11 +1,12 @@
+'use strict';
 // Load modules
 
-var SettingsView = require('../../../source/js/views/settings');
+const SettingsView = require('../../../source/js/views/settings');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('SettingsView', function () {

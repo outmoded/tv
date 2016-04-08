@@ -1,3 +1,4 @@
+'use strict';
 // Load modules
 
 var Sinon = require('sinon');

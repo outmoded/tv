@@ -1,14 +1,15 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
-var Backbone = require('backbone');
+const _ = require('lodash');
+const Backbone = require('backbone');
 
-var SettingsStore = require('../settingsStore');
+const SettingsStore = require('../settingsStore');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.Settings = Backbone.Model.extend({
@@ -26,7 +27,7 @@ exports = module.exports = internals.Settings = Backbone.Model.extend({
     initialize: function (attributes, options) {
 
         this.on('change', this._updateSettingsStore, this);
-        this.on('change:channel', function (model, channel) {
+        this.on('change:channel', (model, channel) => {
 
             options.webSocketManager.applyFilter(channel);
         });
@@ -34,9 +35,9 @@ exports = module.exports = internals.Settings = Backbone.Model.extend({
 
     _updateSettingsStore: function (model) {
 
-        var self = this;
+        const self = this;
 
-        var updateSettingsStoreProp = function (value, key) {
+        const updateSettingsStoreProp = function (value, key) {
 
             self._store.set(key, value);
         };

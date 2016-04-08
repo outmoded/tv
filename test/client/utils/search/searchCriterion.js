@@ -1,13 +1,14 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
+const _ = require('lodash');
 
-var SearchCriterion = require('../../../../source/js/utils/search/searchCriterion');
+const SearchCriterion = require('../../../../source/js/utils/search/searchCriterion');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('SearchCriterion', function () {
@@ -25,8 +26,8 @@ describe('SearchCriterion', function () {
 
                 _.each(SearchCriterion.VALID_SCOPED_PROPERTIES, function (property) {
 
-                    var fragment = property + ':value';
-                    var searchCriterion = SearchCriterion.create(fragment);
+                    const fragment = property + ':value';
+                    const searchCriterion = SearchCriterion.create(fragment);
 
                     expect(searchCriterion.scoped).to.equal(true);
                 });
@@ -34,8 +35,8 @@ describe('SearchCriterion', function () {
 
             it('specifies the scoped property', function () {
 
-                var fragment = 'path:bar';
-                var searchCriterion = SearchCriterion.create(fragment);
+                const fragment = 'path:bar';
+                const searchCriterion = SearchCriterion.create(fragment);
 
                 expect(searchCriterion.scopedProperty).to.equal('path');
             });
@@ -55,7 +56,7 @@ describe('SearchCriterion', function () {
 
             it('does not ignore search criterion or mark it as ignored', function (){
 
-                var criterion = SearchCriterion.create('foo:test');
+                const criterion = SearchCriterion.create('foo:test');
                 expect(criterion.ignored).to.not.equal(true);
                 expect(criterion.scoped).to.equal(false);
             });
@@ -93,7 +94,7 @@ describe('SearchCriterion', function () {
 
                     it('returns true', function () {
 
-                        var request = {
+                        const request = {
                             path: '/customers',
                             statusCode: 200,
                             method: 'GET',
@@ -113,7 +114,7 @@ describe('SearchCriterion', function () {
                             'method:ge',
                             'tags:received',
                             'tags:rec'
-                        ], function (fragment) {
+                        ], (fragment) => {
 
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(true);
                         });
@@ -125,7 +126,7 @@ describe('SearchCriterion', function () {
 
                     it('returns false', function () {
 
-                        var request = {
+                        const request = {
                             path: '/invoices',
                             statusCode: 200,
                             method: 'GET',
@@ -139,7 +140,7 @@ describe('SearchCriterion', function () {
                             'status:404',
                             'method:POST',
                             'tags:error'
-                        ], function (fragment) {
+                        ], (fragment) => {
 
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
                         });
@@ -155,7 +156,7 @@ describe('SearchCriterion', function () {
 
                     it('returns true', function () {
 
-                        var request = {
+                        const request = {
                             path: '/customers',
                             statusCode: 200,
                             method: 'GET',
@@ -170,7 +171,7 @@ describe('SearchCriterion', function () {
                             'status:20,400',
                             'method:ge,post',
                             'tags:rec,foo'
-                        ], function (fragment) {
+                        ], (fragment) => {
 
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(true);
                         });
@@ -182,7 +183,7 @@ describe('SearchCriterion', function () {
 
                     it('returns false', function () {
 
-                        var request = {
+                        const request = {
                             path: '/invoices',
                             statusCode: 200,
                             method: 'GET',
@@ -194,7 +195,7 @@ describe('SearchCriterion', function () {
                         _.each([
                             'path:customers,orders',
                             'tags:error'
-                        ], function (fragment) {
+                        ], (fragment) => {
 
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
                         });
@@ -206,7 +207,7 @@ describe('SearchCriterion', function () {
 
                     it('ignores the empty value', function () {
 
-                        var request = {
+                        const request = {
                             path: '/invoices',
                             statusCode: 200,
                             method: 'GET',
@@ -217,7 +218,7 @@ describe('SearchCriterion', function () {
 
                         _.each([
                             'path:customers,'
-                        ], function (fragment) {
+                        ], (fragment) => {
 
                             expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
                         });
@@ -234,7 +235,7 @@ describe('SearchCriterion', function () {
 
                 it('returns true', function () {
 
-                    var request = {
+                    const request = {
                         path: '/customers',
                         statusCode: 200,
                         method: 'GET',
@@ -253,7 +254,7 @@ describe('SearchCriterion', function () {
                         '200',
                         'received',
                         'rec'
-                    ], function (fragment) {
+                    ], (fragment) => {
 
                         expect(SearchCriterion.create(fragment).matches(request)).to.equal(true);
                     });
@@ -265,7 +266,7 @@ describe('SearchCriterion', function () {
 
                 it('returns false', function () {
 
-                    var request = {
+                    const request = {
                         path: '/customers',
                         statusCode: 200,
                         method: 'GET',
@@ -279,7 +280,7 @@ describe('SearchCriterion', function () {
                         '500',
                         'post',
                         'error'
-                    ], function (fragment) {
+                    ], (fragment) => {
 
                         expect(SearchCriterion.create(fragment).matches(request)).to.equal(false);
                     });
@@ -293,7 +294,7 @@ describe('SearchCriterion', function () {
 
             it('doesn\'t error', function () {
 
-                var request = {
+                const request = {
                     path: '/customers',
                     method: 'GET',
                     serverLogs: [{
@@ -301,7 +302,7 @@ describe('SearchCriterion', function () {
                     }]
                 };
 
-                expect(function () {
+                expect(() => {
 
                     SearchCriterion.create('foo').matches(request);
                 }).to.not.throw();

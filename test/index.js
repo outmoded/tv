@@ -1,26 +1,26 @@
+'use strict';
 // Load modules
 
-var Code = require('code');
-var Hapi = require('hapi');
-var Inert = require('inert');
-var Lab = require('lab');
-var Os = require('os');
-var Tv = require('../');
-var Vision = require('vision');
-var Ws = require('ws');
+const Code = require('code');
+const Hapi = require('hapi');
+const Inert = require('inert');
+const Lab = require('lab');
+const Os = require('os');
+const Tv = require('../');
+const Vision = require('vision');
+const Ws = require('ws');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 // Test shortcuts
 
-var lab = exports.lab = Lab.script();
-var describe = lab.describe;
-var it = lab.it;
-var expect = Code.expect;
+const lab = exports.lab = Lab.script();
+const it = lab.it;
+const expect = Code.expect;
 
 internals.waitForSocketMessages = function (fn) {
 
@@ -28,9 +28,9 @@ internals.waitForSocketMessages = function (fn) {
 };
 
 
-it('reports a request event', function (done) {
+it('reports a request event', (done) => {
 
-    var server = new Hapi.Server();
+    const server = new Hapi.Server();
     server.connection();
 
     server.route({
@@ -42,33 +42,33 @@ it('reports a request event', function (done) {
         }
     });
 
-    server.register([Vision, Inert, { register: Tv, options: { port: 0 } }], function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0 } }], (err) => {
 
         expect(err).to.not.exist();
 
-        server.inject('/debug/console', function (res) {
+        server.inject('/debug/console', (res) => {
 
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain('Debug Console');
 
-            var host = res.result.match(/var host = '([^']+)'/)[1];
-            var port = res.result.match(/var port = (\d+)/)[1];
-            var ws = new Ws('ws://' + host + ':' + port);
+            const host = res.result.match(/var host = '([^']+)'/)[1];
+            const port = res.result.match(/var port = (\d+)/)[1];
+            const ws = new Ws('ws://' + host + ':' + port);
 
-            ws.once('open', function () {
+            ws.once('open', () => {
 
                 ws.send('subscribe:*');
 
-                internals.waitForSocketMessages(function () {
+                internals.waitForSocketMessages(() => {
 
-                    server.inject('/?debug=123', function (response) {
+                    server.inject('/?debug=123', (response) => {
 
                         expect(response.result).to.equal('1');
                     });
                 });
             });
 
-            ws.once('message', function (data, flags) {
+            ws.once('message', (data, flags) => {
 
                 expect(JSON.parse(data).data.agent).to.equal('shot');
                 done();
@@ -77,9 +77,9 @@ it('reports a request event', function (done) {
     });
 });
 
-it('handles subscribe and unsubscribe', function (done) {
+it('handles subscribe and unsubscribe', (done) => {
 
-    var server = new Hapi.Server();
+    const server = new Hapi.Server();
     server.connection();
 
     server.route({
@@ -91,38 +91,38 @@ it('handles subscribe and unsubscribe', function (done) {
         }
     });
 
-    server.register([Vision, Inert, { register: Tv, options: { port: 0 } }], function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0 } }], (err) => {
 
         expect(err).to.not.exist();
 
-        server.inject('/debug/console', function (res) {
+        server.inject('/debug/console', (res) => {
 
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain('Debug Console');
 
-            var host = res.result.match(/var host = '([^']+)'/)[1];
-            var port = res.result.match(/var port = (\d+)/)[1];
-            var ws = new Ws('ws://' + host + ':' + port);
-            var messageCount = 0;
+            const host = res.result.match(/var host = '([^']+)'/)[1];
+            const port = res.result.match(/var port = (\d+)/)[1];
+            const ws = new Ws('ws://' + host + ':' + port);
+            let messageCount = 0;
 
-            ws.once('open', function () {
+            ws.once('open', () => {
 
                 ws.send('subscribe:*');
 
-                internals.waitForSocketMessages(function () {
+                internals.waitForSocketMessages(() => {
 
-                    server.inject('/?debug=123', function () {
+                    server.inject('/?debug=123', () => {
 
-                        internals.waitForSocketMessages(function () {
+                        internals.waitForSocketMessages(() => {
 
-                            var singleRequestMessageCount = messageCount;
+                            const singleRequestMessageCount = messageCount;
                             ws.send('unsubscribe:*');
 
-                            internals.waitForSocketMessages(function () {
+                            internals.waitForSocketMessages(() => {
 
-                                server.inject('/?debug=123', function () {
+                                server.inject('/?debug=123', () => {
 
-                                    internals.waitForSocketMessages(function () {
+                                    internals.waitForSocketMessages(() => {
 
                                         expect(messageCount).to.equal(singleRequestMessageCount);
 
@@ -135,7 +135,7 @@ it('handles subscribe and unsubscribe', function (done) {
                 });
             });
 
-            ws.on('message', function (data, flags) {
+            ws.on('message', (data, flags) => {
 
                 ++messageCount;
             });
@@ -143,9 +143,9 @@ it('handles subscribe and unsubscribe', function (done) {
     });
 });
 
-it('does not resubscribe for the same socket', function (done) {
+it('does not resubscribe for the same socket', (done) => {
 
-    var server = new Hapi.Server();
+    const server = new Hapi.Server();
     server.connection();
 
     server.route({
@@ -157,38 +157,38 @@ it('does not resubscribe for the same socket', function (done) {
         }
     });
 
-    server.register([Vision, Inert, { register: Tv, options: { port: 0 } }], function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0 } }], (err) => {
 
         expect(err).to.not.exist();
 
-        server.inject('/debug/console', function (res) {
+        server.inject('/debug/console', (res) => {
 
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain('Debug Console');
 
-            var host = res.result.match(/var host = '([^']+)'/)[1];
-            var port = res.result.match(/var port = (\d+)/)[1];
-            var ws = new Ws('ws://' + host + ':' + port);
-            var messageCount = 0;
+            const host = res.result.match(/var host = '([^']+)'/)[1];
+            const port = res.result.match(/var port = (\d+)/)[1];
+            const ws = new Ws('ws://' + host + ':' + port);
+            let messageCount = 0;
 
-            ws.once('open', function () {
+            ws.once('open', () => {
 
                 ws.send('subscribe:*');
 
-                internals.waitForSocketMessages(function () {
+                internals.waitForSocketMessages(() => {
 
-                    server.inject('/?debug=123', function () {
+                    server.inject('/?debug=123', () => {
 
-                        internals.waitForSocketMessages(function () {
+                        internals.waitForSocketMessages(() => {
 
-                            var singleRequestMessageCount = messageCount;
+                            const singleRequestMessageCount = messageCount;
                             ws.send('subscribe:*');
 
-                            internals.waitForSocketMessages(function () {
+                            internals.waitForSocketMessages(() => {
 
-                                server.inject('/?debug=123', function () {
+                                server.inject('/?debug=123', () => {
 
-                                    internals.waitForSocketMessages(function () {
+                                    internals.waitForSocketMessages(() => {
 
                                         expect(messageCount).to.equal(singleRequestMessageCount * 2);
 
@@ -201,7 +201,7 @@ it('does not resubscribe for the same socket', function (done) {
                 });
             });
 
-            ws.on('message', function (data, flags) {
+            ws.on('message', (data, flags) => {
 
                 ++messageCount;
             });
@@ -209,9 +209,9 @@ it('does not resubscribe for the same socket', function (done) {
     });
 });
 
-it('handles reconnects gracefully', function (done) {
+it('handles reconnects gracefully', (done) => {
 
-    var server = new Hapi.Server();
+    const server = new Hapi.Server();
     server.connection();
 
     server.route({
@@ -223,31 +223,31 @@ it('handles reconnects gracefully', function (done) {
         }
     });
 
-    server.register([Vision, Inert, { register: Tv, options: { port: 0, host: 'localhost' } }], function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0, host: 'localhost' } }], (err) => {
 
         expect(err).to.not.exist();
 
-        server.inject('/debug/console', function (res) {
+        server.inject('/debug/console', (res) => {
 
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain('Debug Console');
 
-            var host = res.result.match(/var host = '([^']+)'/)[1];
-            var port = res.result.match(/var port = (\d+)/)[1];
-            var ws1 = new Ws('ws://' + host + ':' + port);
+            const host = res.result.match(/var host = '([^']+)'/)[1];
+            const port = res.result.match(/var port = (\d+)/)[1];
+            const ws1 = new Ws('ws://' + host + ':' + port);
 
-            ws1.once('open', function () {
+            ws1.once('open', () => {
 
                 ws1.send('subscribe:*');
                 ws1.close();
-                var ws2 = new Ws('ws://' + host + ':' + port);
+                const ws2 = new Ws('ws://' + host + ':' + port);
 
-                ws2.once('open', function () {
+                ws2.once('open', () => {
 
                     ws2.send('subscribe:*');
-                    internals.waitForSocketMessages(function () {
+                    internals.waitForSocketMessages(() => {
 
-                        server.inject('/?debug=123', function (response) {
+                        server.inject('/?debug=123', (response) => {
 
                             expect(response.result).to.equal('1');
                         });
@@ -255,7 +255,7 @@ it('handles reconnects gracefully', function (done) {
                 });
 
                 // Shouldn't get called
-                ws2.once('message', function (data, flags) {
+                ws2.once('message', (data, flags) => {
 
                     expect(JSON.parse(data).data.agent).to.equal('shot');
                     done();
@@ -265,9 +265,9 @@ it('handles reconnects gracefully', function (done) {
     });
 });
 
-it('uses specified hostname', function (done) {
+it('uses specified hostname', (done) => {
 
-    var server = new Hapi.Server();
+    const server = new Hapi.Server();
     server.connection();
 
     server.route({
@@ -279,16 +279,16 @@ it('uses specified hostname', function (done) {
         }
     });
 
-    server.register([Vision, Inert, { register: Tv, options: { host: '127.0.0.1', port: 0 } }], function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { host: '127.0.0.1', port: 0 } }], (err) => {
 
         expect(err).to.not.exist();
 
-        server.inject('/debug/console', function (res) {
+        server.inject('/debug/console', (res) => {
 
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain('Debug Console');
 
-            var host = res.result.match(/var host = '([^']+)'/)[1];
+            const host = res.result.match(/var host = '([^']+)'/)[1];
             expect(host).to.equal('127.0.0.1');
             done();
 
@@ -296,9 +296,9 @@ it('uses specified hostname', function (done) {
     });
 });
 
-it('uses specified public hostname', function (done) {
+it('uses specified public hostname', (done) => {
 
-    var server = new Hapi.Server();
+    const server = new Hapi.Server();
     server.connection();
 
     server.route({
@@ -310,16 +310,16 @@ it('uses specified public hostname', function (done) {
         }
     });
 
-    server.register([Vision, Inert, { register: Tv, options: { port: 0, host: 'localhost', publicHost: '127.0.0.1' } }], function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0, host: 'localhost', publicHost: '127.0.0.1' } }], (err) => {
 
         expect(err).to.not.exist();
 
-        server.inject('/debug/console', function (res) {
+        server.inject('/debug/console', (res) => {
 
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain('Debug Console');
 
-            var host = res.result.match(/var host = '([^']+)'/)[1];
+            const host = res.result.match(/var host = '([^']+)'/)[1];
             expect(host).to.equal('127.0.0.1');
             done();
 
@@ -327,9 +327,9 @@ it('uses specified public hostname', function (done) {
     });
 });
 
-it('binds to address and uses host as public hostname', function (done) {
+it('binds to address and uses host as public hostname', (done) => {
 
-    var server = new Hapi.Server();
+    const server = new Hapi.Server();
     server.connection();
 
     server.route({
@@ -341,16 +341,16 @@ it('binds to address and uses host as public hostname', function (done) {
         }
     });
 
-    server.register([Vision, Inert, { register: Tv, options: { port: 0, host: 'aaaaa', address: '127.0.0.1' } }], function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0, host: 'aaaaa', address: '127.0.0.1' } }], (err) => {
 
         expect(err).to.not.exist();
 
-        server.inject('/debug/console', function (res) {
+        server.inject('/debug/console', (res) => {
 
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain('Debug Console');
 
-            var host = res.result.match(/var host = '([^']+)'/)[1];
+            const host = res.result.match(/var host = '([^']+)'/)[1];
             expect(host).to.equal('aaaaa');
             done();
 
@@ -358,9 +358,9 @@ it('binds to address and uses host as public hostname', function (done) {
     });
 });
 
-it('defaults to os hostname if unspecified', function (done) {
+it('defaults to os hostname if unspecified', (done) => {
 
-    var server = new Hapi.Server();
+    const server = new Hapi.Server();
     server.connection();
 
     server.route({
@@ -372,16 +372,16 @@ it('defaults to os hostname if unspecified', function (done) {
         }
     });
 
-    server.register([Vision, Inert, { register: Tv, options: { port: 0, host: 'localhost', publicHost: '0.0.0.0' } }], function (err) {
+    server.register([Vision, Inert, { register: Tv, options: { port: 0, host: 'localhost', publicHost: '0.0.0.0' } }], (err) => {
 
         expect(err).to.not.exist();
 
-        server.inject('/debug/console', function (res) {
+        server.inject('/debug/console', (res) => {
 
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain('Debug Console');
 
-            var host = res.result.match(/var host = '([^']+)'/)[1];
+            const host = res.result.match(/var host = '([^']+)'/)[1];
             expect(host).to.equal(Os.hostname());
             done();
 
@@ -390,9 +390,9 @@ it('defaults to os hostname if unspecified', function (done) {
 });
 
 
-it('uses specified route prefix for assets', function (done) {
+it('uses specified route prefix for assets', (done) => {
 
-    var server = new Hapi.Server();
+    const server = new Hapi.Server();
     server.connection();
 
     server.route({
@@ -404,16 +404,16 @@ it('uses specified route prefix for assets', function (done) {
         }
     });
 
-    server.register([Inert, Vision, { register: Tv, options: { port: 0 } }], { routes: { prefix: '/test' } }, function (err) {
+    server.register([Inert, Vision, { register: Tv, options: { port: 0 } }], { routes: { prefix: '/test' } }, (err) => {
 
         expect(err).to.not.exist();
 
-        server.inject('/test/debug/console', function (res) {
+        server.inject('/test/debug/console', (res) => {
 
             expect(res.statusCode).to.equal(200);
 
-            var cssPath = 'href="' + res.request.path + '/css/style.css';
-            var jsPath = 'src="' + res.request.path + '/js/main.js';
+            const cssPath = 'href="' + res.request.path + '/css/style.css';
+            const jsPath = 'src="' + res.request.path + '/js/main.js';
             expect(res.result).to.contain(cssPath);
             expect(res.result).to.contain(jsPath);
             done();

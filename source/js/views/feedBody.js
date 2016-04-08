@@ -1,15 +1,16 @@
+'use strict';
 // Load modules
 
-var Backbone = require('backbone');
-var _ = require('lodash');
+const Backbone = require('backbone');
+const _ = require('lodash');
 
-var RequestView = require('./request');
-var SearchCriteria = require('../utils/search/searchCriteria');
+const RequestView = require('./request');
+const SearchCriteria = require('../utils/search/searchCriteria');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
@@ -33,7 +34,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
         this.$el.empty();
 
-        _.each(this._requestViews, function (requestView) {
+        _.each(this._requestViews, (requestView) => {
 
             requestView.remove();
         });
@@ -43,7 +44,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     hasFavoritedRequests: function () {
 
-        return _.any(this._requestViews, function (requestView) {
+        return _.any(this._requestViews, (requestView) => {
 
             return requestView.favorited;
         });
@@ -51,7 +52,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     hasExpandedRequests: function () {
 
-        return _.any(this._requestViews, function (requestView) {
+        return _.any(this._requestViews, (requestView) => {
 
             return requestView.active;
         });
@@ -62,7 +63,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
         this.$('.request.active').removeClass('active');
         this.$('.request .server-logs').hide();
 
-        _.each(this._requestViews, function (requestView) {
+        _.each(this._requestViews, (requestView) => {
 
             requestView.active = false;
         });
@@ -76,7 +77,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     filterRequests: function (queryString) {
 
-        var searchCriteria = SearchCriteria.create(queryString);
+        const searchCriteria = SearchCriteria.create(queryString);
         this.searchFilter = function (requestView) {
 
             return searchCriteria.matches(requestView.model.toJSON());
@@ -92,17 +93,17 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     _addRequest: function (request) {
 
-        var requestView = new RequestView({ model: request }).render();
+        const requestView = new RequestView({ model: request }).render();
         this._requestViews.push(requestView);
 
-        var self = this;
+        const self = this;
 
-        this.listenTo(requestView, 'serverLogsToggle', function (expanded) {
+        this.listenTo(requestView, 'serverLogsToggle', (expanded) => {
 
             self.trigger('requestExpandToggle', expanded);
         });
 
-        this.listenTo(requestView, 'favoriteToggle', function (favorited) {
+        this.listenTo(requestView, 'favoriteToggle', (favorited) => {
 
             self.trigger('requestFavoriteToggle', favorited);
 
@@ -113,12 +114,12 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
         this._updateRequestVisibility(requestView);
 
-        this.listenTo(request, 'change:statusCode', function () {
+        this.listenTo(request, 'change:statusCode', () => {
 
             self._updateRequestVisibility(requestView, true);
         });
 
-        this._checkToScrollToBottom(function () {
+        this._checkToScrollToBottom(() => {
 
             self.$el.append(requestView.$el);
         });
@@ -126,7 +127,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     _checkToScrollToBottom: function (domManipulationFn) {
 
-        var isScrolledToBottom = this._isScrolledToBottom();
+        const isScrolledToBottom = this._isScrolledToBottom();
 
         domManipulationFn();
 
@@ -137,7 +138,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     _updateRequestVisibility: function (requestView, isUpdate) {
 
-        var show = true;
+        const show = true;
 
         if (this.searchFilter && !this.searchFilter(requestView)) {
             show = false;
