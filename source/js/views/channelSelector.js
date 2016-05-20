@@ -3,9 +3,6 @@
 
 const Backbone = require('backbone');
 
-// const SettingsStore = require('../settingsStore');
-
-
 // Declare internals
 
 const internals = {};

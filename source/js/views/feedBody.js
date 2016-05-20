@@ -96,16 +96,14 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
         const requestView = new RequestView({ model: request }).render();
         this._requestViews.push(requestView);
 
-        const self = this;
-
         this.listenTo(requestView, 'serverLogsToggle', (expanded) => {
 
-            self.trigger('requestExpandToggle', expanded);
+            this.trigger('requestExpandToggle', expanded);
         });
 
         this.listenTo(requestView, 'favoriteToggle', (favorited) => {
 
-            self.trigger('requestFavoriteToggle', favorited);
+            this.trigger('requestFavoriteToggle', favorited);
 
             if (!favorited && self._filterFavorites) {
                 requestView.toggleVisibility(false);
@@ -116,12 +114,12 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
         this.listenTo(request, 'change:statusCode', () => {
 
-            self._updateRequestVisibility(requestView, true);
+            this._updateRequestVisibility(requestView, true);
         });
 
         this._checkToScrollToBottom(() => {
 
-            self.$el.append(requestView.$el);
+            this.$el.append(requestView.$el);
         });
     },
 

@@ -44,13 +44,11 @@ exports = module.exports = window.app = internals.App = {
         const ws = new WebSocket(protocol + host + ':' + port);
         const webSocketManager = opts.webSocketManagerClass.create(ws);
 
-        /* $lab:coverage:off$ */
-        const appView = new opts.appViewClass({
+        new opts.appViewClass({
             el: 'body',
             collection: messageParser.requests,
             webSocketManager: webSocketManager
         }).render();
-        /* $lab:coverage:on$ */
 
         webSocketManager.onSocketOpen = function () {
 

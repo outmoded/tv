@@ -13,12 +13,11 @@ exports = module.exports = internals.WebSocketManager = function (webSocket) {
 
     this._webSocket = webSocket;
 
-    const self = this;
     this._webSocket.onopen = function () {
 
-        self.isOpen = true;
-        if (self.onSocketOpen) {
-            self.onSocketOpen();
+        this.isOpen = true;
+        if (this.onSocketOpen) {
+            this.onSocketOpen();
         }
     };
 };

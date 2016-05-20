@@ -3,7 +3,6 @@
 
 const Backbone = require('backbone');
 const ZeroClipboard = require('zeroclipboard');
-// const _ = require('lodash');
 
 const RequestToTextConverter = require('../utils/requestToTextConverter');
 
@@ -23,10 +22,9 @@ exports = module.exports = internals.ServerLogsView = Backbone.View.extend({
 
     initialize: function () {
 
-        const self = this;
         this.listenTo(this.collection, 'add', (model) => {
 
-            self.this.render();
+            this.render();
         });
     },
 
@@ -43,28 +41,27 @@ exports = module.exports = internals.ServerLogsView = Backbone.View.extend({
 
         const clipboard = this._createZeroClipboard();
 
-        const self = this;
         clipboard.on('ready', (readyEvent) => {
 
             clipboard.on('beforecopy', (event) => {
 
-                clipboard.setData('text/plain', RequestToTextConverter.convertToText(self.model.toJSON()));
+                clipboard.setData('text/plain', RequestToTextConverter.convertToText(this.model.toJSON()));
 
-                self._$clipboard.tooltip({
+                this._$clipboard.tooltip({
                     delay: { hide: 2000 },
                     placement: 'left',
                     animation: 'fade',
                     title: 'Copied to clipboard!'
                 });
 
-                self._$clipboard.tooltip('show');
+                this._$clipboard.tooltip('show');
             });
 
             clipboard.on('aftercopy', (event) => {
 
                 setTimeout(() => {
 
-                    self._$clipboard.tooltip('hide');
+                    this._$clipboard.tooltip('hide');
                 }, 3000);
             });
 

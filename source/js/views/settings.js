@@ -4,7 +4,6 @@
 const _ = require('lodash');
 const Backbone = require('backbone');
 
-// const SettingsStore = require('../settingsStore');
 const JQuerySnippetGenerator = require('../utils/jQuerySnippetGenerator');
 
 

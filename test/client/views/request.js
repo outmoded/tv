@@ -132,10 +132,9 @@ describe('RequestView', function () {
 
                 this.$favorite = this.view.$('.favorite');
 
-                const self = this;
-                this.click = function () {
+                this.click = () => {
 
-                    self.$favorite.click();
+                    this.$favorite.click();
                 };
             });
 

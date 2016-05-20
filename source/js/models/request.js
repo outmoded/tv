@@ -3,9 +3,6 @@
 
 const Backbone = require('backbone');
 
-// const DateTimeFormatter = require('../utils/dateTimeFormatter');
-
-
 // Declare internals
 
 const internals = {};

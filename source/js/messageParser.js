@@ -159,14 +159,13 @@ internals.MessageParser.prototype._refreshResponseTimeout = function (message) {
     }
 
     if (!this._isResponse(message)) {
-        const self = this;
         request.timer = setTimeout(() => {
 
             request.set('statusCode', 'timeout');
             request.set('responseTimeout', true);
             request.set('isComplete', true);
 
-            self.onResponseTimeout && self.onResponseTimeout();
+            this.onResponseTimeout && this.onResponseTimeout();
         }, this._responseTimeout);
     }
 };

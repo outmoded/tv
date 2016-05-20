@@ -20,7 +20,6 @@ describe('App', function () {
 
         beforeEach(function () {
 
-            const self = this;
             this.fakeAppModel = new Backbone.Model();
             const fakeAppView = new Backbone.View({ model: this.fakeAppModel });
             fakeAppView.settingsView = new Backbone.View();
@@ -35,9 +34,9 @@ describe('App', function () {
             };
 
             const mockWebSocketManagerClass = {
-                create: function () {
+                create: () => {
 
-                    return self.mockWebSocketManager;
+                    return this.mockWebSocketManager;
                 }
             };
             this.mockMessageParser = { addMessage: function () { } };

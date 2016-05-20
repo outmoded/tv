@@ -1,6 +1,5 @@
 'use strict';
 // Load modules
-// const _ = require('lodash');
 const Chance = require('chance');
 
 // Declare internals

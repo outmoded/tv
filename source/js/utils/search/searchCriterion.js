@@ -121,22 +121,18 @@ internals.SearchCriterion.prototype._parseScopedProperty = function () {
 
 internals.SearchCriterion.prototype._matchesScopedProperty = function (request) {
 
-    const self = this;
-
     return _.any(this.scopedPropertyValues, (value) => {
 
-        return self._matchesValue(request, self.scopedProperty, value);
+        return this._matchesValue(request, self.scopedProperty, value);
     });
 };
 
 
 internals.SearchCriterion.prototype._matchesAny = function (request) {
 
-    const self = this;
-
     return _.any(internals.VALID_SCOPED_PROPERTIES, (property) => {
 
-        return self._matchesValue(request, property, self._fragment);
+        return this._matchesValue(request, property, self._fragment);
     });
 };
 
