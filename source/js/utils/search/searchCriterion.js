@@ -123,7 +123,7 @@ internals.SearchCriterion.prototype._matchesScopedProperty = function (request) 
 
     return _.any(this.scopedPropertyValues, (value) => {
 
-        return this._matchesValue(request, self.scopedProperty, value);
+        return this._matchesValue(request, this.scopedProperty, value);
     });
 };
 
@@ -132,7 +132,7 @@ internals.SearchCriterion.prototype._matchesAny = function (request) {
 
     return _.any(internals.VALID_SCOPED_PROPERTIES, (property) => {
 
-        return this._matchesValue(request, property, self._fragment);
+        return this._matchesValue(request, property, this._fragment);
     });
 };
 

@@ -1,6 +1,7 @@
 'use strict';
-host = 'localhost';
-port = 8000;
+
+window.host = 'localhost';
+window.port = 8000;
 
 require('es5-shim');
 
@@ -38,14 +39,9 @@ require('./webSocketManager');
 chai.use(require('sinon-chai'));
 chai.use(require('chai-jquery'));
 
-const Backbone = require('backbone');
-Backbone.$ = require('jquery');
+window.Backbone = require('backbone');
+window.Backbone.$ = require('jquery');
 
 require('../../source/js/utils/handlebarsHelpers');
 
-if (window.mochaPhantomJS) {
-    mochaPhantomJS.run();
-}
-else {
-    mocha.run();
-}
+mocha.run();

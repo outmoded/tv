@@ -136,7 +136,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     _updateRequestVisibility: function (requestView, isUpdate) {
 
-        const show = true;
+        let show = true;
 
         if (this.searchFilter && !this.searchFilter(requestView)) {
             show = false;

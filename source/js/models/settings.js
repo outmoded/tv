@@ -35,7 +35,7 @@ exports = module.exports = internals.Settings = Backbone.Model.extend({
 
     _updateSettingsStore: function (model) {
 
-        const updateSettingsStoreProp = function (value, key) {
+        const updateSettingsStoreProp = (value, key) => {
 
             this._store.set(key, value);
         };
