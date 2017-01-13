@@ -47,7 +47,7 @@ exports = module.exports = window.app = internals.App = {
         new opts.appViewClass({
             el: 'body',
             collection: messageParser.requests,
-            webSocketManager: webSocketManager
+            webSocketManager
         }).render();
 
         webSocketManager.onSocketOpen = function () {
