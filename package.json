@@ -14,49 +14,49 @@
     "node": ">=4.0.0"
   },
   "dependencies": {
-    "backbone": "1.2.x",
+    "backbone": "1.3.x",
     "bootstrap": "3.3.x",
-    "chance": "0.8.x",
+    "chance": "1.0.x",
     "handlebars": "4.0.x",
-    "hbsfy": "2.4.x",
-    "hoek": "3.x.x",
+    "hbsfy": "2.7.x",
+    "hoek": "4.x.x",
     "jquery": "2.1.x",
-    "json-markup": "0.1.x",
+    "json-markup": "1.1.x",
     "lodash": "3.10.x",
     "moment": "2.17.x",
-    "ws": "0.8.x",
-    "zeroclipboard": "2.2.x"
+    "ws": "1.1.x",
+    "zeroclipboard": "2.3.x"
   },
   "peerDependencies": {
     "hapi": ">=11.x.x",
-    "inert": ">=3.x.x",
+    "inert": ">=4.x.x",
     "vision": ">=4.x.x"
   },
   "devDependencies": {
     "babelify": "7.3.x",
     "babel-preset-es2015": "6.18.x",
-    "browserify": "12.0.x",
+    "browserify": "13.3.x",
     "browserify-istanbul": "2.0.x",
-    "chai": "3.4.x",
+    "chai": "3.5.x",
     "chai-jquery": "2.0.x",
     "code": "4.x.x",
     "es5-shim": "4.5.x",
     "hapi": "11.x.x",
-    "inert": "3.x.x",
+    "inert": "4.x.x",
     "istanbul": "0.4.x",
     "lab": "11.x.x",
     "mocha": "3.2.x",
     "mocha-phantomjs": "4.1.x",
     "node-sass": "4.3.x",
-    "onchange": "2.0.x",
+    "onchange": "3.2.x",
     "phantomjs-prebuilt": "2.1.x",
     "sinon": "1.17.x",
     "sinon-chai": "2.8.x",
     "vision": "4.x.x",
-    "watchify": "3.6.x"
+    "watchify": "3.8.x"
   },
   "scripts": {
-    "pretest": "npm run build-test",
+    "pretest": "[ -z \"$WATCH\" ] && npm run build-test || true",
     "test": "mocha-phantomjs -p node_modules/.bin/phantomjs test/client/index.html --hooks test/client/phantomHooks.js && lab test/index.js -a code -t 100 -L",
     "test-client-cov": "npm run test && istanbul report --root coverage lcov",
     "watch-js": "watchify -t hbsfy -e source/js/app.js source/js/**/*.js -o public/js/main.js -d -v",
@@ -72,7 +72,7 @@
     "boot": "node examples/simple.js",
     "start": "npm run build && npm run boot",
     "start-dev": "npm run watch & npm run boot",
-    "post-js": "onchange test/bundle.js -- npm run test",
+    "post-js": "WATCH=true onchange test/bundle.js -w -d 1000 -- npm run test",
     "prepublish": "npm run build"
   },
   "license": "BSD-3-Clause"
