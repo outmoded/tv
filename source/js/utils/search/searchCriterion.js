@@ -81,7 +81,7 @@ internals.SearchCriterion.prototype._isValidAny = function () {
     const pieces = this._fragment.split(':');
 
     if (pieces.length > 1) {
-        if (_.contains(internals.VALID_SCOPED_PROPERTIES, pieces[0])) {
+        if (_.includes(internals.VALID_SCOPED_PROPERTIES, pieces[0])) {
             return false;
         }
     }
@@ -107,7 +107,7 @@ internals.SearchCriterion.prototype._isScoped = function () {
     const pieces = this._fragment.split(':');
 
     if (pieces.length > 1 && pieces[1].length) {
-        return _.contains(internals.VALID_SCOPED_PROPERTIES, pieces[0]);
+        return _.includes(internals.VALID_SCOPED_PROPERTIES, pieces[0]);
     }
 
     return false;
