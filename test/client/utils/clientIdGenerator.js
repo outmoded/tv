@@ -32,12 +32,9 @@ describe('ClientIdGenerator', function () {
 
         it('always returns a \'unique\' code', function () {
 
-            const clientIds = _.times(30, setTimeout(function () {
+            const clientIds = _.times(30, () => setTimeout(() => ClientIdGenerator.generate(), 1)); // chance uses time as a seed
 
-                return ClientIdGenerator.generate();
-            }, 1)); // chance uses time as a seed
-
-            expect(_.unique(clientIds)).to.have.length(clientIds.length);
+            expect(_.uniq(clientIds)).to.have.length(clientIds.length);
         });
 
     });
