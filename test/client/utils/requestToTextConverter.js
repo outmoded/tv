@@ -1,11 +1,12 @@
+'use strict';
 // Load modules
 
-var RequestToTextConverter = require('../../../source/js/utils/requestToTextConverter');
+const RequestToTextConverter = require('../../../source/js/utils/requestToTextConverter');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('RequestToTextConverter', function () {
@@ -48,7 +49,7 @@ describe('RequestToTextConverter', function () {
 
         it('converts the request to text', function () {
 
-            var expectedData = [
+            const expectedData = [
                 'Path: GET /foo/bar',
                 'Status: 200',
                 'Server Logs:\n',

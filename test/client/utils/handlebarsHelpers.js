@@ -1,30 +1,31 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
-var Handlebars = require('hbsfy/runtime');
-var Sinon = require('sinon');
+const _ = require('lodash');
+const Handlebars = require('hbsfy/runtime');
+const Sinon = require('sinon');
 
-var DateTimeFormatter = require('../../../source/js/utils/dateTimeFormatter');
-var Helpers = require('../../../source/js/utils/handlebarsHelpers');
+const DateTimeFormatter = require('../../../source/js/utils/dateTimeFormatter');
+const Helpers = require('../../../source/js/utils/handlebarsHelpers');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('HandlebarsHelpers', function () {
 
     it('includes DateTimeFormatter functions as Helpers', function () {
 
-        for (var property in DateTimeFormatter) {
+        for (const property in DateTimeFormatter) {
             expect(Helpers[property]).to.eq(DateTimeFormatter[property]);
         }
     });
 
     it('registers helper functions with handlerbars', function (){
 
-        for (var property in Helpers) {
+        for (const property in Helpers) {
             expect(Handlebars.helpers[property]).to.eq(Helpers[property]);
         }
     });
@@ -33,7 +34,7 @@ describe('HandlebarsHelpers', function () {
 
         it('transforms json to an html representation', function () {
 
-            var result = Helpers.jsonMarkup({ foo: 'bar' });
+            const result = Helpers.jsonMarkup({ foo: 'bar' });
 
             expect(result).to.contain('foo:</span>');
             expect(result).to.contain('"bar"</span>');
@@ -45,7 +46,7 @@ describe('HandlebarsHelpers', function () {
 
         it('generates a jquery snippet', function () {
 
-            var result = Helpers.jQuerySnippet('foo');
+            const result = Helpers.jQuerySnippet('foo');
 
             expect(result).to.contain('.ajaxSetup');
             expect(result).to.contain('foo');
@@ -59,7 +60,7 @@ describe('HandlebarsHelpers', function () {
 
             it('calls the main function', function () {
 
-                var opts = {
+                const opts = {
                     fn: Sinon.spy(),
                     inverse: Sinon.spy()
                 };
@@ -76,7 +77,7 @@ describe('HandlebarsHelpers', function () {
 
             it('calls the inverse function', function () {
 
-                var opts = {
+                const opts = {
                     fn: Sinon.spy(),
                     inverse: Sinon.spy()
                 };
@@ -97,7 +98,7 @@ describe('HandlebarsHelpers', function () {
 
             it('returns the tag name to be used as the css class', function () {
 
-                _.each(['error', 'debug'], function (supportedTag) {
+                _.each(['error', 'debug'], (supportedTag) => {
 
                     expect(Helpers.tagColor(supportedTag)).to.eq(supportedTag);
                 });

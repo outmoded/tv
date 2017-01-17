@@ -1,9 +1,10 @@
+'use strict';
 // Load modules
 
 
 // Declare internals
 
-internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.jQuerySnippetGenerator = function () { };

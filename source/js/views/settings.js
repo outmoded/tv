@@ -1,15 +1,15 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
-var Backbone = require('backbone');
+const _ = require('lodash');
+const Backbone = require('backbone');
 
-var SettingsStore = require('../settingsStore');
-var JQuerySnippetGenerator = require('../utils/jQuerySnippetGenerator');
+const JQuerySnippetGenerator = require('../utils/jQuerySnippetGenerator');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.SettingsView = Backbone.View.extend({
@@ -65,7 +65,7 @@ exports = module.exports = internals.SettingsView = Backbone.View.extend({
         this.model.set('clientId', $(e.currentTarget).val());
     },
 
-    _cancel: function (e) {
+    _cancel: function () {
 
         this.model.set('clientId', this.settingsModel.get('clientId'));
 
@@ -74,10 +74,10 @@ exports = module.exports = internals.SettingsView = Backbone.View.extend({
         this.render();
     },
 
-    _submit: function (e) {
+    _submit: function () {
 
-        var newClientId = this.model.get('clientId');
-        var oldClientId = this.settingsModel.get('clientId');
+        const newClientId = this.model.get('clientId');
+        const oldClientId = this.settingsModel.get('clientId');
 
         this.settingsModel.set('clientId', newClientId);
         if (newClientId !== oldClientId) { // we changed the client id, so subscribe to the one we entered.

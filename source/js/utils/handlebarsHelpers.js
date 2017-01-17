@@ -1,16 +1,17 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
-var Handlebars = require('hbsfy/runtime');
+const _ = require('lodash');
+const Handlebars = require('hbsfy/runtime');
 
-var DateTimeFormatter = require('../utils/dateTimeFormatter');
-var JQuerySnippetGenerator = require('../utils/jQuerySnippetGenerator');
-var JsonMarkup = require('json-markup');
+const DateTimeFormatter = require('../utils/dateTimeFormatter');
+const JQuerySnippetGenerator = require('../utils/jQuerySnippetGenerator');
+const JsonMarkup = require('json-markup');
 
 
 // Declare internals
 
-var internals = {
+const internals = {
     SUPPORTED_COLORED_TAGS: ['error', 'debug']
 };
 
@@ -29,7 +30,7 @@ exports = module.exports = internals.HandlebarsHelpers = {
 
     isEq: function (a, b, options) {
 
-        var result;
+        let result;
 
         if (a === b) {
             result = options.fn();
@@ -54,6 +55,6 @@ exports = module.exports = internals.HandlebarsHelpers = {
 _.extend(internals.HandlebarsHelpers, DateTimeFormatter);
 
 
-for (var property in internals.HandlebarsHelpers) {
+for (const property in internals.HandlebarsHelpers) {
     Handlebars.registerHelper(property, internals.HandlebarsHelpers[property]);
 }

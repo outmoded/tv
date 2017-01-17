@@ -1,13 +1,14 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
+const _ = require('lodash');
 
-var ClientIdGenerator = require('../../../source/js/utils/clientIdGenerator');
+const ClientIdGenerator = require('../../../source/js/utils/clientIdGenerator');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 internals.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -25,13 +26,13 @@ describe('ClientIdGenerator', function () {
 
         it('returns a code', function () {
 
-            var obj = ClientIdGenerator.generate();
+            const obj = ClientIdGenerator.generate();
             expect(ClientIdGenerator.generate()).to.match(/[a-zA-Z]{3}\d{3}/);
         });
 
         it('always returns a \'unique\' code', function () {
 
-            var clientIds = _.times(30, setTimeout(function () {
+            const clientIds = _.times(30, setTimeout(function () {
 
                 return ClientIdGenerator.generate();
             }, 1)); // chance uses time as a seed

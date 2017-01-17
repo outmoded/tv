@@ -1,20 +1,21 @@
+'use strict';
 // Load modules
 
-var Backbone = require('backbone');
-var _ = require('lodash');
-var Sinon = require('sinon');
+const Backbone = require('backbone');
+const _ = require('lodash');
+const Sinon = require('sinon');
 
-var AppView = require('../../../source/js/views/app');
-var Request = require('../../../source/js/models/request');
-var ToolbarView = require('../../../source/js/views/toolbar');
-var FeedHeaderView = require('../../../source/js/views/feedHeader');
-var FeedBodyView = require('../../../source/js/views/feedBody');
-var SettingsView = require('../../../source/js/views/settings');
+const AppView = require('../../../source/js/views/app');
+const Request = require('../../../source/js/models/request');
+const ToolbarView = require('../../../source/js/views/toolbar');
+const FeedHeaderView = require('../../../source/js/views/feedHeader');
+const FeedBodyView = require('../../../source/js/views/feedBody');
+const SettingsView = require('../../../source/js/views/settings');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('AppView', function () {
@@ -23,10 +24,10 @@ describe('AppView', function () {
 
         beforeEach(function () {
 
-            var fakeModel = new Backbone.Model();
-            var fakeCollection = new Backbone.Collection();
+            const fakeModel = new Backbone.Model();
+            const fakeCollection = new Backbone.Collection();
 
-            var mockWebSocketManager = {
+            const mockWebSocketManager = {
                 pause: function (){},
                 resume: function (){}
             };

@@ -1,14 +1,15 @@
+'use strict';
 // Load modules
 
-var Backbone = require('backbone');
-var _ = require('lodash');
+const Backbone = require('backbone');
+const _ = require('lodash');
 
-var ChannelSelectorView = require('./channelSelector');
+const ChannelSelectorView = require('./channelSelector');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.ToolbarView = Backbone.View.extend({
@@ -33,7 +34,7 @@ exports = module.exports = internals.ToolbarView = Backbone.View.extend({
 
     _pauseResumeRequests: function (e) {
 
-        var paused = $(e.currentTarget).find('.resume:visible').length === 1;
+        const paused = $(e.currentTarget).find('.resume:visible').length === 1;
 
         if (paused) {
             this._resumeRequests();
@@ -59,7 +60,7 @@ exports = module.exports = internals.ToolbarView = Backbone.View.extend({
 
     _triggerSearchChanged: _.debounce(function (e) {
 
-        var queryString = $(e.currentTarget).val();
+        const queryString = $(e.currentTarget).val();
         this.trigger('searchChanged', queryString);
     }, 200),
 

@@ -1,14 +1,15 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
-var Backbone = require('backbone');
+const _ = require('lodash');
+const Backbone = require('backbone');
 
-var Request = require('./models/request');
+const Request = require('./models/request');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.MessageParser = function (opts) {
@@ -32,9 +33,9 @@ internals.MessageParser.create = function (opts) {
 // disregard these messages.
 internals.MessageParser.prototype.addMessage = function (rawMessage) {
 
-    var message = JSON.parse(rawMessage.data);
+    const message = JSON.parse(rawMessage.data);
 
-    var request;
+    let request;
     if (this._isFirstMessageForNewRequest(message)) {
         request = this._addRequest(message);
         this._addServerLog(message);
@@ -69,8 +70,8 @@ internals.MessageParser.prototype._isForExistingRequest = function (message) {
 
 internals.MessageParser.prototype._isFirstMessageForNewRequest = function (message) {
 
-    var found = this._findRequest(message);
-    var hasReceivedTag = message.tags && message.tags.indexOf('received') !== -1;
+    const found = this._findRequest(message);
+    const hasReceivedTag = message.tags && message.tags.indexOf('received') !== -1;
 
     return !found && hasReceivedTag;
 };
@@ -78,7 +79,7 @@ internals.MessageParser.prototype._isFirstMessageForNewRequest = function (messa
 
 internals.MessageParser.prototype._addRequest = function (message) {
 
-    var request = new Request({
+    const request = new Request({
         id: message.request,
         path: message.data.url,
         method: message.data.method,
@@ -93,7 +94,7 @@ internals.MessageParser.prototype._addRequest = function (message) {
 
 internals.MessageParser.prototype._updateRequestWithResponse = function (message) {
 
-    var request = this._findRequest(message);
+    const request = this._findRequest(message);
 
     request.set('statusCode', message.data.statusCode);
     request.set('isComplete', true);
@@ -102,10 +103,10 @@ internals.MessageParser.prototype._updateRequestWithResponse = function (message
 
 internals.MessageParser.prototype._findRequest = function (message) {
 
-    var requestId = message.request;
+    const requestId = message.request;
 
     // findLast looks in reverse order since the request is most likely to be last
-    return _.findLast(this.requests.models, function (request) {
+    return _.findLast(this.requests.models, (request) => {
 
         return request.id === requestId;
     });
@@ -114,9 +115,9 @@ internals.MessageParser.prototype._findRequest = function (message) {
 
 internals.MessageParser.prototype._addServerLog = function (message) {
 
-    var request = this._findRequest(message);
+    const request = this._findRequest(message);
 
-    var serverLog = {
+    const serverLog = {
         tags: message.tags || [],
         data: message.data,
         timestamp: message.timestamp,
@@ -148,7 +149,7 @@ internals.MessageParser.prototype._isEmptyResponseServerLog = function (message)
 
 internals.MessageParser.prototype._refreshResponseTimeout = function (message) {
 
-    var request = this._findRequest(message);
+    const request = this._findRequest(message);
 
     clearTimeout(request.timer);
 
@@ -158,14 +159,13 @@ internals.MessageParser.prototype._refreshResponseTimeout = function (message) {
     }
 
     if (!this._isResponse(message)) {
-        var self = this;
-        request.timer = setTimeout(function (){
+        request.timer = setTimeout(() => {
 
             request.set('statusCode', 'timeout');
             request.set('responseTimeout', true);
             request.set('isComplete', true);
 
-            self.onResponseTimeout && self.onResponseTimeout();
+            this.onResponseTimeout && this.onResponseTimeout();
         }, this._responseTimeout);
     }
 };

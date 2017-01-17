@@ -1,11 +1,12 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
+const _ = require('lodash');
 
 
 // Declare internals
 
-var internals = {
+const internals = {
     requests: {
         prefix: '',
         separator: '============='

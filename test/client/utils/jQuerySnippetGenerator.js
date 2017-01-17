@@ -1,11 +1,12 @@
+'use strict';
 // Load modules
 
-var JQuerySnippetGenerator = require('../../../source/js/utils/jQuerySnippetGenerator');
+const JQuerySnippetGenerator = require('../../../source/js/utils/jQuerySnippetGenerator');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('jQuerySnippetGenerator', function () {

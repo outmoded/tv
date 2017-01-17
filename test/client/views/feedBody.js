@@ -1,11 +1,12 @@
+'use strict';
 // Load modules
 
-var FeedBody = require('../../../source/js/views/feedBody');
+const FeedBody = require('../../../source/js/views/feedBody');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('FeedBody', function () {

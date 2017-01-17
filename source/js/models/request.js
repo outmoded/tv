@@ -1,13 +1,11 @@
+'use strict';
 // Load modules
 
-var Backbone = require('backbone');
-
-var DateTimeFormatter = require('../utils/dateTimeFormatter');
-
+const Backbone = require('backbone');
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.Request = Backbone.Model.extend({
@@ -28,7 +26,7 @@ exports = module.exports = internals.Request = Backbone.Model.extend({
 
     toJSON: function () {
 
-        var data = Backbone.Model.prototype.toJSON.apply(this, arguments);
+        const data = Backbone.Model.prototype.toJSON.apply(this, arguments);
         data.serverLogs = this.get('serverLogs').toJSON();
 
         return data;

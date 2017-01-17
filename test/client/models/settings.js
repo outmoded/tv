@@ -1,14 +1,15 @@
+'use strict';
 // Load modules
 
-var Backbone = require('backbone');
-var Sinon = require('sinon');
+const Backbone = require('backbone');
+const Sinon = require('sinon');
 
-var Settings = require('../../../source/js/models/settings');
+const Settings = require('../../../source/js/models/settings');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('Settings', function () {
@@ -41,8 +42,8 @@ describe('Settings', function () {
 
         it('sets the expected defaults from settings', function () {
 
-            var clientId = 'foobar';
-            var channel = '*';
+            const clientId = 'foobar';
+            const channel = '*';
 
             this.settingsStore.set('clientId', clientId);
             this.settingsStore.set('channel', channel);
@@ -59,7 +60,7 @@ describe('Settings', function () {
 
         it('applies the filter to the websocket when channel is changed', function () {
 
-            var settings = new Settings(null, this.options);
+            const settings = new Settings(null, this.options);
 
             expect(this.options.webSocketManager.applyFilter).to.have.not.been.called;
 
@@ -71,7 +72,7 @@ describe('Settings', function () {
 
         it('updates the store when properties change with the properties that changed', function () {
 
-            var settings = new Settings(null, this.options);
+            const settings = new Settings(null, this.options);
 
             settings.set('channel', '*');
 

@@ -1,16 +1,17 @@
+'use strict';
 // Load modules
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.SettingsStore = {
 
     exists: function (key) {
 
-        var value = localStorage.getItem(key);
+        const value = localStorage.getItem(key);
         return value !== void 0 && value !== null;
     },
 

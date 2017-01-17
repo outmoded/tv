@@ -1,11 +1,12 @@
+'use strict';
 // Load modules
 
-var ToolbarView = require('../../../source/js/views/toolbar');
+const ToolbarView = require('../../../source/js/views/toolbar');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('ToolbarView', function () {

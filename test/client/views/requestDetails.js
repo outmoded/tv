@@ -1,11 +1,12 @@
+'use strict';
 // Load modules
 
-var RequestDetailsView = require('../../../source/js/views/requestDetails');
+const RequestDetailsView = require('../../../source/js/views/requestDetails');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('RequestDetailsView', function () {

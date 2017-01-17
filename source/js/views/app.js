@@ -1,19 +1,20 @@
+'use strict';
 // Load modules
 
-var Backbone = require('backbone');
+const Backbone = require('backbone');
 
-var ToolbarView = require('./toolbar');
-var FeedHeaderView = require('./feedHeader');
-var FeedBodyView = require('./feedBody');
-var SettingsView = require('./settings');
-var Settings = require('../models/settings');
-var SettingsStore = require('../settingsStore');
-var ClientIdGenerator = require('../utils/clientIdGenerator');
+const ToolbarView = require('./toolbar');
+const FeedHeaderView = require('./feedHeader');
+const FeedBodyView = require('./feedBody');
+const SettingsView = require('./settings');
+const Settings = require('../models/settings');
+const SettingsStore = require('../settingsStore');
+const ClientIdGenerator = require('../utils/clientIdGenerator');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.AppView = Backbone.View.extend({
@@ -31,7 +32,7 @@ exports = module.exports = internals.AppView = Backbone.View.extend({
 
     render: function () {
 
-        var $markup = $(this.template());
+        const $markup = $(this.template());
 
         this._renderChildViews($markup);
 
@@ -42,10 +43,10 @@ exports = module.exports = internals.AppView = Backbone.View.extend({
 
     _renderChildViews: function ($markup) {
 
-        var settingsView = this._renderSettings($markup);
-        var toolbarView = this._renderToolbar($markup);
-        var feedHeaderView = this._renderFeedHeader($markup);
-        var feedBodyView = this._renderFeedBody($markup);
+        const settingsView = this._renderSettings($markup);
+        const toolbarView = this._renderToolbar($markup);
+        const feedHeaderView = this._renderFeedHeader($markup);
+        const feedBodyView = this._renderFeedBody($markup);
 
         this.listenTo(toolbarView, 'pause', this._webSocketManager.pause.bind(this._webSocketManager));
         this.listenTo(toolbarView, 'resume', this._webSocketManager.resume.bind(this._webSocketManager));
@@ -80,7 +81,7 @@ exports = module.exports = internals.AppView = Backbone.View.extend({
 
     _renderSettings: function ($markup) {
 
-        var settingsView = new SettingsView({
+        const settingsView = new SettingsView({
             el: $markup.siblings('.settings-modal-container'),
             settingsModel: this.model
         });

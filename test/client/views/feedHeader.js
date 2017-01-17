@@ -1,11 +1,12 @@
+'use strict';
 // Load modules
 
-var FeedHeader = require('../../../source/js/views/feedHeader');
+const FeedHeader = require('../../../source/js/views/feedHeader');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 describe('FeedHeader', function () {

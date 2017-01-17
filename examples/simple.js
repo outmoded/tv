@@ -1,17 +1,19 @@
+'use strict';
 // Load modules
 
-var Hapi = require('hapi');
-var Inert = require('inert');
-var Vision = require('vision');
-var Tv = require('../');
+const Hapi = require('hapi');
+const Inert = require('inert');
+const Vision = require('vision');
+const Tv = require('../');
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 internals.plugins = [Vision, Inert, Tv];
 
-var server = new Hapi.Server();
+const server = new Hapi.Server();
+
 server.connection({ port: 8000 });
 
 server.route({
@@ -24,15 +26,19 @@ server.route({
 });
 
 
-server.register(internals.plugins, function (err) {
+server.register(internals.plugins, (err) => {
 
     if (err) {
         console.log(err);
-        return;
+        throw err;
     }
 
-    server.start(function () {
+    server.start((err) => {
 
+        if (err) {
+            console.log(err);
+            throw err;
+        }
         console.log('Server started at: ' + server.info.uri);
     });
 });

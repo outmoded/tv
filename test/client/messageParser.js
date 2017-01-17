@@ -1,15 +1,16 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
-var Sinon = require('sinon');
-var Backbone = require('backbone');
+const _ = require('lodash');
+const Sinon = require('sinon');
+const Backbone = require('backbone');
 
-var MessageParser = require('../../source/js/messageParser');
+const MessageParser = require('../../source/js/messageParser');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 internals.RECEIVED = {
@@ -84,7 +85,7 @@ describe('MessageParser', function () {
 
             beforeEach(function () {
 
-                var message = internals.createMessage(internals.RECEIVED);
+                const message = internals.createMessage(internals.RECEIVED);
                 this.messageData = JSON.parse(message.data);
 
                 this.messageParser.addMessage(message);
@@ -94,7 +95,7 @@ describe('MessageParser', function () {
 
                 expect(this.messageParser.requests).to.have.length(1);
 
-                var request = this.messageParser.requests.toJSON()[0];
+                const request = this.messageParser.requests.toJSON()[0];
                 expect(request).to.have.property('id', this.messageData.request);
                 expect(request).to.have.property('path', this.messageData.data.url);
                 expect(request).to.have.property('method', this.messageData.data.method);
@@ -103,7 +104,7 @@ describe('MessageParser', function () {
 
             it('creates a new server log', function () {
 
-                var request = this.messageParser.requests.models[0];
+                const request = this.messageParser.requests.models[0];
                 expect(request.get('serverLogs').toJSON()).to.have.length(1);
             });
 
@@ -111,7 +112,7 @@ describe('MessageParser', function () {
 
                 it('does not add the message to the response\'s server logs', function (){
 
-                    var message = internals.createMessage(internals.EMPTY_RESPONSE);
+                    const message = internals.createMessage(internals.EMPTY_RESPONSE);
                     this.messageData = JSON.parse(message.data);
 
                     this.messageParser.addMessage(message);
@@ -124,7 +125,7 @@ describe('MessageParser', function () {
 
                 beforeEach(function () {
 
-                    var message = internals.createMessage(internals.HANDLER);
+                    const message = internals.createMessage(internals.HANDLER);
                     this.secondMessageData = JSON.parse(message.data);
 
                     this.messageParser.addMessage(message);
@@ -137,22 +138,22 @@ describe('MessageParser', function () {
 
                 it('creates a new server log', function () {
 
-                    var request = this.messageParser.requests.models[0];
+                    const request = this.messageParser.requests.models[0];
                     expect(request.get('serverLogs').toJSON()).to.have.length(2);
 
-                    var serverLog = request.get('serverLogs').toJSON()[1];
+                    const serverLog = request.get('serverLogs').toJSON()[1];
                     expect(serverLog.tags).to.have.length(2);
                 });
 
             });
 
-            var testResponseMessageUpdates = function (responseMessage) {
+            const testResponseMessageUpdates = function (responseMessage) {
 
                 context('with a response message for a request', function () {
 
                     beforeEach(function () {
 
-                        var message = internals.createMessage(responseMessage);
+                        const message = internals.createMessage(responseMessage);
                         this.messageData = JSON.parse(message.data);
 
                         this.messageParser.addMessage(message);
@@ -167,7 +168,7 @@ describe('MessageParser', function () {
 
                     it('adds a response tag to the server log message', function () {
 
-                        var serverLog = this.request.get('serverLogs').last().toJSON();
+                        const serverLog = this.request.get('serverLogs').last().toJSON();
 
                         expect(serverLog.tags).to.include('response');
                     });
@@ -183,7 +184,7 @@ describe('MessageParser', function () {
 
             beforeEach(function () {
 
-                var message = internals.createMessage(internals.HANDLER, 'abc123');
+                const message = internals.createMessage(internals.HANDLER, 'abc123');
                 this.messageData = JSON.parse(message.data);
 
                 this.messageParser.addMessage(message);
@@ -250,7 +251,7 @@ describe('MessageParser', function () {
 
             it('resets the response timeout for that request', function (done) {
 
-                var messageParser = MessageParser.create({ responseTimeout: 3 });
+                const messageParser = MessageParser.create({ responseTimeout: 3 });
 
                 messageParser.addMessage(internals.createMessage(internals.RECEIVED));
 
@@ -261,7 +262,7 @@ describe('MessageParser', function () {
 
                 setTimeout(function () {
 
-                    var request = messageParser.requests.first();
+                    const request = messageParser.requests.first();
                     expect(request.get('isComplete')).to.not.equal.true;
 
                     done();
@@ -269,17 +270,17 @@ describe('MessageParser', function () {
             });
         });
 
-        var clearResponseTimeoutTest = function (responseMessage) {
+        const clearResponseTimeoutTest = function (responseMessage) {
 
             describe('when a response for a request comes in after the response timeout has occured', function () {
 
                 it('clears the response error timeout', function (done) {
 
-                    var messageParser = MessageParser.create({ responseTimeout: 1 });
+                    const messageParser = MessageParser.create({ responseTimeout: 1 });
 
                     messageParser.addMessage(internals.createMessage(internals.RECEIVED));
 
-                    var request = messageParser.requests.first();
+                    const request = messageParser.requests.first();
 
                     setTimeout(function () {
 

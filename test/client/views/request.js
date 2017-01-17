@@ -1,14 +1,15 @@
+'use strict';
 // Load modules
 
-var Sinon = require('sinon');
-var Backbone = require('backbone');
-var RequestView = require('../../../source/js/views/request');
-var Request = require('../../../source/js/models/request');
+const Sinon = require('sinon');
+const Backbone = require('backbone');
+const RequestView = require('../../../source/js/views/request');
+const Request = require('../../../source/js/models/request');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 internals.generateView = function (options) {
@@ -26,7 +27,7 @@ describe('RequestView', function () {
 
         it('returns html', function () {
 
-            var view = internals.generateView();
+            const view = internals.generateView();
 
             expect(view.template()).to.match(/<[a-z][\s\S]*>/); // html elements
         });
@@ -75,7 +76,7 @@ describe('RequestView', function () {
 
                 this.click();
 
-                var serverLogsView = this.view.serverLogsView;
+                const serverLogsView = this.view.serverLogsView;
                 expect(this.view.serverLogsView).to.be.instanceOf(Backbone.View);
 
                 this.click();
@@ -98,7 +99,7 @@ describe('RequestView', function () {
 
             it('emits the "serverLogsToggle" event with "true" when shown', function () {
 
-                var spy = Sinon.spy();
+                const spy = Sinon.spy();
                 this.view.on('serverLogsToggle', spy);
 
                 this.click();
@@ -108,7 +109,7 @@ describe('RequestView', function () {
 
             it('emits the "serverLogsToggle" event with "false" when hidden', function () {
 
-                var spy = Sinon.spy();
+                const spy = Sinon.spy();
                 this.view.on('serverLogsToggle', spy);
 
                 this.click();
@@ -131,10 +132,9 @@ describe('RequestView', function () {
 
                 this.$favorite = this.view.$('.favorite');
 
-                var self = this;
-                this.click = function () {
+                this.click = () => {
 
-                    self.$favorite.click();
+                    this.$favorite.click();
                 };
             });
 
@@ -173,7 +173,7 @@ describe('RequestView', function () {
 
             it('emits the "favoriteToggle" event with "true" when favorited', function () {
 
-                var spy = Sinon.spy();
+                const spy = Sinon.spy();
                 this.view.on('favoriteToggle', spy);
 
                 this.click();
@@ -183,7 +183,7 @@ describe('RequestView', function () {
 
             it('emits the "favoriteToggle" event with "false" when unfavorited', function () {
 
-                var spy = Sinon.spy();
+                const spy = Sinon.spy();
                 this.view.on('favoriteToggle', spy);
 
                 this.click();

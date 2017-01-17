@@ -1,26 +1,27 @@
+'use strict';
 // Load modules
 
 window.$ = window.jQuery = require('jquery');
 
-var Backbone = require('backbone');
+const Backbone = require('backbone');
 Backbone.$ = window.$;
 
-var _ = require('lodash');
+const _ = require('lodash');
 
 require('bootstrap/js/modal');
 require('bootstrap/js/tooltip');
 
 require('./utils/handlebarsHelpers');
 
-var WebSocketManager = require('./webSocketManager');
-var MessageParser = require('./messageParser');
-var AppView = require('./views/app');
-var SettingsStore = require('./settingsStore');
+const WebSocketManager = require('./webSocketManager');
+const MessageParser = require('./messageParser');
+const AppView = require('./views/app');
+const SettingsStore = require('./settingsStore');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = window.app = internals.App = {
@@ -36,17 +37,17 @@ exports = module.exports = window.app = internals.App = {
 
         opts = _.extend(this.defaults, opts);
 
-        var messageParser = opts.messageParser;
-        var settingsStore = opts.settingsStore;
-        var protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+        const messageParser = opts.messageParser;
+        const settingsStore = opts.settingsStore;
+        const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
 
-        var ws = new WebSocket(protocol + host + ':' + port);
-        var webSocketManager = opts.webSocketManagerClass.create(ws);
+        const ws = new WebSocket(protocol + host + ':' + port);
+        const webSocketManager = opts.webSocketManagerClass.create(ws);
 
-        var appView = new opts.appViewClass({
+        new opts.appViewClass({
             el: 'body',
             collection: messageParser.requests,
-            webSocketManager: webSocketManager
+            webSocketManager
         }).render();
 
         webSocketManager.onSocketOpen = function () {
@@ -54,7 +55,7 @@ exports = module.exports = window.app = internals.App = {
             webSocketManager.applyFilter(settingsStore.get('channel'));
         };
 
-        webSocketManager.onMessage(function (message) {
+        webSocketManager.onMessage((message) => {
 
             opts.messageParser.addMessage(message);
         });

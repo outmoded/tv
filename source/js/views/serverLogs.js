@@ -1,15 +1,15 @@
+'use strict';
 // Load modules
 
-var Backbone = require('backbone');
-var ZeroClipboard = require('zeroclipboard');
-var _ = require('lodash');
+const Backbone = require('backbone');
+const ZeroClipboard = require('zeroclipboard');
 
-var RequestToTextConverter = require('../utils/requestToTextConverter');
+const RequestToTextConverter = require('../utils/requestToTextConverter');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.ServerLogsView = Backbone.View.extend({
@@ -22,8 +22,7 @@ exports = module.exports = internals.ServerLogsView = Backbone.View.extend({
 
     initialize: function () {
 
-        var self = this;
-        this.listenTo(this.collection, 'add', function (model) {
+        this.listenTo(this.collection, 'add', (model) => {
 
             this.render();
         });
@@ -40,30 +39,29 @@ exports = module.exports = internals.ServerLogsView = Backbone.View.extend({
 
     _initializeClipboard: function () {
 
-        clipboard = this._createZeroClipboard();
+        const clipboard = this._createZeroClipboard();
 
-        var self = this;
-        clipboard.on('ready', function (readyEvent) {
+        clipboard.on('ready', (readyEvent) => {
 
-            clipboard.on('beforecopy', function (event) {
+            clipboard.on('beforecopy', (event) => {
 
-                clipboard.setData('text/plain', RequestToTextConverter.convertToText(self.model.toJSON()));
+                clipboard.setData('text/plain', RequestToTextConverter.convertToText(this.model.toJSON()));
 
-                self._$clipboard.tooltip({
+                this._$clipboard.tooltip({
                     delay: { hide: 2000 },
                     placement: 'left',
                     animation: 'fade',
                     title: 'Copied to clipboard!'
                 });
 
-                self._$clipboard.tooltip('show');
+                this._$clipboard.tooltip('show');
             });
 
-            clipboard.on('aftercopy', function (event) {
+            clipboard.on('aftercopy', (event) => {
 
-                setTimeout(function () {
+                setTimeout(() => {
 
-                    self._$clipboard.tooltip('hide');
+                    this._$clipboard.tooltip('hide');
                 }, 3000);
             });
 
@@ -83,7 +81,7 @@ exports = module.exports = internals.ServerLogsView = Backbone.View.extend({
 
     _toggleServerLogData: function (e) {
 
-        var $data = $(e.currentTarget);
+        const $data = $(e.currentTarget);
 
         $data.closest('.data').toggleClass('expanded');
     }

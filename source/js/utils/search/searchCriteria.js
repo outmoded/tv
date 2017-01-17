@@ -1,20 +1,21 @@
+'use strict';
 // Load modules
 
-var _ = require('lodash');
+const _ = require('lodash');
 
-var SearchCriterion = require('./searchCriterion');
+const SearchCriterion = require('./searchCriterion');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 exports = module.exports = internals.SearchCriteria = function (queryString) {
 
-    var fragments = queryString.split(' ');
+    const fragments = queryString.split(' ');
 
-    this.criteria = _.map(fragments, function (fragment) {
+    this.criteria = _.map(fragments, (fragment) => {
 
         return SearchCriterion.create(fragment);
     });
@@ -30,11 +31,11 @@ internals.SearchCriteria.create = function (queryString) {
 internals.SearchCriteria.prototype.matches = function (request) {
 
     return _.chain(this.criteria)
-        .reject(function (criterion) {
+        .reject((criterion) => {
 
             return criterion.ignored;
         })
-        .every(function (criterion) {
+        .every((criterion) => {
 
             return criterion.matches(request);
         })

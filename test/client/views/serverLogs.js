@@ -1,15 +1,16 @@
+'use strict';
 // Load modules
 
-var Sinon = require('sinon');
-var Backbone = require('backbone');
+const Sinon = require('sinon');
+const Backbone = require('backbone');
 
-var ServerLogsView = require('../../../source/js/views/serverLogs');
-var Request = require('../../../source/js/models/request');
+const ServerLogsView = require('../../../source/js/views/serverLogs');
+const Request = require('../../../source/js/models/request');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 internals.RECEIVED = {
@@ -87,7 +88,7 @@ describe('ServerLogsView', function () {
 
         it('rerenders when a new model is added to the collection', function () {
 
-            var spy = Sinon.spy(this.view, 'render');
+            const spy = Sinon.spy(this.view, 'render');
 
             this.view.collection.add(internals.RESPONSE);
 
@@ -133,7 +134,7 @@ describe('ServerLogsView', function () {
 
             this.view.collection.each(function (serverLog, index) {
 
-                var $row = this.view.$('.server-log').eq(index);
+                const $row = this.view.$('.server-log').eq(index);
 
                 expect($row.find('.tags span')).to.have.length(serverLog.get('tags') ? serverLog.get('tags').length : 0);
             }.bind(this));
