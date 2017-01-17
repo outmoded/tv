@@ -44,7 +44,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     hasFavoritedRequests: function () {
 
-        return _.any(this._requestViews, (requestView) => {
+        return _.some(this._requestViews, (requestView) => {
 
             return requestView.favorited;
         });
@@ -52,7 +52,7 @@ exports = module.exports = internals.FeedBodyView = Backbone.View.extend({
 
     hasExpandedRequests: function () {
 
-        return _.any(this._requestViews, (requestView) => {
+        return _.some(this._requestViews, (requestView) => {
 
             return requestView.active;
         });

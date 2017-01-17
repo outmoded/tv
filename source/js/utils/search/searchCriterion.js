@@ -12,7 +12,7 @@ const internals = {
         tags: function (request) {
 
             return _.chain(request.serverLogs)
-                .pluck('tags')
+                .map('tags')
                 .flatten()
                 .uniq()
                 .value();
@@ -20,7 +20,7 @@ const internals = {
         data: function (request) {
 
             return _.chain(request.serverLogs)
-                .pluck('data')
+                .map('data')
                 .flatten()
                 .map((a) => {
 
@@ -81,7 +81,7 @@ internals.SearchCriterion.prototype._isValidAny = function () {
     const pieces = this._fragment.split(':');
 
     if (pieces.length > 1) {
-        if (_.contains(internals.VALID_SCOPED_PROPERTIES, pieces[0])) {
+        if (_.includes(internals.VALID_SCOPED_PROPERTIES, pieces[0])) {
             return false;
         }
     }
@@ -107,7 +107,7 @@ internals.SearchCriterion.prototype._isScoped = function () {
     const pieces = this._fragment.split(':');
 
     if (pieces.length > 1 && pieces[1].length) {
-        return _.contains(internals.VALID_SCOPED_PROPERTIES, pieces[0]);
+        return _.includes(internals.VALID_SCOPED_PROPERTIES, pieces[0]);
     }
 
     return false;
@@ -121,7 +121,7 @@ internals.SearchCriterion.prototype._parseScopedProperty = function () {
 
 internals.SearchCriterion.prototype._matchesScopedProperty = function (request) {
 
-    return _.any(this.scopedPropertyValues, (value) => {
+    return _.some(this.scopedPropertyValues, (value) => {
 
         return this._matchesValue(request, this.scopedProperty, value);
     });
@@ -130,7 +130,7 @@ internals.SearchCriterion.prototype._matchesScopedProperty = function (request) 
 
 internals.SearchCriterion.prototype._matchesAny = function (request) {
 
-    return _.any(internals.VALID_SCOPED_PROPERTIES, (property) => {
+    return _.some(internals.VALID_SCOPED_PROPERTIES, (property) => {
 
         return this._matchesValue(request, property, this._fragment);
     });

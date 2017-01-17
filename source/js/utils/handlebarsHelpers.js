@@ -44,7 +44,7 @@ exports = module.exports = internals.HandlebarsHelpers = {
 
     tagColor: function (tag) {
 
-        if (_.contains(internals.SUPPORTED_COLORED_TAGS, tag)) {
+        if (_.includes(internals.SUPPORTED_COLORED_TAGS, tag)) {
             return tag;
         }
     }
